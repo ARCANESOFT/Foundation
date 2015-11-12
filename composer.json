@@ -1,0 +1,39 @@
+{
+    "name":        "arcanesoft/foundation",
+    "description": "ARCANESOFT Foundation package.",
+    "homepage":    "https://github.com/ARCANESOFT/Foundation",
+    "keywords":    ["arcanedev", "arcanesoft", "laravel"],
+    "authors":  [
+        {
+            "name":     "ARCANEDEV",
+            "email":    "arcanedev.maroc@gmail.com",
+            "homepage": "https://github.com/ARCANEDEV",
+            "role":     "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php":                 ">=5.5.9",
+        "arcanedev/support":   "~3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.1",
+        "phpunit/phpcov":      "~2.0",
+        "phpunit/phpunit":     "~4.0|~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arcanesoft\\Foundation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arcanesoft\\Foundation\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
