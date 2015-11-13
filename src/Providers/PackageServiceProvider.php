@@ -1,6 +1,10 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
+use Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider;
+use Arcanedev\Hasher\HasherServiceProvider;
+use Arcanedev\LogViewer\LogViewerServiceProvider;
 use Arcanedev\Support\ServiceProvider;
+use Arcanesoft\Auth\AuthServiceProvider;
 
 /**
  * Class     PackageServiceProvider
@@ -19,6 +23,9 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Arcanesoft\Auth\AuthServiceProvider::class);
+        $this->app->register(HasherServiceProvider::class);
+        $this->app->register(BreadcrumbsServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
+        $this->app->register(LogViewerServiceProvider::class);
     }
 }
