@@ -96,8 +96,25 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     private function registerPublishes()
     {
+        // Config
         $this->publishes([
             $this->getConfigFile() => config_path($this->vendor . DS . "{$this->package}.php")
         ]);
+
+        // Views
+        $viewsPath = $this->getBasePath() . '/resources/views';
+        $this->loadViewsFrom($viewsPath, 'foundation');
+        $this->publishes([
+            $viewsPath => base_path('resources/views/vendor/foundation'),
+        ], 'views');
+
+        // Translations
+        $translationsPath = $this->getBasePath() . '/resources/lang';
+        $this->loadTranslationsFrom($translationsPath, 'foundation');
+        $this->publishes([
+            $viewsPath => base_path('resources/lang/vendor/foundation'),
+        ], 'lang');
+
+        // Assets
     }
 }
