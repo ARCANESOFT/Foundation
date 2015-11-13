@@ -71,9 +71,11 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            $this->getConfigFile() => config_path($this->vendor . DS . "{$this->package}.php")
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->registerPublishes();
+        }
+
+        $this->app->register(Providers\RouteServiceProvider::class);
     }
 
     /**
@@ -86,5 +88,16 @@ class FoundationServiceProvider extends PackageServiceProvider
         return [
             //
         ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    private function registerPublishes()
+    {
+        $this->publishes([
+            $this->getConfigFile() => config_path($this->vendor . DS . "{$this->package}.php")
+        ]);
     }
 }
