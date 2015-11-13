@@ -62,6 +62,8 @@ class FoundationServiceProvider extends PackageServiceProvider
     public function register()
     {
         $this->registerConfig();
+
+        $this->app->register(Providers\PackageServiceProvider::class);
     }
 
     /**
