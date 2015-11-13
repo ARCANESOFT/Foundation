@@ -110,7 +110,7 @@ class FoundationServiceProvider extends PackageServiceProvider
         $translationsPath = $this->getBasePath() . '/resources/lang';
         $this->loadTranslationsFrom($translationsPath, 'foundation');
         $this->publishes([
-            $viewsPath => base_path('resources/lang/vendor/foundation'),
+            $translationsPath => base_path('resources/lang/vendor/foundation'),
         ], 'lang');
 
         // Assets
