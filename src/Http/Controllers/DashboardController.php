@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers;
 
-use Arcanesoft\Foundation\Bases\Controller;
+use Arcanesoft\Foundation\Bases\FoundationController;
 
 /**
  * Class     DashboardController
@@ -8,7 +8,7 @@ use Arcanesoft\Foundation\Bases\Controller;
  * @package  Arcanesoft\Foundation\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class DashboardController extends Controller
+class DashboardController extends FoundationController
 {
     /**
      * Show the foundation dashboard.
@@ -17,6 +17,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return 'Foundation Dashboard';
+        return $this->view('dashboard');
     }
 }
