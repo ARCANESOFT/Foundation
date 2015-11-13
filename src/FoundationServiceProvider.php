@@ -71,9 +71,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->registerPublishes();
-        }
+        $this->registerPublishes();
 
         $this->app->register(Providers\RouteServiceProvider::class);
     }
