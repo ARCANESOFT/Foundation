@@ -7,18 +7,19 @@
         {
             "name":     "ARCANEDEV",
             "email":    "arcanedev.maroc@gmail.com",
-            "homepage": "https://github.com/ARCANEDEV",
+            "homepage": "https://github.com/ARCANESOFT",
             "role":     "Developer"
         }
     ],
     "license": "MIT",
     "require": {
         "php":                   ">=5.5.9",
-        "arcanesoft/auth":       "*",
         "arcanedev/breadcrumbs": "~2.1",
         "arcanedev/hasher":      "~1.0",
         "arcanedev/log-viewer":  "~3.0",
-        "arcanedev/support":     "~3.0"
+        "arcanedev/support":     "~3.0",
+        "arcanesoft/auth":       "*",
+        "arcanesoft/contracts":  "~1.0"
     },
     "require-dev": {
         "orchestra/testbench":  "~3.1",
