@@ -58,7 +58,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('js', function () {
-    return gulp.src(dirs.src + '/js/app.js')
+    return gulp.src(dirs.resources + '/js/app.js')
         .on('error', notify.onError({
             title:   'Error compiling Javascript.',
             message: 'Error: <%= error.message %>',
@@ -68,7 +68,7 @@ gulp.task('js', function () {
         .pipe(gulp.dest(dirs.dist + '/js'))
         .pipe(uglify())
         .pipe(rename({ extname: '.min.js' }))
-        .pipe(gulp.dest(dirs.dist + '/js/'))
+        .pipe(gulp.dest(dirs.dist + '/js'))
         .pipe(notify({
             title:   'Javascript compiled',
             message: 'Javascript compiled with success !',
@@ -91,7 +91,7 @@ gulp.task('js-vendors', function() {
 
 gulp.task('img-vendors', function() {
     return gulp.src([
-        dirs.bower + '/foundation-assets/dist/img/*'
+        dirs.bower + '/foundation-assets/dist/img/**/*'
     ]).pipe(gulp.dest(dirs.dist + '/img'))
 });
 
