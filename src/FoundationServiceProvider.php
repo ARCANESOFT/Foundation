@@ -64,6 +64,7 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->registerConfig();
 
         $this->app->register(Providers\PackageServiceProvider::class);
+        $this->registerFoundationService();
     }
 
     /**
@@ -84,8 +85,20 @@ class FoundationServiceProvider extends PackageServiceProvider
     public function provides()
     {
         return [
-            //
+            'arcanesoft.foundation',
         ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Services Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Register Foundation service
+     */
+    private function registerFoundationService()
+    {
+        $this->singleton('arcanesoft.foundation', Foundation::class);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -118,6 +131,6 @@ class FoundationServiceProvider extends PackageServiceProvider
         // Assets
         $this->publishes([
             "$basePath/resources/assets/dist" => public_path('vendor/foundation'),
-        ], 'lang');
+        ], 'assets');
     }
 }
