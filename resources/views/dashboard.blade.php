@@ -1,5 +1,5 @@
 @section('header')
-    Dashboard <small>Version 2.0</small>
+    <i class="fa fa-fw fa-dashboard"></i> Dashboard <small>Version 2.0</small>
 @endsection
 
 @section('content')
