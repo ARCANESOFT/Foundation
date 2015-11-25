@@ -14,9 +14,10 @@
         </div>
 
         {{-- Search form --}}
+        @if (false)
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search&hellip;">
+                {!! Form::text('q', old('q', null), ['class' => 'form-control', 'placeholder' => 'Search&hellip;']) !!}
                 <div class="input-group-btn">
                     <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                         <i class="fa fa-search"></i>
@@ -24,6 +25,7 @@
                 </div>
             </div>
         </form>
+        @endif
 
         {{-- Sidebar menu --}}
         <ul class="sidebar-menu">
