@@ -1,5 +1,4 @@
 {
-    "name": "ARCANESOFT-Foundation",
     "private": true,
     "ignore": [
         "**/.*",
@@ -10,10 +9,10 @@
         "tests"
     ],
     "dependencies": {
-        "foundation-assets": "~0.5.0",
-        "sweetalert":        "~1.1.0"
+        "foundation-assets": "^0.6.0",
+        "sweetalert":        "^1.1.0"
     },
     "devDependencies": {
-        "lesshat":           "~3.0.2"
+        "lesshat":           "^3.0.0"
     }
 }
