@@ -12,7 +12,7 @@
         {!! Html::script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') !!}
     <![endif]-->
 </head>
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="fixed sidebar-mini skin-purple hold-transition">
     <div class="wrapper">
         @include('foundation::_templates.default.header')
 
