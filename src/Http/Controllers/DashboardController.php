@@ -17,6 +17,8 @@ class DashboardController extends FoundationController
      */
     public function index()
     {
+        $this->addBreadcrumb('Dashboard');
+
         return $this->view('dashboard');
     }
 }

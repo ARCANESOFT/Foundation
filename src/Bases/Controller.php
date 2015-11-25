@@ -14,7 +14,8 @@ class Controller extends BaseController
      |  Traits
      | ------------------------------------------------------------------------------------------------
      */
-    use \Arcanedev\Support\Traits\Templatable;
+    use \Arcanedev\Breadcrumbs\Traits\BreadcrumbsTrait,
+        \Arcanedev\Support\Traits\Templatable;
 
     /* ------------------------------------------------------------------------------------------------
      |  Properties

@@ -1,5 +1,11 @@
 <?php namespace Arcanesoft\Foundation\Bases;
 
+/**
+ * Class     FoundationController
+ *
+ * @package  Arcanesoft\Foundation\Bases
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class FoundationController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
@@ -24,10 +30,25 @@ class FoundationController extends Controller
     {
         parent::__construct();
 
-        $this->setTemplate(config(
-            'arcanesoft.foundation.template',
-            'foundation::_templates.default.layout'
-        ));
+        $this->setTemplate(config('arcanesoft.foundation.template'));
+        $this->registerBreadcrumbs('foundation');
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Breadcrumbs Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the breadcrumbs home item (root).
+     *
+     * @return array
+     */
+    protected function getBreadcrumbsHomeItem()
+    {
+        return [
+            'title' => 'Home',
+            'url'   => route('foundation::home')
+        ];
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -49,5 +70,13 @@ class FoundationController extends Controller
         }
 
         return parent::view($name, $data);
+    }
+
+    /**
+     * Do random stuff before rendering view.
+     */
+    protected function beforeViewRender()
+    {
+        $this->loadBreadcrumbs();
     }
 }
