@@ -66,6 +66,10 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->app->register(Providers\PackageServiceProvider::class);
         $this->app->register(Providers\ModuleServiceProvider::class);
         $this->registerFoundationService();
+
+        if ($this->app->runningInConsole()) {
+            $this->app->register(Providers\CommandServiceProvider::class);
+        }
     }
 
     /**
