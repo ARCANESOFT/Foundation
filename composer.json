@@ -18,7 +18,7 @@
         "arcanedev/hasher":      "~1.0",
         "arcanedev/log-viewer":  "~3.0",
         "arcanedev/support":     "~3.0",
-        "arcanesoft/auth":       "^0.1",
+        "arcanesoft/auth":       "~0.1",
         "arcanesoft/contracts":  "~1.0"
     },
     "require-dev": {
