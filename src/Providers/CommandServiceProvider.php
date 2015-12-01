@@ -20,6 +20,7 @@ class CommandServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerPublishCommand();
+        $this->registerSetupCommand();
 
         $this->commands($this->commands);
     }
@@ -33,6 +34,7 @@ class CommandServiceProvider extends ServiceProvider
     {
         return [
             \Arcanesoft\Foundation\Console\PublishCommand::class,
+            \Arcanesoft\Foundation\Console\SetupCommand::class,
         ];
     }
 
@@ -51,5 +53,18 @@ class CommandServiceProvider extends ServiceProvider
         );
 
         $this->commands[] = \Arcanesoft\Foundation\Console\PublishCommand::class;
+    }
+
+    /**
+     * Register setup command.
+     */
+    private function registerSetupCommand()
+    {
+        $this->singleton(
+            'arcanesoft.foundation.commands.setup',
+            \Arcanesoft\Foundation\Console\SetupCommand::class
+        );
+
+        $this->commands[] = \Arcanesoft\Foundation\Console\SetupCommand::class;
     }
 }
