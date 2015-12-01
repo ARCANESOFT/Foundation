@@ -1,8 +1,9 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
 use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
+use Arcanesoft\Foundation\Http\Middleware;
 use Arcanesoft\Foundation\Http\Routes;
+use Illuminate\Routing\Router;
 
 /**
  * Class     RouteServiceProvider
@@ -26,6 +27,16 @@ class RouteServiceProvider extends ServiceProvider
         return 'Arcanesoft\\Foundation\\Http\\Routes';
     }
 
+    /**
+     * Get Foundation route group.
+     *
+     * @return array
+     */
+    protected function getFoundationRouteGroup()
+    {
+        return config('arcanesoft.foundation.route', []);
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -37,11 +48,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group([
-            'prefix'    => 'dashboard',
-            'as'        => 'foundation::',
-            'namespace' => 'Arcanesoft\\Foundation\\Http\\Controllers',
-        ], function (Router $router) {
+        $this->middleware('admin', Middleware\AdminMiddleware::class);
+
+        $router->group($this->getFoundationRouteGroup(), function (Router $router) {
             (new Routes\DashboardRoute())->map($router);
         });
     }
