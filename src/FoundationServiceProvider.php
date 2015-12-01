@@ -66,6 +66,7 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->app->register(Providers\PackageServiceProvider::class);
         $this->app->register(Providers\ModuleServiceProvider::class);
         $this->registerFoundationService();
+        $this->registerFoundationDatabase();
 
         if ($this->app->runningInConsole()) {
             $this->app->register(Providers\CommandServiceProvider::class);
@@ -99,11 +100,26 @@ class FoundationServiceProvider extends PackageServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Register Foundation service
+     * Register Foundation service.
      */
     private function registerFoundationService()
     {
         $this->singleton('arcanesoft.foundation', Foundation::class);
+    }
+
+    /**
+     * Register Foundation database.
+     */
+    private function registerFoundationDatabase()
+    {
+        /** @var \Illuminate\Config\Repository $config */
+        $config = $this->app['config'];
+
+        $config->set('database.connections.foundation', [
+            'driver'   => 'sqlite',
+            'database' => storage_path('app/foundation.sqlite'),
+            'prefix'   => '',
+        ]);
     }
 
     /* ------------------------------------------------------------------------------------------------
