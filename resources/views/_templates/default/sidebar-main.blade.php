@@ -37,6 +37,30 @@
             </li>
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-fw fa-key"></i>
+                    <span>Authorisation</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-fw fa-users"></i> Users
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-fw fa-lock"></i> Roles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-fw fa-check-circle"></i> Permissions
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span>Settings</span>
                     <i class="fa fa-angle-left pull-right"></i>
