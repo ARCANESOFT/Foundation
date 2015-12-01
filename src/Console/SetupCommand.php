@@ -37,6 +37,31 @@ class SetupCommand extends Command
      */
     public function handle()
     {
-        $this->info('Coming soon...');
+        $this->createAdminUser();
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Create an admin user.
+     */
+    private function createAdminUser()
+    {
+        $user = new \Arcanesoft\Auth\Models\User([
+            'username'   => 'admin',
+            'first_name' => 'John',
+            'last_name'  => 'DOE',
+            'email'      => env('ADMIN_EMAIL', 'admin@example.com'),
+            'password'   => env('ADMIN_PASSWORD', 'password'),
+        ]);
+
+        $user->is_admin  = true;
+        $user->is_active = true;
+
+        $user->save();
+
+        $this->info('Admin account created !');
     }
 }
