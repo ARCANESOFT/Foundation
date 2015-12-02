@@ -38,22 +38,22 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-fw fa-key"></i>
-                    <span>Authorisation</span>
+                    <span>Authorization</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="#">
+                        <a href="{{ route('auth::foundation.users.index') }}">
                             <i class="fa fa-fw fa-users"></i> Users
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('auth::foundation.roles.index') }}">
                             <i class="fa fa-fw fa-lock"></i> Roles
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('auth::foundation.permissions.index') }}">
                             <i class="fa fa-fw fa-check-circle"></i> Permissions
                         </a>
                     </li>
