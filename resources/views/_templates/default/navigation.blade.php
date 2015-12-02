@@ -15,7 +15,7 @@
             {{-- Tasks --}}
             @include('foundation::_templates.default.navigation.tasks')
             {{-- User Account --}}
-            @include('foundation::_templates.default.navigation.user-menu')
+            @include('auth::foundation._partials.navigation.user-menu')
             {{-- Control Sidebar Toggle Button --}}
             <li>
                 <a href="javascript:void(0);" data-toggle="control-sidebar">
