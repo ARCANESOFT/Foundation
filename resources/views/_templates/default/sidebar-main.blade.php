@@ -1,58 +1,57 @@
 <aside class="main-sidebar">
     <section class="sidebar">
-        {{-- Sidebar user panel --}}
-        <div class="user-panel">
-            <div class="pull-left image">
-                {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
-            </div>
-            <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#">
-                    <i class="fa fa-circle text-success"></i> Online
-                </a>
-            </div>
-        </div>
-
-        {{-- Search form --}}
         @if (false)
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                {!! Form::text('q', old('q', null), ['class' => 'form-control', 'placeholder' => 'Search&hellip;']) !!}
-                <div class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                        <i class="fa fa-search"></i>
-                    </button>
+            {{-- Sidebar user panel --}}
+            <div class="user-panel">
+                <div class="pull-left image">
+                    {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
+                </div>
+                <div class="pull-left info">
+                    <p>Alexander Pierce</p>
+                    <a href="#">
+                        <i class="fa fa-circle text-success"></i> Online
+                    </a>
                 </div>
             </div>
-        </form>
+            {{-- Search form --}}
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    {!! Form::text('q', old('q', null), ['class' => 'form-control', 'placeholder' => 'Search&hellip;']) !!}
+                    <div class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         @endif
 
         {{-- Sidebar menu --}}
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
+            <li class="{{ $current_page == 'foundation-home' ? 'active' : '' }}">
                 <a href="{{ route('foundation::home') }}">
                     <i class="fa fa-fw fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ in_array($current_page, ['auth-users', 'auth-roles', 'auth-permissions']) ? 'active open' : '' }}">
                 <a href="#">
                     <i class="fa fa-fw fa-key"></i>
                     <span>Authorization</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li class="{{ $current_page == 'auth-users' ? 'active' : '' }}">
                         <a href="{{ route('auth::foundation.users.index') }}">
                             <i class="fa fa-fw fa-users"></i> Users
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ $current_page == 'auth-roles' ? 'active' : '' }}">
                         <a href="{{ route('auth::foundation.roles.index') }}">
                             <i class="fa fa-fw fa-lock"></i> Roles
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ $current_page == 'auth-permissions' ? 'active' : '' }}">
                         <a href="{{ route('auth::foundation.permissions.index') }}">
                             <i class="fa fa-fw fa-check-circle"></i> Permissions
                         </a>
@@ -83,8 +82,8 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('foundation::home') }}">
+            <li class="{{ $current_page == 'foundation-logviewer' ? 'active' : '' }}">
+                <a href="{{ route('foundation::log-viewer.index') }}">
                     <i class="fa fa-fw fa-book"></i> <span>LogViewer</span>
                 </a>
             </li>
