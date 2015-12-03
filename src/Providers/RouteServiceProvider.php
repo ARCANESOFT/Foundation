@@ -48,10 +48,19 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $this->middleware('admin', Middleware\AdminMiddleware::class);
+        $this->registerMiddlewares();
 
         $router->group($this->getFoundationRouteGroup(), function (Router $router) {
             (new Routes\DashboardRoute())->map($router);
+            (new Routes\LogViewerRoutes())->map($router);
         });
+    }
+
+    /**
+     * Register all middlewares.
+     */
+    private function registerMiddlewares()
+    {
+        $this->middleware('admin', Middleware\AdminMiddleware::class);
     }
 }
