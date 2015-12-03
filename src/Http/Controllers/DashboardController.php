@@ -10,6 +10,10 @@ use Arcanesoft\Foundation\Bases\FoundationController;
  */
 class DashboardController extends FoundationController
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Show the foundation dashboard.
      *
@@ -17,7 +21,9 @@ class DashboardController extends FoundationController
      */
     public function index()
     {
-        $this->addBreadcrumb('Dashboard');
+        $this->setCurrentPage('foundation-home');
+        $title = 'Dashboard';
+        $this->addBreadcrumb($title);
 
         return $this->view('dashboard');
     }
