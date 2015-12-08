@@ -3,6 +3,7 @@
 use Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider;
 use Arcanedev\Hasher\HasherServiceProvider;
 use Arcanedev\LogViewer\LogViewerServiceProvider;
+use Arcanedev\Settings\SettingsServiceProvider;
 use Arcanedev\Support\ServiceProvider;
 
 /**
@@ -22,6 +23,7 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(SettingsServiceProvider::class);
         $this->app->register(HasherServiceProvider::class);
         $this->app->register(BreadcrumbsServiceProvider::class);
         $this->app->register(LogViewerServiceProvider::class);
