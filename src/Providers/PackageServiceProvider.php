@@ -1,9 +1,5 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
-use Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider;
-use Arcanedev\Hasher\HasherServiceProvider;
-use Arcanedev\LogViewer\LogViewerServiceProvider;
-use Arcanedev\Settings\SettingsServiceProvider;
 use Arcanedev\Support\ServiceProvider;
 
 /**
@@ -23,10 +19,11 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(SettingsServiceProvider::class);
-        $this->app->register(HasherServiceProvider::class);
-        $this->app->register(BreadcrumbsServiceProvider::class);
-        $this->app->register(LogViewerServiceProvider::class);
+        $this->registerSettingsPackage();
+        $this->registerHasherPackage();
+        $this->registerBreadcrumbsPackage();
+        $this->registerLogViewerPackage();
+        $this->registerAliases();
     }
 
     /**
@@ -47,5 +44,45 @@ class PackageServiceProvider extends ServiceProvider
         return [
             //
         ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Package Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Register the Settings Package.
+     */
+    private function registerSettingsPackage()
+    {
+        $this->app->register(\Arcanedev\Settings\SettingsServiceProvider::class);
+        $this->alias('Setting', \Arcanedev\Settings\Facades\Setting::class);
+    }
+
+    /**
+     * Register the Hasher Package.
+     */
+    private function registerHasherPackage()
+    {
+        $this->app->register(\Arcanedev\Hasher\HasherServiceProvider::class);
+    }
+
+    /**
+     * Register the Breadcrumbs Package.
+     */
+    private function registerBreadcrumbsPackage()
+    {
+        $this->app->register(\Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider::class);
+    }
+
+    /**
+     * Register the LogViewer Package.
+     */
+    private function registerLogViewerPackage()
+    {
+        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
+
+        // Disable default routes
+        $this->app['config']->set('log-viewer.route.enabled', false);
     }
 }
