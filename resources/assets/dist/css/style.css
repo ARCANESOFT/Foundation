@@ -1,0 +1,139 @@
+.info-box.level {
+  min-height: 70px;
+}
+.info-box.level .info-box-text,
+.info-box.level .info-box-number,
+.info-box.level .info-box-icon > i {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.info-box.level .info-box-icon {
+  height: 70px;
+  width: 70px;
+  font-size: 40px;
+  line-height: 70px;
+}
+.info-box.level .info-box-content {
+  margin-left: 70px;
+}
+.info-box.level-empty {
+  -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(1);
+  -ms-filter: grayscale(1);
+  filter: grayscale(1);
+  opacity: .6;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition-property: -webkit-filter, opacity;
+  -moz-transition-property: -moz-filter, opacity;
+  -o-transition-property: filter, opacity;
+  transition-property: -webkit-filter,-moz-filter,-o-filter,filter, opacity;
+}
+.info-box.level-empty:hover {
+  -webkit-filter: grayscale(0);
+  -moz-filter: grayscale(0);
+  -ms-filter: grayscale(0);
+  filter: grayscale(0);
+  opacity: 1;
+}
+.badge.level-all,
+.label.level-all,
+.info-box.level-all,
+.timeline > li > .timeline-icon.level-all,
+.badge.level-emergency,
+.label.level-emergency,
+.info-box.level-emergency,
+.timeline > li > .timeline-icon.level-emergency,
+.badge.level-alert,
+.label.level-alert,
+.info-box.level-alert,
+.timeline > li > .timeline-icon.level-alert,
+.badge.level-critical,
+.label.level-critical,
+.info-box.level-critical,
+.timeline > li > .timeline-icon.level-critical,
+.badge.level-error,
+.label.level-error,
+.info-box.level-error,
+.timeline > li > .timeline-icon.level-error,
+.badge.level-warning,
+.label.level-warning,
+.info-box.level-warning,
+.timeline > li > .timeline-icon.level-warning,
+.badge.level-notice,
+.label.level-notice,
+.info-box.level-notice,
+.timeline > li > .timeline-icon.level-notice,
+.badge.level-info,
+.label.level-info,
+.info-box.level-info,
+.timeline > li > .timeline-icon.level-info,
+.badge.level-debug,
+.label.level-debug,
+.info-box.level-debug,
+.timeline > li > .timeline-icon.level-debug {
+  color: #FFF;
+}
+.badge.level-all,
+.label.level-all,
+.info-box.level-all,
+.timeline > li > .timeline-icon.level-all {
+  background-color: #605CA8;
+}
+.badge.level-emergency,
+.label.level-emergency,
+.info-box.level-emergency,
+.timeline > li > .timeline-icon.level-emergency {
+  background-color: #B71C1C;
+}
+.badge.level-alert,
+.label.level-alert,
+.info-box.level-alert,
+.timeline > li > .timeline-icon.level-alert {
+  background-color: #D32F2F;
+}
+.badge.level-critical,
+.label.level-critical,
+.info-box.level-critical,
+.timeline > li > .timeline-icon.level-critical {
+  background-color: #F44336;
+}
+.badge.level-error,
+.label.level-error,
+.info-box.level-error,
+.timeline > li > .timeline-icon.level-error {
+  background-color: #FF5722;
+}
+.badge.level-warning,
+.label.level-warning,
+.info-box.level-warning,
+.timeline > li > .timeline-icon.level-warning {
+  background-color: #FF9100;
+}
+.badge.level-notice,
+.label.level-notice,
+.info-box.level-notice,
+.timeline > li > .timeline-icon.level-notice {
+  background-color: #4CAF50;
+}
+.badge.level-info,
+.label.level-info,
+.info-box.level-info,
+.timeline > li > .timeline-icon.level-info {
+  background-color: #1976D2;
+}
+.badge.level-debug,
+.label.level-debug,
+.info-box.level-debug,
+.timeline > li > .timeline-icon.level-debug {
+  background-color: #90CAF9;
+}
+.badge.level-env,
+.label.level-env {
+  background-color: #605CA8;
+}
+.badge.level-empty,
+.label.level-empty {
+  background-color: #D1D1D1;
+}

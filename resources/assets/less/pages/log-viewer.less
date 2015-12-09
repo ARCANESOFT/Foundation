@@ -1,6 +1,5 @@
 .info-box {
     &.level {
-        color: #FFF;
         min-height: @log-icon-size;
 
         .info-box-text,
@@ -34,8 +33,22 @@
     }
 }
 
+.badge,
+.label,
 .info-box,
-.label {
+.timeline > li > .timeline-icon {
+    &.level-all,
+    &.level-emergency,
+    &.level-alert,
+    &.level-critical,
+    &.level-error,
+    &.level-warning,
+    &.level-notice,
+    &.level-info,
+    &.level-debug {
+        color: #FFF;
+    }
+
     &.level-all {
         background-color: @log-color-all;
     }
@@ -73,6 +86,12 @@
     }
 }
 
-.label.level-empty {
-    background-color: @log-color-empty;
+.badge, .label {
+    &.level-env {
+        background-color: @log-color-env;
+    }
+
+    &.level-empty {
+        background-color: @log-color-empty;
+    }
 }
