@@ -82,7 +82,11 @@ class PackageServiceProvider extends ServiceProvider
     {
         $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
 
-        // Disable default routes
+        // Setting up the LogViewer config.
         $this->app['config']->set('log-viewer.route.enabled', false);
+        $this->app['config']->set(
+            'log-viewer.menu.filter-route',
+            'foundation::log-viewer.logs.filter'
+        );
     }
 }
