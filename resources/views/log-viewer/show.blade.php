@@ -124,7 +124,7 @@
     <div id="delete-log-modal" class="modal fade">
         <div class="modal-dialog">
             {!! Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) !!}
-                {!! Form::hidden('date', $date) !!}
+                {!! Form::hidden('date', $log->date) !!}
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -133,7 +133,7 @@
                         <h4 class="modal-title">DELETE LOG FILE</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to <span class="label label-danger">DELETE</span> this log file <span class="label label-primary">{{ $date }}</span> ?</p>
+                        <p>Are you sure you want to <span class="label label-danger">DELETE</span> this log file <span class="label label-primary">{{ $log->date }}</span> ?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
