@@ -48,7 +48,7 @@ class LogViewerController extends FoundationController
         parent::__construct();
 
         $this->logViewer = $logViewer;
-
+        $this->perPage   = config('arcanesoft.foundation.log-viewer.per-page', $this->perPage);
         $this->setCurrentPage('foundation-logviewer');
         $this->addBreadcrumbRoute('LogViewer', 'foundation::log-viewer.index');
     }
@@ -57,23 +57,36 @@ class LogViewerController extends FoundationController
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Show the LogViewer Dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $stats    = $this->logViewer->statsTable();
         $percents = $this->calcPercentages($stats->footer(), $stats->header());
 
+        $this->setTitle('LogViewer Dashboard');
         $this->addBreadcrumb('Dashboard');
 
         return $this->view('log-viewer.dashboard', compact('percents'));
     }
 
-    public function listLogs()
+    /**
+     * List all logs.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\View\View
+     */
+    public function listLogs(Request $request)
     {
         $stats   = $this->logViewer->statsTable();
         $headers = $stats->header();
         // $footer   = $stats->footer();
 
-        $page    = request('page', 1);
+        $page    = $request->get('page', 1);
         $offset  = ($page * $this->perPage) - $this->perPage;
 
         $rows    = new LengthAwarePaginator(
@@ -82,15 +95,17 @@ class LogViewerController extends FoundationController
             $this->perPage,
             $page
         );
-        $rows->setPath(request()->url());
+        $rows->setPath($request->url());
 
-        $this->addBreadcrumb('Logs List');
+        $title = 'Logs List';
+        $this->setTitle($title);
+        $this->addBreadcrumb($title);
 
         return $this->view('log-viewer.list', compact('headers', 'rows', 'footer'));
     }
 
     /**
-     * Show the log.
+     * Show the log entries by date.
      *
      * @param  string  $date
      *
@@ -103,14 +118,16 @@ class LogViewerController extends FoundationController
         $entries   = $log->entries()->paginate($this->perPage);
         $presenter = new PaginationPresenter($entries);
 
+        $title = 'Log : ' . $date;
+        $this->setTitle($title);
         $this->addBreadcrumbRoute('Logs List', 'foundation::log-viewer.logs.list');
-        $this->addBreadcrumb($date);
+        $this->addBreadcrumb($title);
 
         return $this->view('log-viewer.show', compact('log', 'levels', 'entries', 'presenter'));
     }
 
     /**
-     * Filter the log entries by level.
+     * Filter the log entries by date and level.
      *
      * @param  string  $date
      * @param  string  $level
@@ -137,7 +154,7 @@ class LogViewerController extends FoundationController
     }
 
     /**
-     * Download the log
+     * Download the log.
      *
      * @param  string  $date
      *
@@ -172,7 +189,7 @@ class LogViewerController extends FoundationController
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get a log or fail
+     * Get a log or fail.
      *
      * @param  string  $date
      *
@@ -193,7 +210,7 @@ class LogViewerController extends FoundationController
     }
 
     /**
-     * Calculate the percentage
+     * Calculate the percentage.
      *
      * @param  array  $total
      * @param  array  $names

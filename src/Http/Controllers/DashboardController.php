@@ -23,6 +23,7 @@ class DashboardController extends FoundationController
     {
         $this->setCurrentPage('foundation-home');
         $title = 'Dashboard';
+        $this->setTitle($title);
         $this->addBreadcrumb($title);
 
         return $this->view('dashboard');
