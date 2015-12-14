@@ -30,8 +30,22 @@ class FoundationController extends Controller
     {
         parent::__construct();
 
+        $this->initSeo();
         $this->setTemplate(config('arcanesoft.foundation.template'));
         $this->registerBreadcrumbs('foundation');
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  SEO Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Init SEO.
+     */
+    private function initSeo()
+    {
+        $this->seo()->disableOpenGraph();
+        $this->seo()->disableTwitter();
     }
 
     /* ------------------------------------------------------------------------------------------------
