@@ -20,6 +20,7 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerSettingsPackage();
+        $this->registerSeoHelperPackage();
         $this->registerHasherPackage();
         $this->registerBreadcrumbsPackage();
         $this->registerLogViewerPackage();
@@ -60,11 +61,21 @@ class PackageServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register SEO Helper Package.
+     */
+    private function registerSeoHelperPackage()
+    {
+        $this->app->register(\Arcanedev\SeoHelper\SeoHelperServiceProvider::class);
+        $this->alias('SeoHelper', \Arcanedev\SeoHelper\Facades\SeoHelper::class);
+    }
+
+    /**
      * Register the Hasher Package.
      */
     private function registerHasherPackage()
     {
         $this->app->register(\Arcanedev\Hasher\HasherServiceProvider::class);
+        $this->alias('Hasher', \Arcanedev\Hasher\Facades\Hasher::class);
     }
 
     /**
@@ -73,6 +84,7 @@ class PackageServiceProvider extends ServiceProvider
     private function registerBreadcrumbsPackage()
     {
         $this->app->register(\Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider::class);
+        $this->alias('Breadcrumbs', \Arcanedev\Breadcrumbs\Facades\Breadcrumbs::class);
     }
 
     /**
