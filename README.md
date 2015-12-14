@@ -31,10 +31,11 @@ Foundation package for ARCANESOFT CMS.
 
 ### Available Packages
 
-| Package                                                            | Description                                       |
-| ------------------------------------------------------------------ | ------------------------------------------------- |
-| [arcanedev/breadcrumbs](https://github.com/ARCANEDEV/Breadcrumbs)  | A simple &amp; easy way to create breadcrumbs.    |
-| [arcanedev/hasher](https://github.com/ARCANEDEV/Hasher)            | Provides a flexible hash manager for Laravel.     |
-| [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)     | Provides a log viewer.                            |
-| [arcanedev/settings](https://github.com/ARCANEDEV/Settings)        | This package allow to have a persistent settings. |
-| [arcanedev/support](https://github.com/ARCANEDEV/Support)          | ARCANEDEV Support Library.                        |
+| Package                                                           | Description                                                                             |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [arcanedev/breadcrumbs](https://github.com/ARCANEDEV/Breadcrumbs) | A simple &amp; easy way to create breadcrumbs.                                          |
+| [arcanedev/hasher](https://github.com/ARCANEDEV/Hasher)           | Provides a flexible hash manager for Laravel.                                           |
+| [arcanedev/log-viewer](https://github.com/ARCANEDEV/LogViewer)    | Provides a log viewer.                                                                  |
+| [arcanedev/settings](https://github.com/ARCANEDEV/Settings)       | This package allow to have a persistent settings.                                       |
+| [arcanedev/seo-helper](https://github.com/ARCANEDEV/SEO-Helper)   | SEO Helper is a package that provides tools and helpers for Search Engine Optimization. |
+| [arcanedev/support](https://github.com/ARCANEDEV/Support)         | ARCANEDEV Support Library.                                                              |
