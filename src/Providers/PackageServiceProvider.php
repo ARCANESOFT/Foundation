@@ -67,6 +67,16 @@ class PackageServiceProvider extends ServiceProvider
     {
         $this->app->register(\Arcanedev\SeoHelper\SeoHelperServiceProvider::class);
         $this->alias('SeoHelper', \Arcanedev\SeoHelper\Facades\SeoHelper::class);
+
+        // Setting up the SEO Helper config.
+        $this->config()->set(
+            'seo-helper.title.site-name',
+            $this->config()->get('arcanesoft.foundation.seo.site-name', 'ARCANESOFT')
+        );
+        $this->config()->set(
+            'seo-helper.misc.default.viewport',
+            $this->config()->get('arcanesoft.foundation.seo.viewport')
+        );
     }
 
     /**
@@ -95,10 +105,24 @@ class PackageServiceProvider extends ServiceProvider
         $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
 
         // Setting up the LogViewer config.
-        $this->app['config']->set('log-viewer.route.enabled', false);
-        $this->app['config']->set(
+        $this->config()->set('log-viewer.route.enabled', false);
+        $this->config()->set(
             'log-viewer.menu.filter-route',
             'foundation::log-viewer.logs.filter'
         );
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the config instance.
+     *
+     * @return \Illuminate\Contracts\Config\Repository
+     */
+    private function config()
+    {
+        return $this->app['config'];
     }
 }
