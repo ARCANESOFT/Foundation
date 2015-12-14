@@ -18,6 +18,7 @@
         "arcanedev/hasher":      "~1.0",
         "arcanedev/log-viewer":  "~3.0",
         "arcanedev/settings":    "~1.0",
+        "arcanedev/seo-helper":  "~0.16",
         "arcanedev/support":     "~3.0",
         "arcanesoft/auth":       "~0.3",
         "arcanesoft/contracts":  "~1.0"
