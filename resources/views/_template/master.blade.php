@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ARCANESOFT Foundation | Dashboard v2</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {!! seo_helper()->render() !!}
     {!! Html::style('vendor/foundation/css/foundation.min.css') !!}
     {!! Html::style('vendor/foundation/css/style.min.css') !!}
     {!! Html::script('vendor/foundation/js/plugins/pace.min.js') !!}
@@ -15,9 +14,9 @@
 </head>
 <body class="fixed sidebar-mini skin-purple hold-transition">
     <div class="wrapper">
-        @include('foundation::_templates.default.header')
+        @include('foundation::_template.header')
 
-        @include('foundation::_templates.default.sidebar-main')
+        @include('foundation::_template.sidebar-main')
 
         <!-- Content Wrapper. Contains page content -->
         <main class="content-wrapper">
@@ -34,10 +33,10 @@
             </section>
         </main>
 
-        @include('foundation::_templates.default.footer')
+        @include('foundation::_template.footer')
 
         {{-- Control Sidebar --}}
-        @include('foundation::_templates.default.sidebar-alt')
+        @include('foundation::_template.sidebar-alt')
     </div>
 
     {!! Html::script('vendor/foundation/js/vendors.min.js') !!}

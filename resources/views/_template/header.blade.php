@@ -7,5 +7,5 @@
         <span class="logo-lg"><b>ARCANE</b>SOFT</span>
     </a>
 
-    @include('foundation::_templates.default.navigation')
+    @include('foundation::_template.navigation')
 </header>

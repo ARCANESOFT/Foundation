@@ -9,11 +9,11 @@
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
             {{-- Messages --}}
-            @include('foundation::_templates.default.navigation.messages')
+            @include('foundation::_template.navigation.messages')
             {{-- Notifications --}}
-            @include('foundation::_templates.default.navigation.notifications')
+            @include('foundation::_template.navigation.notifications')
             {{-- Tasks --}}
-            @include('foundation::_templates.default.navigation.tasks')
+            @include('foundation::_template.navigation.tasks')
             {{-- User Account --}}
             @include('auth::foundation._partials.navigation.user-menu')
             {{-- Control Sidebar Toggle Button --}}
