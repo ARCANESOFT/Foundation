@@ -16,7 +16,8 @@ class Controller extends BaseController
      */
     use \Arcanedev\Breadcrumbs\Traits\BreadcrumbsTrait,
         \Arcanedev\SeoHelper\Traits\Seoable,
-        \Arcanedev\Support\Traits\Templatable;
+        \Arcanedev\Support\Traits\Templatable,
+        \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
     /* ------------------------------------------------------------------------------------------------
      |  Properties
