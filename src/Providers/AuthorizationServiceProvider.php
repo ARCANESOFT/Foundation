@@ -4,12 +4,12 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 /**
- * Class     AuthServiceProvider
+ * Class     AuthorizationServiceProvider
  *
  * @package  Arcanesoft\Foundation\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class AuthServiceProvider extends ServiceProvider
+class AuthorizationServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
