@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation;
 
-use Arcanedev\Support\PackageServiceProvider;
+use Arcanesoft\Core\Bases\PackageServiceProvider;
 
 /**
  * Class     FoundationServiceProvider
@@ -14,13 +14,6 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Vendor name.
-     *
-     * @var string
-     */
-    protected $vendor       = 'arcanesoft';
-
     /**
      * Package name.
      *
@@ -42,16 +35,6 @@ class FoundationServiceProvider extends PackageServiceProvider
         return dirname(__DIR__);
     }
 
-    /**
-     * Get config key.
-     *
-     * @return string
-     */
-    protected function getConfigKey()
-    {
-        return str_slug($this->vendor . ' ' . $this->package, '.');
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -63,11 +46,11 @@ class FoundationServiceProvider extends PackageServiceProvider
     {
         $this->registerConfig();
 
-        $this->app->register(Providers\PackageServiceProvider::class);
+        $this->app->register(\Arcanesoft\Core\CoreServiceProvider::class);
+        $this->app->register(Providers\PackagesServiceProvider::class);
         $this->app->register(Providers\ModuleServiceProvider::class);
         $this->app->register(Providers\AuthorizationServiceProvider::class);
         $this->registerFoundationService();
-        $this->registerFoundationDatabase();
 
         if ($this->app->runningInConsole()) {
             $this->app->register(Providers\CommandServiceProvider::class);
@@ -106,21 +89,6 @@ class FoundationServiceProvider extends PackageServiceProvider
     private function registerFoundationService()
     {
         $this->singleton('arcanesoft.foundation', Foundation::class);
-    }
-
-    /**
-     * Register Foundation database.
-     */
-    private function registerFoundationDatabase()
-    {
-        /** @var \Illuminate\Config\Repository $config */
-        $config = $this->app['config'];
-
-        $config->set('database.connections.foundation', [
-            'driver'   => 'sqlite',
-            'database' => storage_path('app/foundation.sqlite'),
-            'prefix'   => '',
-        ]);
     }
 
     /* ------------------------------------------------------------------------------------------------
