@@ -3,7 +3,7 @@
 use Arcanedev\LogViewer\Contracts\LogViewerInterface;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Exceptions\LogNotFound;
-use Arcanesoft\Foundation\Bases\FoundationController;
+use Arcanesoft\Core\Bases\FoundationController;
 use Arcanesoft\Foundation\Presenters\PaginationPresenter;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;

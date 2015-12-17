@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers;
 
-use Arcanesoft\Foundation\Bases\FoundationController;
+use Arcanesoft\Core\Bases\FoundationController;
 
 /**
  * Class     DashboardController
