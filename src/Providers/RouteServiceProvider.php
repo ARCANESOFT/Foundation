@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
-use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Arcanesoft\Foundation\Http\Middleware;
+use Arcanesoft\Core\Bases\RouteServiceProvider as ServiceProvider;
 use Arcanesoft\Foundation\Http\Routes;
 use Illuminate\Routing\Router;
 
@@ -27,16 +26,6 @@ class RouteServiceProvider extends ServiceProvider
         return 'Arcanesoft\\Foundation\\Http\\Routes';
     }
 
-    /**
-     * Get Foundation route group.
-     *
-     * @return array
-     */
-    protected function getFoundationRouteGroup()
-    {
-        return config('arcanesoft.foundation.route', []);
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -48,19 +37,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $this->registerMiddlewares();
-
         $router->group($this->getFoundationRouteGroup(), function (Router $router) {
             (new Routes\DashboardRoute())->map($router);
             (new Routes\LogViewerRoutes())->map($router);
         });
-    }
-
-    /**
-     * Register all middlewares.
-     */
-    private function registerMiddlewares()
-    {
-        $this->middleware('admin', Middleware\AdminMiddleware::class);
     }
 }
