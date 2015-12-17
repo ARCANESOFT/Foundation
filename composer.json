@@ -13,15 +13,10 @@
     ],
     "license": "MIT",
     "require": {
-        "php":                   ">=5.5.9",
-        "arcanedev/breadcrumbs": "~2.1",
-        "arcanedev/hasher":      "~1.0",
-        "arcanedev/log-viewer":  "~3.0",
-        "arcanedev/settings":    "~1.0",
-        "arcanedev/seo-helper":  "~0.17",
-        "arcanedev/support":     "~3.0",
-        "arcanesoft/auth":       "~0.4",
-        "arcanesoft/contracts":  "~1.0"
+        "php":                  ">=5.5.9",
+        "arcanedev/log-viewer": "~3.0",
+        "arcanesoft/core":      "~0.1",
+        "arcanesoft/auth":      "~0.4"
     },
     "require-dev": {
         "orchestra/testbench":  "~3.1",
