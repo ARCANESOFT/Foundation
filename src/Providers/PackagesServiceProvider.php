@@ -3,12 +3,12 @@
 use Arcanedev\Support\ServiceProvider;
 
 /**
- * Class     PackageServiceProvider
+ * Class     PackagesServiceProvider
  *
  * @package  Arcanesoft\Foundation\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class PackageServiceProvider extends ServiceProvider
+class PackagesServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -19,11 +19,11 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerSettingsPackage();
-        $this->registerSeoHelperPackage();
-        $this->registerHasherPackage();
-        $this->registerBreadcrumbsPackage();
         $this->registerLogViewerPackage();
+
+        $this->configSeoHelperPackage();
+        $this->configLogViewerPackage();
+
         $this->registerAliases();
     }
 
@@ -48,26 +48,26 @@ class PackageServiceProvider extends ServiceProvider
     }
 
     /* ------------------------------------------------------------------------------------------------
-     |  Package Functions
+     |  Register Packages
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Register the Settings Package.
+     * Register the LogViewer Package.
      */
-    private function registerSettingsPackage()
+    private function registerLogViewerPackage()
     {
-        $this->app->register(\Arcanedev\Settings\SettingsServiceProvider::class);
-        $this->alias('Setting', \Arcanedev\Settings\Facades\Setting::class);
+        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Config Packages
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Register SEO Helper Package.
      */
-    private function registerSeoHelperPackage()
+    private function configSeoHelperPackage()
     {
-        $this->app->register(\Arcanedev\SeoHelper\SeoHelperServiceProvider::class);
-        $this->alias('SeoHelper', \Arcanedev\SeoHelper\Facades\SeoHelper::class);
-
         // Setting up the SEO Helper config.
         $this->config()->set(
             'seo-helper.title.site-name',
@@ -79,31 +79,8 @@ class PackageServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Register the Hasher Package.
-     */
-    private function registerHasherPackage()
+    private function configLogViewerPackage()
     {
-        $this->app->register(\Arcanedev\Hasher\HasherServiceProvider::class);
-        $this->alias('Hasher', \Arcanedev\Hasher\Facades\Hasher::class);
-    }
-
-    /**
-     * Register the Breadcrumbs Package.
-     */
-    private function registerBreadcrumbsPackage()
-    {
-        $this->app->register(\Arcanedev\Breadcrumbs\BreadcrumbsServiceProvider::class);
-        $this->alias('Breadcrumbs', \Arcanedev\Breadcrumbs\Facades\Breadcrumbs::class);
-    }
-
-    /**
-     * Register the LogViewer Package.
-     */
-    private function registerLogViewerPackage()
-    {
-        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
-
         // Setting up the LogViewer config.
         $this->config()->set('log-viewer.route.enabled', false);
         $this->config()->set(
