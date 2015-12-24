@@ -161,15 +161,15 @@
                     type:     $(this).attr('method'),
                     dataType: 'json',
                     data:     $(this).serialize(),
-                    success: function(data, textStatus, xhr) {
+                    success: function(data) {
                         submitBtn.button('reset');
-                        if (data.result === 'success') {
+                        if (data.status === 'success') {
                             deleteLogModal.modal('hide');
                             location.replace("{{ route('foundation::log-viewer.logs.list') }}");
                         }
                         else {
                             alert('AJAX ERROR ! Check the console !');
-                            console.error(errorThrown);
+                            console.error(data);
                         }
                     },
                     error: function(xhr, textStatus, errorThrown) {

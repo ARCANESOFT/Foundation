@@ -131,7 +131,7 @@
                     data:     $(this).serialize(),
                     success: function(data) {
                         submitBtn.button('reset');
-                        if (data.result === 'success') {
+                        if (data.status === 'success') {
                             deleteLogModal.modal('hide');
                             location.reload();
                         }

@@ -188,12 +188,20 @@ class LogViewerController extends FoundationController
 
         $this->authorize('foundation::log-viewer.delete');
 
-        $date    = $request->get('date');
-        $deleted = $this->logViewer->delete($date);
+        $date = $request->get('date');
 
-        return response()->json([
-            'result' => $deleted ? 'success' : 'error'
-        ]);
+        if ($this->logViewer->delete($date)) {
+            $ajax = ['status' => 'success'];
+            notification()->success(
+                "Log [$date] deleted !",
+                "The log [$date] was deleted successfully !"
+            );
+        }
+        else {
+            $ajax = ['status' => 'error'];
+        }
+
+        return response()->json($ajax);
     }
 
     /* ------------------------------------------------------------------------------------------------
