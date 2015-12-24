@@ -45,11 +45,7 @@ class FoundationServiceProvider extends PackageServiceProvider
     public function register()
     {
         $this->registerConfig();
-
-        $this->app->register(\Arcanesoft\Core\CoreServiceProvider::class);
-        $this->app->register(Providers\PackagesServiceProvider::class);
-        $this->app->register(Providers\ModuleServiceProvider::class);
-        $this->app->register(Providers\AuthorizationServiceProvider::class);
+        $this->registerServiceProviders();
         $this->registerFoundationService();
 
         if ($this->app->runningInConsole()) {
@@ -83,6 +79,17 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Services Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Register all the required service providers.
+     */
+    private function registerServiceProviders()
+    {
+        $this->app->register(\Arcanesoft\Core\CoreServiceProvider::class);
+        $this->app->register(Providers\PackagesServiceProvider::class);
+        $this->app->register(Providers\ModuleServiceProvider::class);
+        $this->app->register(Providers\AuthorizationServiceProvider::class);
+    }
+
     /**
      * Register Foundation service.
      */
