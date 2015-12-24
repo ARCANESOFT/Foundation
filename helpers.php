@@ -2,7 +2,7 @@
 
 if ( ! function_exists('foundation')) {
     /**
-     * Get Foundation instance.
+     * Get the Foundation instance.
      *
      * @return \Arcanesoft\Foundation\Foundation
      */
