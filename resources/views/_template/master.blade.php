@@ -8,8 +8,8 @@
     {!! Html::style('vendor/foundation/css/style.min.css') !!}
     {!! Html::script('vendor/foundation/js/plugins/pace.min.js') !!}
     <!--[if lt IE 9]>
-        {!! Html::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') !!}
-        {!! Html::script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') !!}
+    {!! Html::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') !!}
+    {!! Html::script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') !!}
     <![endif]-->
 </head>
 <body class="fixed sidebar-mini skin-purple hold-transition">
@@ -18,7 +18,7 @@
 
         @include('foundation::_template.sidebar-main')
 
-        <!-- Content Wrapper. Contains page content -->
+            <!-- Content Wrapper. Contains page content -->
         <main class="content-wrapper">
             {{-- Content Header (Page header) --}}
             <section class="content-header">
@@ -29,6 +29,10 @@
 
             {{-- Main content --}}
             <section class="content">
+                @if (session()->has(notification()->getName()))
+                    @include('foundation::_template.notifications')
+                @endif
+
                 @yield('content')
             </section>
         </main>
