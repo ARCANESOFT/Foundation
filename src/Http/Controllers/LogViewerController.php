@@ -4,6 +4,7 @@ use Arcanedev\LogViewer\Contracts\LogViewerInterface;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Exceptions\LogNotFound;
 use Arcanesoft\Core\Bases\FoundationController;
+use Arcanesoft\Core\Traits\Notifyable;
 use Arcanesoft\Foundation\Presenters\PaginationPresenter;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -16,6 +17,12 @@ use Illuminate\Pagination\LengthAwarePaginator;
  */
 class LogViewerController extends FoundationController
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Notifyable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -192,9 +199,10 @@ class LogViewerController extends FoundationController
 
         if ($this->logViewer->delete($date)) {
             $ajax = ['status' => 'success'];
-            notification()->success(
-                "Log [$date] deleted !",
-                "The log [$date] was deleted successfully !"
+
+            $this->notifySuccess(
+                "The log [$date] was deleted successfully !",
+                "Log [$date] deleted !"
             );
         }
         else {

@@ -29,7 +29,7 @@
 
             {{-- Main content --}}
             <section class="content">
-                @if (session()->has(notification()->getName()))
+                @if (notify()->ready())
                     @include('foundation::_template.notifications')
                 @endif
 

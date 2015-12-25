@@ -1,11 +1,6 @@
 <?php
 
-$key     = notification()->getName();
-$status  = session()->get("$key.status",  'info');
-$title   = session()->get("$key.title",   'Notification !');
-$message = session()->get("$key.message", 'This is an info notification !');
-
-switch ($status) {
+switch (notify()->type()) {
     case 'success':
         $status = 'success';
         $icon   = 'fa fa-check';
@@ -31,7 +26,7 @@ switch ($status) {
 
 <div class="alert alert-dismissible alert-{{ $status }}">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h4><i class="icon {{ $icon }}"></i> {{ $title }}</h4>
-    {{ $message }}
+    <h4><i class="icon {{ $icon }}"></i> {{ notify()->option('title', 'Default title') }}</h4>
+    {{ notify()->message() }}
 </div>
 
