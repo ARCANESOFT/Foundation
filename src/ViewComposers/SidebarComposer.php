@@ -15,11 +15,21 @@ class SidebarComposer
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * The Sidebar Helper instance.
+     *
+     * @var \Arcanesoft\Core\Helpers\Sidebar\Contracts\Sidebar
+     */
     protected $sidebar;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * SidebarComposer constructor.
+     *
+     * @param  \Arcanesoft\Core\Helpers\Sidebar\Contracts\Sidebar  $sidebar
      */
     public function __construct(Sidebar $sidebar)
     {
