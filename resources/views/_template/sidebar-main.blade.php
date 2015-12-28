@@ -26,73 +26,7 @@
             </form>
         @endif
 
-        {{-- Sidebar menu --}}
-        <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="{{ $current_page == 'foundation-home' ? 'active' : '' }}">
-                <a href="{{ route('foundation::home') }}">
-                    <i class="fa fa-fw fa-dashboard"></i> <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="treeview {{ in_array($current_page, ['auth-dashboard', 'auth-users', 'auth-roles', 'auth-permissions']) ? 'active open' : '' }}">
-                <a href="#">
-                    <i class="fa fa-fw fa-key"></i>
-                    <span>Authorization</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $current_page === 'auth-dashboard' ? 'active' : '' }}">
-                        <a href="{{ route('auth::foundation.dashboard') }}">
-                            <i class="fa fa-fw fa-bar-chart"></i> Statistics
-                        </a>
-                    </li>
-                    <li class="{{ $current_page === 'auth-users' ? 'active' : '' }}">
-                        <a href="{{ route('auth::foundation.users.index') }}">
-                            <i class="fa fa-fw fa-users"></i> Users
-                        </a>
-                    </li>
-                    <li class="{{ $current_page === 'auth-roles' ? 'active' : '' }}">
-                        <a href="{{ route('auth::foundation.roles.index') }}">
-                            <i class="fa fa-fw fa-lock"></i> Roles
-                        </a>
-                    </li>
-                    <li class="{{ $current_page === 'auth-permissions' ? 'active' : '' }}">
-                        <a href="{{ route('auth::foundation.permissions.index') }}">
-                            <i class="fa fa-fw fa-check-circle"></i> Permissions
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    <span>Settings</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-fw fa-wrench"></i> Generals
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-fw fa-paint-brush"></i> Themes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-fw fa-cubes"></i> Modules
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ $current_page == 'foundation-logviewer' ? 'active' : '' }}">
-                <a href="{{ route('foundation::log-viewer.index') }}">
-                    <i class="fa fa-fw fa-book"></i> <span>LogViewer</span>
-                </a>
-            </li>
-        </ul>
+        {!! sidebar()->render('foundation::_composers.sidebar.main') !!}
     </section>
 </aside>
 

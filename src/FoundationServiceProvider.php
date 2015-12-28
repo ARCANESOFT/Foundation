@@ -61,6 +61,7 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->registerPublishes();
 
         $this->app->register(Providers\RouteServiceProvider::class);
+        $this->app->register(Providers\ComposerServiceProvider::class);
     }
 
     /**
