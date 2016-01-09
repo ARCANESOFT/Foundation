@@ -37,7 +37,14 @@ class SetupCommand extends Command
      */
     public function handle()
     {
-        $this->createAdminUser();
+        $arguments = [
+            '--quiet' => true,
+        ];
+
+        if ($this->confirm('Do you wish to reset the application ? [y|N]')) {
+            $this->publishAllModules($arguments);
+            $this->setupAllModules($arguments);
+        }
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -45,23 +52,29 @@ class SetupCommand extends Command
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Create an admin user.
+     * Publish all modules : configs, migrations, assets ...
+     *
+     * @param  array  $arguments
      */
-    private function createAdminUser()
+    private function publishAllModules($arguments)
     {
-        $user = new \Arcanesoft\Auth\Models\User([
-            'username'   => 'admin',
-            'first_name' => 'John',
-            'last_name'  => 'DOE',
-            'email'      => env('ADMIN_EMAIL', 'admin@example.com'),
-            'password'   => env('ADMIN_PASSWORD', 'password'),
-        ]);
+        $this->call('foundation:publish', $arguments);
 
-        $user->is_admin  = true;
-        $user->is_active = true;
+        $this->call('optimize');
 
-        $user->save();
+        $this->info('All modules are published !');
+    }
 
-        $this->info('Admin account created !');
+    /**
+     * Setup all modules.
+     *
+     * @param  array  $arguments
+     */
+    private function setupAllModules($arguments)
+    {
+        $this->call('migrate:refresh');
+
+        // Setup the auth module.
+        $this->call('auth:setup', $arguments);
     }
 }
