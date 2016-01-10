@@ -19,7 +19,7 @@
         "arcanesoft/auth":      "~0.4"
     },
     "require-dev": {
-        "orchestra/testbench":  "~3.1",
+        "orchestra/testbench":  "~3.1.0",
         "phpunit/phpcov":       "~2.0",
         "phpunit/phpunit":      "~4.0|~5.0"
     },
