@@ -45,6 +45,7 @@ class FoundationServiceProvider extends PackageServiceProvider
     public function register()
     {
         $this->registerConfig();
+        $this->registerSidebarItems();
         $this->registerServiceProviders();
         $this->registerFoundationService();
 
@@ -103,6 +104,9 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Register all publishable files.
+     */
     private function registerPublishes()
     {
         $basePath = $this->getBasePath();
@@ -110,7 +114,7 @@ class FoundationServiceProvider extends PackageServiceProvider
         // Config
         $this->publishes([
             $this->getConfigFile() => config_path($this->vendor . DS . "{$this->package}.php")
-        ]);
+        ], 'config');
 
         // Views
         $viewsPath = "$basePath/resources/views";
@@ -130,5 +134,8 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->publishes([
             "$basePath/resources/assets/dist" => public_path('vendor/foundation'),
         ], 'assets');
+
+        // Sidebar items
+        $this->publishSidebarItems();
     }
 }

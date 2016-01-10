@@ -49,92 +49,26 @@ class SidebarComposer
     {
         $current_page = array_get($view->getData(), 'current_page', '');
 
-        $this->sidebar->add([
-            'title'       => 'Dashboard',
-            'name'        => 'foundation-home',
-            'route'       => 'foundation::home',
-            'icon'        => 'fa fa-fw fa-dashboard',
-            'roles'       => [],
-            'permissions' => [],
-        ]);
-        $this->sidebar->add([
-            'title'       => 'Authorization',
-            'name'        => 'auth',
-            'icon'        => 'fa fa-fw fa-key',
-            'roles'       => [],
-            'permissions' => [],
-            'children'    => [
-                [
-                    'title'       => 'Statistics',
-                    'name'        => 'auth-dashboard',
-                    'route'       => 'auth::foundation.dashboard',
-                    'icon'        => 'fa fa-fw fa-bar-chart',
-                    'roles'       => [],
-                    'permissions' => [],
-                ],[
-                    'title'       => 'Users',
-                    'name'        => 'auth-users',
-                    'route'       => 'auth::foundation.users.index',
-                    'icon'        => 'fa fa-fw fa-users',
-                    'roles'       => [],
-                    'permissions' => [],
-                ],[
-                    'title'       => 'Roles',
-                    'name'        => 'auth-roles',
-                    'route'       => 'auth::foundation.roles.index',
-                    'icon'        => 'fa fa-fw fa-lock',
-                    'roles'       => [],
-                    'permissions' => [],
-                ],[
-                    'title'       => 'Permissions',
-                    'name'        => 'auth-permissions',
-                    'route'       => 'auth::foundation.permissions.index',
-                    'icon'        => 'fa fa-fw fa-check-circle',
-                    'roles'       => [],
-                    'permissions' => [],
-                ]
-            ],
-        ]);
-        $this->sidebar->add([
-            'title'       => 'Settings',
-            'name'        => 'foundation-settings',
-            'icon'        => 'fa fa-fw fa-cogs',
-            'roles'       => [],
-            'permissions' => [],
-            'children'    => [
-                [
-                    'title'       => 'Generals',
-                    'name'        => 'foundation-settings-generals',
-                    'route'       => 'auth::foundation.dashboard',
-                    'icon'        => 'fa fa-fw fa-wrench',
-                    'roles'       => [],
-                    'permissions' => [],
-                ],[
-                    'title'       => 'Themes',
-                    'name'        => 'foundation-settings-themes',
-                    'route'       => 'auth::foundation.dashboard',
-                    'icon'        => 'fa fa-fw fa-paint-brush',
-                    'roles'       => [],
-                    'permissions' => [],
-                ],[
-                    'title'       => 'Modules',
-                    'name'        => 'foundation-settings-modules',
-                    'route'       => 'auth::foundation.dashboard',
-                    'icon'        => 'fa fa-fw fa-cubes',
-                    'roles'       => [],
-                    'permissions' => [],
-                ],
-            ],
-        ]);
-        $this->sidebar->add([
-            'title'       => 'LogViewer',
-            'name'        => 'foundation-logviewer',
-            'route'       => 'foundation::log-viewer.index',
-            'icon'        => 'fa fa-fw fa-book',
-            'roles'       => [],
-            'permissions' => [],
-        ]);
+        foreach ($this->getSidebarItems() as $sidebarKey) {
+            if (config()->has($sidebarKey)) {
+                $this->sidebar->add(config($sidebarKey));
+            }
+        }
 
         $this->sidebar->setCurrent($current_page);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get sidebar items.
+     *
+     * @return array
+     */
+    private function getSidebarItems()
+    {
+        return config('arcanesoft.foundation.sidebar.items', []);
     }
 }
