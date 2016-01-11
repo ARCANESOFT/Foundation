@@ -54,23 +54,23 @@ class AuthorizationServiceProvider extends ServiceProvider
     private function registerLogViewerPolicies(GateContract $gate)
     {
         // TODO: Complete the log-viewer policy implementations.
-        $gate->define('foundation::log-viewer.dashboard', function ($user) {
+        $gate->define('foundation.logviewer.dashboard', function ($user) {
             return true;
         });
 
-        $gate->define('foundation::log-viewer.list', function ($user) {
+        $gate->define('foundation.logviewer.list', function ($user) {
             return true;
         });
 
-        $gate->define('foundation::log-viewer.show', function ($user) {
+        $gate->define('foundation.logviewer.show', function ($user) {
             return true;
         });
 
-        $gate->define('foundation::log-viewer.download', function ($user) {
+        $gate->define('foundation.logviewer.download', function ($user) {
             return true;
         });
 
-        $gate->define('foundation::log-viewer.delete', function ($user) {
+        $gate->define('foundation.logviewer.delete', function ($user) {
             return true;
         });
     }
