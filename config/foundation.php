@@ -34,8 +34,8 @@ return [
     'sidebar'   => [
         'items' => [
             'arcanesoft.sidebar.foundation.dashboard',
-            'arcanesoft.sidebar.foundation.settings',
             'arcanesoft.sidebar.auth.main',
+            'arcanesoft.sidebar.foundation.settings',
             'arcanesoft.sidebar.foundation.log-viewer',
         ]
     ],
