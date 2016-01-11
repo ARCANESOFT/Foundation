@@ -47,15 +47,15 @@ class SidebarComposer
      */
     public function compose(View $view)
     {
-        $current_page = array_get($view->getData(), 'current_page', '');
-
         foreach ($this->getSidebarItems() as $sidebarKey) {
             if (config()->has($sidebarKey)) {
                 $this->sidebar->add(config($sidebarKey));
             }
         }
 
-        $this->sidebar->setCurrent($current_page);
+        $this->sidebar->setCurrent(
+            array_get($view->getData(), 'current_page', '')
+        );
     }
 
     /* ------------------------------------------------------------------------------------------------
