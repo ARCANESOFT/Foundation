@@ -10,15 +10,8 @@ return [
         [
             'title'       => 'Generals',
             'name'        => 'foundation-settings-generals',
-            'route'       => 'auth::foundation.dashboard',
+            'route'       => 'foundation::settings.index',
             'icon'        => 'fa fa-fw fa-wrench',
-            'roles'       => [],
-            'permissions' => [],
-        ],[
-            'title'       => 'Themes',
-            'name'        => 'foundation-settings-themes',
-            'route'       => 'auth::foundation.dashboard',
-            'icon'        => 'fa fa-fw fa-paint-brush',
             'roles'       => [],
             'permissions' => [],
         ],[
