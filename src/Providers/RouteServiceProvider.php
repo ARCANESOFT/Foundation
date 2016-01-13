@@ -38,8 +38,9 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         $router->group($this->getFoundationRouteGroup(), function (Router $router) {
-            (new Routes\DashboardRoute())->map($router);
-            (new Routes\LogViewerRoutes())->map($router);
+            (new Routes\DashboardRoute)->map($router);
+            (new Routes\LogViewerRoutes)->map($router);
+            (new Routes\SettingsRoutes)->map($router);
         });
     }
 }
