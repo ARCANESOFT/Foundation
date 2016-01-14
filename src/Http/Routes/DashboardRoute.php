@@ -18,8 +18,6 @@ class DashboardRoute extends RouteRegister
      */
     public function map(Registrar $router)
     {
-        parent::map($router);
-
         $this->get('/', [
             'as'    => 'home',
             'uses'  => 'DashboardController@index',

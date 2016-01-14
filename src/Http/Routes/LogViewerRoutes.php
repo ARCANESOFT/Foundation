@@ -18,8 +18,6 @@ class LogViewerRoutes extends RouteRegister
      */
     public function map(Registrar $router)
     {
-        parent::map($router);
-
         $this->group([
             'prefix' => 'log-viewer',
             'as'     => 'log-viewer.',
