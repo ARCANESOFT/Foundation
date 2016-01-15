@@ -1,5 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
+use Arcanesoft\Contracts\Auth\Models\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -38,8 +39,7 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         /** @var  \Illuminate\Auth\Access\Gate  $gate */
-        $gate->before(function ($user, $ability) {
-            /** @var  \Arcanesoft\Auth\Models\User  $user */
+        $gate->before(function (User $user, $ability) {
             return $user->isAdmin() ? true : null;
         });
 
@@ -53,25 +53,17 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     private function registerLogViewerPolicies(GateContract $gate)
     {
-        // TODO: Complete the log-viewer policy implementations.
-        $gate->define('foundation.logviewer.dashboard', function ($user) {
-            return true;
-        });
+        $class    = \Arcanesoft\Foundation\Policies\LogViewerPolicy::class;
+        $policies = [
+            'dashboardPolicy' => 'foundation.logviewer.dashboard',
+            'listPolicy'      => 'foundation.logviewer.list',
+            'showPolicy'      => 'foundation.logviewer.show',
+            'downloadPolicy'  => 'foundation.logviewer.download',
+            'deletePolicy'    => 'foundation.logviewer.delete',
+        ];
 
-        $gate->define('foundation.logviewer.list', function ($user) {
-            return true;
-        });
-
-        $gate->define('foundation.logviewer.show', function ($user) {
-            return true;
-        });
-
-        $gate->define('foundation.logviewer.download', function ($user) {
-            return true;
-        });
-
-        $gate->define('foundation.logviewer.delete', function ($user) {
-            return true;
-        });
+        foreach ($policies as $method => $ability) {
+            $gate->define($ability, "$class@$method");
+        }
     }
 }

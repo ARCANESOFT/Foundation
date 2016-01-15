@@ -71,7 +71,7 @@ class LogViewerController extends FoundationController
      */
     public function index()
     {
-        $this->authorize('foundation::log-viewer.dashboard');
+        $this->authorize('foundation.logviewer.dashboard');
 
         $stats    = $this->logViewer->statsTable();
         $percents = $this->calcPercentages($stats->footer(), $stats->header());
@@ -91,7 +91,7 @@ class LogViewerController extends FoundationController
      */
     public function listLogs(Request $request)
     {
-        $this->authorize('foundation::log-viewer.list');
+        $this->authorize('foundation.logviewer.list');
 
         $stats   = $this->logViewer->statsTable();
         $headers = $stats->header();
@@ -124,7 +124,7 @@ class LogViewerController extends FoundationController
      */
     public function show($date)
     {
-        $this->authorize('foundation::log-viewer.show');
+        $this->authorize('foundation.logviewer.show');
 
         $log       = $this->getLogOrFail($date);
         $levels    = $this->logViewer->levelsNames();
@@ -149,7 +149,7 @@ class LogViewerController extends FoundationController
      */
     public function showByLevel($date, $level)
     {
-        $this->authorize('foundation::log-viewer.show');
+        $this->authorize('foundation.logviewer.show');
 
         $log = $this->getLogOrFail($date);
 
@@ -177,7 +177,7 @@ class LogViewerController extends FoundationController
      */
     public function download($date)
     {
-        $this->authorize('foundation::log-viewer.download');
+        $this->authorize('foundation.logviewer.download');
 
         return $this->logViewer->download($date);
     }
@@ -193,7 +193,7 @@ class LogViewerController extends FoundationController
     {
         self::onlyAjax();
 
-        $this->authorize('foundation::log-viewer.delete');
+        $this->authorize('foundation.logviewer.delete');
 
         $date = $request->get('date');
 
