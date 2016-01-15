@@ -1,6 +1,6 @@
 {
     "name":    "Foundation",
-    "version": "0.5.7",
+    "version": "0.6.1",
     "private": true,
     "devDependencies": {
         "gulp":            "^3.8.0",
