@@ -37,15 +37,11 @@ class PublishCommand extends Command
      */
     public function handle()
     {
-        $arguments = [
-            '--quiet' => $this->option('quiet') ? true : false,
-        ];
-
-        $this->call('vendor:publish', array_merge($arguments, [
+        $this->call('vendor:publish', [
             '--provider' => \Arcanesoft\Foundation\FoundationServiceProvider::class,
-        ]));
+        ]);
 
-        $this->call('settings:publish', $arguments);
-        $this->call('auth:publish', $arguments);
+        $this->call('settings:publish');
+        $this->call('auth:publish');
     }
 }

@@ -37,27 +37,38 @@ class SetupCommand extends Command
      */
     public function handle()
     {
-        if ( ! $this->confirm('Do you wish to reset the application ? [y|N]')) {
-            return;
+        $this->arcanesoftHeader();
+
+        if ($this->confirm('Do you wish to reset the application ? [y|N]')) {
+            $this->setup();
         }
-
-        $options = $this->getDefaultOptions();
-
-        $this->publishAllModules($options);
-        $this->setupAllModules($options);
-        $this->seedFoundation($options);
     }
 
     /**
-     * Get the default options.
-     *
-     * @return array
+     * Display arcanesoft header.
      */
-    private function getDefaultOptions()
+    private function arcanesoftHeader()
     {
-        return $arguments = [
-            '--quiet' => true,
-        ];
+        $this->comment('    ___    ____  _________    _   _____________ ____  ____________');
+        $this->comment('   /   |  / __ \/ ____/   |  / | / / ____/ ___// __ \/ ____/_  __/');
+        $this->comment('  / /| | / /_/ / /   / /| | /  |/ / __/  \__ \/ / / / /_    / /   ');
+        $this->comment(' / ___ |/ _, _/ /___/ ___ |/ /|  / /___ ___/ / /_/ / __/   / /    ');
+        $this->comment('/_/  |_/_/ |_|\____/_/  |_/_/ |_/_____//____/\____/_/     /_/     ');
+        $this->line('');
+
+        // Copyright
+        $this->comment('Version ' . foundation()->version() . ' | 2015-2016 | Created by ARCANEDEV(c)');
+        $this->line('');
+    }
+
+    /**
+     * Run the setup.
+     */
+    private function setup()
+    {
+        $this->publishAllModules();
+        $this->refreshMigrations();
+        $this->seedAllModules();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -66,38 +77,47 @@ class SetupCommand extends Command
      */
     /**
      * Publish all modules : configs, migrations, assets ...
-     *
-     * @param  array  $options
      */
-    private function publishAllModules(array $options)
+    private function publishAllModules()
     {
-        $this->call('foundation:publish', $options);
+        $this->frame('Publishing all the modules files');
+        $this->line('');
 
+        $this->call('foundation:publish');
         $this->call('optimize');
 
-        $this->info('All modules are published !');
+        $this->comment('All files are published !');
+        $this->line('');
     }
 
     /**
-     * Setup all modules.
-     *
-     * @param  array  $options
+     * Refresh migrations.
      */
-    private function setupAllModules(array $options)
+    private function refreshMigrations()
     {
-        $this->call('migrate:refresh', $options);
+        $this->frame('Refreshing all the migrations');
+        $this->line('');
 
-        // Setup the auth module.
-        $this->call('auth:setup', $options);
+        $this->call('migrate:refresh');
+
+        $this->line('');
     }
 
     /**
-     * Seed Foundation.
+     * Seed all modules.
      */
-    private function seedFoundation(array $options)
+    private function seedAllModules()
     {
-        $this->call('db:seed', array_merge($options, [
+        $this->frame('Seeding the database');
+        $this->line('');
+
+        $this->call('auth:setup');
+
+        $this->call('db:seed', [
             '--class' => \Arcanesoft\Foundation\Seeds\DatabaseSeeder::class
-        ]));
+        ]);
+
+        $this->comment('Database seeded !');
+        $this->line('');
     }
 }
