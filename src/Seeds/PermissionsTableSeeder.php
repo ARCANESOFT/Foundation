@@ -27,6 +27,7 @@ class PermissionsTableSeeder extends PermissionsSeeder
                     'description' => 'Foundation permissions group',
                 ],
                 'permissions' => array_merge(
+                    $this->getSettingsSeeds(),
                     $this->getLogViewerSeeds()
                 ),
             ],
@@ -37,6 +38,22 @@ class PermissionsTableSeeder extends PermissionsSeeder
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Get the Settings permissions.
+     *
+     * @return array
+     */
+    private function getSettingsSeeds()
+    {
+        return [
+            [
+                'name'        => 'Settings - View the general settings',
+                'description' => 'Allow to view the general settings.',
+                'slug'        => 'foundation.settings.general',
+            ]
+        ];
+    }
+
     /**
      * Get the LogViewer permissions.
      *
