@@ -24,7 +24,7 @@ return [
      */
     'seo'       => [
         'site-name' => 'ARCANESOFT',
-        'viewport'  => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+        'viewport'  => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
     ],
 
     /* ------------------------------------------------------------------------------------------------
@@ -35,9 +35,11 @@ return [
         'items' => [
             'arcanesoft.sidebar.foundation.dashboard',
             'arcanesoft.sidebar.auth.main',
+            // 'arcanesoft.sidebar.pages.main',
+            // 'arcanesoft.sidebar.blog.main',
             'arcanesoft.sidebar.foundation.settings',
             'arcanesoft.sidebar.foundation.log-viewer',
-        ]
+        ],
     ],
 
     /* ------------------------------------------------------------------------------------------------
