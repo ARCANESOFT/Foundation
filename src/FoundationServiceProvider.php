@@ -19,7 +19,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      *
      * @var string
      */
-    protected $package      = 'foundation';
+    protected $package = 'foundation';
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -59,7 +59,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function boot()
     {
-        $this->registerPublishes();
+        $this->publishAll();
 
         $this->app->register(Providers\RouteServiceProvider::class);
         $this->app->register(Providers\ComposerServiceProvider::class);
@@ -72,9 +72,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function provides()
     {
-        return [
-            'arcanesoft.foundation',
-        ];
+        return ['arcanesoft.foundation'];
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -101,41 +99,20 @@ class FoundationServiceProvider extends PackageServiceProvider
     }
 
     /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
+     |  Package Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Register all publishable files.
+     * Publish all the package files.
+     *
+     * @param  bool  $load
      */
-    private function registerPublishes()
+    protected function publishAll($load = true)
     {
-        $basePath = $this->getBasePath();
+        parent::publishAll($load);
 
-        // Config
         $this->publishes([
-            $this->getConfigFile() => config_path($this->vendor . DS . "{$this->package}.php")
-        ], 'config');
-
-        // Views
-        $viewsPath = "$basePath/resources/views";
-        $this->loadViewsFrom($viewsPath, 'foundation');
-        $this->publishes([
-            $viewsPath => base_path('resources/views/vendor/foundation'),
-        ], 'views');
-
-        // Translations
-        $translationsPath = "$basePath/resources/lang";
-        $this->loadTranslationsFrom($translationsPath, 'foundation');
-        $this->publishes([
-            $translationsPath => base_path('resources/lang/vendor/foundation'),
-        ], 'lang');
-
-        // Assets
-        $this->publishes([
-            "$basePath/resources/assets/dist" => public_path('vendor/foundation'),
+            $this->getBasePath() . '/resources/assets/dist' => public_path("vendor/{$this->package}"),
         ], 'assets');
-
-        // Sidebar items
-        $this->publishSidebarItems();
     }
 }
