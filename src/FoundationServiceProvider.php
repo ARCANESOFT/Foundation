@@ -59,10 +59,15 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function boot()
     {
-        $this->publishAll();
-
         $this->app->register(Providers\RouteServiceProvider::class);
         $this->app->register(Providers\ComposerServiceProvider::class);
+
+        // Publishes
+        $this->publishConfig();
+        $this->publishViews();
+        $this->publishTranslations();
+        $this->publishSidebarItems();
+        $this->publishAssets();
     }
 
     /**
@@ -99,18 +104,14 @@ class FoundationServiceProvider extends PackageServiceProvider
     }
 
     /* ------------------------------------------------------------------------------------------------
-     |  Package Functions
+     |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Publish all the package files.
-     *
-     * @param  bool  $load
+     * Publish assets.
      */
-    protected function publishAll($load = true)
+    private function publishAssets()
     {
-        parent::publishAll($load);
-
         $this->publishes([
             $this->getBasePath() . '/resources/assets/dist' => public_path("vendor/{$this->package}"),
         ], 'assets');
