@@ -68,22 +68,26 @@ class PackagesServiceProvider extends ServiceProvider
      */
     private function configSeoHelperPackage()
     {
+        $config = $this->config();
+
         // Setting up the SEO Helper config.
-        $this->config()->set(
+        $config->set(
             'seo-helper.title.site-name',
-            $this->config()->get('arcanesoft.foundation.seo.site-name', 'ARCANESOFT')
+            $config->get('arcanesoft.foundation.seo.site-name', 'ARCANESOFT')
         );
-        $this->config()->set(
+        $config->set(
             'seo-helper.misc.default.viewport',
-            $this->config()->get('arcanesoft.foundation.seo.viewport')
+            $config->get('arcanesoft.foundation.seo.viewport')
         );
     }
 
     private function configLogViewerPackage()
     {
+        $config = $this->config();
+
         // Setting up the LogViewer config.
-        $this->config()->set('log-viewer.route.enabled', false);
-        $this->config()->set(
+        $config ->set('log-viewer.route.enabled', false);
+        $config ->set(
             'log-viewer.menu.filter-route',
             'foundation::log-viewer.logs.filter'
         );

@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Console;
 
 use Arcanedev\Support\Bases\Command;
+use Arcanesoft\Foundation\Seeds\DatabaseSeeder;
 
 /**
  * Class     SetupCommand
@@ -112,12 +113,23 @@ class SetupCommand extends Command
         $this->line('');
 
         $this->call('auth:setup');
-
-        $this->call('db:seed', [
-            '--class' => \Arcanesoft\Foundation\Seeds\DatabaseSeeder::class
-        ]);
+        $this->call('db:seed', ['--class' => DatabaseSeeder::class]);
 
         $this->comment('Database seeded !');
         $this->line('');
+
+        foreach ($this->config()->get('arcanesoft.foundation.modules.setup', []) as $setup) {
+            $this->call($setup);
+        }
+    }
+
+    /**
+     * Get the config repository.
+     *
+     * @return \Illuminate\Contracts\Config\Repository
+     */
+    protected function config()
+    {
+        return $this->laravel['config'];
     }
 }
