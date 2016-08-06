@@ -92,18 +92,4 @@ class PackagesServiceProvider extends ServiceProvider
             'foundation::log-viewer.logs.filter'
         );
     }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the config instance.
-     *
-     * @return \Illuminate\Contracts\Config\Repository
-     */
-    private function config()
-    {
-        return $this->app['config'];
-    }
 }
