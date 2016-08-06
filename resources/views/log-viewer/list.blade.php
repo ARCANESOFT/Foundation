@@ -37,44 +37,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($rows as $date => $row)
-                            <tr>
-                                @foreach($row as $key => $value)
-                                    <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
-                                        @if ($key == 'date')
-                                            <span class="label label-primary">{{ $value }}</span>
-                                        @else
-                                            <span class="label level-{{ $value !== 0 ? $key : 'empty' }}">
-                                    {{ $value }}
-                                </span>
-                                        @endif
+                        @if ($rows->count())
+                            @foreach($rows as $date => $row)
+                                <tr>
+                                    @foreach($row as $key => $value)
+                                        <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
+                                            @if ($key == 'date')
+                                                <span class="label label-primary">{{ $value }}</span>
+                                            @else
+                                                <span class="label level-{{ $value !== 0 ? $key : 'empty' }}">
+                                        {{ $value }}
+                                    </span>
+                                            @endif
+                                        </td>
+                                    @endforeach
+                                    <td class="text-right">
+                                        <a href="{{ route('foundation::log-viewer.logs.show', [$date]) }}" class="btn btn-xs btn-info" data-toggle="tooltip" data-original-title="Show">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <a href="{{ route('foundation::log-viewer.logs.download', [$date]) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-original-title="Download">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                        <a href="#delete-log-modal" class="btn btn-xs btn-danger" data-log-date="{{ $date }}" data-toggle="tooltip" data-original-title="Delete">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
                                     </td>
-                                @endforeach
-                                <td class="text-right">
-                                    <a href="{{ route('foundation::log-viewer.logs.show', [$date]) }}" class="btn btn-xs btn-info" data-toggle="tooltip" data-original-title="Show">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                    <a href="{{ route('foundation::log-viewer.logs.download', [$date]) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-original-title="Download">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                    <a href="#delete-log-modal" class="btn btn-xs btn-danger" data-log-date="{{ $date }}" data-toggle="tooltip" data-original-title="Delete">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="11" class="text-center">
+                                    <span class="label label-default">
+                                        There is no log for the time being.
+                                    </span>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endif
                     </tbody>
-                    <tfoot>
-                        <tr></tr>
-                    </tfoot>
                 </table>
             </div>
 
             {{-- DELETE MODAL --}}
             <div id="delete-log-modal" class="modal fade">
                 <div class="modal-dialog">
-                    {!! Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) !!}
-                        {!! Form::hidden('date') !!}
+                    {{ Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) }}
+                        {{ Form::hidden('date') }}
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -90,7 +97,7 @@
                                 <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">DELETE FILE</button>
                             </div>
                         </div>
-                    {!! Form::close() !!}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

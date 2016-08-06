@@ -123,8 +123,8 @@
     {{-- DELETE MODAL --}}
     <div id="delete-log-modal" class="modal fade">
         <div class="modal-dialog">
-            {!! Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) !!}
-                {!! Form::hidden('date', $log->date) !!}
+            {{ Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) }}
+                {{ Form::hidden('date', $log->date) }}
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -140,7 +140,7 @@
                         <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">DELETE FILE</button>
                     </div>
                 </div>
-            {!! Form::close() !!}
+            {{ Form::close() }}
         </div>
     </div>
 @endsection
