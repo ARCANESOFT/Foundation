@@ -1,7 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Seeds;
 
-use Arcanesoft\Auth\Models\Role;
 use Arcanesoft\Auth\Models\Permission;
+use Arcanesoft\Auth\Models\Role;
 use Arcanesoft\Auth\Seeds\RolesSeeder;
 
 /**
@@ -54,7 +54,7 @@ class RolesTableSeeder extends RolesSeeder
             $role = Role::where('slug', $roleSlug)->first();
             $ids  = $permissions->filter(function (Permission $permission) use ($permissionSlug) {
                 return starts_with($permission->slug, $permissionSlug);
-            })->lists('id')->toArray();
+            })->pluck('id')->toArray();
 
             $role->permissions()->sync($ids);
         }
