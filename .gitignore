@@ -1,9 +1,6 @@
-/.idea/
-/_arcanedev/
 /build/
-/bower_components/
 /resources/assets/bower/
 /node_modules/
 /vendor/
-composer.lock
-composer.phar
+/composer.lock
+/composer.phar
