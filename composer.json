@@ -13,10 +13,10 @@
     ],
     "license": "MIT",
     "require": {
-        "php":                  ">=5.5.9",
+        "php":                  ">=5.6.4",
         "arcanedev/log-viewer": "~3.0",
         "arcanesoft/core":      "~0.3",
-        "arcanesoft/auth":      "~0.4"
+        "arcanesoft/auth":      "~1.0"
     },
     "require-dev": {
         "phpunit/phpcov":       "~2.0|~3.0",
@@ -34,7 +34,7 @@
         }
     },
     "scripts": {
-        "testbench": "composer require --dev \"orchestra/testbench=~3.1.0\""
+        "testbench": "composer require --dev \"orchestra/testbench=~3.3.0\""
     },
     "extra": {
         "branch-alias": {
