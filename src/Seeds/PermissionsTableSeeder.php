@@ -50,7 +50,7 @@ class PermissionsTableSeeder extends PermissionsSeeder
                 'name'        => 'Settings - View the general settings',
                 'description' => 'Allow to view the general settings.',
                 'slug'        => 'foundation.settings.general',
-            ]
+            ],
         ];
     }
 
@@ -66,23 +66,27 @@ class PermissionsTableSeeder extends PermissionsSeeder
                 'name'        => 'LogViewer - View dashboard',
                 'description' => 'Allow to view the LogViewer dashboard.',
                 'slug'        => 'foundation.logviewer.dashboard',
-            ],[
+            ],
+            [
                 'name'        => 'LogViewer - List all logs',
                 'description' => 'Allow to list all the logs.',
                 'slug'        => 'foundation.logviewer.list',
-            ],[
+            ],
+            [
                 'name'        => 'LogViewer - View a log',
                 'description' => 'Allow to display a log.',
                 'slug'        => 'foundation.logviewer.show',
-            ],[
+            ],
+            [
                 'name'        => 'LogViewer - Download a log',
                 'description' => 'Allow to download a log.',
                 'slug'        => 'foundation.logviewer.download',
-            ],[
+            ],
+            [
                 'name'        => 'LogViewer - Delete a log',
                 'description' => 'Allow to delete a log.',
                 'slug'        => 'foundation.logviewer.delete',
-            ]
+            ],
         ];
     }
 }
