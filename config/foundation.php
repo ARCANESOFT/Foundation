@@ -8,7 +8,7 @@ return [
     'route'     => [
         'prefix'     => 'dashboard',
         'as'         => 'foundation::',
-        'middleware' => 'admin',
+        'middleware' => ['auth', 'admin'],
         'namespace'  => 'Arcanesoft\\Foundation\\Http\\Controllers',
     ],
 
