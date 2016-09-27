@@ -7,11 +7,19 @@ use Arcanesoft\Contracts\Auth\Models\User;
  *
  * @package  Arcanesoft\Foundation\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- *
- * @todo: Adding the check role (LogViewer manager role)
  */
-class LogViewerPolicy
+class LogViewerPolicy extends Policy
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Constants
+     | ------------------------------------------------------------------------------------------------
+     */
+    const PERMISSION_DASHBOARD = 'foundation.logviewer.dashboard';
+    const PERMISSION_LIST      = 'foundation.logviewer.list';
+    const PERMISSION_SHOW      = 'foundation.logviewer.show';
+    const PERMISSION_DOWNLOAD  = 'foundation.logviewer.download';
+    const PERMISSION_DELETE    = 'foundation.logviewer.delete';
+
     /* ------------------------------------------------------------------------------------------------
      |  Getters and Setters
      | ------------------------------------------------------------------------------------------------
@@ -24,11 +32,11 @@ class LogViewerPolicy
     public static function getPolicies()
     {
         return [
-            'dashboardPolicy' => 'foundation.logviewer.dashboard',
-            'listPolicy'      => 'foundation.logviewer.list',
-            'showPolicy'      => 'foundation.logviewer.show',
-            'downloadPolicy'  => 'foundation.logviewer.download',
-            'deletePolicy'    => 'foundation.logviewer.delete',
+            'dashboardPolicy' => static::PERMISSION_DASHBOARD,
+            'listPolicy'      => static::PERMISSION_LIST,
+            'showPolicy'      => static::PERMISSION_SHOW,
+            'downloadPolicy'  => static::PERMISSION_DOWNLOAD,
+            'deletePolicy'    => static::PERMISSION_DELETE,
         ];
     }
 
@@ -45,7 +53,7 @@ class LogViewerPolicy
      */
     public function dashboardPolicy(User $user)
     {
-        return $user->may('foundation.logviewer.dashboard');
+        return $user->may(static::PERMISSION_DASHBOARD);
     }
 
     /**
@@ -57,7 +65,7 @@ class LogViewerPolicy
      */
     public function listPolicy(User $user)
     {
-        return $user->may('foundation.logviewer.list');
+        return $user->may(static::PERMISSION_LIST);
     }
 
     /**
@@ -69,7 +77,7 @@ class LogViewerPolicy
      */
     public function showPolicy(User $user)
     {
-        return $user->may('foundation.logviewer.show');
+        return $user->may(static::PERMISSION_SHOW);
     }
 
     /**
@@ -81,7 +89,7 @@ class LogViewerPolicy
      */
     public function downloadPolicy(User $user)
     {
-        return $user->may('foundation.logviewer.download');
+        return $user->may(static::PERMISSION_DOWNLOAD);
     }
 
     /**
@@ -93,6 +101,6 @@ class LogViewerPolicy
      */
     public function deletePolicy(User $user)
     {
-        return $user->may('foundation.logviewer.delete');
+        return $user->may(static::PERMISSION_DELETE);
     }
 }
