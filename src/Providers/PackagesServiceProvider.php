@@ -20,10 +20,7 @@ class PackagesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerLogViewerPackage();
-
-        $this->configSeoHelperPackage();
         $this->configLogViewerPackage();
-
         $this->registerAliases();
     }
 
@@ -63,24 +60,6 @@ class PackagesServiceProvider extends ServiceProvider
      |  Config Packages
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Register SEO Helper Package.
-     */
-    private function configSeoHelperPackage()
-    {
-        $config = $this->config();
-
-        // Setting up the SEO Helper config.
-        $config->set(
-            'seo-helper.title.site-name',
-            $config->get('arcanesoft.foundation.seo.site-name', 'ARCANESOFT')
-        );
-        $config->set(
-            'seo-helper.misc.default.viewport',
-            $config->get('arcanesoft.foundation.seo.viewport')
-        );
-    }
-
     private function configLogViewerPackage()
     {
         $config = $this->config();
