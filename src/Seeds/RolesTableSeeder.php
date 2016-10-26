@@ -3,6 +3,7 @@
 use Arcanesoft\Auth\Models\Permission;
 use Arcanesoft\Auth\Models\Role;
 use Arcanesoft\Auth\Seeds\RolesSeeder;
+use Illuminate\Support\Str;
 
 /**
  * Class     RoleTableSeeder
@@ -26,7 +27,7 @@ class RolesTableSeeder extends RolesSeeder
                 'name'        => 'LogViewer Manager',
                 'description' => 'The LogViewer manager role.',
                 'is_locked'   => true,
-            ]
+            ],
         ]);
 
         $this->syncAdminRole();
@@ -44,6 +45,7 @@ class RolesTableSeeder extends RolesSeeder
      */
     private function syncRoles()
     {
+        /** @var \Illuminate\Database\Eloquent\Collection $permissions */
         $permissions = Permission::all();
         $roles       = [
             'logviewer-manager' => 'foundation.logviewer.'
@@ -53,7 +55,7 @@ class RolesTableSeeder extends RolesSeeder
             /** @var  \Arcanesoft\Auth\Models\Role  $role */
             $role = Role::where('slug', $roleSlug)->first();
             $ids  = $permissions->filter(function (Permission $permission) use ($permissionSlug) {
-                return starts_with($permission->slug, $permissionSlug);
+                return Str::startsWith($permission->slug, $permissionSlug);
             })->pluck('id')->toArray();
 
             $role->permissions()->sync($ids);

@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Seeds;
 
 use Arcanesoft\Auth\Seeds\PermissionsSeeder;
+use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 /**
  * Class     PermissionTableSeeder
@@ -49,8 +50,8 @@ class PermissionsTableSeeder extends PermissionsSeeder
             [
                 'name'        => 'Settings - View the general settings',
                 'description' => 'Allow to view the general settings.',
-                'slug'        => 'foundation.settings.general',
-            ]
+                'slug'        => 'foundation.settings.general', // TODO: Create Settings Policies
+            ],
         ];
     }
 
@@ -65,24 +66,28 @@ class PermissionsTableSeeder extends PermissionsSeeder
             [
                 'name'        => 'LogViewer - View dashboard',
                 'description' => 'Allow to view the LogViewer dashboard.',
-                'slug'        => 'foundation.logviewer.dashboard',
-            ],[
+                'slug'        => LogViewerPolicy::PERMISSION_DASHBOARD,
+            ],
+            [
                 'name'        => 'LogViewer - List all logs',
                 'description' => 'Allow to list all the logs.',
-                'slug'        => 'foundation.logviewer.list',
-            ],[
+                'slug'        => LogViewerPolicy::PERMISSION_LIST,
+            ],
+            [
                 'name'        => 'LogViewer - View a log',
                 'description' => 'Allow to display a log.',
-                'slug'        => 'foundation.logviewer.show',
-            ],[
+                'slug'        => LogViewerPolicy::PERMISSION_SHOW,
+            ],
+            [
                 'name'        => 'LogViewer - Download a log',
                 'description' => 'Allow to download a log.',
-                'slug'        => 'foundation.logviewer.download',
-            ],[
+                'slug'        => LogViewerPolicy::PERMISSION_DOWNLOAD,
+            ],
+            [
                 'name'        => 'LogViewer - Delete a log',
                 'description' => 'Allow to delete a log.',
-                'slug'        => 'foundation.logviewer.delete',
-            ]
+                'slug'        => LogViewerPolicy::PERMISSION_DELETE,
+            ],
         ];
     }
 }
