@@ -3,11 +3,12 @@
 use Arcanedev\LogViewer\Contracts\LogViewerInterface;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Exceptions\LogNotFound;
-use Arcanesoft\Core\Bases\FoundationController;
 use Arcanesoft\Core\Traits\Notifyable;
+use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 use Arcanesoft\Foundation\Presenters\PaginationPresenter;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 
 /**
  * Class     LogViewerController
@@ -15,7 +16,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @package  Arcanesoft\Foundation\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LogViewerController extends FoundationController
+class LogViewerController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -71,7 +72,7 @@ class LogViewerController extends FoundationController
      */
     public function index()
     {
-        $this->authorize('foundation.logviewer.dashboard');
+        $this->authorize(LogViewerPolicy::PERMISSION_DASHBOARD);
 
         $stats    = $this->logViewer->statsTable();
         $percents = $this->calcPercentages($stats->footer(), $stats->header());
@@ -91,7 +92,7 @@ class LogViewerController extends FoundationController
      */
     public function listLogs(Request $request)
     {
-        $this->authorize('foundation.logviewer.list');
+        $this->authorize(LogViewerPolicy::PERMISSION_LIST);
 
         $stats   = $this->logViewer->statsTable();
         $headers = $stats->header();
@@ -124,7 +125,7 @@ class LogViewerController extends FoundationController
      */
     public function show($date)
     {
-        $this->authorize('foundation.logviewer.show');
+        $this->authorize(LogViewerPolicy::PERMISSION_SHOW);
 
         $log       = $this->getLogOrFail($date);
         $levels    = $this->logViewer->levelsNames();
@@ -149,7 +150,7 @@ class LogViewerController extends FoundationController
      */
     public function showByLevel($date, $level)
     {
-        $this->authorize('foundation.logviewer.show');
+        $this->authorize(LogViewerPolicy::PERMISSION_SHOW);
 
         $log = $this->getLogOrFail($date);
 
@@ -177,7 +178,7 @@ class LogViewerController extends FoundationController
      */
     public function download($date)
     {
-        $this->authorize('foundation.logviewer.download');
+        $this->authorize(LogViewerPolicy::PERMISSION_DOWNLOAD);
 
         return $this->logViewer->download($date);
     }
@@ -193,9 +194,10 @@ class LogViewerController extends FoundationController
     {
         self::onlyAjax();
 
-        $this->authorize('foundation.logviewer.delete');
+        $this->authorize(LogViewerPolicy::PERMISSION_DELETE);
 
         $date = $request->get('date');
+        $ajax = ['status' => 'error'];
 
         if ($this->logViewer->delete($date)) {
             $ajax = ['status' => 'success'];
@@ -204,9 +206,6 @@ class LogViewerController extends FoundationController
                 "The log [$date] was deleted successfully !",
                 "Log [$date] deleted !"
             );
-        }
-        else {
-            $ajax = ['status' => 'error'];
         }
 
         return response()->json($ajax);
@@ -248,7 +247,7 @@ class LogViewerController extends FoundationController
     private function calcPercentages(array $total, array $names)
     {
         $percents = [];
-        $all      = array_get($total, 'all');
+        $all      = Arr::get($total, 'all');
 
         foreach ($total as $level => $count) {
             $percents[$level] = [

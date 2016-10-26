@@ -1,6 +1,5 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers;
 
-use Arcanesoft\Core\Bases\FoundationController;
 use Arcanesoft\Core\Traits\Notifyable;
 
 /**
@@ -9,7 +8,7 @@ use Arcanesoft\Core\Traits\Notifyable;
  * @package  Arcanesoft\Foundation\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SettingsController extends FoundationController
+class SettingsController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits

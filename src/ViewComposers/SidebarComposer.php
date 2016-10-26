@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\ViewComposers;
 
 use Arcanesoft\Core\Helpers\Sidebar\Contracts\Sidebar;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
 /**
@@ -54,7 +55,7 @@ class SidebarComposer
         }
 
         $this->sidebar->setCurrent(
-            array_get($view->getData(), 'current_page', '')
+            Arr::get($view->getData(), 'current_page', '')
         );
     }
 

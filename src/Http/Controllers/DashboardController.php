@@ -1,14 +1,12 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers;
 
-use Arcanesoft\Core\Bases\FoundationController;
-
 /**
  * Class     DashboardController
  *
  * @package  Arcanesoft\Foundation\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class DashboardController extends FoundationController
+class DashboardController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
