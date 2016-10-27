@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation;
 
 use Arcanesoft\Core\Bases\PackageServiceProvider;
+use Arcanesoft\Core\CoreServiceProvider;
 
 /**
  * Class     FoundationServiceProvider
@@ -67,7 +68,6 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->publishViews();
         $this->publishTranslations();
         $this->publishSidebarItems();
-        $this->publishAssets();
     }
 
     /**
@@ -89,7 +89,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     private function registerServiceProviders()
     {
-        $this->app->register(\Arcanesoft\Core\CoreServiceProvider::class);
+        $this->app->register(CoreServiceProvider::class);
         $this->app->register(Providers\PackagesServiceProvider::class);
         $this->app->register(Providers\ModuleServiceProvider::class);
         $this->app->register(Providers\AuthorizationServiceProvider::class);
@@ -101,19 +101,5 @@ class FoundationServiceProvider extends PackageServiceProvider
     private function registerFoundationService()
     {
         $this->singleton('arcanesoft.foundation', Foundation::class);
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Publish assets.
-     */
-    private function publishAssets()
-    {
-        $this->publishes([
-            $this->getBasePath() . '/resources/assets/dist' => public_path("vendor/{$this->package}"),
-        ], 'assets');
     }
 }
