@@ -182,5 +182,8 @@
     </div>
 @endsection
 
+@section('modals')
+@endsection
+
 @section('scripts')
 @endsection

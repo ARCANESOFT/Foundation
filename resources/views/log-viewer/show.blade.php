@@ -60,55 +60,55 @@
         <div class="col-sm-9">
             <ul class="timeline">
                 @if ($presenter->hasPages())
-                    <li class="time-label">
-                        <span class="bg-aqua">
-                            {{ trans('foundation::pagination.pages', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
-                        </span>
-                    </li>
-                    <li>
-                        <div class="timeline-item">
-                            <div class="timeline-body text-center">
-                                {!! $presenter->render() !!}
-                            </div>
+                <li class="time-label">
+                    <span class="bg-aqua">
+                        {{ trans('foundation::pagination.pages', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
+                    </span>
+                </li>
+                <li>
+                    <div class="timeline-item">
+                        <div class="timeline-body text-center">
+                            {!! $presenter->render() !!}
                         </div>
-                    </li>
+                    </div>
+                </li>
                 @endif
 
                 @foreach($entries as $key => $entry)
-                    <li>
-                        <div class="timeline-icon level-{{ $entry->level }}" data-toggle="tooltip" data-original-title="{{ $entry->name() }}">
-                            {!! $entry->icon() !!}
-                        </div>
-                        <div class="timeline-item">
-                            <span class="time">
-                                <i class="fa fa-fw fa-clock-o"></i> {{ $entry->datetime->format('H:i:s') }}
+                <li>
+                    <div class="timeline-icon level-{{ $entry->level }}" data-toggle="tooltip" data-original-title="{{ $entry->name() }}">
+                        {!! $entry->icon() !!}
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time">
+                            <i class="fa fa-fw fa-clock-o"></i> {{ $entry->datetime->format('H:i:s') }}
+                        </span>
+                        <div class="timeline-header">
+                            <span class="label level-env">
+                                ENV: {{ $entry->env }}
                             </span>
-                            <div class="timeline-header">
-                                <span class="label level-env">
-                                    ENV: {{ $entry->env }}
-                                </span>
-                            </div>
-                            <div class="timeline-body">
-                                <p>{{ $entry->header }}</p>
-                                <button class="btn btn-xs btn-default" type="button" data-toggle="collapse" data-target="#log-entry-stack-{{  $key }}" aria-expanded="false" aria-controls="#log-entry-stack-{{  $key }}">
-                                    Toggle stack
-                                </button>
-                                <div id="log-entry-stack-{{  $key }}" class="collapse">
-                                    <pre>{{ $entry->stack }}</pre>
-                                </div>
+                        </div>
+                        <div class="timeline-body">
+                            <p>{{ $entry->header }}</p>
+                            <button class="btn btn-xs btn-default" type="button" data-toggle="collapse" data-target="#log-entry-stack-{{  $key }}" aria-expanded="false" aria-controls="#log-entry-stack-{{  $key }}">
+                                Toggle stack
+                            </button>
+                            <div id="log-entry-stack-{{  $key }}" class="collapse">
+                                <pre>{{ $entry->stack }}</pre>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
                 @endforeach
 
                 @if ($presenter->hasPages())
-                    <li>
-                        <div class="timeline-item">
-                            <div class="timeline-body text-center">
-                                {!! $presenter->render() !!}
-                            </div>
+                <li>
+                    <div class="timeline-item">
+                        <div class="timeline-body text-center">
+                            {!! $presenter->render() !!}
                         </div>
-                    </li>
+                    </div>
+                </li>
                 @endif
 
                 <li>
@@ -119,8 +119,9 @@
             </ul>
         </div>
     </div>
+@endsection
 
-    {{-- DELETE MODAL --}}
+@section('modals')
     <div id="delete-log-modal" class="modal fade">
         <div class="modal-dialog">
             {{ Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) }}
@@ -136,7 +137,7 @@
                         <p>Are you sure you want to <span class="label label-danger">DELETE</span> this log file <span class="label label-primary">{{ $log->date }}</span> ?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        {{ Form::button('Cancel', ['data-dismiss' => 'modal', 'class' => 'btn btn-sm btn-default pull-left']) }}
                         <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">DELETE FILE</button>
                     </div>
                 </div>
@@ -148,34 +149,34 @@
 @section('scripts')
     <script>
         $(function () {
-            var deleteLogModal = $('div#delete-log-modal'),
-                deleteLogForm  = $('form#delete-log-form'),
-                submitBtn      = deleteLogForm.find('button[type="submit"]');
+            var $deleteLogModal = $('div#delete-log-modal'),
+                $deleteLogForm  = $('form#delete-log-form');
 
-            deleteLogForm.submit(function(event) {
+            $deleteLogForm.on('submit', function(event) {
                 event.preventDefault();
-                submitBtn.button('loading');
+                var $submitBtn = $deleteLogForm.find('button[type="submit"]');
+
+                $submitBtn.button('loading');
 
                 $.ajax({
-                    url:      $(this).attr('action'),
-                    type:     $(this).attr('method'),
+                    url:      $deleteLogForm.attr('action'),
+                    type:     $deleteLogForm.attr('method'),
                     dataType: 'json',
-                    data:     $(this).serialize(),
+                    data:     $deleteLogForm.serialize(),
                     success: function(data) {
-                        submitBtn.button('reset');
                         if (data.status === 'success') {
-                            deleteLogModal.modal('hide');
+                            $deleteLogModal.modal('hide');
                             location.replace("{{ route('foundation::log-viewer.logs.list') }}");
                         }
                         else {
                             alert('AJAX ERROR ! Check the console !');
-                            console.error(data);
+                            $submitBtn.button('reset');
                         }
                     },
                     error: function(xhr, textStatus, errorThrown) {
                         alert('AJAX ERROR ! Check the console !');
                         console.error(errorThrown);
-                        submitBtn.button('reset');
+                        $submitBtn.button('reset');
                     }
                 });
 
