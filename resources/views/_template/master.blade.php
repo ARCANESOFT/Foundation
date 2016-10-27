@@ -10,6 +10,7 @@
     {{ Html::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}
     {{ Html::script('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') }}
     <![endif]-->
+    @yield('head')
 </head>
 <body class="fixed sidebar-mini skin-purple hold-transition">
     <div class="wrapper">
@@ -41,6 +42,8 @@
         {{-- Control Sidebar --}}
         @include('foundation::_template.sidebar-alt')
     </div>
+
+    @yield('modals')
 
     {{ Html::script('vendor/foundation/js/vendors.js') }}
     {{ Html::script('vendor/foundation/js/app.js') }}
