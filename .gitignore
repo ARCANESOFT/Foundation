@@ -1,5 +1,4 @@
 /build/
-/resources/assets/bower/
 /node_modules/
 /vendor/
 /composer.lock
