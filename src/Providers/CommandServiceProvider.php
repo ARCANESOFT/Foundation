@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
-use Arcanedev\Support\Providers\CommandServiceProvider as ServiceProvider;
+use Arcanedev\Support\ServiceProvider;
+use Arcanesoft\Foundation\Console;
 
 /**
  * Class     CommandServiceProvider
@@ -11,6 +12,21 @@ use Arcanedev\Support\Providers\CommandServiceProvider as ServiceProvider;
 class CommandServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
+     |  Properties
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Console commands.
+     *
+     * @var array
+     */
+    protected $commands = [
+        Console\PublishCommand::class,
+        Console\SetupCommand::class,
+        Console\ClearCommand::class,
+    ];
+
+    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
@@ -19,9 +35,6 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerPublishCommand();
-        $this->registerSetupCommand();
-
         $this->commands($this->commands);
     }
 
@@ -32,39 +45,6 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [
-            \Arcanesoft\Foundation\Console\PublishCommand::class,
-            \Arcanesoft\Foundation\Console\SetupCommand::class,
-        ];
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Commands Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Register publish command.
-     */
-    private function registerPublishCommand()
-    {
-        $this->singleton(
-            'arcanesoft.foundation.commands.publish',
-            \Arcanesoft\Foundation\Console\PublishCommand::class
-        );
-
-        $this->commands[] = \Arcanesoft\Foundation\Console\PublishCommand::class;
-    }
-
-    /**
-     * Register setup command.
-     */
-    private function registerSetupCommand()
-    {
-        $this->singleton(
-            'arcanesoft.foundation.commands.setup',
-            \Arcanesoft\Foundation\Console\SetupCommand::class
-        );
-
-        $this->commands[] = \Arcanesoft\Foundation\Console\SetupCommand::class;
+        return $this->commands;
     }
 }

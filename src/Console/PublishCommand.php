@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Console;
 
-use Arcanedev\Support\Bases\Command;
+use Arcanesoft\Foundation\FoundationServiceProvider;
 
 /**
  * Class     PublishCommand
@@ -38,7 +38,7 @@ class PublishCommand extends Command
     public function handle()
     {
         $this->call('vendor:publish', [
-            '--provider' => \Arcanesoft\Foundation\FoundationServiceProvider::class,
+            '--provider' => FoundationServiceProvider::class,
         ]);
 
         $this->call('settings:publish');
