@@ -29,7 +29,6 @@ return [
             // 'arcanesoft.sidebar.pages.main',
             // 'arcanesoft.sidebar.blog.main',
             'arcanesoft.sidebar.foundation.settings',
-            'arcanesoft.sidebar.foundation.log-viewer',
             'arcanesoft.sidebar.foundation.system',
         ],
     ],
@@ -49,7 +48,9 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'log-viewer' => [
-        'per-page' => 30,
+        'per-page'     => 30,
+
+        'filter-route' => 'foundation::system.log-viewer.logs.filter',
     ],
 
     /* ------------------------------------------------------------------------------------------------

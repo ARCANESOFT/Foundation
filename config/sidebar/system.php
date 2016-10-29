@@ -1,6 +1,7 @@
 <?php
 
 use Arcanesoft\Auth\Models\Role;
+use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 return [
     'title'       => 'System',
@@ -9,6 +10,14 @@ return [
     'roles'       => [Role::ADMINISTRATOR],
     'permissions' => [],
     'children'    => [
+        [
+            'title'       => 'LogViewer',
+            'name'        => 'foundation-system-logviewer',
+            'route'       => 'foundation::system.log-viewer.index',
+            'icon'        => 'fa fa-fw fa-book',
+            'roles'       => [Role::ADMINISTRATOR, 'logviewer-manager'],
+            'permissions' => [LogViewerPolicy::PERMISSION_DASHBOARD],
+        ],
         [
             'title'       => 'Routes',
             'name'        => 'foundation-system-routes',

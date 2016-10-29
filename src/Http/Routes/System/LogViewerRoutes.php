@@ -1,4 +1,4 @@
-<?php namespace Arcanesoft\Foundation\Http\Routes;
+<?php namespace Arcanesoft\Foundation\Http\Routes\System;
 
 use Arcanedev\Support\Bases\RouteRegister;
 use Illuminate\Contracts\Routing\Registrar;
@@ -23,7 +23,7 @@ class LogViewerRoutes extends RouteRegister
             'as'     => 'log-viewer.',
         ], function () {
             $this->get('/', [
-                'as'    => 'index', // foundation::log-viewer.index
+                'as'    => 'index', // foundation::system.log-viewer.index
                 'uses'  => 'LogViewerController@index',
             ]);
 
@@ -32,7 +32,7 @@ class LogViewerRoutes extends RouteRegister
                 'as'     => 'logs.',
             ], function() {
                 $this->get('/', [
-                    'as'    => 'list', // foundation::log-viewer.logs.list
+                    'as'    => 'list', // foundation::system.log-viewer.logs.list
                     'uses'  => 'LogViewerController@listLogs',
                 ]);
 
@@ -40,23 +40,23 @@ class LogViewerRoutes extends RouteRegister
                     'prefix'    => '{date}',
                 ], function() {
                     $this->get('/', [
-                        'as'    => 'show', // foundation::log-viewer.logs.show
+                        'as'    => 'show', // foundation::system.log-viewer.logs.show
                         'uses'  => 'LogViewerController@show',
                     ]);
 
                     $this->get('download', [
-                        'as'    => 'download', // foundation::log-viewer.logs.download
+                        'as'    => 'download', // foundation::system.log-viewer.logs.download
                         'uses'  => 'LogViewerController@download',
                     ]);
 
                     $this->get('{level}', [
-                        'as'    => 'filter', // foundation::log-viewer.logs.filter
+                        'as'    => 'filter', // foundation::system.log-viewer.logs.filter
                         'uses'  => 'LogViewerController@showByLevel',
                     ]);
                 });
 
                 $this->delete('delete', [
-                    'as'    => 'delete', // foundation::log-viewer.logs.delete
+                    'as'    => 'delete', // foundation::system.log-viewer.logs.delete
                     'uses'  => 'LogViewerController@delete',
                 ]);
             });

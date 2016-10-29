@@ -8,18 +8,18 @@
             <h3 class="box-title"><i class="fa fa-fw fa-list"></i> Logs List</h3>
             <div class="box-tools">
                 <div class="btn-group">
-                    <a href="{{ route('foundation::log-viewer.index') }}" class="btn btn-sm btn-default {{ route_is('foundation::log-viewer.index') ? 'active' : '' }}">
+                    <a href="{{ route('foundation::system.log-viewer.index') }}" class="btn btn-sm btn-default {{ route_is('foundation::system.log-viewer.index') ? 'active' : '' }}">
                         <i class="fa fa-fw fa-dashboard"></i> Dashboard
                     </a>
-                    <a href="{{ route('foundation::log-viewer.logs.list') }}" class="btn btn-sm btn-default {{ route_is('foundation::log-viewer.logs.list') ? 'active' : '' }}">
+                    <a href="{{ route('foundation::system.log-viewer.logs.list') }}" class="btn btn-sm btn-default {{ route_is('foundation::system.log-viewer.logs.list') ? 'active' : '' }}">
                         <i class="fa fa-fw fa-list"></i> Logs list
                     </a>
                 </div>
             </div>
         </div>
-        <div class="box-body">
+        <div class="box-body no-padding">
             <div class="table-responsive">
-                <table class="table table-condensed table-hover table-stats">
+                <table class="table table-condensed table-hover table-stats no-margin">
                     <thead>
                         <tr>
                             @foreach($headers as $key => $header)
@@ -46,16 +46,16 @@
                                             <span class="label label-primary">{{ $value }}</span>
                                         @else
                                             <span class="label level-{{ $value !== 0 ? $key : 'empty' }}">
-                                    {{ $value }}
-                                </span>
+                                                {{ $value }}
+                                            </span>
                                         @endif
                                     </td>
                                 @endforeach
                                 <td class="text-right">
-                                    <a href="{{ route('foundation::log-viewer.logs.show', [$date]) }}" class="btn btn-xs btn-info" data-toggle="tooltip" data-original-title="Show">
+                                    <a href="{{ route('foundation::system.log-viewer.logs.show', [$date]) }}" class="btn btn-xs btn-info" data-toggle="tooltip" data-original-title="Show">
                                         <i class="fa fa-search"></i>
                                     </a>
-                                    <a href="{{ route('foundation::log-viewer.logs.download', [$date]) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-original-title="Download">
+                                    <a href="{{ route('foundation::system.log-viewer.logs.download', [$date]) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-original-title="Download">
                                         <i class="fa fa-download"></i>
                                     </a>
                                     <a href="#delete-log-modal" class="btn btn-xs btn-danger" data-log-date="{{ $date }}" data-toggle="tooltip" data-original-title="Delete">
@@ -88,7 +88,7 @@
 @section('modals')
     <div id="delete-log-modal" class="modal fade">
         <div class="modal-dialog">
-            {{ Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form', 'autocomplete' => 'off']) }}
+            {{ Form::open(['route' => 'foundation::system.log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form', 'autocomplete' => 'off']) }}
                 {{ Form::hidden('date') }}
                 <div class="modal-content">
                     <div class="modal-header">

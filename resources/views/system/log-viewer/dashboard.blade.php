@@ -8,10 +8,10 @@
             <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i> Dashboard</h3>
             <div class="box-tools">
                 <div class="btn-group">
-                    <a href="{{ route('foundation::log-viewer.index') }}" class="btn btn-sm btn-default {{ route_is('foundation::log-viewer.index') ? 'active' : '' }}">
+                    <a href="{{ route('foundation::system.log-viewer.index') }}" class="btn btn-sm btn-default {{ route_is('foundation::system.log-viewer.index') ? 'active' : '' }}">
                         <i class="fa fa-fw fa-dashboard"></i> Dashboard
                     </a>
-                    <a href="{{ route('foundation::log-viewer.logs.list') }}" class="btn btn-sm btn-default {{ route_is('foundation::log-viewer.logs.list') ? 'active' : '' }}">
+                    <a href="{{ route('foundation::system.log-viewer.logs.list') }}" class="btn btn-sm btn-default {{ route_is('foundation::system.log-viewer.logs.list') ? 'active' : '' }}">
                         <i class="fa fa-fw fa-list"></i> Logs list
                     </a>
                 </div>

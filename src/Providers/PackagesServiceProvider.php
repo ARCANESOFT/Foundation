@@ -78,10 +78,10 @@ class PackagesServiceProvider extends ServiceProvider
         $config = $this->config();
 
         // Setting up the LogViewer config.
-        $config ->set('log-viewer.route.enabled', false);
-        $config ->set(
+        $config->set('log-viewer.route.enabled', false);
+        $config->set(
             'log-viewer.menu.filter-route',
-            'foundation::log-viewer.logs.filter'
+            $config->get('arcanesoft.foundation.log-viewer.filter-route')
         );
     }
 }
