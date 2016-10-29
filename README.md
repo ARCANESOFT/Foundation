@@ -1,7 +1,6 @@
 # Foundation [![Packagist License][badge_license]](LICENSE.md) [![For ARCANESOFT CMS][badge_arcanesoft]][link-arcanesoft]
 
 [![Travis Status][badge_build]][link-travis]
-[![HHVM Status][badge_hhvm]][link-hhvm]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
@@ -44,7 +43,6 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [badge_license]:      https://img.shields.io/packagist/l/arcanesoft/foundation.svg?style=flat-square
 [badge_arcanesoft]:   https://img.shields.io/badge/For-ARCANESOFT%20CMS-orange.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANESOFT/Foundation.svg?style=flat-square
-[badge_hhvm]:         https://img.shields.io/hhvm/arcanesoft/foundation.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANESOFT/Foundation.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANESOFT/Foundation.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/0e0105f7-211f-47cb-a7b8-e6357e2f616b.svg?style=flat-square
@@ -60,6 +58,5 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-contributors]:  https://github.com/ARCANESOFT/Foundation/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanesoft/foundation
 [link-travis]:        https://travis-ci.org/ARCANESOFT/Foundation
-[link-hhvm]:          http://hhvm.h4cc.de/package/arcanesoft/foundation
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANESOFT/Foundation/?branch=master
 [link-insight]:       https://insight.sensiolabs.com/projects/0e0105f7-211f-47cb-a7b8-e6357e2f616b
