@@ -1,8 +1,8 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers;
 
-use Arcanedev\LogViewer\Contracts\LogViewerInterface;
+use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
-use Arcanedev\LogViewer\Exceptions\LogNotFound;
+use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
 use Arcanesoft\Core\Traits\Notifyable;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 use Arcanesoft\Foundation\Presenters\PaginationPresenter;
@@ -31,7 +31,7 @@ class LogViewerController extends Controller
     /**
      * The LogViewer instance.
      *
-     * @var \Arcanedev\LogViewer\Contracts\LogViewerInterface
+     * @var \Arcanedev\LogViewer\Contracts\LogViewer
      */
     protected $logViewer;
 
@@ -49,9 +49,9 @@ class LogViewerController extends Controller
     /**
      * LogViewerController constructor.
      *
-     * @param  \Arcanedev\LogViewer\Contracts\LogViewerInterface  $logViewer
+     * @param  \Arcanedev\LogViewer\Contracts\LogViewer  $logViewer
      */
-    public function __construct(LogViewerInterface $logViewer)
+    public function __construct(LogViewerContract $logViewer)
     {
         parent::__construct();
 
@@ -229,7 +229,7 @@ class LogViewerController extends Controller
         try {
             $log = $this->logViewer->get($date);
         }
-        catch(LogNotFound $e) {
+        catch(LogNotFoundException $e) {
             abort(404, $e->getMessage());
         }
 
