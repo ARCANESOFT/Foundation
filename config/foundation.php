@@ -30,6 +30,7 @@ return [
             // 'arcanesoft.sidebar.blog.main',
             'arcanesoft.sidebar.foundation.settings',
             'arcanesoft.sidebar.foundation.log-viewer',
+            'arcanesoft.sidebar.foundation.system',
         ],
     ],
 
@@ -49,5 +50,32 @@ return [
      */
     'log-viewer' => [
         'per-page' => 30,
+    ],
+
+    /* ------------------------------------------------------------------------------------------------
+     |  RoutesViewer
+     | ------------------------------------------------------------------------------------------------
+     */
+    'routes-viewer' => [
+        'uris' => [
+            'hide' => [
+                '_debugbar'
+            ],
+        ],
+
+        'methods' => [
+            'hide' => [
+                'HEAD',
+            ],
+
+            'colors' => [
+                'GET'    => 'success',
+                'HEAD'   => 'default',
+                'POST'   => 'primary',
+                'PUT'    => 'warning',
+                'PATCH'  => 'info',
+                'DELETE' => 'danger',
+            ],
+        ],
     ],
 ];

@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             Routes\DashboardRoute::register($router);
             Routes\LogViewerRoutes::register($router);
             Routes\SettingsRoutes::register($router);
+            Routes\SystemRoutes::register($router);
         });
     }
 }

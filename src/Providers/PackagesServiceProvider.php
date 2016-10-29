@@ -21,6 +21,7 @@ class PackagesServiceProvider extends ServiceProvider
     {
         $this->registerLogViewerPackage();
         $this->configLogViewerPackage();
+        $this->registerRoutesViewerService();
         $this->registerAliases();
     }
 
@@ -42,6 +43,18 @@ class PackagesServiceProvider extends ServiceProvider
         return [
             //
         ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Register Services
+     | ------------------------------------------------------------------------------------------------
+     */
+    public function registerRoutesViewerService()
+    {
+        $this->singleton(
+            'arcanedev.foundation.routes-viewer',
+            \Arcanesoft\Foundation\Services\RoutesViewer::class
+        );
     }
 
     /* ------------------------------------------------------------------------------------------------
