@@ -88,7 +88,7 @@
 @section('modals')
     <div id="delete-log-modal" class="modal fade">
         <div class="modal-dialog">
-            {{ Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form']) }}
+            {{ Form::open(['route' => 'foundation::log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form', 'autocomplete' => 'off']) }}
                 {{ Form::hidden('date') }}
                 <div class="modal-content">
                     <div class="modal-header">
