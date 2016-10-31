@@ -17,13 +17,13 @@ return [
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [],
         ],
-        [
-            'title'       => 'Modules',
-            'name'        => 'foundation-settings-modules',
-            'route'       => 'auth::foundation.dashboard',
-            'icon'        => 'fa fa-fw fa-cubes',
-            'roles'       => [Role::ADMINISTRATOR],
-            'permissions' => [],
-        ],
+//        [
+//            'title'       => 'Modules',
+//            'name'        => 'foundation-settings-modules',
+//            'route'       => 'auth::foundation.dashboard',
+//            'icon'        => 'fa fa-fw fa-cubes',
+//            'roles'       => [Role::ADMINISTRATOR],
+//            'permissions' => [],
+//        ],
     ],
 ];

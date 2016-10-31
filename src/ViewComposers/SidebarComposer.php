@@ -48,28 +48,13 @@ class SidebarComposer
      */
     public function compose(View $view)
     {
-        foreach ($this->getSidebarItems() as $sidebarKey) {
-            if (config()->has($sidebarKey)) {
+        foreach (config('arcanesoft.foundation.sidebar.items', []) as $sidebarKey) {
+            if (config()->has($sidebarKey))
                 $this->sidebar->add(config($sidebarKey));
-            }
         }
 
         $this->sidebar->setCurrent(
             Arr::get($view->getData(), 'current_page', '')
         );
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get sidebar items.
-     *
-     * @return array
-     */
-    private function getSidebarItems()
-    {
-        return config('arcanesoft.foundation.sidebar.items', []);
     }
 }

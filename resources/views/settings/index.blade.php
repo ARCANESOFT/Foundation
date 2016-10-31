@@ -10,65 +10,6 @@
                     <div class="box">
                         <div class="box-header">
                             <h2 class="box-title">
-                                <i class="fa fa-fw fa-gear"></i> System
-                            </h2>
-                        </div>
-                        <div class="box-body no-padding">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th>Base URL</th>
-                                        <td>
-                                            <span class="label label-primary">{{ config('app.url') }}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width: 150px;">Default Locale</th>
-                                        <td>
-                                            <span class="label label-primary">{{ strtoupper(config('app.locale')) }}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Timezone</th>
-                                        <td>
-                                            <span class="label label-primary">{{ config('app.timezone') }}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Debug Mode</th>
-                                        <td>
-                                            @if (config('app.debug', false))
-                                                <span class="label label-warning">Enabled</span>
-                                            @else
-                                                <span class="label label-success">Disabled</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Maintenance Mode</th>
-                                        <td>
-                                            @if (app()->isDownForMaintenance())
-                                                <span class="label label-warning">Enabled</span>
-                                            @else
-                                                <span class="label label-success">Disabled</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>ARCANESOFT</th>
-                                        <td>
-                                            <span class="label label-primary">version {{ foundation()->version() }}</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h2 class="box-title">
                                 <i class="fa fa-fw fa-envelope"></i> Mail
                             </h2>
                         </div>

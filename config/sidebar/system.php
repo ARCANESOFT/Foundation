@@ -11,6 +11,16 @@ return [
     'permissions' => [],
     'children'    => [
         [
+            'title'       => 'Informations',
+            'name'        => 'foundation-system-information',
+            'route'       => 'foundation::system.information.index',
+            'icon'        => 'fa fa-fw fa-info-circle',
+            'roles'       => [Role::ADMINISTRATOR],
+            'permissions' => [
+                //
+            ],
+        ],
+        [
             'title'       => 'LogViewer',
             'name'        => 'foundation-system-logviewer',
             'route'       => 'foundation::system.log-viewer.index',

@@ -19,6 +19,7 @@ class SystemRoutes extends RouteRegister
     public function map(Registrar $router)
     {
         $this->group(['prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'], function () {
+            System\InformationRoutes::register($this->router);
             System\LogViewerRoutes::register($this->router);
             System\RouteViewerRoutes::register($this->router);
         });

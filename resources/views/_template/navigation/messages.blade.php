@@ -10,7 +10,7 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
+                            {{ Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
                         </div>
                         <h4>
                             Support Team <small><i class="fa fa-clock-o"></i> 5 mins</small>
@@ -21,44 +21,36 @@
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
+                            {{ Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
                         </div>
-                        <h4>
-                            AdminLTE Design Team <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                        </h4>
+                        <h4>AdminLTE Design Team <small><i class="fa fa-clock-o"></i> 2 hours</small></h4>
                         <p>Why not buy a new awesome theme?</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
+                            {{ Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
                         </div>
-                        <h4>
-                            Developers <small><i class="fa fa-clock-o"></i> Today</small>
-                        </h4>
+                        <h4>Developers <small><i class="fa fa-clock-o"></i> Today</small></h4>
                         <p>Why not buy a new awesome theme?</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
+                            {{ Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
                         </div>
-                        <h4>
-                            Sales Department <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                        </h4>
+                        <h4>Sales Department <small><i class="fa fa-clock-o"></i> Yesterday</small></h4>
                         <p>Why not buy a new awesome theme?</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <div class="pull-left">
-                            {!! Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) !!}
+                            {{ Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
                         </div>
-                        <h4>
-                            Reviewers <small><i class="fa fa-clock-o"></i> 2 days</small>
-                        </h4>
+                        <h4>Reviewers <small><i class="fa fa-clock-o"></i> 2 days</small></h4>
                         <p>Why not buy a new awesome theme?</p>
                     </a>
                 </li>

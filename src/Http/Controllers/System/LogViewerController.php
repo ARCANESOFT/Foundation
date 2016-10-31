@@ -4,9 +4,7 @@ use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
 use Arcanesoft\Core\Traits\Notifyable;
-use Arcanesoft\Foundation\Http\Controllers\Controller;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
-use Arcanesoft\Foundation\Presenters\PaginationPresenter;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
@@ -160,13 +158,14 @@ class LogViewerController extends Controller
 
         $levels    = $this->logViewer->levelsNames();
         $entries   = $this->logViewer->entries($date, $level)->paginate($this->perPage);
-        $presenter = new PaginationPresenter($entries);
 
         $this->addBreadcrumbRoute('Logs List', 'foundation::system.log-viewer.logs.list');
         $this->addBreadcrumbRoute($date, 'foundation::system.log-viewer.logs.show', [$date]);
         $this->addBreadcrumb(ucfirst($level));
 
-        return $this->view('system.log-viewer.show', compact('log', 'levels', 'entries', 'presenter'));
+        $this->setTitle($date . ' | '. ucfirst($level));
+
+        return $this->view('system.log-viewer.show', compact('log', 'levels', 'entries'));
     }
 
     /**

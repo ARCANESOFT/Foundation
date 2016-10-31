@@ -1,26 +1,26 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\System;
 
 /**
- * Class     RoutesController
+ * Class     InformationController
  *
  * @package  Arcanesoft\Foundation\Http\Controllers\System
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class RoutesController extends Controller
+class InformationController extends Controller
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * RoutesController constructor.
+     * InformationController constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
-        $this->setCurrentPage('foundation-system-routes');
-        $this->addBreadcrumbRoute('Routes', 'foundation::system.routes.index');
+        $this->setCurrentPage('foundation-system-information');
+        $this->addBreadcrumbRoute('Information', 'foundation::system.information.index');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -29,11 +29,8 @@ class RoutesController extends Controller
      */
     public function index()
     {
-        $this->setTitle('Routes Viewer');
-        $this->addBreadcrumb('List of all routes');
+        $this->setTitle('System information');
 
-        $routes = app('arcanedev.foundation.routes-viewer')->all();
-
-        return $this->view('system.routes.list', compact('routes'));
+        return $this->view('system.information.index');
     }
 }

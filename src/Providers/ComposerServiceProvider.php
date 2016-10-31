@@ -23,6 +23,16 @@ class ComposerServiceProvider extends ServiceProvider
             'foundation::_template.sidebar-main',
             \Arcanesoft\Foundation\ViewComposers\SidebarComposer::class
         );
+
+        view()->composer(
+            \Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer::VIEW_NAME,
+            \Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer::class
+        );
+
+        view()->composer(
+            \Arcanesoft\Foundation\ViewComposers\System\FoldersPermissionsComposer::VIEW_NAME,
+            \Arcanesoft\Foundation\ViewComposers\System\FoldersPermissionsComposer::class
+        );
     }
 
     /**
