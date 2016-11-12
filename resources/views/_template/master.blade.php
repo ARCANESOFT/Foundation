@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {!! seo_helper()->render() !!}
     {{ Html::style('vendor/foundation/css/app.css') }}
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>
+    </script>
     {{ Html::script('vendor/foundation/js/vendors/pace.min.js') }}
     <!--[if lt IE 9]>
     {{ Html::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}
@@ -13,7 +18,7 @@
     @yield('head')
 </head>
 <body class="fixed sidebar-mini skin-purple hold-transition">
-    <div class="wrapper">
+    <div id="app" class="wrapper">
         @include('foundation::_template.header')
 
         @include('foundation::_template.sidebar-main')
