@@ -28,6 +28,7 @@ return [
             'arcanesoft.sidebar.auth.main',
             // 'arcanesoft.sidebar.pages.main',
             // 'arcanesoft.sidebar.blog.main',
+            // 'arcanesoft.sidebar.tracker.main',
             'arcanesoft.sidebar.foundation.settings',
             'arcanesoft.sidebar.foundation.system',
         ],
