@@ -14,13 +14,17 @@
                 </a>
             </li>
             {{-- Messages --}}
-            @include('foundation::_template.navigation.messages')
+            @include('foundation::admin._template.navigation.messages')
             {{-- Notifications --}}
-            @include('foundation::_template.navigation.notifications')
+            @include('foundation::admin._template.navigation.notifications')
             {{-- Tasks --}}
-            @include('foundation::_template.navigation.tasks')
+            @include('foundation::admin._template.navigation.tasks')
+
             {{-- User Account --}}
-            @include('auth::foundation._partials.navigation.user-menu')
+            @if (view()->exists('auth::foundation._partials.navigation.user-menu'))
+                @include('auth::foundation._partials.navigation.user-menu')
+            @endif
+
             {{-- Control Sidebar Toggle Button --}}
             <li>
                 <a href="javascript:void(0);" data-toggle="control-sidebar">

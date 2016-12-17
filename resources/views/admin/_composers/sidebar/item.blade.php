@@ -5,7 +5,7 @@
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            @each('foundation::_composers.sidebar.item', $item->children, 'item')
+            @each('foundation::admin._composers.sidebar.item', $item->children, 'item')
         </ul>
     @else
         <a href="{{ $item->url }}">

@@ -56,10 +56,10 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            @include('admin::foundation.system.log-viewer._includes.menu')
+            @include('foundation::admin.system.log-viewer._includes.menu')
         </div>
         <div class="col-md-9">
-            @include('admin::foundation.system.log-viewer._includes.timeline-entries', compact('entries'))
+            @include('foundation::admin.system.log-viewer._includes.timeline-entries', compact('entries'))
         </div>
     </div>
 @endsection
@@ -99,7 +99,7 @@
                 event.preventDefault();
 
                 var $submitBtn = $deleteLogForm.find('button[type="submit"]');
-                $submitBtn.button('loading');
+                    $submitBtn.button('loading');
 
                 $.ajax({
                     url:      $deleteLogForm.attr('action'),

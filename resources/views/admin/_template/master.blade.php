@@ -7,7 +7,7 @@
     {{ Html::style('vendor/foundation/css/app.css') }}
 
     {{-- CSRF Token --}}
-    @include('foundation::_template.csrf-token')
+    @include('foundation::admin._template.csrf-token')
     {{ Html::script('vendor/foundation/js/vendors/pace.min.js') }}
     <!--[if lt IE 9]>
     {{ Html::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}
@@ -17,9 +17,9 @@
 </head>
 <body class="fixed sidebar-mini skin-purple hold-transition">
     <div id="app" class="wrapper">
-        @include('foundation::_template.header')
+        @include('foundation::admin._template.header')
 
-        @include('foundation::_template.sidebar-main')
+        @include('foundation::admin._template.sidebar-main')
 
         {{-- Content Wrapper. Contains page content --}}
         <main class="content-wrapper">
@@ -33,17 +33,17 @@
             {{-- Main content --}}
             <section class="content">
                 @if (notify()->ready())
-                    @include('foundation::_template.notifications')
+                    @include('foundation::admin._template.notifications')
                 @endif
 
                 @yield('content')
             </section>
         </main>
 
-        @include('foundation::_template.footer')
+        @include('foundation::admin._template.footer')
 
         {{-- Control Sidebar --}}
-        @include('foundation::_template.sidebar-alt')
+        @include('foundation::admin._template.sidebar-alt')
     </div>
 
     @yield('modals')

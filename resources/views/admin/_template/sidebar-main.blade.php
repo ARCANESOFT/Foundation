@@ -26,6 +26,6 @@
             </form>
         @endif
 
-        {!! sidebar()->render('foundation::_composers.sidebar.main') !!}
+        {!! sidebar()->render('foundation::admin._composers.sidebar.main') !!}
     </section>
 </aside>

@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
     private function mapAdminRoutes(Router $router)
     {
         $attributes = array_merge($this->getFoundationRouteGroup(), [
-            'as'        => 'admin::foundation',
+            'as'        => 'admin::foundation.',
             'namespace' => 'Arcanesoft\\Foundation\\Http\\Controllers\\Admin',
         ]);
 

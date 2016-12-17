@@ -20,7 +20,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            'foundation::_template.sidebar-main',
+            \Arcanesoft\Foundation\ViewComposers\SidebarComposer::VIEW_NAME,
             \Arcanesoft\Foundation\ViewComposers\SidebarComposer::class
         );
 
