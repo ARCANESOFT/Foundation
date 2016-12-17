@@ -14,7 +14,7 @@ class ServerRequirementsComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW_NAME = 'foundation::system.information._includes.server-requirements';
+    const VIEW_NAME = 'foundation::admin.system.information._includes.server-requirements';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

@@ -1,4 +1,4 @@
-<?php namespace Arcanesoft\Foundation\Http\Controllers\System;
+<?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
 /**
  * Class     RoutesController
@@ -20,7 +20,7 @@ class RoutesController extends Controller
         parent::__construct();
 
         $this->setCurrentPage('foundation-system-routes');
-        $this->addBreadcrumbRoute('Routes', 'foundation::system.routes.index');
+        $this->addBreadcrumbRoute('Routes', 'admin::foundation.system.routes.index');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -34,6 +34,6 @@ class RoutesController extends Controller
 
         $routes = app('arcanedev.foundation.routes-viewer')->all();
 
-        return $this->view('system.routes.list', compact('routes'));
+        return $this->view('admin.system.routes.list', compact('routes'));
     }
 }

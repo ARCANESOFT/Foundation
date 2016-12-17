@@ -37,10 +37,29 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group($this->getFoundationRouteGroup(), function (Router $router) {
-            Routes\DashboardRoute::register($router);
-            Routes\SettingsRoutes::register($router);
-            Routes\SystemRoutes::register($router);
+        $this->mapAdminRoutes($router);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Map the admin routes.
+     *
+     * @param  \Illuminate\Contracts\Routing\Registrar  $router
+     */
+    private function mapAdminRoutes(Router $router)
+    {
+        $attributes = array_merge($this->getFoundationRouteGroup(), [
+            'as'        => 'admin::foundation',
+            'namespace' => 'Arcanesoft\\Foundation\\Http\\Controllers\\Admin',
+        ]);
+
+        $router->group($attributes, function (Router $router) {
+            Routes\Admin\DashboardRoute::register($router);
+            Routes\Admin\SettingsRoutes::register($router);
+            Routes\Admin\SystemRoutes::register($router);
         });
     }
 }

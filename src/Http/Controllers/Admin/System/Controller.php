@@ -1,11 +1,11 @@
-<?php namespace Arcanesoft\Foundation\Http\Controllers\System;
+<?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
-use Arcanesoft\Foundation\Http\Controllers\Controller as BaseController;
+use Arcanesoft\Foundation\Http\Controllers\Admin\Controller as BaseController;
 
 /**
  * Class     Controller
  *
- * @package  Arcanesoft\Foundation\Http\Controllers\System
+ * @package  Arcanesoft\Foundation\Http\Controllers\Admin\System
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Controller extends BaseController
@@ -21,6 +21,6 @@ abstract class Controller extends BaseController
     {
         parent::__construct();
 
-        $this->addBreadcrumbRoute('System', 'foundation::system.information.index');
+        $this->addBreadcrumbRoute('System', 'admin::foundation.system.information.index');
     }
 }

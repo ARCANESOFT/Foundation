@@ -5,7 +5,7 @@
                 {{ trans('foundation::pagination.pages', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
             </span>
         </li>
-        @include('foundation::system.log-viewer._includes.timeline-pagination', compact('entries'))
+        @include('foundation::admin.system.log-viewer._includes.timeline-pagination', compact('entries'))
     @endif
 
     @foreach($entries as $key => $entry)
@@ -34,7 +34,7 @@
     @endforeach
 
     @if ($entries->hasPages())
-        @include('foundation::system.log-viewer._includes.timeline-pagination', compact('entries'))
+        @include('foundation::admin.system.log-viewer._includes.timeline-pagination', compact('entries'))
     @endif
 
     <li>

@@ -1,4 +1,4 @@
-<?php namespace Arcanesoft\Foundation\Http\Controllers\System;
+<?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 /**
  * Class     LogViewerController
  *
- * @package  Arcanesoft\Foundation\Http\Controllers\System
+ * @package  Arcanesoft\Foundation\Http\Controllers\Admin\System
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LogViewerController extends Controller
@@ -57,7 +57,7 @@ class LogViewerController extends Controller
         $this->logViewer = $logViewer;
         $this->perPage   = config('arcanesoft.foundation.log-viewer.per-page', $this->perPage);
         $this->setCurrentPage('foundation-system-logviewer');
-        $this->addBreadcrumbRoute('LogViewer', 'foundation::system.log-viewer.index');
+        $this->addBreadcrumbRoute('LogViewer', 'admin::foundation.system.log-viewer.index');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ class LogViewerController extends Controller
         $this->setTitle('LogViewer Dashboard');
         $this->addBreadcrumb('Dashboard');
 
-        return $this->view('system.log-viewer.dashboard', compact('percents'));
+        return $this->view('admin.system.log-viewer.dashboard', compact('percents'));
     }
 
     /**
@@ -99,7 +99,6 @@ class LogViewerController extends Controller
 
         $page    = $request->get('page', 1);
         $offset  = ($page * $this->perPage) - $this->perPage;
-
         $rows    = new LengthAwarePaginator(
             array_slice($stats->rows(), $offset, $this->perPage, true),
             count($stats->rows()),
@@ -108,11 +107,10 @@ class LogViewerController extends Controller
         );
         $rows->setPath($request->url());
 
-        $title = 'Logs List';
-        $this->setTitle($title);
+        $this->setTitle($title = 'Logs List');
         $this->addBreadcrumb($title);
 
-        return $this->view('system.log-viewer.list', compact('headers', 'rows', 'footer'));
+        return $this->view('admin.system.log-viewer.list', compact('headers', 'rows', 'footer'));
     }
 
     /**
@@ -130,12 +128,11 @@ class LogViewerController extends Controller
         $levels    = $this->logViewer->levelsNames();
         $entries   = $log->entries()->paginate($this->perPage);
 
-        $title = 'Log : ' . $date;
-        $this->setTitle($title);
-        $this->addBreadcrumbRoute('Logs List', 'foundation::system.log-viewer.logs.list');
+        $this->setTitle($title = "Log : {$date}");
+        $this->addBreadcrumbRoute('Logs List', 'admin::foundation.system.log-viewer.logs.list');
         $this->addBreadcrumb($title);
 
-        return $this->view('system.log-viewer.show', compact('log', 'levels', 'entries'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries'));
     }
 
     /**
@@ -153,19 +150,19 @@ class LogViewerController extends Controller
         $log = $this->getLogOrFail($date);
 
         if ($level == 'all') {
-            return redirect()->route('foundation::system.log-viewer.logs.show', [$date]);
+            return redirect()->route('admin::foundation.system.log-viewer.logs.show', [$date]);
         }
 
-        $levels    = $this->logViewer->levelsNames();
-        $entries   = $this->logViewer->entries($date, $level)->paginate($this->perPage);
+        $levels  = $this->logViewer->levelsNames();
+        $entries = $this->logViewer->entries($date, $level)->paginate($this->perPage);
 
-        $this->addBreadcrumbRoute('Logs List', 'foundation::system.log-viewer.logs.list');
-        $this->addBreadcrumbRoute($date, 'foundation::system.log-viewer.logs.show', [$date]);
+        $this->addBreadcrumbRoute('Logs List', 'admin::foundation.system.log-viewer.logs.list');
+        $this->addBreadcrumbRoute($date, 'admin::foundation.system.log-viewer.logs.show', [$date]);
         $this->addBreadcrumb(ucfirst($level));
 
-        $this->setTitle($date . ' | '. ucfirst($level));
+        $this->setTitle($date.' | '.ucfirst($level));
 
-        return $this->view('system.log-viewer.show', compact('log', 'levels', 'entries'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries'));
     }
 
     /**

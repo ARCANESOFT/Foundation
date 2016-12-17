@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="box-footer text-right">
-            <a href="{{ route('foundation::system.log-viewer.logs.download', [$log->date]) }}" class="btn btn-sm btn-success">
+            <a href="{{ route('admin::foundation.system.log-viewer.logs.download', [$log->date]) }}" class="btn btn-sm btn-success">
                 <i class="fa fa-fw fa-download"></i> DOWNLOAD
             </a>
             <a href="#deleteLogModal" data-toggle="modal" class="btn btn-sm btn-danger">
@@ -56,10 +56,10 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            @include('foundation::system.log-viewer._includes.menu')
+            @include('admin::foundation.system.log-viewer._includes.menu')
         </div>
         <div class="col-md-9">
-            @include('foundation::system.log-viewer._includes.timeline-entries', compact('entries'))
+            @include('admin::foundation.system.log-viewer._includes.timeline-entries', compact('entries'))
         </div>
     </div>
 @endsection
@@ -67,7 +67,7 @@
 @section('modals')
     <div id="deleteLogModal" class="modal fade">
         <div class="modal-dialog">
-            {{ Form::open(['route' => 'foundation::system.log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'deleteLogForm', 'autocomplete' => 'off']) }}
+            {{ Form::open(['route' => 'admin::foundation.system.log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'deleteLogForm', 'autocomplete' => 'off']) }}
                 {{ Form::hidden('date', $log->date) }}
                 <div class="modal-content">
                     <div class="modal-header">
@@ -109,7 +109,7 @@
                     success: function(data) {
                         if (data.status === 'success') {
                             $deleteLogModal.modal('hide');
-                            location.replace("{{ route('foundation::system.log-viewer.logs.list') }}");
+                            location.replace("{{ route('admin::foundation.system.log-viewer.logs.list') }}");
                         }
                         else {
                             alert('AJAX ERROR ! Check the console !');

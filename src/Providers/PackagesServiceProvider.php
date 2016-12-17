@@ -20,7 +20,6 @@ class PackagesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerLogViewerPackage();
-        $this->configLogViewerPackage();
         $this->registerRoutesViewerService();
         $this->registerAliases();
     }
@@ -67,14 +66,7 @@ class PackagesServiceProvider extends ServiceProvider
     private function registerLogViewerPackage()
     {
         $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
-    }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Config Packages
-     | ------------------------------------------------------------------------------------------------
-     */
-    private function configLogViewerPackage()
-    {
         $config = $this->config();
 
         // Setting up the LogViewer config.

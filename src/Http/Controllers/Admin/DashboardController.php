@@ -1,9 +1,9 @@
-<?php namespace Arcanesoft\Foundation\Http\Controllers;
+<?php namespace Arcanesoft\Foundation\Http\Controllers\Admin;
 
 /**
  * Class     DashboardController
  *
- * @package  Arcanesoft\Foundation\Http\Controllers
+ * @package  Arcanesoft\Foundation\Http\Controllers\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DashboardController extends Controller
@@ -20,10 +20,9 @@ class DashboardController extends Controller
     public function index()
     {
         $this->setCurrentPage('foundation-home');
-        $title = 'Dashboard';
-        $this->setTitle($title);
+        $this->setTitle($title = 'Dashboard');
         $this->addBreadcrumb($title);
 
-        return $this->view('dashboard');
+        return $this->view('admin.dashboard');
     }
 }

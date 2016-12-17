@@ -1,9 +1,9 @@
-<?php namespace Arcanesoft\Foundation\Http\Controllers\System;
+<?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
 /**
  * Class     InformationController
  *
- * @package  Arcanesoft\Foundation\Http\Controllers\System
+ * @package  Arcanesoft\Foundation\Http\Controllers\Admin\System
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class InformationController extends Controller
@@ -20,7 +20,7 @@ class InformationController extends Controller
         parent::__construct();
 
         $this->setCurrentPage('foundation-system-information');
-        $this->addBreadcrumbRoute('Information', 'foundation::system.information.index');
+        $this->addBreadcrumbRoute('Information', 'admin::foundation.system.information.index');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -31,6 +31,6 @@ class InformationController extends Controller
     {
         $this->setTitle('System information');
 
-        return $this->view('system.information.index');
+        return $this->view('admin.system.information.index');
     }
 }

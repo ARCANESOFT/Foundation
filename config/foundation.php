@@ -7,9 +7,8 @@ return [
      */
     'route'     => [
         'prefix'     => 'dashboard',
-        'as'         => 'foundation::',
+
         'middleware' => ['web', 'auth', 'admin'],
-        'namespace'  => 'Arcanesoft\\Foundation\\Http\\Controllers',
     ],
 
     /* ------------------------------------------------------------------------------------------------
@@ -52,7 +51,7 @@ return [
     'log-viewer' => [
         'per-page'     => 30,
 
-        'filter-route' => 'foundation::system.log-viewer.logs.filter',
+        'filter-route' => 'admin::foundation.system.log-viewer.logs.filter',
     ],
 
     /* ------------------------------------------------------------------------------------------------

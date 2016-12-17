@@ -13,7 +13,7 @@ return [
         [
             'title'       => 'Informations',
             'name'        => 'foundation-system-information',
-            'route'       => 'foundation::system.information.index',
+            'route'       => 'admin::foundation.system.information.index',
             'icon'        => 'fa fa-fw fa-info-circle',
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [
@@ -23,7 +23,7 @@ return [
         [
             'title'       => 'LogViewer',
             'name'        => 'foundation-system-logviewer',
-            'route'       => 'foundation::system.log-viewer.index',
+            'route'       => 'admin::foundation.system.log-viewer.index',
             'icon'        => 'fa fa-fw fa-book',
             'roles'       => [Role::ADMINISTRATOR, 'logviewer-manager'],
             'permissions' => [LogViewerPolicy::PERMISSION_DASHBOARD],
@@ -31,7 +31,7 @@ return [
         [
             'title'       => 'Routes',
             'name'        => 'foundation-system-routes',
-            'route'       => 'foundation::system.routes.index',
+            'route'       => 'admin::foundation.system.routes.index',
             'icon'        => 'fa fa-fw fa-map-signs',
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [],

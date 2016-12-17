@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            @include('foundation::system.information._includes.application')
+            @include('foundation::admin.system.information._includes.application')
         </div>
         <div class="col-md-4">
             @include(Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer::VIEW_NAME)
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    @include('foundation::system.information._includes.php-env')
+    @include('foundation::admin.system.information._includes.php-env')
 @endsection
 
 @section('modals')

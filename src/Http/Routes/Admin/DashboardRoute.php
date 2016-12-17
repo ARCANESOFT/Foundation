@@ -1,15 +1,15 @@
-<?php namespace Arcanesoft\Foundation\Http\Routes\System;
+<?php namespace Arcanesoft\Foundation\Http\Routes\Admin;
 
 use Arcanedev\Support\Bases\RouteRegister;
 use Illuminate\Contracts\Routing\Registrar;
 
 /**
- * Class     InformationRoutes
+ * Class     DashboardRoute
  *
- * @package  Arcanesoft\Foundation\Http\Routes\System
+ * @package  Arcanesoft\Foundation\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class InformationRoutes extends RouteRegister
+class DashboardRoute extends RouteRegister
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -22,11 +22,7 @@ class InformationRoutes extends RouteRegister
      */
     public function map(Registrar $router)
     {
-        $this->group(['prefix' => 'information', 'as' => 'information.'], function () {
-            $this->get('/', [
-                'as'   => 'index',
-                'uses' => 'InformationController@index',
-            ]);
-        });
+        $this->get('/', 'DashboardController@index')
+             ->name('home'); // admin::foundation.home
     }
 }
