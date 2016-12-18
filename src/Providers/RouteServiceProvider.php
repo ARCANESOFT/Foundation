@@ -13,20 +13,6 @@ use Illuminate\Contracts\Routing\Registrar as Router;
 class RouteServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the routes namespace
-     *
-     * @return string
-     */
-    protected function getRouteNamespace()
-    {
-        return 'Arcanesoft\\Foundation\\Http\\Routes';
-    }
-
-    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */

@@ -40,7 +40,7 @@ class PackagesServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            //
+            'arcanedev.foundation.routes-viewer',
         ];
     }
 
@@ -65,7 +65,7 @@ class PackagesServiceProvider extends ServiceProvider
      */
     private function registerLogViewerPackage()
     {
-        $this->app->register(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
+        $this->registerProvider(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
 
         $config = $this->config();
 

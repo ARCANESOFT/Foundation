@@ -47,12 +47,14 @@ class FoundationServiceProvider extends PackageServiceProvider
     {
         $this->registerConfig();
         $this->registerSidebarItems();
-        $this->registerServiceProviders();
+        $this->registerProviders([
+            CoreServiceProvider::class,
+            Providers\PackagesServiceProvider::class,
+            Providers\ModuleServiceProvider::class,
+            Providers\AuthorizationServiceProvider::class,
+        ]);
+        $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
         $this->registerFoundationService();
-
-        if ($this->app->runningInConsole()) {
-            $this->app->register(Providers\CommandServiceProvider::class);
-        }
     }
 
     /**
@@ -60,8 +62,10 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function boot()
     {
-        $this->app->register(Providers\RouteServiceProvider::class);
-        $this->app->register(Providers\ComposerServiceProvider::class);
+        $this->registerProviders([
+            Providers\RouteServiceProvider::class,
+            Providers\ComposerServiceProvider::class,
+        ]);
 
         // Publishes
         $this->publishConfig();
@@ -84,17 +88,6 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Services Functions
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Register all the required service providers.
-     */
-    private function registerServiceProviders()
-    {
-        $this->app->register(CoreServiceProvider::class);
-        $this->app->register(Providers\PackagesServiceProvider::class);
-        $this->app->register(Providers\ModuleServiceProvider::class);
-        $this->app->register(Providers\AuthorizationServiceProvider::class);
-    }
-
     /**
      * Register Foundation service.
      */

@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin;
 
-use Arcanesoft\Core\Bases\FoundationController;
+use Arcanesoft\Core\Bases\AdminController;
 
 /**
  * Class     Controller
@@ -8,7 +8,7 @@ use Arcanesoft\Core\Bases\FoundationController;
  * @package  Arcanesoft\Foundation\Http\Controllers\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-abstract class Controller extends FoundationController
+abstract class Controller extends AdminController
 {
     //
 }
