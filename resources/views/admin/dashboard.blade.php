@@ -3,9 +3,9 @@
 @endsection
 
 @section('content')
-    @if (view()->exists('auth::foundation._includes.dashboard'))
-        @include('auth::foundation._includes.dashboard')
-    @endif
+    @foreach(config('arcanesoft.foundation.dashboards') as $view)
+        @if (view()->exists($view)) @include($view) @endif
+    @endforeach
 @endsection
 
 @section('scripts')
