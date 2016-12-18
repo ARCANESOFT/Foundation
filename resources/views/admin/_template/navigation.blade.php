@@ -21,8 +21,8 @@
             @include('foundation::admin._template.navigation.tasks')
 
             {{-- User Account --}}
-            @if (view()->exists('auth::foundation._partials.navigation.user-menu'))
-                @include('auth::foundation._partials.navigation.user-menu')
+            @if (view()->exists('auth::admin._partials.navigation.user-menu'))
+                @include('auth::admin._partials.navigation.user-menu')
             @endif
 
             {{-- Control Sidebar Toggle Button --}}
