@@ -43,10 +43,10 @@
         @include('foundation::admin._template.footer')
 
         {{-- Control Sidebar --}}
-        @include('foundation::admin._template.sidebar-alt')
-    </div>
+        {{-- @include('foundation::admin._template.sidebar-alt') --}}
 
-    @yield('modals')
+        @yield('modals')
+    </div>
 
     {{ Html::script('vendor/foundation/js/vendors.js') }}
     {{ Html::script('vendor/foundation/js/app.js') }}
