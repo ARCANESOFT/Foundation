@@ -37,10 +37,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function mapAdminRoutes(Router $router)
     {
-        $attributes = array_merge($this->getFoundationRouteGroup(), [
-            'as'        => 'admin::foundation.',
-            'namespace' => 'Arcanesoft\\Foundation\\Http\\Controllers\\Admin',
-        ]);
+        $attributes = $this->getAdminAttributes(
+            'foundation.',
+            'Arcanesoft\\Foundation\\Http\\Controllers\\Admin'
+        );
 
         $router->group($attributes, function (Router $router) {
             Routes\Admin\DashboardRoute::register($router);
