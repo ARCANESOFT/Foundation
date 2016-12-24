@@ -19,8 +19,7 @@
                         <tr>
                             <th>Methods</th>
                             <th>URI/Domain</th>
-                            <th>Name</th>
-                            <th>Action</th>
+                            <th>Name / Action</th>
                             <th>Middleware</th>
                         </tr>
                     </thead>
@@ -28,26 +27,27 @@
                         @foreach ($routes as $route)
                         <tr>
                             <td>
-                                @foreach ($route['methods'] as $method)
+                                @foreach ($route->methods as $method)
                                     <span class="label label-{{ $method['color'] }}">{{ $method['name'] }}</span>
                                 @endforeach
                             </td>
                             <td>
-                                <small>{!! preg_replace('#({[^}]+})#', '<span class="text-danger">$1</span>', $route['uri']) !!}<br></small>
-                                @if ($route['domain'])
-                                    {{ $route['domain'] }}
+                                <small>{!! preg_replace('#({[^}]+})#', '<span class="text-danger">$1</span>', $route->uri) !!}<br></small>
+                                @if ($route->domain)
+                                    {{ $route->domain }}
                                 @else
                                     <span class="label label-default">--</span>
                                 @endif
                             </td>
-                            <td><small>{{ $route['name'] }}</small></td>
                             <td>
+                                <small><b>N: </b> {{ $route->name }}</small>
+                                <br>
                                 <small>
-                                    {!! preg_replace('#(@.*)$#', '<span class="text-success">$1</span>', $route['action']) !!}
+                                    <b>A: </b> {!! preg_replace('#(@.*)$#', '<span class="text-success">$1</span>', $route->action) !!}
                                 </small>
                             </td>
                             <td>
-                                @foreach($route['middlewares'] as $middleware)
+                                @foreach($route->middleware as $middleware)
                                     <span class="label label-inverse">{{ $middleware }}</span>
                                 @endforeach
                             </td>

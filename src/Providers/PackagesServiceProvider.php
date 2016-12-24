@@ -52,7 +52,7 @@ class PackagesServiceProvider extends ServiceProvider
     {
         $this->singleton(
             'arcanedev.foundation.routes-viewer',
-            \Arcanesoft\Foundation\Services\RoutesViewer::class
+            \Arcanesoft\Foundation\Services\RoutesViewer\Manager::class
         );
     }
 

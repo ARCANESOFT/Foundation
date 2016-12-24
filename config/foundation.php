@@ -6,9 +6,7 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'route'     => [
-        'prefix'     => 'dashboard',
-
-        'middleware' => ['web', 'auth', 'admin'],
+        //
     ],
 
     /* ------------------------------------------------------------------------------------------------
@@ -29,6 +27,7 @@ return [
             // 'arcanesoft.sidebar.blog.main',
             // 'arcanesoft.sidebar.media.main',
             // 'arcanesoft.sidebar.tracker.main',
+            // 'arcanesoft.sidebar.seo.main',
             'arcanesoft.sidebar.foundation.settings',
             'arcanesoft.sidebar.foundation.system',
         ],
@@ -71,13 +70,13 @@ return [
         'per-page' => 30,
 
         'uris'     => [
-            'hide' => [
+            'excluded' => [
                 '_debugbar'
             ],
         ],
 
         'methods'  => [
-            'hide' => [
+            'excluded' => [
                 'HEAD',
             ],
 
