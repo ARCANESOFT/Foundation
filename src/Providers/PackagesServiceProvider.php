@@ -1,5 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
+use Arcanedev\LogViewer\LogViewerServiceProvider;
+use Arcanedev\RouteViewer\RouteViewerServiceProvider;
 use Arcanedev\Support\ServiceProvider;
 
 /**
@@ -20,7 +22,7 @@ class PackagesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerLogViewerPackage();
-        $this->registerRoutesViewerService();
+        $this->registerRouteViewerPackage();
         $this->registerAliases();
     }
 
@@ -40,7 +42,7 @@ class PackagesServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.foundation.routes-viewer',
+            //
         ];
     }
 
@@ -48,13 +50,8 @@ class PackagesServiceProvider extends ServiceProvider
      |  Register Services
      | ------------------------------------------------------------------------------------------------
      */
-    public function registerRoutesViewerService()
-    {
-        $this->singleton(
-            'arcanedev.foundation.routes-viewer',
-            \Arcanesoft\Foundation\Services\RoutesViewer\Manager::class
-        );
-    }
+
+    //
 
     /* ------------------------------------------------------------------------------------------------
      |  Register Packages
@@ -65,7 +62,7 @@ class PackagesServiceProvider extends ServiceProvider
      */
     private function registerLogViewerPackage()
     {
-        $this->registerProvider(\Arcanedev\LogViewer\LogViewerServiceProvider::class);
+        $this->registerProvider(LogViewerServiceProvider::class);
 
         $config = $this->config();
 
@@ -75,5 +72,16 @@ class PackagesServiceProvider extends ServiceProvider
             'log-viewer.menu.filter-route',
             $config->get('arcanesoft.foundation.log-viewer.filter-route')
         );
+    }
+
+    /**
+     * Register the RouteViewer Package.
+     */
+    private function registerRouteViewerPackage()
+    {
+        $this->registerProvider(RouteViewerServiceProvider::class);
+
+        // Setting up the RouteViewer config.
+        $this->config()->set('route-viewer.route.enabled', false);
     }
 }
