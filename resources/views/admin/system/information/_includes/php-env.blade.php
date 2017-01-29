@@ -10,7 +10,9 @@
             <tr>
                 <th>Loaded Extensions</th>
                 <td>
-                    {{ implode(', ', get_loaded_extensions()) }}
+                    @foreach(get_loaded_extensions() as $extension)
+                        <span class="label label-inverse" style="display: inline-block;">{{ $extension }}</span>
+                    @endforeach
                 </td>
             </tr>
         </table>

@@ -38,6 +38,13 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'modules' => [
+        'providers' => [
+            Arcanesoft\Auth\AuthServiceProvider::class,
+            // Arcanesoft\Blog\BlogServiceProvider::class,
+            // Arcanesoft\Media\MediaServiceProvider::class,
+            // Arcanesoft\Tracker\TrackerServiceProvider::class,
+            // Arcanesoft\Seo\SeoServiceProvider::class,
+        ],
         'setup' => [
             //
         ],

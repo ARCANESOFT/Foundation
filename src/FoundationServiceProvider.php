@@ -50,9 +50,9 @@ class FoundationServiceProvider extends PackageServiceProvider
         $this->registerProviders([
             CoreServiceProvider::class,
             Providers\PackagesServiceProvider::class,
-            Providers\ModuleServiceProvider::class,
             Providers\AuthorizationServiceProvider::class,
         ]);
+        $this->registerModuleProviders();
         $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
         $this->registerFoundationService();
     }
@@ -94,5 +94,15 @@ class FoundationServiceProvider extends PackageServiceProvider
     private function registerFoundationService()
     {
         $this->singleton('arcanesoft.foundation', Foundation::class);
+    }
+
+    /**
+     * Register ARCANESOFT's modules (providers).
+     */
+    private function registerModuleProviders()
+    {
+        $this->registerProviders(
+            $this->config()->get('arcanesoft.foundation.modules.providers', [])
+        );
     }
 }

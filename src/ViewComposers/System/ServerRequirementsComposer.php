@@ -27,11 +27,16 @@ class ServerRequirementsComposer
      */
     public function compose(View $view)
     {
-        $requirements = $this->checkRequirements([
+        $requirements['php'] = $this->checkPhpRequirements([
             'openssl',
             'pdo',
             'mbstring',
-            'tokenizer'
+            'tokenizer',
+            'xml',
+        ]);
+
+        $requirements['apache'] = $this->checkApacheRequirements([
+            'mod_rewrite',
         ]);
 
         $view->with('requirements', $requirements);
@@ -42,18 +47,39 @@ class ServerRequirementsComposer
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Check the server requirements.
+     * Check the PHP requirements.
      *
      * @param  array  $requirements
      *
      * @return \Illuminate\Support\Collection
      */
-    private function checkRequirements(array $requirements)
+    private function checkPhpRequirements(array $requirements)
     {
         $requirements = array_combine($requirements, $requirements);
 
         return collect($requirements)->transform(function ($requirement) {
             return extension_loaded($requirement);
+        });
+    }
+
+    /**
+     * Check the APACHE requirements.
+     *
+     * @param  array  $requirements
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function checkApacheRequirements(array $requirements)
+    {
+        if ( ! function_exists('apache_get_modules')) {
+            return collect([]);
+        }
+
+        $modules      = apache_get_modules();
+        $requirements = array_combine($requirements, $requirements);
+
+        return collect($requirements)->transform(function ($requirement) use ($modules) {
+            return in_array($requirement, $modules);
         });
     }
 }
