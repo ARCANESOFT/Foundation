@@ -81,7 +81,9 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function provides()
     {
-        return ['arcanesoft.foundation'];
+        return [
+            Contracts\Foundation::class,
+        ];
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -93,7 +95,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     private function registerFoundationService()
     {
-        $this->singleton('arcanesoft.foundation', Foundation::class);
+        $this->singleton(Contracts\Foundation::class, Foundation::class);
     }
 
     /**

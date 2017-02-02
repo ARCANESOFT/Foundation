@@ -40,7 +40,7 @@
                                 @endif
                             </td>
                             <td>
-                                <small><b>N: </b> {{ $route->name }}</small>
+                                <small><b>N: </b> <span class="label label-{{ $route->hasName() ? 'primary' : 'default' }}">{{ $route->name }}</span></small>
                                 <br>
                                 <small>
                                     <b>A: </b> {!! preg_replace('#(@.*)$#', '<span class="text-success">$1</span>', $route->action) !!}

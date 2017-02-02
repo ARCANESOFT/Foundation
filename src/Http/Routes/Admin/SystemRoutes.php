@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Routes\Admin;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
  * Class     SystemRoutes
@@ -9,7 +8,7 @@ use Illuminate\Contracts\Routing\Registrar;
  * @package  Arcanesoft\Foundation\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SystemRoutes extends RouteRegister
+class SystemRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -17,12 +16,10 @@ class SystemRoutes extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
-        $this->group(['prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'], function () {
+        $this->prefix('system')->name('system.')->namespace('System')->group(function () {
             $this->registerSystemInformationRoutes();
             $this->registerLogViewerRoutes();
             $this->registerRouteViewerRoutes();
@@ -38,9 +35,9 @@ class SystemRoutes extends RouteRegister
      */
     private function registerSystemInformationRoutes()
     {
-        $this->group(['prefix' => 'information', 'as' => 'information.'], function () {
+        $this->prefix('information')->name('information.')->group(function () {
             $this->get('/',  'InformationController@index')
-                ->name('index');
+                ->name('index');  // admin::foundation.system.information.index
         });
     }
 
@@ -49,15 +46,15 @@ class SystemRoutes extends RouteRegister
      */
     private function registerLogViewerRoutes()
     {
-        $this->group(['prefix' => 'log-viewer', 'as' => 'log-viewer.'], function () {
+        $this->prefix('log-viewer')->name('log-viewer.')->group(function () {
             $this->get('/', 'LogViewerController@index')
-                 ->name('index'); // foundation::system.log-viewer.index
+                 ->name('index'); // admin::foundation.system.log-viewer.index
 
-            $this->group(['prefix' => 'logs', 'as' => 'logs.'], function() {
+            $this->prefix('logs')->name('logs.')->group(function() {
                 $this->get('/', 'LogViewerController@listLogs')
                      ->name('list'); // foundation::system.log-viewer.logs.list
 
-                $this->group(['prefix' => '{date}'], function() {
+                $this->prefix('{date}')->group(function() {
                     $this->get('/', 'LogViewerController@show')
                          ->name('show'); // foundation::system.log-viewer.logs.show
 
@@ -79,9 +76,9 @@ class SystemRoutes extends RouteRegister
      */
     private function registerRouteViewerRoutes()
     {
-        $this->group(['prefix' => 'routes', 'as' => 'routes.'], function () {
+        $this->prefix('routes')->name('routes.')->group(function () {
             $this->get('/', 'RoutesController@index')
-                 ->name('index');
+                 ->name('index'); // foundation::system.routes.index
         });
     }
 }

@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Routes\Admin;
 
-use Arcanedev\Support\Bases\RouteRegister;
-use Illuminate\Contracts\Routing\Registrar;
+use Arcanedev\Support\Routing\RouteRegistrar;
 
 /**
  * Class     DashboardRoute
@@ -9,7 +8,7 @@ use Illuminate\Contracts\Routing\Registrar;
  * @package  Arcanesoft\Foundation\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class DashboardRoute extends RouteRegister
+class DashboardRoute extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -17,10 +16,8 @@ class DashboardRoute extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
         $this->get('/', 'DashboardController@index')
              ->name('home'); // admin::foundation.home

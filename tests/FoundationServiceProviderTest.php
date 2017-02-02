@@ -58,7 +58,7 @@ class FoundationServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanesoft.foundation',
+            \Arcanesoft\Foundation\Contracts\Foundation::class,
         ];
 
         $this->assertEquals($expected, $this->provider->provides());

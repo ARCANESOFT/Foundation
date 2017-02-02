@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Routes\Admin;
 
-use Arcanedev\Support\Bases\RouteRegister;
+use Arcanedev\Support\Routing\RouteRegistrar;
 use Illuminate\Contracts\Routing\Registrar;
 
 /**
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Routing\Registrar;
  * @package  Arcanesoft\Foundation\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SettingsRoutes extends RouteRegister
+class SettingsRoutes extends RouteRegistrar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -17,12 +17,10 @@ class SettingsRoutes extends RouteRegister
      */
     /**
      * Map routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Registrar $router)
+    public function map()
     {
-        $this->group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+        $this->prefix('settings')->name('settings.')->group(function () {
             $this->get('/', 'SettingsController@index')
                  ->name('index'); // admin::foundation.settings.index
         });

@@ -25,7 +25,7 @@ class FoundationTest extends TestCase
     {
         parent::setUp();
 
-        $this->foundation = app('arcanesoft.foundation');
+        $this->foundation = $this->app->make(\Arcanesoft\Foundation\Contracts\Foundation::class);
     }
 
     public function tearDown()

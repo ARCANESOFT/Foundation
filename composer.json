@@ -15,9 +15,9 @@
     "require": {
         "php":                    ">=5.6.4",
         "arcanedev/log-viewer":   "~4.3",
-        "arcanedev/route-viewer": "~0.1",
-        "arcanesoft/auth":        "~1.12",
-        "arcanesoft/core":        "~1.4"
+        "arcanedev/route-viewer": "~1.0",
+        "arcanesoft/auth":        "~2.0",
+        "arcanesoft/core":        "~1.5"
     },
     "require-dev": {
         "phpunit/phpcov":  "~3.0",
