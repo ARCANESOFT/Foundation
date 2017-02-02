@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Routes\Admin;
 
 use Arcanedev\Support\Routing\RouteRegistrar;
-use Illuminate\Contracts\Routing\Registrar;
 
 /**
  * Class     SettingsRoutes

@@ -7,6 +7,8 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  *
  * @package  Arcanesoft\Foundation\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @todo: Fixing the routes by solving the group issue and removing the `clear()` method.
  */
 class SystemRoutes extends RouteRegistrar
 {
@@ -19,7 +21,7 @@ class SystemRoutes extends RouteRegistrar
      */
     public function map()
     {
-        $this->prefix('system')->name('system.')->namespace('System')->group(function () {
+        $this->namespace('System')->prefix('system')->name('system.')->group(function () {
             $this->registerSystemInformationRoutes();
             $this->registerLogViewerRoutes();
             $this->registerRouteViewerRoutes();
@@ -35,8 +37,8 @@ class SystemRoutes extends RouteRegistrar
      */
     private function registerSystemInformationRoutes()
     {
-        $this->prefix('information')->name('information.')->group(function () {
-            $this->get('/',  'InformationController@index')
+        $this->clear()->prefix('information')->name('information.')->group(function () {
+            $this->get('/', 'InformationController@index')
                 ->name('index');  // admin::foundation.system.information.index
         });
     }
@@ -46,27 +48,25 @@ class SystemRoutes extends RouteRegistrar
      */
     private function registerLogViewerRoutes()
     {
-        $this->prefix('log-viewer')->name('log-viewer.')->group(function () {
+        $this->clear()->prefix('log-viewer')->name('log-viewer.')->group(function () {
             $this->get('/', 'LogViewerController@index')
-                 ->name('index'); // admin::foundation.system.log-viewer.index
+                ->name('index'); // admin::foundation.system.log-viewer.index
 
-            $this->prefix('logs')->name('logs.')->group(function() {
+            $this->clear()->prefix('logs')->name('logs.')->group(function() {
                 $this->get('/', 'LogViewerController@listLogs')
-                     ->name('list'); // foundation::system.log-viewer.logs.list
+                    ->name('list'); // foundation::system.log-viewer.logs.list
 
-                $this->prefix('{date}')->group(function() {
-                    $this->get('/', 'LogViewerController@show')
-                         ->name('show'); // foundation::system.log-viewer.logs.show
+                $this->get('{date}', 'LogViewerController@show')
+                    ->name('show'); // foundation::system.log-viewer.logs.show
 
-                    $this->get('download', 'LogViewerController@download')
-                         ->name('download'); // foundation::system.log-viewer.logs.download
+                $this->get('{date}/download', 'LogViewerController@download')
+                    ->name('download'); // foundation::system.log-viewer.logs.download
 
-                    $this->get('{level}', 'LogViewerController@showByLevel')
-                         ->name('filter'); // foundation::system.log-viewer.logs.filter
-                });
+                $this->get('{date}/{level}', 'LogViewerController@showByLevel')
+                    ->name('filter'); // foundation::system.log-viewer.logs.filter
 
                 $this->delete('delete', 'LogViewerController@delete')
-                     ->name('delete'); // foundation::system.log-viewer.logs.delete
+                    ->name('delete'); // foundation::system.log-viewer.logs.delete
             });
         });
     }
@@ -76,9 +76,9 @@ class SystemRoutes extends RouteRegistrar
      */
     private function registerRouteViewerRoutes()
     {
-        $this->prefix('routes')->name('routes.')->group(function () {
+        $this->clear()->prefix('routes')->name('routes.')->group(function () {
             $this->get('/', 'RoutesController@index')
-                 ->name('index'); // foundation::system.routes.index
+                ->name('index'); // foundation::system.routes.index
         });
     }
 }
