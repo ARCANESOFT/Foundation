@@ -7,8 +7,6 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  *
  * @package  Arcanesoft\Foundation\Http\Routes\Admin
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- *
- * @todo: Fixing the routes by solving the group issue and removing the `clear()` method.
  */
 class SystemRoutes extends RouteRegistrar
 {
@@ -37,7 +35,7 @@ class SystemRoutes extends RouteRegistrar
      */
     private function registerSystemInformationRoutes()
     {
-        $this->clear()->prefix('information')->name('information.')->group(function () {
+        $this->prefix('information')->name('information.')->group(function () {
             $this->get('/', 'InformationController@index')
                 ->name('index');  // admin::foundation.system.information.index
         });
@@ -48,11 +46,11 @@ class SystemRoutes extends RouteRegistrar
      */
     private function registerLogViewerRoutes()
     {
-        $this->clear()->prefix('log-viewer')->name('log-viewer.')->group(function () {
+        $this->prefix('log-viewer')->name('log-viewer.')->group(function () {
             $this->get('/', 'LogViewerController@index')
                 ->name('index'); // admin::foundation.system.log-viewer.index
 
-            $this->clear()->prefix('logs')->name('logs.')->group(function() {
+            $this->prefix('logs')->name('logs.')->group(function() {
                 $this->get('/', 'LogViewerController@listLogs')
                     ->name('list'); // foundation::system.log-viewer.logs.list
 
@@ -76,7 +74,7 @@ class SystemRoutes extends RouteRegistrar
      */
     private function registerRouteViewerRoutes()
     {
-        $this->clear()->prefix('routes')->name('routes.')->group(function () {
+        $this->prefix('routes')->name('routes.')->group(function () {
             $this->get('/', 'RoutesController@index')
                 ->name('index'); // foundation::system.routes.index
         });
