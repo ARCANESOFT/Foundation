@@ -23,6 +23,7 @@ class PackagesServiceProvider extends ServiceProvider
     {
         $this->registerLogViewerPackage();
         $this->registerRouteViewerPackage();
+        $this->registerBackupsPackage();
         $this->registerAliases();
     }
 
@@ -83,5 +84,10 @@ class PackagesServiceProvider extends ServiceProvider
 
         // Setting up the RouteViewer config.
         $this->config()->set('route-viewer.route.enabled', false);
+    }
+
+    private function registerBackupsPackage()
+    {
+        $this->registerProvider(\Spatie\Backup\BackupServiceProvider::class);
     }
 }
