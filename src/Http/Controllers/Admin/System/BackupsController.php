@@ -1,5 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
+use Arcanesoft\Core\Traits\Notifyable;
 use Arcanesoft\Foundation\Services\Backups;
 
 /**
@@ -10,6 +11,12 @@ use Arcanesoft\Foundation\Services\Backups;
  */
 class BackupsController extends Controller
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Notifyable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -31,6 +38,7 @@ class BackupsController extends Controller
      */
     public function index()
     {
+        // TODO: Add authorization check
         $this->setTitle('Backups');
         $this->addBreadcrumb('List of all backup statuses');
 
@@ -41,6 +49,7 @@ class BackupsController extends Controller
 
     public function show($index)
     {
+        // TODO: Add authorization check
         $status = Backups::getStatus($index);
 
         if (is_null($status)) self::pageNotFound();
@@ -51,5 +60,45 @@ class BackupsController extends Controller
         $backups = $status->backupDestination()->backups();
 
         return $this->view('admin.system.backups.show', compact('status', 'backups'));
+    }
+
+    public function backup()
+    {
+        // TODO: Add authorization check
+        self::onlyAjax();
+
+        if (Backups::runBackups()) {
+            $ajax = ['status' => 'success'];
+
+            $this->notifySuccess('', 'Backups created !');
+        }
+        else {
+            $ajax = [
+                'status'  => 'error',
+                'message' => 'There is an error while running the backups.'
+            ];
+        }
+
+        return response()->json($ajax);
+    }
+
+    public function clear()
+    {
+        // TODO: Add authorization check
+        self::onlyAjax();
+
+        if (Backups::clearBackups()) {
+            $ajax = ['status' => 'success'];
+
+            $this->notifySuccess('The Backups was cleared successfully !', 'Backups cleared !');
+        }
+        else {
+            $ajax = [
+                'status'  => 'error',
+                'message' => 'There is an error while clearing the backups.'
+            ];
+        }
+
+        return response()->json($ajax);
     }
 }

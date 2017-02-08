@@ -81,14 +81,23 @@ class SystemRoutes extends RouteRegistrar
         });
     }
 
+    /**
+     * Register the backups routes.
+     */
     private function registerBackupsRoutes()
     {
         $this->prefix('backups')->name('backups.')->group(function () {
             $this->get('/', 'BackupsController@index')
-                ->name('index'); // admin::foundation.system.backups.index
+                ->name('index');   // admin::foundation.system.backups.index
+
+            $this->post('backup', 'BackupsController@backup')
+                 ->name('backup'); // admin::foundation.system.backups.backup
+
+            $this->post('clear', 'BackupsController@clear')
+                 ->name('clear');  // admin::foundation.system.backups.clear
 
             $this->get('{index}', 'BackupsController@show')
-                ->name('show'); // admin::foundation.system.backups.show
+                ->name('show');    // admin::foundation.system.backups.show
         });
     }
 }

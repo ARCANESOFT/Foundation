@@ -6,6 +6,14 @@
     <div class="box">
         <div class="box-header with-border">
             <h2 class="box-title">Statuses</h2>
+            <div class="box-tools">
+                <a href="#runBackupsModal" class="btn btn-xs btn-success">
+                    <i class="fa fa-fw fa-floppy-o"></i> Run Backups
+                </a>
+                <a href="#clearBackupsModal" class="btn btn-xs btn-warning">
+                    <i class="fa fa-fw fa-trash-o"></i> Clear Backups
+                </a>
+            </div>
         </div>
         <div class="box-body no-padding">
             <div class="table-responsive">
@@ -82,5 +90,132 @@
     </div>
 @endsection
 
+@section('modals')
+    <div id="runBackupsModal" class="modal fade">
+        <div class="modal-dialog">
+            {{ Form::open(['route' => 'admin::foundation.system.backups.backup', 'method' => 'POST', 'id' => 'runBackupsForm', 'class' => '', 'autocomplete' => 'off']) }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Backup all</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to run the <span class="label label-success">backups</span> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        {{ Form::button('Cancel', ['data-dismiss' => 'modal', 'class' => 'btn btn-sm btn-default pull-left']) }}
+                        {{ Form::button('Backup', ['type' => 'submit', 'class' => 'btn btn-sm btn-success', 'data-loading-text' => 'Loading&hellip;']) }}
+                    </div>
+                </div>
+            {{ Form::close() }}
+        </div>
+    </div>
+
+    <div id="clearBackupsModal" class="modal fade">
+        <div class="modal-dialog">
+            {{ Form::open(['route' => 'admin::foundation.system.backups.clear', 'method' => 'POST', 'id' => 'clearBackupsForm', 'class' => '', 'autocomplete' => 'off']) }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Clear all backups</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to <span class="label label-warning">clear</span> all the backups ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        {{ Form::button('Cancel', ['data-dismiss' => 'modal', 'class' => 'btn btn-sm btn-default pull-left']) }}
+                        {{ Form::button('Clear', ['type' => 'submit', 'class' => 'btn btn-sm btn-warning', 'data-loading-text' => 'Loading&hellip;']) }}
+                    </div>
+                </div>
+            {{ Form::close() }}
+        </div>
+    </div>
+@endsection
+
 @section('scripts')
+    <script>
+        $(function () {
+            // RUN BACKUPS MODAL
+            //--------------------------------
+            var $runBackupsModal = $('div#runBackupsModal'),
+                $runBackupsForm  = $('form#runBackupsForm');
+
+            $('a[href="#runBackupsModal"]').on('click', function (e) {
+                e.preventDefault();
+
+                $runBackupsModal.modal('show');
+            });
+
+            $runBackupsForm.on('submit', function (e) {
+                e.preventDefault();
+
+                var $submitBtn = $runBackupsForm.find('button[type="submit"]');
+                $submitBtn.button('loading');
+
+                $.ajax({
+                    url:      $runBackupsForm.attr('action'),
+                    type:     $runBackupsForm.attr('method'),
+                    dataType: 'json',
+                    data:     $runBackupsForm.serialize(),
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            $runBackupsModal.modal('hide');
+                            location.reload();
+                        }
+                        else {
+                            alert('ERROR ! Check the console !');
+                            console.error(data.message);
+                            $submitBtn.button('reset');
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('AJAX ERROR ! Check the console !');
+                        console.error(errorThrown);
+                        $submitBtn.button('reset');
+                    }
+                });
+            });
+
+            // CLEAR BACKUPS MODAL
+            //--------------------------------
+            var $clearBackupsModal = $('div#clearBackupsModal'),
+                $clearBackupsForm  = $('form#clearBackupsForm');
+
+            $('a[href="#clearBackupsModal"]').on('click', function (e) {
+                e.preventDefault();
+
+                $clearBackupsModal.modal('show');
+            });
+
+            $clearBackupsForm.on('submit', function (e) {
+                e.preventDefault();
+
+                var $submitBtn = $clearBackupsForm.find('button[type="submit"]');
+                $submitBtn.button('loading');
+
+                $.ajax({
+                    url:      $clearBackupsForm.attr('action'),
+                    type:     $clearBackupsForm.attr('method'),
+                    dataType: 'json',
+                    data:     $clearBackupsForm.serialize(),
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            $clearBackupsModal.modal('hide');
+                            location.reload();
+                        }
+                        else {
+                            alert('ERROR ! Check the console !');
+                            console.error(data.message);
+                            $submitBtn.button('reset');
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('AJAX ERROR ! Check the console !');
+                        console.error(errorThrown);
+                        $submitBtn.button('reset');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
