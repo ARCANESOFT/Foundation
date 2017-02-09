@@ -3,7 +3,7 @@
 use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
 use Arcanesoft\Contracts\Auth\Models\User;
 use Arcanesoft\Foundation\Policies;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class     AuthorizationServiceProvider
@@ -19,30 +19,25 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     /**
      * Register any application authentication / authorization services.
-     *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
 
         /** @var  \Illuminate\Auth\Access\Gate  $gate */
-        $gate->before(function (User $user, $ability) {
+        Gate::before(function (User $user, $ability) {
             return $user->isAdmin() ? true : null;
         });
 
-        $this->registerLogViewerPolicies($gate);
+        $this->registerLogViewerPolicies();
     }
 
     /**
      * Register LogViewer policies.
-     *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      */
-    private function registerLogViewerPolicies(GateContract $gate)
+    private function registerLogViewerPolicies()
     {
         $this->defineMany(
-            $gate,
             Policies\LogViewerPolicy::class,
             Policies\LogViewerPolicy::getPolicies()
         );

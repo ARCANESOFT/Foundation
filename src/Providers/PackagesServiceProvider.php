@@ -3,6 +3,7 @@
 use Arcanedev\LogViewer\LogViewerServiceProvider;
 use Arcanedev\RouteViewer\RouteViewerServiceProvider;
 use Arcanedev\Support\ServiceProvider;
+use Spatie\Backup\BackupServiceProvider;
 
 /**
  * Class     PackagesServiceProvider
@@ -21,6 +22,8 @@ class PackagesServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         $this->registerLogViewerPackage();
         $this->registerRouteViewerPackage();
         $this->registerBackupsPackage();
@@ -32,7 +35,7 @@ class PackagesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        parent::boot();
     }
 
     /**
@@ -86,8 +89,11 @@ class PackagesServiceProvider extends ServiceProvider
         $this->config()->set('route-viewer.route.enabled', false);
     }
 
+    /**
+     * Register the Backup package.
+     */
     private function registerBackupsPackage()
     {
-        $this->registerProvider(\Spatie\Backup\BackupServiceProvider::class);
+        $this->registerProvider(BackupServiceProvider::class);
     }
 }

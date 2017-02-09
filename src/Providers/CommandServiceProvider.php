@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
-use Arcanedev\Support\ServiceProvider;
+use Arcanedev\Support\Providers\CommandServiceProvider as ServiceProvider;
 use Arcanesoft\Foundation\Console;
 
 /**
@@ -25,26 +25,4 @@ class CommandServiceProvider extends ServiceProvider
         Console\SetupCommand::class,
         Console\ClearCommand::class,
     ];
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Register the service provider.
-     */
-    public function register()
-    {
-        $this->commands($this->commands);
-    }
-
-    /**
-     * Get the provided commands.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return $this->commands;
-    }
 }

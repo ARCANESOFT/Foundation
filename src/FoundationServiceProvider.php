@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Foundation;
 
 use Arcanesoft\Core\Bases\PackageServiceProvider;
-use Arcanesoft\Core\CoreServiceProvider;
 
 /**
  * Class     FoundationServiceProvider
@@ -45,10 +44,11 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
         $this->registerSidebarItems();
         $this->registerProviders([
-            CoreServiceProvider::class,
             Providers\PackagesServiceProvider::class,
             Providers\AuthorizationServiceProvider::class,
         ]);
@@ -64,7 +64,7 @@ class FoundationServiceProvider extends PackageServiceProvider
     {
         $this->registerProviders([
             Providers\RouteServiceProvider::class,
-            Providers\ComposerServiceProvider::class,
+            Providers\ViewComposerServiceProvider::class,
         ]);
 
         // Publishes

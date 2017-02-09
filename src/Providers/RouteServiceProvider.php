@@ -2,7 +2,6 @@
 
 use Arcanesoft\Core\Bases\RouteServiceProvider as ServiceProvider;
 use Arcanesoft\Foundation\Http\Routes;
-use Illuminate\Contracts\Routing\Registrar as Router;
 
 /**
  * Class     RouteServiceProvider
@@ -18,12 +17,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     /**
      * Define the routes for the application.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    public function map(Router $router)
+    public function map()
     {
-        $this->mapAdminRoutes($router);
+        $this->mapAdminRoutes();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -32,20 +29,18 @@ class RouteServiceProvider extends ServiceProvider
      */
     /**
      * Map the admin routes.
-     *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    private function mapAdminRoutes(Router $router)
+    private function mapAdminRoutes()
     {
         $attributes = $this->getAdminAttributes(
             'foundation.',
             'Arcanesoft\\Foundation\\Http\\Controllers\\Admin'
         );
 
-        $router->group($attributes, function (Router $router) {
-            Routes\Admin\DashboardRoute::register($router);
-            Routes\Admin\SettingsRoutes::register($router);
-            Routes\Admin\SystemRoutes::register($router);
+        $this->group($attributes, function () {
+            Routes\Admin\DashboardRoute::register();
+            Routes\Admin\SettingsRoutes::register();
+            Routes\Admin\SystemRoutes::register();
         });
     }
 }
