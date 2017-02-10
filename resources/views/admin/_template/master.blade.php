@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {!! seo_helper()->render() !!}
+    {{ seo_helper()->renderHtml() }}
     {{ Html::style(mix('assets/css/admin.css')) }}
-
-    {{-- CSRF Token --}}
-    @include('foundation::admin._template.csrf-token')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{ Html::script('assets/js/vendors/pace.min.js') }}
     <!--[if lt IE 9]>
     {{ Html::script('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}
