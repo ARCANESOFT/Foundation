@@ -17,7 +17,7 @@
         "arcanedev/log-viewer":   "~4.3",
         "arcanedev/route-viewer": "~1.0",
         "arcanesoft/auth":        "~2.0",
-        "arcanesoft/core":        "~1.5",
+        "arcanesoft/core":        "~2.0",
         "spatie/laravel-backup":  "~4.4"
     },
     "require-dev": {
