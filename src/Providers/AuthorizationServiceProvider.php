@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Gate;
  */
 class AuthorizationServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register any application authentication / authorization services.

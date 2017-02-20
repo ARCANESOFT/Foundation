@@ -1,9 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
 use Arcanedev\Support\Providers\ViewComposerServiceProvider as ServiceProvider;
-use Arcanesoft\Foundation\ViewComposers\SidebarComposer;
-use Arcanesoft\Foundation\ViewComposers\System\FoldersPermissionsComposer;
-use Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer;
+use Arcanesoft\Foundation\ViewComposers;
 
 /**
  * Class     ViewComposerServiceProvider
@@ -13,9 +11,9 @@ use Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer;
  */
 class ViewComposerServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * Register the composer classes.
@@ -23,8 +21,8 @@ class ViewComposerServiceProvider extends ServiceProvider
      * @var array
      */
     protected $composerClasses = [
-        SidebarComposer::VIEW_NAME            => SidebarComposer::class,
-        ServerRequirementsComposer::VIEW_NAME => ServerRequirementsComposer::class,
-        FoldersPermissionsComposer::VIEW_NAME => FoldersPermissionsComposer::class,
+        ViewComposers\SidebarComposer::VIEW                   => ViewComposers\SidebarComposer::class,
+        ViewComposers\System\ServerRequirementsComposer::VIEW => ViewComposers\System\ServerRequirementsComposer::class,
+        ViewComposers\System\FoldersPermissionsComposer::VIEW => ViewComposers\System\FoldersPermissionsComposer::class,
     ];
 }

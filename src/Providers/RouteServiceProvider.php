@@ -11,9 +11,20 @@ use Arcanesoft\Foundation\Http\Routes;
  */
 class RouteServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
+    /**
+     * The admin controller namespace for the application.
+     *
+     * @var string
+     */
+    protected $adminNamespace = 'Arcanesoft\\Foundation\\Http\\Controllers\\Admin';
+
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Define the routes for the application.
@@ -23,24 +34,17 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminRoutes();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Map the admin routes.
      */
     private function mapAdminRoutes()
     {
-        $attributes = $this->getAdminAttributes(
-            'foundation.',
-            'Arcanesoft\\Foundation\\Http\\Controllers\\Admin'
-        );
-
-        $this->group($attributes, function () {
-            Routes\Admin\DashboardRoute::register();
-            Routes\Admin\SettingsRoutes::register();
-            Routes\Admin\SystemRoutes::register();
+        $this->adminGroup(function () {
+            $this->name('foundation.')->group(function () {
+                Routes\Admin\DashboardRoute::register();
+                Routes\Admin\SettingsRoutes::register();
+                Routes\Admin\SystemRoutes::register();
+            });
         });
     }
 }
