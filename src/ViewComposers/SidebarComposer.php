@@ -16,7 +16,7 @@ class SidebarComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW_NAME = 'foundation::admin._template.sidebar-main';
+    const VIEW = 'foundation::admin._template.sidebar-main';
 
     /* ------------------------------------------------------------------------------------------------
      |  Properties

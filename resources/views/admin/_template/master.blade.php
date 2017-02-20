@@ -13,11 +13,11 @@
     <![endif]-->
     @yield('head')
 </head>
-<body class="fixed sidebar-mini skin-purple hold-transition">
+<body class="fixed sidebar-mini hold-transition {{ config('arcanesoft.foundation.skin', 'skin-purple') }}">
     <div id="app" class="wrapper">
         @include('foundation::admin._template.header')
 
-        @include('foundation::admin._template.sidebar-main')
+        @include(Arcanesoft\Foundation\ViewComposers\SidebarComposer::VIEW)
 
         {{-- Content Wrapper. Contains page content --}}
         <main class="content-wrapper">

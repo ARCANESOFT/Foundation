@@ -8,10 +8,10 @@
             @include('foundation::admin.system.information._includes.application')
         </div>
         <div class="col-md-4">
-            @include(Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer::VIEW_NAME)
+            @include(Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer::VIEW)
         </div>
         <div class="col-md-4">
-            @include(Arcanesoft\Foundation\ViewComposers\System\FoldersPermissionsComposer::VIEW_NAME)
+            @include(Arcanesoft\Foundation\ViewComposers\System\FoldersPermissionsComposer::VIEW)
         </div>
     </div>
 
