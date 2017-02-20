@@ -14,7 +14,7 @@ class FoldersPermissionsComposer
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const VIEW_NAME = 'foundation::admin.system.information._includes.folders-permissions';
+    const VIEW = 'foundation::admin.system.information._includes.folders-permissions';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
