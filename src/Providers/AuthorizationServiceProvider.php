@@ -22,13 +22,8 @@ class AuthorizationServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        /** @var  \Illuminate\Auth\Access\Gate  $gate */
-//        Gate::before(function (User $user, $ability) {
-//            return $user->isAdmin() ? true : null;
-//        });
+        $this->defineMany(LogViewerPolicy::class, LogViewerPolicy::policies());
 
         // TODO: Add more policies for other foundation features.
-
-        $this->defineMany(LogViewerPolicy::class, LogViewerPolicy::policies());
     }
 }
