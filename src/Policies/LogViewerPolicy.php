@@ -8,11 +8,11 @@ use Arcanesoft\Contracts\Auth\Models\User;
  * @package  Arcanesoft\Foundation\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LogViewerPolicy extends Policy
+class LogViewerPolicy extends AbstractPolicy
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constants
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     const PERMISSION_DASHBOARD = 'foundation.logviewer.dashboard';
     const PERMISSION_LIST      = 'foundation.logviewer.list';
@@ -20,29 +20,9 @@ class LogViewerPolicy extends Policy
     const PERMISSION_DOWNLOAD  = 'foundation.logviewer.download';
     const PERMISSION_DELETE    = 'foundation.logviewer.delete';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Getters and Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the policies.
-     *
-     * @return array
-     */
-    public static function getPolicies()
-    {
-        return [
-            'dashboardPolicy' => static::PERMISSION_DASHBOARD,
-            'listPolicy'      => static::PERMISSION_LIST,
-            'showPolicy'      => static::PERMISSION_SHOW,
-            'downloadPolicy'  => static::PERMISSION_DOWNLOAD,
-            'deletePolicy'    => static::PERMISSION_DELETE,
-        ];
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Policies Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Abilities
+     | -----------------------------------------------------------------
      */
     /**
      * Allow to view the LogViewer dashboard.

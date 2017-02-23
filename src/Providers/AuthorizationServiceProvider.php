@@ -1,9 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Providers;
 
 use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
-use Arcanesoft\Contracts\Auth\Models\User;
-use Arcanesoft\Foundation\Policies;
-use Illuminate\Support\Facades\Gate;
+use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 /**
  * Class     AuthorizationServiceProvider
@@ -25,21 +23,12 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         /** @var  \Illuminate\Auth\Access\Gate  $gate */
-        Gate::before(function (User $user, $ability) {
-            return $user->isAdmin() ? true : null;
-        });
+//        Gate::before(function (User $user, $ability) {
+//            return $user->isAdmin() ? true : null;
+//        });
 
-        $this->registerLogViewerPolicies();
-    }
+        // TODO: Add more policies for other foundation features.
 
-    /**
-     * Register LogViewer policies.
-     */
-    private function registerLogViewerPolicies()
-    {
-        $this->defineMany(
-            Policies\LogViewerPolicy::class,
-            Policies\LogViewerPolicy::getPolicies()
-        );
+        $this->defineMany(LogViewerPolicy::class, LogViewerPolicy::policies());
     }
 }
