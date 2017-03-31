@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            @include('foundation::admin.system.information._includes.application')
+            @include(Arcanesoft\Foundation\ViewComposers\System\ApplicationInfoComposer::VIEW)
         </div>
         <div class="col-md-4">
             @include(Arcanesoft\Foundation\ViewComposers\System\ServerRequirementsComposer::VIEW)

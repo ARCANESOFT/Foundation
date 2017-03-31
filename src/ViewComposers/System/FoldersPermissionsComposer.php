@@ -10,15 +10,15 @@ use Illuminate\View\View;
  */
 class FoldersPermissionsComposer
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constants
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     const VIEW = 'foundation::admin.system.information._includes.folders-permissions';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Compose the view.
@@ -27,46 +27,38 @@ class FoldersPermissionsComposer
      */
     public function compose(View $view)
     {
-        $permissions = $this->checkPermissions([
-            'storage/app/'       => 775,
-            'storage/framework/' => 775,
-            'storage/logs/'      => 775,
-            'bootstrap/cache/'   => 775,
+        $permissions = $this->prepare([
+            'storage/app/',
+            'storage/framework/',
+            'storage/logs/',
+            'bootstrap/cache/',
         ]);
 
         $view->with('permissions', $permissions);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
-     * Check the permissions.
+     * Prepare the permissions.
      *
      * @param  array  $folders
      *
      * @return \Illuminate\Support\Collection
      */
-    private function checkPermissions(array $folders)
+    private function prepare(array $folders)
     {
-        return collect($folders)->transform(function ($permission, $folder) {
+        return collect($folders)->mapWithKeys(function ($folder) {
+            $path = base_path($folder);
+
             return [
-                'chmod'   => $permission,
-                'allowed' => $this->getFolderPermission($folder) >= $permission
+                $folder => [
+                    'chmod'    => (int) substr(sprintf('%o', fileperms($path)), -4),
+                    'writable' => is_writable($path),
+                ],
             ];
         });
-    }
-
-    /**
-     * Get a folder permission.
-     *
-     * @param  string  $folder
-     *
-     * @return int
-     */
-    private function getFolderPermission($folder)
-    {
-        return (int) substr(sprintf('%o', fileperms(base_path($folder))), -4);
     }
 }

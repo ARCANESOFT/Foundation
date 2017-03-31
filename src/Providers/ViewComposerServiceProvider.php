@@ -22,6 +22,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     protected $composerClasses = [
         ViewComposers\SidebarComposer::VIEW                   => ViewComposers\SidebarComposer::class,
+        ViewComposers\System\ApplicationInfoComposer::VIEW    => ViewComposers\System\ApplicationInfoComposer::class,
         ViewComposers\System\ServerRequirementsComposer::VIEW => ViewComposers\System\ServerRequirementsComposer::class,
         ViewComposers\System\FoldersPermissionsComposer::VIEW => ViewComposers\System\FoldersPermissionsComposer::class,
     ];

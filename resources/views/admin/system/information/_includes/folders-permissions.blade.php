@@ -8,7 +8,7 @@
             <tr>
                 <td>{{ $folder }}</td>
                 <td class="text-right">
-                    <span class="label label-{{ $permission['allowed'] ? 'success' : 'danger' }}">
+                    <span class="label label-{{ $permission['writable'] ? 'success' : 'danger' }}">
                         {{ $permission['chmod'] }}
                     </span>
                 </td>

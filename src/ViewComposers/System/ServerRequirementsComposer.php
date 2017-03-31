@@ -28,14 +28,11 @@ class ServerRequirementsComposer
     public function compose(View $view)
     {
         $requirements['php'] = $this->checkPhpRequirements([
-            'openssl',
-            'pdo',
-            'mbstring',
-            'tokenizer',
-            'xml',
+            'openssl', 'pdo', 'mbstring', 'tokenizer', 'xml',
         ]);
 
-        $requirements['apache'] = $this->checkApacheRequirements([
+        $requirements['server']['ssl']     = $this->checkSslInstalled();
+        $requirements['server']['modules'] = $this->getServerModules([
             'mod_rewrite',
         ]);
 
@@ -60,6 +57,16 @@ class ServerRequirementsComposer
         return collect($requirements)->transform(function ($requirement) {
             return extension_loaded($requirement);
         });
+   }
+
+    /**
+     * Check if SSL is installed.
+     *
+     * @return bool
+     */
+    private function checkSslInstalled()
+    {
+        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? true : false;
     }
 
     /**
@@ -69,7 +76,7 @@ class ServerRequirementsComposer
      *
      * @return \Illuminate\Support\Collection
      */
-    private function checkApacheRequirements(array $requirements)
+    private function getServerModules(array $requirements)
     {
         if ( ! function_exists('apache_get_modules')) {
             return collect([]);

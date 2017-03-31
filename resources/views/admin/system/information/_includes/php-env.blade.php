@@ -1,20 +1,10 @@
 <div class="box">
-    <div class="box-header">
-        <h2 class="box-title">PHP</h2>
-        <div class="box-tools">
-            <span class="label label-primary">Version: {{ phpversion() }}</span>
-        </div>
+    <div class="box-header with-border">
+        <h2 class="box-title">PHP Extensions</h2>
     </div>
-    <div class="box-body no-padding">
-        <table class="table table-condensed table-hover no-margin">
-            <tr>
-                <th>Loaded Extensions</th>
-                <td>
-                    @foreach(get_loaded_extensions() as $extension)
-                        <span class="label label-inverse" style="display: inline-block;">{{ $extension }}</span>
-                    @endforeach
-                </td>
-            </tr>
-        </table>
+    <div class="box-body">
+        @foreach(get_loaded_extensions() as $extension)
+            <span class="label label-default">{{ $extension }}</span>
+        @endforeach
     </div>
 </div>
