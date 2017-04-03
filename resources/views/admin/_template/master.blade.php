@@ -16,7 +16,6 @@
 <body class="fixed sidebar-mini hold-transition {{ config('arcanesoft.foundation.skin', 'skin-purple') }}">
     <div id="app" class="wrapper">
         @include('foundation::admin._template.header')
-
         @include(Arcanesoft\Foundation\ViewComposers\SidebarComposer::VIEW)
 
         {{-- Content Wrapper. Contains page content --}}
@@ -30,9 +29,7 @@
 
             {{-- Main content --}}
             <section class="content">
-                @if (notify()->ready())
-                    @include('foundation::admin._template.notifications')
-                @endif
+                @includeWhen(notify()->ready(), 'foundation::admin._template.notifications')
 
                 @yield('content')
             </section>
