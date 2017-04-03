@@ -5,14 +5,14 @@
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i> Dashboard</h3>
+            <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.dashboard') }}</h3>
             <div class="box-tools">
                 <div class="btn-group">
-                    <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-sm btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-dashboard"></i> Dashboard
+                    <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
+                        <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.dashboard') }}
                     </a>
-                    <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-sm btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-list"></i> Logs list
+                    <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
+                        <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.logs-list') }}
                     </a>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text">{{ $item['name'] }}</span>
                                     <span class="info-box-number">
-                                    {{ $item['count'] }} entries - {!! $item['percent'] !!} %
-                                </span>
+                                        {{ trans('foundation::log-viewer.entries-stats', ['count' => $item['count'], 'percent' => $item['percent']]) }}
+                                    </span>
 
                                     <div class="progress">
                                         <div class="progress-bar" style="width: {{ $item['percent'] }}%"></div>
@@ -42,7 +42,7 @@
                     @endforeach
                 </div>
             @else
-                <span class="label label-default">There is no log for the time being.</span>
+                <span class="label label-default">{{ trans('foundation::log-viewer.no-entries') }}</span>
             @endif
         </div>
     </div>

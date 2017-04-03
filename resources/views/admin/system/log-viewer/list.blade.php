@@ -5,14 +5,14 @@
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-fw fa-list"></i> Logs List</h3>
+            <h3 class="box-title"><i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.logs-list') }}</h3>
             <div class="box-tools">
                 <div class="btn-group">
-                    <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-sm btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-dashboard"></i> Dashboard
+                    <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
+                        <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.dashboard') }}
                     </a>
-                    <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-sm btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-list"></i> Logs list
+                    <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
+                        <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.logs-list') }}
                     </a>
                 </div>
             </div>
@@ -67,9 +67,7 @@
                         @else
                             <tr>
                                 <td colspan="11" class="text-center">
-                                    <span class="label label-default">
-                                        There is no log for the time being.
-                                    </span>
+                                    <span class="label label-default">{{ trans('foundation::log-viewer.no-entries') }}</span>
                                 </td>
                             </tr>
                         @endif
