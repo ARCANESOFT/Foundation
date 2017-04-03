@@ -1,6 +1,6 @@
 <?php namespace Arcanesoft\Foundation\ViewComposers;
 
-use Arcanesoft\Core\Helpers\Sidebar\Contracts\Sidebar;
+use Arcanesoft\Sidebar\Contracts\Manager as SidebarManager;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
@@ -12,20 +12,20 @@ use Illuminate\View\View;
  */
 class SidebarComposer
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constants
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     const VIEW = 'foundation::admin._template.sidebar-main';
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
-     * The Sidebar Helper instance.
+     * The Sidebar instance.
      *
-     * @var \Arcanesoft\Core\Helpers\Sidebar\Contracts\Sidebar
+     * @var \Arcanesoft\Sidebar\Contracts\Manager
      */
     protected $sidebar;
 
@@ -36,16 +36,16 @@ class SidebarComposer
     /**
      * SidebarComposer constructor.
      *
-     * @param  \Arcanesoft\Core\Helpers\Sidebar\Contracts\Sidebar  $sidebar
+     * @param  \Arcanesoft\Sidebar\Contracts\Manager  $sidebar
      */
-    public function __construct(Sidebar $sidebar)
+    public function __construct(SidebarManager $sidebar)
     {
         $this->sidebar = $sidebar;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Bind data to the view.
@@ -54,11 +54,7 @@ class SidebarComposer
      */
     public function compose(View $view)
     {
-        foreach (config('arcanesoft.foundation.sidebar.items', []) as $sidebarKey) {
-            if (config()->has($sidebarKey))
-                $this->sidebar->add(config($sidebarKey));
-        }
-
+        $this->sidebar->loadItemsFromConfig('arcanesoft.foundation.sidebar.items');
         $this->sidebar->setCurrent(
             Arr::get($view->getData(), 'current_page', '')
         );
