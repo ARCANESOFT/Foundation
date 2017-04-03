@@ -10,9 +10,9 @@ use Arcanesoft\Foundation\Http\Controllers\Admin\Controller as BaseController;
  */
 abstract class Controller extends BaseController
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Constructor
+     | -----------------------------------------------------------------
      */
     /**
      * Controller constructor.

@@ -1,6 +1,5 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
-use Arcanesoft\Core\Traits\Notifyable;
 use Arcanesoft\Foundation\Services\Backups;
 
 /**
@@ -11,15 +10,9 @@ use Arcanesoft\Foundation\Services\Backups;
  */
 class BackupsController extends Controller
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Traits
-     | ------------------------------------------------------------------------------------------------
-     */
-    use Notifyable;
-
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * BackupsController constructor.
@@ -32,9 +25,9 @@ class BackupsController extends Controller
         $this->addBreadcrumbRoute('Backups', 'admin::foundation.system.backups.index');
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     public function index()
     {
@@ -68,18 +61,15 @@ class BackupsController extends Controller
         self::onlyAjax();
 
         if (Backups::runBackups()) {
-            $ajax = ['status' => 'success'];
+            $this->notifySuccess('The Backups was created successfully !', 'Backups created !');
 
-            $this->notifySuccess('', 'Backups created !');
-        }
-        else {
-            $ajax = [
-                'status'  => 'error',
-                'message' => 'There is an error while running the backups.'
-            ];
+            return response()->json(['status' => 'success']);
         }
 
-        return response()->json($ajax);
+        return response()->json([
+            'status'  => 'error',
+            'message' => 'There is an error while running the backups.'
+        ]);
     }
 
     public function clear()
@@ -88,17 +78,14 @@ class BackupsController extends Controller
         self::onlyAjax();
 
         if (Backups::clearBackups()) {
-            $ajax = ['status' => 'success'];
-
             $this->notifySuccess('The Backups was cleared successfully !', 'Backups cleared !');
-        }
-        else {
-            $ajax = [
-                'status'  => 'error',
-                'message' => 'There is an error while clearing the backups.'
-            ];
+
+            return response()->json(['status' => 'success']);
         }
 
-        return response()->json($ajax);
+        return response()->json([
+            'status'  => 'error',
+            'message' => 'There is an error while clearing the backups.'
+        ]);
     }
 }

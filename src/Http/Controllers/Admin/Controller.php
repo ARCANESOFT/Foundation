@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin;
 
 use Arcanesoft\Core\Http\Controllers\AdminController;
+use Arcanesoft\Core\Traits\Notifyable;
 
 /**
  * Class     Controller
@@ -10,6 +11,12 @@ use Arcanesoft\Core\Http\Controllers\AdminController;
  */
 abstract class Controller extends AdminController
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+    use Notifyable;
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------

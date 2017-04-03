@@ -24,6 +24,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         ViewComposers\SidebarComposer::VIEW                   => ViewComposers\SidebarComposer::class,
         ViewComposers\System\ApplicationInfoComposer::VIEW    => ViewComposers\System\ApplicationInfoComposer::class,
         ViewComposers\System\ServerRequirementsComposer::VIEW => ViewComposers\System\ServerRequirementsComposer::class,
+        ViewComposers\System\PhpInfoComposer::VIEW            => ViewComposers\System\PhpInfoComposer::class,
         ViewComposers\System\FoldersPermissionsComposer::VIEW => ViewComposers\System\FoldersPermissionsComposer::class,
     ];
 }

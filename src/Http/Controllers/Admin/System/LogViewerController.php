@@ -3,7 +3,6 @@
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
-use Arcanesoft\Core\Traits\Notifyable;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -17,15 +16,9 @@ use Illuminate\Support\Arr;
  */
 class LogViewerController extends Controller
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Traits
-     | ------------------------------------------------------------------------------------------------
-     */
-    use Notifyable;
-
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The LogViewer instance.
@@ -41,9 +34,9 @@ class LogViewerController extends Controller
      */
     protected $perPage = 30;
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * LogViewerController constructor.
@@ -149,9 +142,8 @@ class LogViewerController extends Controller
 
         $log = $this->getLogOrFail($date);
 
-        if ($level == 'all') {
+        if ($level == 'all')
             return redirect()->route('admin::foundation.system.log-viewer.logs.show', [$date]);
-        }
 
         $levels  = $this->logViewer->levelsNames();
         $entries = $this->logViewer->entries($date, $level)->paginate($this->perPage);
@@ -193,23 +185,22 @@ class LogViewerController extends Controller
         $this->authorize(LogViewerPolicy::PERMISSION_DELETE);
 
         $date = $request->get('date');
-        $ajax = ['status' => 'error'];
 
         if ($this->logViewer->delete($date)) {
-            $ajax = ['status' => 'success'];
-
             $this->notifySuccess(
                 "The log [$date] was deleted successfully !",
                 "Log [$date] deleted !"
             );
+
+            return response()->json(['status' => 'success']);
         }
 
-        return response()->json($ajax);
+        return response()->json(['status' => 'error']);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Get a log or fail.

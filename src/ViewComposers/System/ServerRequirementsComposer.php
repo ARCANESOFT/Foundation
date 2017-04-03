@@ -10,15 +10,15 @@ use Illuminate\View\View;
  */
 class ServerRequirementsComposer
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constants
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     const VIEW = 'foundation::admin.system.information._includes.server-requirements';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Compose the view.
@@ -27,11 +27,6 @@ class ServerRequirementsComposer
      */
     public function compose(View $view)
     {
-        $requirements['php']['version']      = phpversion();
-        $requirements['php']['requirements'] = $this->checkPhpRequirements([
-            'openssl', 'pdo', 'mbstring', 'tokenizer', 'xml',
-        ]);
-
         $requirements['server']['ssl']     = $this->checkSslInstalled();
         $requirements['server']['modules'] = $this->getServerModules([
             'mod_rewrite',
@@ -40,26 +35,10 @@ class ServerRequirementsComposer
         $view->with('requirements', $requirements);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
-    /**
-     * Check the PHP requirements.
-     *
-     * @param  array  $requirements
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private function checkPhpRequirements(array $requirements)
-    {
-        $requirements = array_combine($requirements, $requirements);
-
-        return collect($requirements)->transform(function ($requirement) {
-            return extension_loaded($requirement);
-        });
-   }
-
     /**
      * Check if SSL is installed.
      *
