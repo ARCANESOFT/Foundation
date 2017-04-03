@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    @include('foundation::admin.system.information._includes.php-env')
+    @include('foundation::admin.system.information._includes.php-extensions')
 @endsection
 
 @section('modals')

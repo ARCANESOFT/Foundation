@@ -7,10 +7,10 @@
             <tr>
                 <th>Version</th>
                 <td class="text-right">
-                    <span class="label label-primary">{{ phpversion() }}</span>
+                    <span class="label label-primary">{{ $requirements['php']['version'] }}</span>
                 </td>
             </tr>
-            @foreach($requirements['php'] as $requirement => $enabled)
+            @foreach($requirements['php']['requirements'] as $requirement => $enabled)
             <tr>
                 <th>{{ ucfirst($requirement) }} Ext</th>
                 <td class="text-right">

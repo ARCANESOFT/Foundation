@@ -27,7 +27,8 @@ class ServerRequirementsComposer
      */
     public function compose(View $view)
     {
-        $requirements['php'] = $this->checkPhpRequirements([
+        $requirements['php']['version']      = phpversion();
+        $requirements['php']['requirements'] = $this->checkPhpRequirements([
             'openssl', 'pdo', 'mbstring', 'tokenizer', 'xml',
         ]);
 
