@@ -10,5 +10,14 @@ use Arcanesoft\Core\Http\Controllers\AdminController;
  */
 abstract class Controller extends AdminController
 {
-    //
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
+    /**
+     * The view namespace.
+     *
+     * @var string
+     */
+    protected $viewNamespace = 'foundation';
 }
