@@ -10,9 +10,9 @@ use Arcanesoft\Foundation\FoundationServiceProvider;
  */
 class PublishCommand extends Command
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The name and signature of the console command.
@@ -28,20 +28,19 @@ class PublishCommand extends Command
      */
     protected $description = 'Publish foundation config, assets and other stuff.';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $this->call('vendor:publish', [
-            '--provider' => FoundationServiceProvider::class,
-        ]);
+        $this->call('vendor:publish', ['--provider' => FoundationServiceProvider::class]);
 
-        $this->call('settings:publish');
-        $this->call('auth:publish');
+        foreach ($this->config()->get('arcanesoft.foundation.modules.commands.publish', []) as $command) {
+            $this->call($command);
+        }
     }
 }

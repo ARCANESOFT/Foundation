@@ -3,34 +3,34 @@
 use Arcanesoft\Foundation\Seeds\DatabaseSeeder;
 
 /**
- * Class     SetupCommand
+ * Class     InstallCommand
  *
  * @package  Arcanesoft\Foundation\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SetupCommand extends Command
+class InstallCommand extends Command
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'foundation:setup';
+    protected $signature = 'foundation:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Foundation setup command.';
+    protected $description = 'Foundation install command.';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Execute the console command.
@@ -51,15 +51,15 @@ class SetupCommand extends Command
     {
         $this->publishAllModules();
         $this->refreshMigrations();
-        $this->seedAllModules();
+        $this->installModules();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
-     * Publish all modules : configs, migrations, assets ...
+     * Publish all modules: configs, migrations, assets ...
      */
     private function publishAllModules()
     {
@@ -89,19 +89,18 @@ class SetupCommand extends Command
     /**
      * Seed all modules.
      */
-    private function seedAllModules()
+    private function installModules()
     {
+        foreach ($this->config()->get('arcanesoft.foundation.modules.commands.install', []) as $command) {
+            $this->call($command);
+        }
+
         $this->frame('Seeding the database');
         $this->line('');
 
-        $this->call('auth:setup');
         $this->call('db:seed', ['--class' => DatabaseSeeder::class]);
 
         $this->comment('Database seeded !');
         $this->line('');
-
-        foreach ($this->config()->get('arcanesoft.foundation.modules.setup', []) as $setup) {
-            $this->call($setup);
-        }
     }
 }

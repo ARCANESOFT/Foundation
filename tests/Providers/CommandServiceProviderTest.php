@@ -59,7 +59,7 @@ class CommandServiceProviderTest extends TestCase
     {
         $expected = [
             \Arcanesoft\Foundation\Console\PublishCommand::class,
-            \Arcanesoft\Foundation\Console\SetupCommand::class,
+            \Arcanesoft\Foundation\Console\InstallCommand::class,
             \Arcanesoft\Foundation\Console\ClearCommand::class,
         ];
 

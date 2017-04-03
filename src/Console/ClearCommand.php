@@ -8,9 +8,9 @@
  */
 class ClearCommand extends Command
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * The name and signature of the console command.
@@ -26,6 +26,10 @@ class ClearCommand extends Command
      */
     protected $description = 'Remove the compiled class/view files, flush the application cache and remove the route/configuration cache files.';
 
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
     /**
      * Execute the console command.
      */

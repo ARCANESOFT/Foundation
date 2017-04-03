@@ -44,8 +44,15 @@ return [
             // Arcanesoft\Seo\SeoServiceProvider::class,
         ],
 
-        'setup' => [
-            //
+        'commands' => [
+            'install' => [
+                'auth:setup',
+            ],
+
+            'publish' => [
+                'settings:publish',
+                'auth:publish',
+            ]
         ],
     ],
 
