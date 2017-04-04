@@ -33,9 +33,7 @@
     </li>
     @endforeach
 
-    @if ($entries->hasPages())
-        @include('foundation::admin.system.log-viewer._includes.timeline-pagination', compact('entries'))
-    @endif
+    @includeWhen($entries->hasPages(), 'foundation::admin.system.log-viewer._includes.timeline-pagination', compact('entries'))
 
     <li>
         <div class="timeline-icon bg-gray">

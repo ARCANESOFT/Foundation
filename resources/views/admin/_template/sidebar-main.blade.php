@@ -4,7 +4,7 @@
             {{-- Sidebar user panel --}}
             <div class="user-panel">
                 <div class="pull-left image">
-                    {{ Html::image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
+                    {{ html()->image('http://placehold.it/160x160', 'User Image', ['class' => 'img-circle']) }}
                 </div>
                 <div class="pull-left info">
                     <p>Alexander Pierce</p>

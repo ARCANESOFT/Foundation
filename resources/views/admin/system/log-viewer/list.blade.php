@@ -76,9 +76,7 @@
             </div>
         </div>
         @if ($rows->hasPages())
-            <div class="box-footer">
-                {!! $rows->render() !!}
-            </div>
+            <div class="box-footer">{!! $rows->render() !!}</div>
         @endif
     </div>
 @endsection

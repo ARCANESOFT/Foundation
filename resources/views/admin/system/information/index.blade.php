@@ -13,7 +13,6 @@
         </div>
         <div class="col-md-4">
             @include(Arcanesoft\Foundation\ViewComposers\System\PhpInfoComposer::VIEW)
-            @include('foundation::admin.system.information._includes.php-extensions')
         </div>
     </div>
 
