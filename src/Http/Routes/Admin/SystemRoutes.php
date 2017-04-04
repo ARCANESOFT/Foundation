@@ -91,9 +91,11 @@ class SystemRoutes extends RouteRegistrar
                 ->name('index');   // admin::foundation.system.backups.index
 
             $this->post('backup', 'BackupsController@backup')
+                 ->middleware('ajax')
                  ->name('backup'); // admin::foundation.system.backups.backup
 
             $this->post('clear', 'BackupsController@clear')
+                 ->middleware('ajax')
                  ->name('clear');  // admin::foundation.system.backups.clear
 
             $this->get('{index}', 'BackupsController@show')

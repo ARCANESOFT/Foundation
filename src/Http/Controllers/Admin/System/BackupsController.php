@@ -1,5 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
+use Arcanedev\LaravelApiHelper\Traits\JsonResponses;
 use Arcanesoft\Foundation\Services\Backups;
 
 /**
@@ -10,6 +11,12 @@ use Arcanesoft\Foundation\Services\Backups;
  */
 class BackupsController extends Controller
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+    use JsonResponses;
+
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
@@ -58,34 +65,26 @@ class BackupsController extends Controller
     public function backup()
     {
         // TODO: Add authorization check
-        self::onlyAjax();
 
         if (Backups::runBackups()) {
-            $this->notifySuccess('The Backups was created successfully !', 'Backups created !');
+            $this->notifySuccess($message = 'The Backups was created successfully !', 'Backups created !');
 
-            return response()->json(['status' => 'success']);
+            return $this->jsonResponseSuccess(compact('message'));
         }
 
-        return response()->json([
-            'status'  => 'error',
-            'message' => 'There is an error while running the backups.'
-        ]);
+        return $this->jsonResponseError('There is an error while running the backups.');
     }
 
     public function clear()
     {
         // TODO: Add authorization check
-        self::onlyAjax();
 
         if (Backups::clearBackups()) {
-            $this->notifySuccess('The Backups was cleared successfully !', 'Backups cleared !');
+            $this->notifySuccess($message = 'The Backups was cleared successfully !', 'Backups cleared !');
 
-            return response()->json(['status' => 'success']);
+            return $this->jsonResponseSuccess(compact('message'));
         }
 
-        return response()->json([
-            'status'  => 'error',
-            'message' => 'There is an error while clearing the backups.'
-        ]);
+        return $this->jsonResponseError('There is an error while running the backups.');
     }
 }
