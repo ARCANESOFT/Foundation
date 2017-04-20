@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
 
+    'dashboard' => 'Dashboard',
     'home'      => 'Home',
+    'copyright' => 'Copyright :date - :name &copy; -  All rights reserved.',
 ];

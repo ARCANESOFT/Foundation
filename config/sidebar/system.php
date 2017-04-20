@@ -4,14 +4,14 @@ use Arcanesoft\Auth\Models\Role;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 return [
-    'title'       => 'System',
+    'title'       => 'foundation::sidebar.system',
     'name'        => 'foundation-system',
     'icon'        => 'fa fa-fw fa-desktop',
     'roles'       => [Role::ADMINISTRATOR],
     'permissions' => [],
     'children'    => [
         [
-            'title'       => 'Informations',
+            'title'       => 'foundation::sidebar.system-informations',
             'name'        => 'foundation-system-information',
             'route'       => 'admin::foundation.system.information.index',
             'icon'        => 'fa fa-fw fa-info-circle',
@@ -21,7 +21,7 @@ return [
             ],
         ],
         [
-            'title'       => 'LogViewer',
+            'title'       => 'foundation::sidebar.system-log-viewer',
             'name'        => 'foundation-system-logviewer',
             'route'       => 'admin::foundation.system.log-viewer.index',
             'icon'        => 'fa fa-fw fa-book',
@@ -29,7 +29,7 @@ return [
             'permissions' => [LogViewerPolicy::PERMISSION_DASHBOARD],
         ],
         [
-            'title'       => 'Routes',
+            'title'       => 'foundation::sidebar.system-routes',
             'name'        => 'foundation-system-routes',
             'route'       => 'admin::foundation.system.routes.index',
             'icon'        => 'fa fa-fw fa-map-signs',

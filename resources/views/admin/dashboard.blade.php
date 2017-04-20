@@ -4,7 +4,7 @@
 
 @section('content')
     @foreach(config('arcanesoft.foundation.dashboards', []) as $view)
-        @includeWhen(view()->exists($view), $view)
+        @includeIf($view)
     @endforeach
 @endsection
 
