@@ -4,8 +4,8 @@ return [
 
     'dashboard' => 'Tableau de board',
 
-    'settings'          => 'Settings',
-    'settings-generals' => 'Generals',
+    'settings'          => 'Réglages',
+    'settings-generals' => 'Généraux',
     'settings-modules'  => 'Modules',
 
     'system'              => 'Système',

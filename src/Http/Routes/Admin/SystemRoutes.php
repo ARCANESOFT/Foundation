@@ -10,10 +10,11 @@ use Arcanedev\Support\Routing\RouteRegistrar;
  */
 class SystemRoutes extends RouteRegistrar
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Map routes.
      */
@@ -27,10 +28,11 @@ class SystemRoutes extends RouteRegistrar
         });
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Register the system information routes.
      */
@@ -38,7 +40,7 @@ class SystemRoutes extends RouteRegistrar
     {
         $this->prefix('information')->name('information.')->group(function () {
             $this->get('/', 'InformationController@index')
-                ->name('index');  // admin::foundation.system.information.index
+                 ->name('index');  // admin::foundation.system.information.index
         });
     }
 
@@ -49,23 +51,23 @@ class SystemRoutes extends RouteRegistrar
     {
         $this->prefix('log-viewer')->name('log-viewer.')->group(function () {
             $this->get('/', 'LogViewerController@index')
-                ->name('index'); // admin::foundation.system.log-viewer.index
+                 ->name('index'); // admin::foundation.system.log-viewer.index
 
             $this->prefix('logs')->name('logs.')->group(function() {
                 $this->get('/', 'LogViewerController@listLogs')
-                    ->name('list'); // admin::foundation.system.log-viewer.logs.list
+                     ->name('list'); // admin::foundation.system.log-viewer.logs.list
 
                 $this->get('{date}', 'LogViewerController@show')
-                    ->name('show'); // admin::foundation.system.log-viewer.logs.show
+                     ->name('show'); // admin::foundation.system.log-viewer.logs.show
 
                 $this->get('{date}/download', 'LogViewerController@download')
-                    ->name('download'); // admin::foundation.system.log-viewer.logs.download
+                     ->name('download'); // admin::foundation.system.log-viewer.logs.download
 
                 $this->get('{date}/{level}', 'LogViewerController@showByLevel')
-                    ->name('filter'); // admin::foundation.system.log-viewer.logs.filter
+                     ->name('filter'); // admin::foundation.system.log-viewer.logs.filter
 
                 $this->delete('delete', 'LogViewerController@delete')
-                    ->name('delete'); // admin::foundation.system.log-viewer.logs.delete
+                     ->name('delete'); // admin::foundation.system.log-viewer.logs.delete
             });
         });
     }
@@ -77,7 +79,7 @@ class SystemRoutes extends RouteRegistrar
     {
         $this->prefix('routes')->name('routes.')->group(function () {
             $this->get('/', 'RoutesController@index')
-                ->name('index'); // admin::foundation.system.routes.index
+                 ->name('index'); // admin::foundation.system.routes.index
         });
     }
 
@@ -88,7 +90,7 @@ class SystemRoutes extends RouteRegistrar
     {
         $this->prefix('backups')->name('backups.')->group(function () {
             $this->get('/', 'BackupsController@index')
-                ->name('index');   // admin::foundation.system.backups.index
+                 ->name('index');   // admin::foundation.system.backups.index
 
             $this->post('backup', 'BackupsController@backup')
                  ->middleware('ajax')
@@ -99,7 +101,7 @@ class SystemRoutes extends RouteRegistrar
                  ->name('clear');  // admin::foundation.system.backups.clear
 
             $this->get('{index}', 'BackupsController@show')
-                ->name('show');    // admin::foundation.system.backups.show
+                 ->name('show');    // admin::foundation.system.backups.show
         });
     }
 }

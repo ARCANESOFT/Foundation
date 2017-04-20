@@ -9,9 +9,26 @@
 class DashboardController extends Controller
 {
     /* -----------------------------------------------------------------
+     |  Constructor
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * DashboardController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->setCurrentPage('foundation-home');
+        $this->addBreadcrumbRoute(trans('foundation::dashboard.titles.dashboard'), 'admin::foundation.home');
+    }
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Show the foundation dashboard.
      *
@@ -19,9 +36,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $this->setCurrentPage('foundation-home');
-        $this->setTitle($title = 'Dashboard');
-        $this->addBreadcrumb($title);
+        $this->setTitle(trans('foundation::dashboard.titles.dashboard'));
 
         return $this->view('admin.dashboard');
     }
