@@ -14,6 +14,7 @@ abstract class Command extends BaseCommand
      |  Shared Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Display arcanesoft header.
      */
@@ -27,7 +28,7 @@ abstract class Command extends BaseCommand
         $this->line('');
 
         // Copyright
-        $this->comment('Version ' . foundation()->version() . ' | 2015-2016 | Created by ARCANEDEV(c)');
+        $this->comment('Version '.foundation()->version().' | 2015-'.date('Y').' | Created by ARCANEDEV(c)');
         $this->line('');
     }
 

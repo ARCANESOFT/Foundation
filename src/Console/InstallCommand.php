@@ -14,6 +14,7 @@ class InstallCommand extends Command
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The name and signature of the console command.
      *
@@ -32,6 +33,7 @@ class InstallCommand extends Command
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Execute the console command.
      */
@@ -39,25 +41,21 @@ class InstallCommand extends Command
     {
         $this->arcanesoftHeader();
 
-        if ($this->confirm('Do you wish to reset the application ? [y|N]')) {
-            $this->setup();
+        if ($this->confirm('Do you wish to publish the modules ? [y or yes, default is no]')) {
+            $this->publishAllModules();
         }
-    }
 
-    /**
-     * Run the setup.
-     */
-    private function setup()
-    {
-        $this->publishAllModules();
-        $this->refreshMigrations();
-        $this->installModules();
+        if ($this->confirm('Do you wish to reset the migrations ? [y or yes, default is no]')) {
+            $this->refreshMigrations();
+            $this->installModules();
+        }
     }
 
     /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Publish all modules: configs, migrations, assets ...
      */
@@ -91,16 +89,16 @@ class InstallCommand extends Command
      */
     private function installModules()
     {
+        $this->frame('Installing the modules');
+        $this->line('');
+
         foreach ($this->config()->get('arcanesoft.foundation.modules.commands.install', []) as $command) {
             $this->call($command);
         }
-
-        $this->frame('Seeding the database');
-        $this->line('');
-
         $this->call('db:seed', ['--class' => DatabaseSeeder::class]);
 
-        $this->comment('Database seeded !');
+        $this->line('');
+        $this->comment('Modules installed !');
         $this->line('');
     }
 }
