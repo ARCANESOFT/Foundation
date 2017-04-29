@@ -17,12 +17,14 @@ class ApplicationInfoComposer
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const VIEW = 'foundation::admin.system.information._includes.application';
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Compose the view.
      *
@@ -51,6 +53,7 @@ class ApplicationInfoComposer
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the application size.
      *
@@ -58,15 +61,29 @@ class ApplicationInfoComposer
      */
     private function getApplicationSize()
     {
-        $iterator = new RecursiveDirectoryIterator(base_path(), FilesystemIterator::SKIP_DOTS);
-
-        $size = 0;
-
-        foreach (new RecursiveIteratorIterator($iterator) as $object) {
-            $size += $object->getSize();
-        }
+        $size = cache()->remember('foundation.app.size', 5, function () {
+            return $this->getFolderSize(base_path());
+        });
 
         return $this->formatSize($size);
+    }
+
+    /**
+     * Get the folder size.
+     *
+     * @param  string  $dir
+     *
+     * @return int
+     */
+    private function getFolderSize($dir)
+    {
+        $size = 0;
+
+        foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
+            $size += is_file($each) ? filesize($each) : $this->getFolderSize($each);
+        }
+
+        return $size;
     }
 
     /**

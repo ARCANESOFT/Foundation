@@ -14,6 +14,7 @@ abstract class Controller extends BaseController
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Controller constructor.
      */

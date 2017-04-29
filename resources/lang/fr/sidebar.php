@@ -2,11 +2,11 @@
 
 return [
 
-    'dashboard' => 'Tableau de board',
+    'dashboard'           => 'Tableau de board',
 
-    'settings'          => 'Réglages',
-    'settings-generals' => 'Généraux',
-    'settings-modules'  => 'Modules',
+    'settings'            => 'Réglages',
+    'settings-generals'   => 'Généraux',
+    'settings-modules'    => 'Modules',
 
     'system'              => 'Système',
     'system-informations' => 'Informations',

@@ -57,17 +57,20 @@ class SystemRoutes extends RouteRegistrar
                 $this->get('/', 'LogViewerController@listLogs')
                      ->name('list'); // admin::foundation.system.log-viewer.logs.list
 
-                $this->get('{date}', 'LogViewerController@show')
-                     ->name('show'); // admin::foundation.system.log-viewer.logs.show
+                $this->prefix('{log_date}')->group(function () {
+                    $this->get('/', 'LogViewerController@show')
+                         ->name('show'); // admin::foundation.system.log-viewer.logs.show
 
-                $this->get('{date}/download', 'LogViewerController@download')
-                     ->name('download'); // admin::foundation.system.log-viewer.logs.download
+                    $this->get('download', 'LogViewerController@download')
+                         ->name('download'); // admin::foundation.system.log-viewer.logs.download
 
-                $this->get('{date}/{level}', 'LogViewerController@showByLevel')
-                     ->name('filter'); // admin::foundation.system.log-viewer.logs.filter
+                    $this->get('{level}', 'LogViewerController@showByLevel')
+                         ->name('filter'); // admin::foundation.system.log-viewer.logs.filter
 
-                $this->delete('delete', 'LogViewerController@delete')
-                     ->name('delete'); // admin::foundation.system.log-viewer.logs.delete
+                    $this->delete('delete', 'LogViewerController@delete')
+                         ->middleware('ajax')
+                         ->name('delete'); // admin::foundation.system.log-viewer.logs.delete
+                });
             });
         });
     }

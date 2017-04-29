@@ -15,12 +15,14 @@ class Foundation implements FoundationContract
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const VERSION = '2.1.1';
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The application instance.
      *
@@ -32,6 +34,7 @@ class Foundation implements FoundationContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Foundation constructor.
      *
@@ -46,6 +49,7 @@ class Foundation implements FoundationContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the package version.
      *

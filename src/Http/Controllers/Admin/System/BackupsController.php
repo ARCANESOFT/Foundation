@@ -15,12 +15,14 @@ class BackupsController extends Controller
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use JsonResponses;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * BackupsController constructor.
      */
@@ -36,6 +38,7 @@ class BackupsController extends Controller
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function index()
     {
         // TODO: Add authorization check
