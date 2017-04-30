@@ -1,9 +1,6 @@
 <?php namespace Arcanesoft\Foundation\ViewComposers\System;
 
-use FilesystemIterator;
 use Illuminate\View\View;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 
 /**
  * Class     ApplicationInfoComposer

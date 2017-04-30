@@ -1,6 +1,7 @@
 <?php
 
 use Arcanesoft\Auth\Models\Role;
+use Arcanesoft\Foundation\Policies\BackupPolicy;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 return [
@@ -26,7 +27,9 @@ return [
             'route'       => 'admin::foundation.system.log-viewer.index',
             'icon'        => 'fa fa-fw fa-book',
             'roles'       => [Role::ADMINISTRATOR, 'logviewer-manager'],
-            'permissions' => [LogViewerPolicy::PERMISSION_DASHBOARD],
+            'permissions' => [
+                LogViewerPolicy::PERMISSION_DASHBOARD,
+            ],
         ],
         [
             'title'       => 'foundation::sidebar.system-routes',
@@ -36,5 +39,15 @@ return [
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [],
         ],
+        [
+            'title'       => 'foundation::sidebar.backups',
+            'name'        => 'foundation-system-backups',
+            'route'       => 'admin::foundation.system.backups.index',
+            'icon'        => 'fa fa-fw fa-database',
+            'roles'       => [Role::ADMINISTRATOR],
+            'permissions' => [
+                BackupPolicy::PERMISSION_LIST,
+            ],
+        ]
     ],
 ];

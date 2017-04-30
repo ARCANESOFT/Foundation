@@ -15,6 +15,7 @@ class AuthorizationServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register any application authentication / authorization services.
      */

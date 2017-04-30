@@ -17,6 +17,7 @@ class PackagesServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      */
@@ -51,13 +52,6 @@ class PackagesServiceProvider extends ServiceProvider
     }
 
     /* -----------------------------------------------------------------
-     |  Register Services
-     | -----------------------------------------------------------------
-     */
-
-    //
-
-    /* -----------------------------------------------------------------
      |  Register Packages
      | -----------------------------------------------------------------
      */
@@ -86,7 +80,7 @@ class PackagesServiceProvider extends ServiceProvider
         $this->registerProvider(RouteViewerServiceProvider::class);
 
         // Setting up the RouteViewer config.
-        $this->config()->set('route-viewer.route.enabled', false);
+        $this->config()->set('route-viewer.php.route.enabled', false);
     }
 
     /**

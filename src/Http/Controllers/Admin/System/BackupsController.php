@@ -1,7 +1,9 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
 use Arcanedev\LaravelApiHelper\Traits\JsonResponses;
+use Arcanesoft\Foundation\Policies\BackupPolicy;
 use Arcanesoft\Foundation\Services\Backups;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class     BackupsController
@@ -31,7 +33,7 @@ class BackupsController extends Controller
         parent::__construct();
 
         $this->setCurrentPage('foundation-system-backups');
-        $this->addBreadcrumbRoute('Backups', 'admin::foundation.system.backups.index');
+        $this->addBreadcrumbRoute(trans('foundation::backups.titles.backups'), 'admin::foundation.system.backups.index');
     }
 
     /* -----------------------------------------------------------------
@@ -41,53 +43,79 @@ class BackupsController extends Controller
 
     public function index()
     {
-        // TODO: Add authorization check
-        $this->setTitle('Backups');
-        $this->addBreadcrumb('List of all backup statuses');
+        $this->authorize(BackupPolicy::PERMISSION_LIST);
 
         $statuses = Backups::statuses();
+
+        $this->setTitle($title = trans('foundation::backups.titles.monitor-statuses-list'));
+        $this->addBreadcrumb($title);
 
         return $this->view('admin.system.backups.index', compact('statuses'));
     }
 
     public function show($index)
     {
-        // TODO: Add authorization check
-        $status = Backups::getStatus($index);
+        $this->authorize(BackupPolicy::PERMISSION_SHOW);
 
-        if (is_null($status)) self::pageNotFound();
-
-        $this->setTitle('Backups');
-        $this->addBreadcrumb('List of all backups');
+        if (is_null($status = Backups::getStatus($index)))
+            self::pageNotFound();
 
         $backups = $status->backupDestination()->backups();
+
+        $this->setTitle($title = trans('foundation::backups.titles.monitor-status'));
+        $this->addBreadcrumb($title);
 
         return $this->view('admin.system.backups.show', compact('status', 'backups'));
     }
 
     public function backup()
     {
-        // TODO: Add authorization check
+        $this->authorize(BackupPolicy::PERMISSION_CREATE);
 
         if (Backups::runBackups()) {
-            $this->notifySuccess($message = 'The Backups was created successfully !', 'Backups created !');
-
-            return $this->jsonResponseSuccess(compact('message'));
+            return $this->jsonResponseSuccess([
+                'message' => $this->transNotification('created'),
+            ]);
         }
 
-        return $this->jsonResponseError('There is an error while running the backups.');
+        return $this->jsonResponseError(['message' => 'There is an error while running the backups.']);
     }
 
     public function clear()
     {
-        // TODO: Add authorization check
+        $this->authorize(BackupPolicy::PERMISSION_DELETE);
 
         if (Backups::clearBackups()) {
-            $this->notifySuccess($message = 'The Backups was cleared successfully !', 'Backups cleared !');
-
-            return $this->jsonResponseSuccess(compact('message'));
+            return $this->jsonResponseSuccess([
+                'message' => $this->transNotification('cleared'),
+            ]);
         }
 
-        return $this->jsonResponseError('There is an error while running the backups.');
+        return $this->jsonResponseError(['message' => 'There is an error while running the backups.']);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Notify with translation.
+     *
+     * @param  string  $action
+     * @param  array   $replace
+     * @param  array   $context
+     *
+     * @return string
+     */
+    protected function transNotification($action, array $replace = [], array $context = [])
+    {
+        $title   = trans("foundation::backups.messages.{$action}.title");
+        $message = trans("foundation::backups.messages.{$action}.message", $replace);
+
+        Log::info($message, $context);
+        $this->notifySuccess($message, $title);
+
+        return $message;
     }
 }

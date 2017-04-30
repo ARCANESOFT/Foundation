@@ -14,12 +14,14 @@ class ServerRequirementsComposer
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const VIEW = 'foundation::admin.system.information._includes.server-requirements';
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Compose the view.
      *
@@ -39,6 +41,7 @@ class ServerRequirementsComposer
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if SSL is installed.
      *

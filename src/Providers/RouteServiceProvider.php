@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The admin controller namespace for the application.
      *

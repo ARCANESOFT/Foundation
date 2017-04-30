@@ -12,6 +12,7 @@ class ClearCommand extends Command
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The name and signature of the console command.
      *
@@ -30,6 +31,7 @@ class ClearCommand extends Command
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Execute the console command.
      */

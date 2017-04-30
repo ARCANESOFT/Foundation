@@ -12,5 +12,6 @@ return [
     'system-informations' => 'Informations',
     'system-log-viewer'   => 'LogViewer',
     'system-routes'       => 'Routes',
+    'backups'             => 'Backups',
 
 ];
