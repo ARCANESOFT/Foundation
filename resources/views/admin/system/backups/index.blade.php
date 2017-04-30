@@ -7,12 +7,17 @@
         <div class="box-header with-border">
             <h2 class="box-title">{{ trans('foundation::backups.titles.monitor-statuses-list') }}</h2>
             <div class="box-tools">
-                <a href="#run-backups-modal" class="btn btn-xs btn-success">
-                    <i class="fa fa-fw fa-floppy-o"></i> {{ trans('foundation::backups.actions.run-backups') }}
-                </a>
-                <a href="#clear-backups-modal" class="btn btn-xs btn-warning">
-                    <i class="fa fa-fw fa-eraser"></i> {{ trans('foundation::backups.actions.clear-backups') }}
-                </a>
+                @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_CREATE)
+                    <a href="#run-backups-modal" class="btn btn-xs btn-success">
+                        <i class="fa fa-fw fa-floppy-o"></i> {{ trans('foundation::backups.actions.run-backups') }}
+                    </a>
+                @endcan
+
+                @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_DELETE)
+                    <a href="#clear-backups-modal" class="btn btn-xs btn-warning">
+                        <i class="fa fa-fw fa-eraser"></i> {{ trans('foundation::backups.actions.clear-backups') }}
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="box-body no-padding">
@@ -88,121 +93,131 @@
 @endsection
 
 @section('modals')
-    <div id="run-backups-modal" class="modal fade">
-        <div class="modal-dialog">
-            {{ Form::open(['route' => 'admin::foundation.system.backups.backup', 'method' => 'POST', 'id' => 'run-backups-form', 'class' => '', 'autocomplete' => 'off']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">{{ trans('foundation::backups.modals.backup.title') }}</h4>
+    @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_CREATE)
+        <div id="run-backups-modal" class="modal fade">
+            <div class="modal-dialog">
+                {{ Form::open(['route' => 'admin::foundation.system.backups.backup', 'method' => 'POST', 'id' => 'run-backups-form', 'class' => '', 'autocomplete' => 'off']) }}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">{{ trans('foundation::backups.modals.backup.title') }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>{!! trans('foundation::backups.modals.backup.message') !!}</p>
+                        </div>
+                        <div class="modal-footer">
+                            {{ ui_button('cancel')->appendClass('pull-left')->setAttribute('data-dismiss', 'modal') }}
+                            {{ ui_button('backup', 'submit')->withLoadingText() }}
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>{!! trans('foundation::backups.modals.backup.message') !!}</p>
-                    </div>
-                    <div class="modal-footer">
-                        {{ ui_button('cancel')->appendClass('pull-left')->setAttribute('data-dismiss', 'modal') }}
-                        {{ ui_button('backup', 'submit')->withLoadingText() }}
-                    </div>
-                </div>
-            {{ Form::close() }}
+                {{ Form::close() }}
+            </div>
         </div>
-    </div>
+    @endcan
 
-    <div id="clear-backups-modal" class="modal fade">
-        <div class="modal-dialog">
-            {{ Form::open(['route' => 'admin::foundation.system.backups.clear', 'method' => 'POST', 'id' => 'clear-backups-form', 'class' => '', 'autocomplete' => 'off']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">{{ trans('foundation::backups.modals.clear.title') }}</h4>
+    @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_DELETE)
+        <div id="clear-backups-modal" class="modal fade">
+            <div class="modal-dialog">
+                {{ Form::open(['route' => 'admin::foundation.system.backups.clear', 'method' => 'POST', 'id' => 'clear-backups-form', 'class' => '', 'autocomplete' => 'off']) }}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">{{ trans('foundation::backups.modals.clear.title') }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>{!! trans('foundation::backups.modals.clear.message') !!}</p>
+                        </div>
+                        <div class="modal-footer">
+                            {{ ui_button('cancel')->appendClass('pull-left')->setAttribute('data-dismiss', 'modal') }}
+                            {{ ui_button('clear', 'submit')->withLoadingText() }}
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>{!! trans('foundation::backups.modals.clear.message') !!}</p>
-                    </div>
-                    <div class="modal-footer">
-                        {{ ui_button('cancel')->appendClass('pull-left')->setAttribute('data-dismiss', 'modal') }}
-                        {{ ui_button('clear', 'submit')->withLoadingText() }}
-                    </div>
-                </div>
-            {{ Form::close() }}
+                {{ Form::close() }}
+            </div>
         </div>
-    </div>
+    @endcan
 @endsection
 
 @section('scripts')
-    <script>
-        $(function () {
-            // RUN BACKUPS MODAL
-            //--------------------------------
-            var $runBackupsModal = $('div#run-backups-modal'),
-                $runBackupsForm  = $('form#run-backups-form');
+    {{-- RUN BACKUPS MODAL --}}
+    @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_CREATE)
+        <script>
+            $(function () {
+                var $runBackupsModal = $('div#run-backups-modal'),
+                    $runBackupsForm  = $('form#run-backups-form');
 
-            $('a[href="#run-backups-modal"]').on('click', function (e) {
-                e.preventDefault();
+                $('a[href="#run-backups-modal"]').on('click', function (e) {
+                    e.preventDefault();
 
-                $runBackupsModal.modal('show');
+                    $runBackupsModal.modal('show');
+                });
+
+                $runBackupsForm.on('submit', function (e) {
+                    e.preventDefault();
+
+                    var $submitBtn = $runBackupsForm.find('button[type="submit"]');
+                        $submitBtn.button('loading');
+
+                    axios.post($runBackupsForm.attr('action'))
+                         .then(function (response) {
+                             if (response.data.code === 'success') {
+                                 $runBackupsModal.modal('hide');
+                                 location.reload();
+                             }
+                             else {
+                                 alert('ERROR ! Check the console !');
+                                 console.error(response.data.message);
+                                 $submitBtn.button('reset');
+                             }
+                         })
+                         .catch(function (error) {
+                             alert('AJAX ERROR ! Check the console !');
+                             console.log(error);
+                             $submitBtn.button('reset');
+                         });
+                });
             });
+        </script>
+    @endcan
 
-            $runBackupsForm.on('submit', function (e) {
-                e.preventDefault();
+    {{-- CLEAR BACKUPS MODAL --}}
+    @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_DELETE)
+        <script>
+            $(function () {
+                var $clearBackupsModal = $('div#clear-backups-modal'),
+                    $clearBackupsForm  = $('form#clear-backups-form');
 
-                var $submitBtn = $runBackupsForm.find('button[type="submit"]');
+                $('a[href="#clear-backups-modal"]').on('click', function (e) {
+                    e.preventDefault();
+
+                    $clearBackupsModal.modal('show');
+                });
+
+                $clearBackupsForm.on('submit', function (e) {
+                    e.preventDefault();
+
+                    var $submitBtn = $clearBackupsForm.find('button[type="submit"]');
                     $submitBtn.button('loading');
 
-                axios.post($runBackupsForm.attr('action'))
-                     .then(function (response) {
-                         if (response.data.code === 'success') {
-                             $runBackupsModal.modal('hide');
-                             location.reload();
-                         }
-                         else {
-                             alert('ERROR ! Check the console !');
-                             console.error(response.data.message);
-                             $submitBtn.button('reset');
-                         }
-                     })
-                     .catch(function (error) {
-                         alert('AJAX ERROR ! Check the console !');
-                         console.log(error);
-                         $submitBtn.button('reset');
-                     });
+                    axios.post($clearBackupsForm.attr('action'))
+                        .then(function (response) {
+                            if (response.data.code === 'success') {
+                                $clearBackupsModal.modal('hide');
+                                location.reload();
+                            }
+                            else {
+                                alert('ERROR ! Check the console !');
+                                console.error(response.data.message);
+                                $submitBtn.button('reset');
+                            }
+                        })
+                        .catch(function (error) {
+                            alert('AJAX ERROR ! Check the console !');
+                            console.log(error);
+                            $submitBtn.button('reset');
+                        });
+                });
             });
-
-            // CLEAR BACKUPS MODAL
-            //--------------------------------
-            var $clearBackupsModal = $('div#clear-backups-modal'),
-                $clearBackupsForm  = $('form#clear-backups-form');
-
-            $('a[href="#clear-backups-modal"]').on('click', function (e) {
-                e.preventDefault();
-
-                $clearBackupsModal.modal('show');
-            });
-
-            $clearBackupsForm.on('submit', function (e) {
-                e.preventDefault();
-
-                var $submitBtn = $clearBackupsForm.find('button[type="submit"]');
-                    $submitBtn.button('loading');
-
-                axios.post($clearBackupsForm.attr('action'))
-                     .then(function (response) {
-                         if (response.data.code === 'success') {
-                             $clearBackupsModal.modal('hide');
-                             location.reload();
-                         }
-                         else {
-                             alert('ERROR ! Check the console !');
-                             console.error(response.data.message);
-                             $submitBtn.button('reset');
-                         }
-                     })
-                     .catch(function (error) {
-                         alert('AJAX ERROR ! Check the console !');
-                         console.log(error);
-                         $submitBtn.button('reset');
-                     });
-            });
-        });
-    </script>
+        </script>
+    @endcan
 @endsection
