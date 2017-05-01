@@ -1,5 +1,5 @@
 @section('header')
-    <i class="fa fa-fw fa-info-circle"></i> System <small>Information</small>
+    <i class="fa fa-fw fa-info-circle"></i> Information <small></small>
 @endsection
 
 @section('content')
@@ -15,8 +15,6 @@
             @include(Arcanesoft\Foundation\ViewComposers\System\PhpInfoComposer::VIEW)
         </div>
     </div>
-
-
 @endsection
 
 @section('modals')

@@ -5,14 +5,14 @@
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.logs-list') }}</h3>
+            <h3 class="box-title"><i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.titles.logs-list') }}</h3>
             <div class="box-tools">
                 <div class="btn-group">
                     <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.dashboard') }}
+                        <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.titles.dashboard') }}
                     </a>
                     <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.logs-list') }}
+                        <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.titles.logs-list') }}
                     </a>
                 </div>
             </div>
@@ -28,17 +28,16 @@
                                     <span class="label label-info">{{ $header }}</span>
                                 @else
                                     <span class="label level-{{ $key }}">
-                                        {!! log_styler()->icon($key) . ' ' . $header !!}
+                                        {!! log_styler()->icon($key).' '.$header !!}
                                     </span>
                                 @endif
                             </th>
                             @endforeach
-                            <th class="text-right">Actions</th>
+                            <th class="text-right">{{ trans('core::generals.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($rows->count())
-                            @foreach($rows as $date => $row)
+                        @forelse($rows as $date => $row)
                             <tr>
                                 @foreach($row as $key => $value)
                                     <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
@@ -52,25 +51,26 @@
                                     </td>
                                 @endforeach
                                 <td class="text-right">
-                                    <a href="{{ route('admin::foundation.system.log-viewer.logs.show', [$date]) }}" class="btn btn-xs btn-info" data-toggle="tooltip" data-original-title="Show">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                    <a href="{{ route('admin::foundation.system.log-viewer.logs.download', [$date]) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-original-title="Download">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                    <a href="#delete-log-modal" class="btn btn-xs btn-danger" data-log-date="{{ $date }}" data-toggle="tooltip" data-original-title="Delete">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
+                                    @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_SHOW)
+                                        {{ ui_link_icon('show', route('admin::foundation.system.log-viewer.logs.show', [$date])) }}
+                                    @endcan
+
+                                    @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DOWNLOAD)
+                                        {{ ui_link_icon('download', route('admin::foundation.system.log-viewer.logs.download', [$date])) }}
+                                    @endcan
+
+                                    @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
+                                        {{ ui_link_icon('delete', '#delete-log-modal', ['data-log-date' => $date]) }}
+                                    @endcan
                                 </td>
                             </tr>
-                            @endforeach
-                        @else
+                        @empty
                             <tr>
                                 <td colspan="11" class="text-center">
                                     <span class="label label-default">{{ trans('foundation::log-viewer.no-entries') }}</span>
                                 </td>
                             </tr>
-                        @endif
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -82,44 +82,46 @@
 @endsection
 
 @section('modals')
-    <div id="delete-log-modal" class="modal fade">
-        <div class="modal-dialog">
-            {{ Form::open(['route' => 'admin::foundation.system.log-viewer.logs.delete', 'method' => 'DELETE', 'id' => 'delete-log-form', 'autocomplete' => 'off']) }}
-                {{ Form::hidden('date') }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">DELETE LOG FILE</h4>
+    @can(\Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
+        <div id="delete-log-modal" class="modal fade">
+            <div class="modal-dialog">
+                {{ Form::open(['route' => ['admin::foundation.system.log-viewer.logs.delete', ':date'], 'method' => 'DELETE', 'id' => 'delete-log-form', 'autocomplete' => 'off']) }}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">{{ trans("foundation::log-viewer.modals.delete.title") }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            {{ ui_button('cancel')->appendClass('pull-left')->setAttribute('data-dismiss', 'modal') }}
+                            {{ ui_button('delete', 'submit')->withLoadingText() }}
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p></p>
-                    </div>
-                    <div class="modal-footer">
-                        {{ Form::button('Cancel', ['data-dismiss' => 'modal', 'class' => 'btn btn-sm btn-default pull-left']) }}
-                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">
-                            DELETE FILE
-                        </button>
-                    </div>
-                </div>
-            {{ Form::close() }}
+                {{ Form::close() }}
+            </div>
         </div>
-    </div>
+    @endcan
 @endsection
 
 @section('scripts')
+    @can(\Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
     <script>
         $(function () {
             var $deleteLogModal = $('div#delete-log-modal'),
-                $deleteLogForm  = $('form#delete-log-form');
+                $deleteLogForm  = $('form#delete-log-form'),
+                deleteLogAction = $deleteLogForm.attr('action');
 
             $('a[href="#delete-log-modal"]').on('click', function(event) {
                 event.preventDefault();
-                var date = $(this).data('log-date');
-                $deleteLogForm.find('input[name="date"]').val(date);
+                var date = $(this).attr('data-log-date');
+
+                $deleteLogForm.attr('action', deleteLogAction.replace(':date', date));
                 $deleteLogModal.find('.modal-body p').html(
-                    'Are you sure you want to <span class="label label-danger">DELETE</span> this log file <span class="label label-primary">' + date + '</span> ?'
+                    '{!! trans("foundation::log-viewer.modals.delete.message") !!}'.replace(':date', date)
                 );
 
                 $deleteLogModal.modal('show');
@@ -131,35 +133,31 @@
 
                 submitBtn.button('loading');
 
-                $.ajax({
-                    url:      $deleteLogForm.attr('action'),
-                    type:     $deleteLogForm.attr('method'),
-                    dataType: 'json',
-                    data:     $deleteLogForm.serialize(),
-                    success: function(data) {
-                        if (data.status === 'success') {
-                            $deleteLogModal.modal('hide');
-                            location.reload();
-                        }
-                        else {
-                            alert('AJAX ERROR ! Check the console !');
-                            submitBtn.button('reset');
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        alert('AJAX ERROR ! Check the console !');
-                        console.error(errorThrown);
-                        submitBtn.button('reset');
-                    }
-                });
+                axios.delete($deleteLogForm.attr('action'))
+                     .then(function (response) {
+                         if (response.data.code === 'success') {
+                             $deleteLogModal.modal('hide');
+                             location.reload();
+                         }
+                         else {
+                             alert('AJAX ERROR ! Check the console !');
+                             submitBtn.button('reset');
+                         }
+                     })
+                     .catch(function (error) {
+                         alert('AJAX ERROR ! Check the console !');
+                         console.log(error);
+                         submitBtn.button('reset');
+                     });
 
                 return false;
             });
 
             $deleteLogModal.on('hidden.bs.modal', function() {
-                $deleteLogForm.find('input[name=date]').val('');
+                $deleteLogForm.attr('action', deleteLogAction);
                 $deleteLogModal.find('.modal-body p').html('');
             });
         });
     </script>
+    @endcan
 @endsection

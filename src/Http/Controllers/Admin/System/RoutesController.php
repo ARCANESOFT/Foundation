@@ -14,6 +14,7 @@ class RoutesController extends Controller
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The route viewer instance.
      *
@@ -25,6 +26,7 @@ class RoutesController extends Controller
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * RoutesController constructor.
      *
@@ -37,19 +39,20 @@ class RoutesController extends Controller
         $this->routeViewer = $routeViewer;
 
         $this->setCurrentPage('foundation-system-routes');
-        $this->addBreadcrumbRoute('Routes', 'admin::foundation.system.routes.index');
+        $this->addBreadcrumbRoute(trans('foundation::route-viewer.titles.routes'), 'admin::foundation.system.routes.index');
     }
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function index()
     {
-        $this->setTitle('Routes Viewer');
-        $this->addBreadcrumb('List of all routes');
-
         $routes = $this->routeViewer->all();
+
+        $this->setTitle($title = trans('foundation::route-viewer.titles.routes-list'));
+        $this->addBreadcrumb($title);
 
         return $this->view('admin.system.routes.list', compact('routes'));
     }

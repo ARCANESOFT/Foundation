@@ -5,14 +5,14 @@
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.dashboard') }}</h3>
+            <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.titles.dashboard') }}</h3>
             <div class="box-tools">
                 <div class="btn-group">
                     <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.dashboard') }}
+                        <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.titles.dashboard') }}
                     </a>
                     <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
-                        <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.logs-list') }}
+                        <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.titles.logs-list') }}
                     </a>
                 </div>
             </div>

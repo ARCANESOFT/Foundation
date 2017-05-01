@@ -2,15 +2,16 @@
 
 return [
 
-    'dashboard' => 'Dashboard',
+    'dashboard'           => 'Dashboard',
 
-    'settings'          => 'Settings',
-    'settings-generals' => 'Generals',
-    'settings-modules'  => 'Modules',
+    'settings'            => 'Settings',
+    'settings-generals'   => 'Generals',
+    'settings-modules'    => 'Modules',
 
     'system'              => 'System',
     'system-informations' => 'Informations',
     'system-log-viewer'   => 'LogViewer',
     'system-routes'       => 'Routes',
+    'backups'             => 'Backups',
 
 ];

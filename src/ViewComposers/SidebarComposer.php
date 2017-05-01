@@ -16,12 +16,14 @@ class SidebarComposer
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const VIEW = 'foundation::admin._template.sidebar-main';
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The Sidebar instance.
      *
@@ -33,6 +35,7 @@ class SidebarComposer
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
+
     /**
      * SidebarComposer constructor.
      *
@@ -47,6 +50,7 @@ class SidebarComposer
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Bind data to the view.
      *

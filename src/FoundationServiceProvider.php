@@ -14,6 +14,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Package name.
      *
@@ -25,6 +26,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      */
@@ -48,6 +50,8 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
         $this->registerProviders([
             Providers\RouteServiceProvider::class,
             Providers\ViewComposerServiceProvider::class,
@@ -76,6 +80,7 @@ class FoundationServiceProvider extends PackageServiceProvider
      |  Services Functions
      | -----------------------------------------------------------------
      */
+
     /**
      * Register Foundation service.
      */
@@ -89,8 +94,9 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     private function registerModuleProviders()
     {
-        $this->registerProviders(
-            $this->config()->get('arcanesoft.foundation.modules.providers', [])
-        );
+        $providers = $this->config()->get('arcanesoft.foundation.modules.providers', []);
+
+        if (count($providers) > 0)
+            $this->registerProviders($providers);
     }
 }

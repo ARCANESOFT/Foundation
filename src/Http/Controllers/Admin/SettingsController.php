@@ -12,6 +12,7 @@ class SettingsController extends Controller
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * SettingsController constructor.
      */
@@ -27,6 +28,7 @@ class SettingsController extends Controller
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function index()
     {
         $title = 'Generals';

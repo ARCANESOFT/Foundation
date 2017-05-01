@@ -15,6 +15,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the composer classes.
      *

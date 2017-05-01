@@ -41,11 +41,11 @@ class InstallCommand extends Command
     {
         $this->arcanesoftHeader();
 
-        if ($this->confirm('Do you wish to publish the modules ? [y or yes, default is no]')) {
+        if ($this->confirm('Do you wish to publish the modules ?')) {
             $this->publishAllModules();
         }
 
-        if ($this->confirm('Do you wish to reset the migrations ? [y or yes, default is no]')) {
+        if ($this->confirm('Do you wish to reset the migrations ?')) {
             $this->refreshMigrations();
             $this->installModules();
         }

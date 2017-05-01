@@ -17,6 +17,7 @@ class RolesTableSeeder extends RolesSeeder
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Run the database seeds.
      */
@@ -26,6 +27,11 @@ class RolesTableSeeder extends RolesSeeder
             [
                 'name'        => 'LogViewer Manager',
                 'description' => 'The LogViewer manager role.',
+                'is_locked'   => true,
+            ],
+            [
+                'name'        => 'Backups Manager',
+                'description' => 'The Backups manager role.',
                 'is_locked'   => true,
             ],
         ]);
@@ -38,6 +44,7 @@ class RolesTableSeeder extends RolesSeeder
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Sync the roles.
      *
@@ -48,7 +55,8 @@ class RolesTableSeeder extends RolesSeeder
         /** @var \Illuminate\Database\Eloquent\Collection $permissions */
         $permissions = Permission::all();
         $roles       = [
-            'logviewer-manager' => 'foundation.logviewer.'
+            'logviewer-manager' => 'foundation.logviewer.',
+            'backups-manager'   => 'foundation.backups.',
         ];
 
         foreach ($roles as $roleSlug => $permissionSlug) {

@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Seeds;
 
 use Arcanesoft\Auth\Seeds\PermissionsSeeder;
+use Arcanesoft\Foundation\Policies\BackupPolicy;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 /**
@@ -15,6 +16,7 @@ class PermissionsTableSeeder extends PermissionsSeeder
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Run the database seeds.
      */
@@ -28,23 +30,25 @@ class PermissionsTableSeeder extends PermissionsSeeder
                     'description' => 'Foundation permissions group',
                 ],
                 'permissions' => array_merge(
-                    $this->getSettingsSeeds(),
-                    $this->getLogViewerSeeds()
+                    $this->getSettingsPermissions(),
+                    $this->getLogViewerPermissions(),
+                    $this->getBackupsPermissions()
                 ),
             ],
         ]);
     }
 
     /* -----------------------------------------------------------------
-     |  Other Methods
+     |  Permissions
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the Settings permissions.
      *
      * @return array
      */
-    private function getSettingsSeeds()
+    private function getSettingsPermissions()
     {
         return [
             [
@@ -60,7 +64,7 @@ class PermissionsTableSeeder extends PermissionsSeeder
      *
      * @return array
      */
-    private function getLogViewerSeeds()
+    private function getLogViewerPermissions()
     {
         return [
             [
@@ -87,6 +91,37 @@ class PermissionsTableSeeder extends PermissionsSeeder
                 'name'        => 'LogViewer - Delete a log',
                 'description' => 'Allow to delete a log.',
                 'slug'        => LogViewerPolicy::PERMISSION_DELETE,
+            ],
+        ];
+    }
+
+    /**
+     * Get the Backups permissions.
+     *
+     * @return array
+     */
+    private function getBackupsPermissions()
+    {
+        return [
+            [
+                'name'        => 'Backups - List all backup monitors',
+                'description' => 'Allow to list all the logs.',
+                'slug'        => BackupPolicy::PERMISSION_LIST,
+            ],
+            [
+                'name'        => 'Backups - View a backup monitor',
+                'description' => 'Allow to display a backup monitor.',
+                'slug'        => BackupPolicy::PERMISSION_SHOW,
+            ],
+            [
+                'name'        => 'Backups - Create backups',
+                'description' => 'Allow to create backups.',
+                'slug'        => BackupPolicy::PERMISSION_CREATE,
+            ],
+            [
+                'name'        => 'Backups - Delete/Clear backups',
+                'description' => 'Allow to delete or clear backups.',
+                'slug'        => BackupPolicy::PERMISSION_DELETE,
             ],
         ];
     }

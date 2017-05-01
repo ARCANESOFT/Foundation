@@ -12,6 +12,7 @@ class InformationController extends Controller
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * InformationController constructor.
      */
@@ -27,6 +28,7 @@ class InformationController extends Controller
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function index()
     {
         $this->setTitle('System information');

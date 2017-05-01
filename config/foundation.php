@@ -46,7 +46,7 @@ return [
 
         'commands' => [
             'install' => [
-                'auth:setup',
+                'auth:install',
             ],
 
             'publish' => [

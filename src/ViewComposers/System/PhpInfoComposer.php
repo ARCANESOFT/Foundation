@@ -14,12 +14,14 @@ class PhpInfoComposer
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const VIEW = 'foundation::admin.system.information._includes.php-info';
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Compose the view.
      *

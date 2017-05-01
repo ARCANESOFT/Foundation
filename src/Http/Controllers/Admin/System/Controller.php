@@ -14,6 +14,7 @@ abstract class Controller extends BaseController
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Controller constructor.
      */
@@ -21,6 +22,6 @@ abstract class Controller extends BaseController
     {
         parent::__construct();
 
-        $this->addBreadcrumbRoute('System', 'admin::foundation.system.information.index');
+        $this->addBreadcrumbRoute(trans('foundation::sidebar.system'), 'admin::foundation.system.information.index');
     }
 }

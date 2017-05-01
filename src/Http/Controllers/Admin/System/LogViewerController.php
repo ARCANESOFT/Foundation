@@ -1,5 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
+use Arcanedev\LaravelApiHelper\Traits\JsonResponses;
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
 use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
@@ -17,9 +18,17 @@ use Illuminate\Support\Arr;
 class LogViewerController extends Controller
 {
     /* -----------------------------------------------------------------
+     |  Trait
+     | -----------------------------------------------------------------
+     */
+
+    use JsonResponses;
+
+    /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The LogViewer instance.
      *
@@ -38,6 +47,7 @@ class LogViewerController extends Controller
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * LogViewerController constructor.
      *
@@ -57,6 +67,7 @@ class LogViewerController extends Controller
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+
     /**
      * Show the LogViewer Dashboard.
      *
@@ -100,7 +111,7 @@ class LogViewerController extends Controller
         );
         $rows->setPath($request->url());
 
-        $this->setTitle($title = trans('foundation::log-viewer.logs-list'));
+        $this->setTitle($title = trans('foundation::log-viewer.titles.logs-list'));
         $this->addBreadcrumb($title);
 
         return $this->view('admin.system.log-viewer.list', compact('headers', 'rows', 'footer'));
@@ -121,7 +132,7 @@ class LogViewerController extends Controller
         $levels    = $this->logViewer->levelsNames();
         $entries   = $log->entries()->paginate($this->perPage);
 
-        $this->addBreadcrumbRoute(trans('foundation::log-viewer.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
+        $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
         $this->setTitle($title = "Log : {$date}");
         $this->addBreadcrumb($title);
 
@@ -148,7 +159,7 @@ class LogViewerController extends Controller
         $levels  = $this->logViewer->levelsNames();
         $entries = $this->logViewer->entries($date, $level)->paginate($this->perPage);
 
-        $this->addBreadcrumbRoute(trans('foundation::log-viewer.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
+        $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
 
         $this->setTitle($date.' | '.ucfirst($level));
         $this->addBreadcrumbRoute($date, 'admin::foundation.system.log-viewer.logs.show', [$date]);
@@ -174,34 +185,33 @@ class LogViewerController extends Controller
     /**
      * Delete a log.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $date
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request)
+    public function delete($date)
     {
-        self::onlyAjax();
-
         $this->authorize(LogViewerPolicy::PERMISSION_DELETE);
-
-        $date = $request->get('date');
 
         if ($this->logViewer->delete($date)) {
             $this->notifySuccess(
-                "The log [$date] was deleted successfully !",
-                "Log [$date] deleted !"
+                $message = trans('foundation::log-viewer.messages.deleted.message', compact('date')),
+                trans('foundation::log-viewer.messages.deleted.title')
             );
 
-            return response()->json(['status' => 'success']);
+            return $this->jsonResponseSuccess(compact('message'));
         }
 
-        return response()->json(['status' => 'error']);
+        return $this->jsonResponseError([
+            'message' => "An error occurred while deleting the log [$date]"
+        ]);
     }
 
     /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get a log or fail.
      *

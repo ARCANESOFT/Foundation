@@ -12,6 +12,7 @@ interface Foundation
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the package version.
      *

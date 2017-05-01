@@ -14,12 +14,14 @@ class FoldersPermissionsComposer
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const VIEW = 'foundation::admin.system.information._includes.folders-permissions';
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Compose the view.
      *
@@ -41,6 +43,7 @@ class FoldersPermissionsComposer
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Prepare the permissions.
      *
