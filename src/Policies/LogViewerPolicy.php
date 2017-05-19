@@ -14,6 +14,7 @@ class LogViewerPolicy extends AbstractPolicy
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const PERMISSION_DASHBOARD = 'foundation.logviewer.dashboard';
     const PERMISSION_LIST      = 'foundation.logviewer.list';
     const PERMISSION_SHOW      = 'foundation.logviewer.show';
@@ -24,6 +25,7 @@ class LogViewerPolicy extends AbstractPolicy
      |  Abilities
      | -----------------------------------------------------------------
      */
+
     /**
      * Allow to view the LogViewer dashboard.
      *
