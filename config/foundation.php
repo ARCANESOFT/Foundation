@@ -9,7 +9,7 @@ return [
 
     'template'  => 'foundation::admin._template.master',
 
-    'skin'      => 'skin-blue',
+    'skin'      => 'skin-purple',
 
     /* -----------------------------------------------------------------
      |  Sidebar Items
@@ -47,12 +47,12 @@ return [
         'commands' => [
             'install' => [
                 'auth:install',
+                // 'seo:install',
             ],
 
             'publish' => [
-                'settings:publish',
                 'auth:publish',
-            ]
+            ],
         ],
     ],
 
@@ -63,6 +63,7 @@ return [
 
     'dashboards' => [
         'auth::admin._composers.dashboard',
+        // 'blog::admin._composers.dashboard',
         // 'tracker::admin._composers.dashboard',
     ],
 
