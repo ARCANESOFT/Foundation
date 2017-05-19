@@ -8,12 +8,17 @@
             <h3 class="box-title"><i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.titles.logs-list') }}</h3>
             <div class="box-tools">
                 <div class="btn-group">
+                    @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DASHBOARD)
                     <a href="{{ route('admin::foundation.system.log-viewer.index') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.index') ? 'active' : '' }}">
                         <i class="fa fa-fw fa-dashboard"></i> {{ trans('foundation::log-viewer.titles.dashboard') }}
                     </a>
+                    @endcan
+
+                    @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_LIST)
                     <a href="{{ route('admin::foundation.system.log-viewer.logs.list') }}" class="btn btn-xs btn-default {{ route_is('admin::foundation.system.log-viewer.logs.list') ? 'active' : '' }}">
                         <i class="fa fa-fw fa-list"></i> {{ trans('foundation::log-viewer.titles.logs-list') }}
                     </a>
+                    @endcan
                 </div>
             </div>
         </div>

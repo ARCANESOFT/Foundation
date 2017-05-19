@@ -80,7 +80,9 @@
                                     @endif
                                 </td>
                                 <td class="text-right">
-                                    {{ ui_link_icon('show', route('admin::foundation.system.backups.show', [$index])) }}
+                                    @can(Arcanesoft\Foundation\Policies\BackupPolicy::PERMISSION_SHOW)
+                                        {{ ui_link_icon('show', route('admin::foundation.system.backups.show', [$index])) }}
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
@@ -146,14 +148,14 @@
                 var $runBackupsModal = $('div#run-backups-modal'),
                     $runBackupsForm  = $('form#run-backups-form');
 
-                $('a[href="#run-backups-modal"]').on('click', function (e) {
-                    e.preventDefault();
+                $('a[href="#run-backups-modal"]').on('click', function (event) {
+                    event.preventDefault();
 
                     $runBackupsModal.modal('show');
                 });
 
-                $runBackupsForm.on('submit', function (e) {
-                    e.preventDefault();
+                $runBackupsForm.on('submit', function (event) {
+                    event.preventDefault();
 
                     var $submitBtn = $runBackupsForm.find('button[type="submit"]');
                         $submitBtn.button('loading');
@@ -166,7 +168,6 @@
                              }
                              else {
                                  alert('ERROR ! Check the console !');
-                                 console.error(response.data.message);
                                  $submitBtn.button('reset');
                              }
                          })
@@ -187,35 +188,34 @@
                 var $clearBackupsModal = $('div#clear-backups-modal'),
                     $clearBackupsForm  = $('form#clear-backups-form');
 
-                $('a[href="#clear-backups-modal"]').on('click', function (e) {
-                    e.preventDefault();
+                $('a[href="#clear-backups-modal"]').on('click', function (event) {
+                    event.preventDefault();
 
                     $clearBackupsModal.modal('show');
                 });
 
-                $clearBackupsForm.on('submit', function (e) {
-                    e.preventDefault();
+                $clearBackupsForm.on('submit', function (event) {
+                    event.preventDefault();
 
                     var $submitBtn = $clearBackupsForm.find('button[type="submit"]');
-                    $submitBtn.button('loading');
+                        $submitBtn.button('loading');
 
                     axios.post($clearBackupsForm.attr('action'))
-                        .then(function (response) {
-                            if (response.data.code === 'success') {
-                                $clearBackupsModal.modal('hide');
-                                location.reload();
-                            }
-                            else {
-                                alert('ERROR ! Check the console !');
-                                console.error(response.data.message);
-                                $submitBtn.button('reset');
-                            }
-                        })
-                        .catch(function (error) {
-                            alert('AJAX ERROR ! Check the console !');
-                            console.log(error);
-                            $submitBtn.button('reset');
-                        });
+                         .then(function (response) {
+                             if (response.data.code === 'success') {
+                                 $clearBackupsModal.modal('hide');
+                                 location.reload();
+                             }
+                             else {
+                                 alert('ERROR ! Check the console !');
+                                 $submitBtn.button('reset');
+                             }
+                         })
+                         .catch(function (error) {
+                             alert('AJAX ERROR ! Check the console !');
+                             console.log(error);
+                             $submitBtn.button('reset');
+                         });
                 });
             });
         </script>

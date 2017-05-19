@@ -22,9 +22,9 @@
                     <tr>
                         <td><b>{{ trans('foundation::log-viewer.attributes.log_entries') }} :</b></td>
                         <td>
-                                <span class="label label-{{ $entries->total() ? 'info' : 'default'}}">
-                                    {{ $entries->total() }}
-                                </span>
+                            <span class="label label-{{ $entries->total() ? 'info' : 'default'}}">
+                                {{ $entries->total() }}
+                            </span>
                         </td>
                         <td><b>{{ trans('foundation::log-viewer.attributes.size') }} :</b></td>
                         <td>
@@ -95,8 +95,8 @@
             var $deleteLogModal = $('div#delete-log-modal'),
                 $deleteLogForm  = $('form#delete-log-form');
 
-            $('a[href="#delete-log-modal"]').on('click', function (e) {
-                e.preventDefault();
+            $('a[href="#delete-log-modal"]').on('click', function (event) {
+                event.preventDefault();
 
                 $deleteLogModal.modal('show');
             });
