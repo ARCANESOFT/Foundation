@@ -36,12 +36,16 @@ class FoundationServiceProvider extends PackageServiceProvider
 
         $this->registerConfig();
         $this->registerSidebarItems();
+
         $this->registerProviders([
             Providers\PackagesServiceProvider::class,
             Providers\AuthorizationServiceProvider::class,
+            Providers\RouteServiceProvider::class,
+            Providers\ViewComposerServiceProvider::class,
         ]);
         $this->registerModuleProviders();
         $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
+
         $this->registerFoundationService();
     }
 
@@ -51,11 +55,6 @@ class FoundationServiceProvider extends PackageServiceProvider
     public function boot()
     {
         parent::boot();
-
-        $this->registerProviders([
-            Providers\RouteServiceProvider::class,
-            Providers\ViewComposerServiceProvider::class,
-        ]);
 
         // Publishes
         $this->publishConfig();
