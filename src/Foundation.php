@@ -16,7 +16,7 @@ class Foundation implements FoundationContract
      | -----------------------------------------------------------------
      */
 
-    const VERSION = '2.2.0';
+    const VERSION = '2.2.1';
 
     /* -----------------------------------------------------------------
      |  Properties
