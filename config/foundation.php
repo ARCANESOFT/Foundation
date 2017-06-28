@@ -38,6 +38,7 @@ return [
     'modules' => [
         'providers' => [
             Arcanesoft\Auth\AuthServiceProvider::class,
+            // Arcanesoft\Backups\BackupsServiceProvider::class,
             // Arcanesoft\Blog\BlogServiceProvider::class,
             // Arcanesoft\Media\MediaServiceProvider::class,
             // Arcanesoft\Tracker\TrackerServiceProvider::class,
@@ -47,11 +48,13 @@ return [
         'commands' => [
             'install' => [
                 'auth:install',
+                // 'backups:install',
                 // 'seo:install',
             ],
 
             'publish' => [
                 'auth:publish',
+                // 'backups:publish',
             ],
         ],
     ],

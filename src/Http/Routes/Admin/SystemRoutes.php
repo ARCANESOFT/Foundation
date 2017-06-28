@@ -24,7 +24,6 @@ class SystemRoutes extends RouteRegistrar
             $this->registerSystemInformationRoutes();
             $this->registerLogViewerRoutes();
             $this->registerRouteViewerRoutes();
-            $this->registerBackupsRoutes();
         });
     }
 
@@ -83,28 +82,6 @@ class SystemRoutes extends RouteRegistrar
         $this->prefix('routes')->name('routes.')->group(function () {
             $this->get('/', 'RoutesController@index')
                  ->name('index'); // admin::foundation.system.routes.index
-        });
-    }
-
-    /**
-     * Register the backups routes.
-     */
-    private function registerBackupsRoutes()
-    {
-        $this->prefix('backups')->name('backups.')->group(function () {
-            $this->get('/', 'BackupsController@index')
-                 ->name('index');   // admin::foundation.system.backups.index
-
-            $this->post('backup', 'BackupsController@backup')
-                 ->middleware('ajax')
-                 ->name('backup'); // admin::foundation.system.backups.backup
-
-            $this->post('clear', 'BackupsController@clear')
-                 ->middleware('ajax')
-                 ->name('clear');  // admin::foundation.system.backups.clear
-
-            $this->get('{index}', 'BackupsController@show')
-                 ->name('show');    // admin::foundation.system.backups.show
         });
     }
 }

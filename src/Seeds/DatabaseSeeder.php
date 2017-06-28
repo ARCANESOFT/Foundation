@@ -1,12 +1,14 @@
 <?php namespace Arcanesoft\Foundation\Seeds;
 
+use Arcanedev\Support\Bases\Seeder;
+
 /**
  * Class     DatabaseSeeder
  *
  * @package  Arcanesoft\Foundation\Seeds
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class DatabaseSeeder extends AbstractSeeder
+class DatabaseSeeder extends Seeder
 {
     /* -----------------------------------------------------------------
      |  Properties

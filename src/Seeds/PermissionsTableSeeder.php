@@ -1,7 +1,6 @@
 <?php namespace Arcanesoft\Foundation\Seeds;
 
 use Arcanesoft\Auth\Seeds\PermissionsSeeder;
-use Arcanesoft\Foundation\Policies\BackupPolicy;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 /**
@@ -31,8 +30,7 @@ class PermissionsTableSeeder extends PermissionsSeeder
                 ],
                 'permissions' => array_merge(
                     $this->getSettingsPermissions(),
-                    $this->getLogViewerPermissions(),
-                    $this->getBackupsPermissions()
+                    $this->getLogViewerPermissions()
                 ),
             ],
         ]);
@@ -91,37 +89,6 @@ class PermissionsTableSeeder extends PermissionsSeeder
                 'name'        => 'LogViewer - Delete a log',
                 'description' => 'Allow to delete a log.',
                 'slug'        => LogViewerPolicy::PERMISSION_DELETE,
-            ],
-        ];
-    }
-
-    /**
-     * Get the Backups permissions.
-     *
-     * @return array
-     */
-    private function getBackupsPermissions()
-    {
-        return [
-            [
-                'name'        => 'Backups - List all backup monitors',
-                'description' => 'Allow to list all the logs.',
-                'slug'        => BackupPolicy::PERMISSION_LIST,
-            ],
-            [
-                'name'        => 'Backups - View a backup monitor',
-                'description' => 'Allow to display a backup monitor.',
-                'slug'        => BackupPolicy::PERMISSION_SHOW,
-            ],
-            [
-                'name'        => 'Backups - Create backups',
-                'description' => 'Allow to create backups.',
-                'slug'        => BackupPolicy::PERMISSION_CREATE,
-            ],
-            [
-                'name'        => 'Backups - Delete/Clear backups',
-                'description' => 'Allow to delete or clear backups.',
-                'slug'        => BackupPolicy::PERMISSION_DELETE,
             ],
         ];
     }

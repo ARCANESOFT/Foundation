@@ -39,15 +39,5 @@ return [
             'roles'       => [Role::ADMINISTRATOR],
             'permissions' => [],
         ],
-        [
-            'title'       => 'foundation::sidebar.backups',
-            'name'        => 'foundation-system-backups',
-            'route'       => 'admin::foundation.system.backups.index',
-            'icon'        => 'fa fa-fw fa-database',
-            'roles'       => [Role::ADMINISTRATOR],
-            'permissions' => [
-                BackupPolicy::PERMISSION_LIST,
-            ],
-        ]
     ],
 ];

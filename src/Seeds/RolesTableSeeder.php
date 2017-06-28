@@ -26,18 +26,12 @@ class RolesTableSeeder extends RolesSeeder
                 'description' => 'The LogViewer manager role.',
                 'is_locked'   => true,
             ],
-            [
-                'name'        => 'Backups Manager',
-                'description' => 'The Backups manager role.',
-                'is_locked'   => true,
-            ],
         ]);
 
         $this->syncAdminRole();
 
         $this->syncRoles([
             'logviewer-manager' => 'foundation.logviewer.',
-            'backups-manager'   => 'foundation.backups.',
         ]);
     }
 }
