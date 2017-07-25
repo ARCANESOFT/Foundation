@@ -35,7 +35,7 @@
         }
     },
     "scripts": {
-        "testbench": "composer require --dev \"orchestra/testbench=~3.4.0\""
+        "testbench": "composer require --dev \"orchestra/testbench=~3.4\""
     },
     "extra": {
         "branch-alias": {

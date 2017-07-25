@@ -1,6 +1,8 @@
 <?php namespace Arcanesoft\Foundation\ViewComposers\System;
 
 use Illuminate\View\View;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * Class     ApplicationInfoComposer
@@ -68,16 +70,16 @@ class ApplicationInfoComposer
     /**
      * Get the folder size.
      *
-     * @param  string  $dir
+     * @param  string  $path
      *
      * @return int
      */
-    private function getFolderSize($dir)
+    private function getFolderSize($path)
     {
         $size = 0;
 
-        foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
-            $size += is_file($each) ? filesize($each) : $this->getFolderSize($each);
+        foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $directory){
+            $size += $directory->getSize();
         }
 
         return $size;
