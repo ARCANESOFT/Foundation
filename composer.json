@@ -16,7 +16,7 @@
         "php":                    ">=5.6.4",
         "arcanedev/log-viewer":   "~4.3",
         "arcanedev/route-viewer": "~1.0",
-        "arcanesoft/auth":        "~2.2",
+        "arcanesoft/auth":        "~3.0",
         "arcanesoft/core":        "~2.4"
     },
     "require-dev": {
