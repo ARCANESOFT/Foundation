@@ -3,11 +3,21 @@
 @endsection
 
 @section('content')
+    {{-- Log Details --}}
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">
                 <i class="fa fa-fw fa-list"></i> Log : {{ $log->date }}
             </h3>
+            <div class="box-tools">
+                @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DOWNLOAD)
+                    {{ ui_link('download', route('admin::foundation.system.log-viewer.logs.download', [$log->date]))->size('xs') }}
+                @endcan
+
+                @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
+                    {{ ui_link('delete', '#delete-log-modal')->size('xs') }}
+                @endcan
+            </div>
         </div>
         <div class="box-body no-padding">
             <div class="table-responsive">
@@ -45,14 +55,21 @@
                 </table>
             </div>
         </div>
-        <div class="box-footer text-right">
-            @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DOWNLOAD)
-                {{ ui_link('download', route('admin::foundation.system.log-viewer.logs.download', [$log->date])) }}
-            @endcan
-
-            @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
-                {{ ui_link('delete', '#delete-log-modal') }}
-            @endcan
+        <div class="box-footer">
+            {{-- Search --}}
+            <form action="{{ route('admin::foundation.system.log-viewer.logs.search', [$log->date, $level]) }}" method="GET">
+                <div class=form-group">
+                    <div class="input-group">
+                        <input id="query" name="query" class="form-control"  value="{!! request('query') !!}" placeholder="typing something to search">
+                        <span class="input-group-btn">
+                            @if (request()->has('query'))
+                                <a href="{{ route('admin::foundation.system.log-viewer.logs.show', [$log->date]) }}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
+                            @endif
+                            <button id="search-btn" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="row">
@@ -60,7 +77,8 @@
             @include('foundation::admin.system.log-viewer._includes.menu')
         </div>
         <div class="col-md-9">
-            @include('foundation::admin.system.log-viewer._includes.timeline-entries', compact('entries'))
+            {{-- Log Entries --}}
+            @include('foundation::admin.system.log-viewer._includes.timeline-entries', compact('entries', 'query'))
         </div>
     </div>
 @endsection

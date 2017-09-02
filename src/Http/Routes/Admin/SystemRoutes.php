@@ -66,6 +66,9 @@ class SystemRoutes extends RouteRegistrar
                     $this->get('{level}', 'LogViewerController@showByLevel')
                          ->name('filter'); // admin::foundation.system.log-viewer.logs.filter
 
+                    $this->get('{level}/search', 'LogViewerController@search')
+                         ->name('search'); // admin::foundation.system.log-viewer.logs.search
+
                     $this->delete('delete', 'LogViewerController@delete')
                          ->middleware('ajax')
                          ->name('delete'); // admin::foundation.system.log-viewer.logs.delete

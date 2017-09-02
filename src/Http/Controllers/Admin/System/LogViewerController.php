@@ -3,11 +3,13 @@
 use Arcanedev\LaravelApiHelper\Traits\JsonResponses;
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
+use Arcanedev\LogViewer\Entities\LogEntry;
 use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class     LogViewerController
@@ -128,15 +130,15 @@ class LogViewerController extends Controller
     {
         $this->authorize(LogViewerPolicy::PERMISSION_SHOW);
 
-        $log       = $this->getLogOrFail($date);
-        $levels    = $this->logViewer->levelsNames();
-        $entries   = $log->entries()->paginate($this->perPage);
+        $log     = $this->getLogOrFail($date);
+        $levels  = $this->logViewer->levelsNames();
+        $entries = $log->entries($level = 'all')->paginate($this->perPage);
 
         $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
         $this->setTitle($title = "Log : {$date}");
         $this->addBreadcrumb($title);
 
-        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'level', 'search', 'entries'));
     }
 
     /**
@@ -166,6 +168,30 @@ class LogViewerController extends Controller
         $this->addBreadcrumb(ucfirst($level));
 
         return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries'));
+    }
+
+    /**
+     * Show the log with the search query.
+     *
+     * @param  string                    $date
+     * @param  string                    $level
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\View\View
+     */
+    public function search($date, $level = 'all', Request $request)
+    {
+        $log = $this->getLogOrFail($date);
+
+        if (is_null($query = $request->get('query')))
+            return redirect()->route('admin::foundation.system.log-viewer.logs.show', [$date]);
+
+        $levels  = $this->logViewer->levelsNames();
+        $entries = $log->entries($level)->filter(function (LogEntry $value) use ($query) {
+            return Str::contains($value->header, $query);
+        })->paginate($this->perPage);
+
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'level', 'query', 'entries'));
     }
 
     /**
