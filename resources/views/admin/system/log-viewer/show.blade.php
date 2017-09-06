@@ -1,13 +1,25 @@
+<?php /** @var  Arcanedev\LogViewer\Entities\Log  $log */ ?>
+
 @section('header')
     <i class="fa fa-fw fa-book"></i> LogViewer
 @endsection
 
 @section('content')
+    {{-- Log Details --}}
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">
                 <i class="fa fa-fw fa-list"></i> Log : {{ $log->date }}
             </h3>
+            <div class="box-tools">
+                @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DOWNLOAD)
+                    {{ ui_link('download', route('admin::foundation.system.log-viewer.logs.download', [$log->date]))->size('xs') }}
+                @endcan
+
+                @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
+                    {{ ui_link('delete', '#delete-log-modal')->size('xs') }}
+                @endcan
+            </div>
         </div>
         <div class="box-body no-padding">
             <div class="table-responsive">
@@ -22,9 +34,7 @@
                     <tr>
                         <td><b>{{ trans('foundation::log-viewer.attributes.log_entries') }} :</b></td>
                         <td>
-                            <span class="label label-{{ $entries->total() ? 'info' : 'default'}}">
-                                {{ $entries->total() }}
-                            </span>
+                            {{ label_count($log->entries()->count()) }}
                         </td>
                         <td><b>{{ trans('foundation::log-viewer.attributes.size') }} :</b></td>
                         <td>
@@ -45,14 +55,25 @@
                 </table>
             </div>
         </div>
-        <div class="box-footer text-right">
-            @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DOWNLOAD)
-                {{ ui_link('download', route('admin::foundation.system.log-viewer.logs.download', [$log->date])) }}
-            @endcan
-
-            @can(Arcanesoft\Foundation\Policies\LogViewerPolicy::PERMISSION_DELETE)
-                {{ ui_link('delete', '#delete-log-modal') }}
-            @endcan
+        <div class="box-footer">
+            {{-- Search --}}
+            {{ Form::open(['route' => ['admin::foundation.system.log-viewer.logs.search', $log->date, $level], 'method' => 'GET']) }}
+                <div class=form-group">
+                    <div class="input-group">
+                        {{ Form::text('query', old('query', $query ?? ''), ['class' => "form-control", 'placeholder' => 'typing something to search']) }}
+                        <span class="input-group-btn">
+                            @if (request()->has('query'))
+                                <a href="{{ route('admin::foundation.system.log-viewer.logs.show', [$log->date]) }}" class="btn btn-default">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </a>
+                            @endif
+                            <button id="search-btn" class="btn btn-primary">
+                                <i class="fa fa-fw fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            {{ Form::close() }}
         </div>
     </div>
     <div class="row">
@@ -60,7 +81,8 @@
             @include('foundation::admin.system.log-viewer._includes.menu')
         </div>
         <div class="col-md-9">
-            @include('foundation::admin.system.log-viewer._includes.timeline-entries', compact('entries'))
+            {{-- Log Entries --}}
+            @include('foundation::admin.system.log-viewer._includes.timeline-entries', compact('entries', 'query'))
         </div>
     </div>
 @endsection

@@ -29,14 +29,12 @@ class FoldersPermissionsComposer
      */
     public function compose(View $view)
     {
-        $permissions = $this->prepare([
+        $view->with('permissions', $this->prepare([
             'storage/app/',
             'storage/framework/',
             'storage/logs/',
             'bootstrap/cache/',
-        ]);
-
-        $view->with('permissions', $permissions);
+        ]));
     }
 
     /* -----------------------------------------------------------------

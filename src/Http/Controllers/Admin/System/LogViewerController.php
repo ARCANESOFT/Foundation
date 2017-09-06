@@ -3,11 +3,12 @@
 use Arcanedev\LaravelApiHelper\Traits\JsonResponses;
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
 use Arcanedev\LogViewer\Entities\Log;
-use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
+use Arcanedev\LogViewer\Entities\LogEntry;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class     LogViewerController
@@ -120,78 +121,99 @@ class LogViewerController extends Controller
     /**
      * Show the log entries by date.
      *
-     * @param  string  $date
+     * @param  \Arcanedev\LogViewer\Entities\Log  $log
      *
      * @return \Illuminate\View\View
      */
-    public function show($date)
+    public function show(Log $log)
     {
         $this->authorize(LogViewerPolicy::PERMISSION_SHOW);
 
-        $log       = $this->getLogOrFail($date);
-        $levels    = $this->logViewer->levelsNames();
-        $entries   = $log->entries()->paginate($this->perPage);
+        $levels  = $this->logViewer->levelsNames();
+        $entries = $log->entries($level = 'all')->paginate($this->perPage);
 
         $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
-        $this->setTitle($title = "Log : {$date}");
+        $this->setTitle($title = "Log : {$log->date}");
         $this->addBreadcrumb($title);
 
-        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'level', 'search', 'entries'));
     }
 
     /**
      * Filter the log entries by date and level.
      *
-     * @param  string  $date
-     * @param  string  $level
+     * @param  \Arcanedev\LogViewer\Entities\Log  $log
+     * @param  string                             $level
      *
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function showByLevel($date, $level)
+    public function showByLevel(Log $log, $level)
     {
         $this->authorize(LogViewerPolicy::PERMISSION_SHOW);
 
-        $log = $this->getLogOrFail($date);
-
         if ($level == 'all')
-            return redirect()->route('admin::foundation.system.log-viewer.logs.show', [$date]);
+            return redirect()->route('admin::foundation.system.log-viewer.logs.show', [$log->date]);
 
         $levels  = $this->logViewer->levelsNames();
-        $entries = $this->logViewer->entries($date, $level)->paginate($this->perPage);
+        $entries = $this->logViewer->entries($log->date, $level)->paginate($this->perPage);
 
         $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
 
-        $this->setTitle($date.' | '.ucfirst($level));
-        $this->addBreadcrumbRoute($date, 'admin::foundation.system.log-viewer.logs.show', [$date]);
+        $this->setTitle($log->date.' | '.ucfirst($level));
+        $this->addBreadcrumbRoute($log->date, 'admin::foundation.system.log-viewer.logs.show', [$log->date]);
         $this->addBreadcrumb(ucfirst($level));
 
-        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries', 'level'));
+    }
+
+    /**
+     * Show the log with the search query.
+     *
+     * @param  \Arcanedev\LogViewer\Entities\Log  $log
+     * @param  string                             $level
+     * @param  \Illuminate\Http\Request           $request
+     *
+     * @return \Illuminate\View\View
+     */
+    public function search(Log $log, $level = 'all', Request $request)
+    {
+        if (is_null($query = $request->get('query')))
+            return redirect()->route('admin::foundation.system.log-viewer.logs.show', [$log->date]);
+
+        $levels  = $this->logViewer->levelsNames();
+        $entries = $log->entries($level)->filter(function (LogEntry $value) use ($query) {
+            return Str::contains($value->header, $query);
+        })->paginate($this->perPage);
+
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'level', 'query', 'entries'));
     }
 
     /**
      * Download the log.
      *
-     * @param  string  $date
+     * @param  \Arcanedev\LogViewer\Entities\Log  $log
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function download($date)
+    public function download(Log $log)
     {
         $this->authorize(LogViewerPolicy::PERMISSION_DOWNLOAD);
 
-        return $this->logViewer->download($date);
+        return $this->logViewer->download($log->date);
     }
 
     /**
      * Delete a log.
      *
-     * @param  string  $date
+     * @param  \Arcanedev\LogViewer\Entities\Log  $log
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete($date)
+    public function delete(Log $log)
     {
         $this->authorize(LogViewerPolicy::PERMISSION_DELETE);
+
+        $date = $log->date;
 
         if ($this->logViewer->delete($date)) {
             $this->notifySuccess(
@@ -211,27 +233,6 @@ class LogViewerController extends Controller
      |  Other Methods
      | -----------------------------------------------------------------
      */
-
-    /**
-     * Get a log or fail.
-     *
-     * @param  string  $date
-     *
-     * @return Log|null
-     */
-    private function getLogOrFail($date)
-    {
-        $log = null;
-
-        try {
-            $log = $this->logViewer->get($date);
-        }
-        catch(LogNotFoundException $e) {
-            abort(404, $e->getMessage());
-        }
-
-        return $log;
-    }
 
     /**
      * Calculate the percentage.

@@ -29,17 +29,18 @@ class PhpInfoComposer
      */
     public function compose(View $view)
     {
-        $info['version']      = phpversion();
-        $info['extensions']   = get_loaded_extensions();
-        $info['requirements'] = $this->checkPhpRequirements();
-
-        $view->with('phpInfo', $info);
+        $view->with('phpInfo', [
+            'version'      => phpversion(),
+            'extensions'   => get_loaded_extensions(),
+            'requirements' => $this->checkPhpRequirements(),
+        ]);
     }
 
     /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check the PHP requirements.
      *
@@ -47,10 +48,8 @@ class PhpInfoComposer
      */
     private function checkPhpRequirements()
     {
-        $requirements = ['openssl', 'pdo', 'mbstring', 'tokenizer', 'xml'];
-
-        return collect(array_combine($requirements, $requirements))->transform(function ($requirement) {
-            return extension_loaded($requirement);
+        return collect(['openssl', 'pdo', 'mbstring', 'tokenizer', 'xml'])->mapWithKeys(function ($requirement) {
+            return [$requirement => extension_loaded($requirement)];
         });
     }
 }

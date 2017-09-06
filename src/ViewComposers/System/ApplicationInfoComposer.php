@@ -78,7 +78,7 @@ class ApplicationInfoComposer
     {
         $size = 0;
 
-        foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $directory){
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $directory) {
             /** @var  \SplFileInfo  $directory */
             $size += $directory->getSize();
         }

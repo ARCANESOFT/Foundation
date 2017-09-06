@@ -76,10 +76,10 @@ class InstallCommand extends Command
      */
     private function refreshMigrations()
     {
-        $this->frame('Refreshing all the migrations');
+        $this->frame('Reseting all the migrations');
         $this->line('');
 
-        $this->call('migrate:refresh');
+        $this->call('migrate:fresh');
 
         $this->line('');
     }

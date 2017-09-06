@@ -13,15 +13,15 @@
     ],
     "license": "MIT",
     "require": {
-        "php":                    ">=5.6.4",
-        "arcanedev/log-viewer":   "~4.3",
-        "arcanedev/route-viewer": "~1.0",
-        "arcanesoft/auth":        "~3.0",
-        "arcanesoft/core":        "~2.4"
+        "php":                    ">=7.0",
+        "arcanedev/log-viewer":   "~4.4",
+        "arcanedev/route-viewer": "~1.1",
+        "arcanesoft/auth":        "~3.1",
+        "arcanesoft/core":        "~2.7"
     },
     "require-dev": {
-        "phpunit/phpcov":  "~3.0",
-        "phpunit/phpunit": "~5.0"
+        "phpunit/phpunit": "~6.0",
+        "phpunit/phpcov":  "~4.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,11 +35,6 @@
         }
     },
     "scripts": {
-        "testbench": "composer require --dev \"orchestra/testbench=~3.4\""
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
+        "testbench": "composer require --dev \"orchestra/testbench=~3.5\""
     }
 }

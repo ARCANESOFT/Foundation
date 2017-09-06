@@ -1,7 +1,6 @@
 <?php
 
 use Arcanesoft\Auth\Models\Role;
-use Arcanesoft\Foundation\Policies\BackupPolicy;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
 
 return [
