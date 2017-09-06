@@ -1,6 +1,7 @@
 <?php namespace Arcanesoft\Foundation\Http\Controllers\Admin\System;
 
 use Arcanedev\RouteViewer\Contracts\RouteViewer;
+use Arcanesoft\Foundation\Policies\RouteViewerPolicy;
 
 /**
  * Class     RoutesController
@@ -49,11 +50,13 @@ class RoutesController extends Controller
 
     public function index()
     {
-        $routes = $this->routeViewer->all();
+        $this->authorize(RouteViewerPolicy::PERMISSION_LIST);
 
         $this->setTitle($title = trans('foundation::route-viewer.titles.routes-list'));
         $this->addBreadcrumb($title);
 
-        return $this->view('admin.system.routes.list', compact('routes'));
+        return $this->view('admin.system.routes.list', [
+            'routes' => $this->routeViewer->all()
+        ]);
     }
 }

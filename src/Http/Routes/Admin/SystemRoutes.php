@@ -16,6 +16,16 @@ class SystemRoutes extends RouteRegistrar
      */
 
     /**
+     * Bind routes.
+     */
+    public static function bindings()
+    {
+        (new static)->bind('logviewer_log_date', function ($date) {
+            return log_viewer()->get($date);
+        });
+    }
+
+    /**
      * Map routes.
      */
     public function map()
@@ -56,7 +66,7 @@ class SystemRoutes extends RouteRegistrar
                 $this->get('/', 'LogViewerController@listLogs')
                      ->name('list'); // admin::foundation.system.log-viewer.logs.list
 
-                $this->prefix('{log_date}')->group(function () {
+                $this->prefix('{logviewer_log_date}')->group(function () {
                     $this->get('/', 'LogViewerController@show')
                          ->name('show'); // admin::foundation.system.log-viewer.logs.show
 

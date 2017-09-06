@@ -25,6 +25,10 @@ class RolesTableSeeder extends RolesSeeder
                 'name'        => 'LogViewer Manager',
                 'description' => 'The LogViewer manager role.',
                 'is_locked'   => true,
+            ],[
+                'name'        => 'RouteViewer Manager',
+                'description' => 'The RouteViewer manager role.',
+                'is_locked'   => true,
             ],
         ]);
 
@@ -32,6 +36,7 @@ class RolesTableSeeder extends RolesSeeder
 
         $this->syncRoles([
             'logviewer-manager' => 'foundation.logviewer.',
+            'routeviewer-manager' => 'foundation.routeviewer.',
         ]);
     }
 }

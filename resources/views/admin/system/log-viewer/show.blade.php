@@ -1,3 +1,5 @@
+<?php /** @var  Arcanedev\LogViewer\Entities\Log  $log */ ?>
+
 @section('header')
     <i class="fa fa-fw fa-book"></i> LogViewer
 @endsection
@@ -32,9 +34,7 @@
                     <tr>
                         <td><b>{{ trans('foundation::log-viewer.attributes.log_entries') }} :</b></td>
                         <td>
-                            <span class="label label-{{ $entries->total() ? 'info' : 'default'}}">
-                                {{ $entries->total() }}
-                            </span>
+                            {{ label_count($log->entries()->count()) }}
                         </td>
                         <td><b>{{ trans('foundation::log-viewer.attributes.size') }} :</b></td>
                         <td>
@@ -57,19 +57,23 @@
         </div>
         <div class="box-footer">
             {{-- Search --}}
-            <form action="{{ route('admin::foundation.system.log-viewer.logs.search', [$log->date, $level]) }}" method="GET">
+            {{ Form::open(['route' => ['admin::foundation.system.log-viewer.logs.search', $log->date, $level], 'method' => 'GET']) }}
                 <div class=form-group">
                     <div class="input-group">
-                        <input id="query" name="query" class="form-control"  value="{!! request('query') !!}" placeholder="typing something to search">
+                        {{ Form::text('query', old('query', $query ?? ''), ['class' => "form-control", 'placeholder' => 'typing something to search']) }}
                         <span class="input-group-btn">
                             @if (request()->has('query'))
-                                <a href="{{ route('admin::foundation.system.log-viewer.logs.show', [$log->date]) }}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a href="{{ route('admin::foundation.system.log-viewer.logs.show', [$log->date]) }}" class="btn btn-default">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </a>
                             @endif
-                            <button id="search-btn" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                            <button id="search-btn" class="btn btn-primary">
+                                <i class="fa fa-fw fa-search"></i>
+                            </button>
                         </span>
                     </div>
                 </div>
-            </form>
+            {{ Form::close() }}
         </div>
     </div>
     <div class="row">

@@ -2,6 +2,7 @@
 
 use Arcanedev\Support\Providers\AuthorizationServiceProvider as ServiceProvider;
 use Arcanesoft\Foundation\Policies\LogViewerPolicy;
+use Arcanesoft\Foundation\Policies\RouteViewerPolicy;
 
 /**
  * Class     AuthorizationServiceProvider
@@ -24,6 +25,7 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         $this->defineMany(LogViewerPolicy::class, LogViewerPolicy::policies());
+        $this->defineMany(RouteViewerPolicy::class, RouteViewerPolicy::policies());
 
         // TODO: Add more policies for other foundation features.
     }
