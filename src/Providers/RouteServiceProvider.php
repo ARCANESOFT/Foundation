@@ -27,6 +27,15 @@ class RouteServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
+    /**
+     * Register the route bindings.
+     */
+    protected function registerRouteBindings()
+    {
+        Routes\Admin\SystemRoutes::bindings();
+    }
+
     /**
      * Define the routes for the application.
      */
