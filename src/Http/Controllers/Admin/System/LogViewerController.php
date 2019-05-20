@@ -115,7 +115,7 @@ class LogViewerController extends Controller
         $this->setTitle($title = trans('foundation::log-viewer.titles.logs-list'));
         $this->addBreadcrumb($title);
 
-        return $this->view('admin.system.log-viewer.list', compact('headers', 'rows', 'footer'));
+        return $this->view('admin.system.log-viewer.list', compact('headers', 'rows'));
     }
 
     /**
