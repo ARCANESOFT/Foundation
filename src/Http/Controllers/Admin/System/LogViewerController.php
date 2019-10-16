@@ -131,12 +131,13 @@ class LogViewerController extends Controller
 
         $levels  = $this->logViewer->levelsNames();
         $entries = $log->entries($level = 'all')->paginate($this->perPage);
+        $query   = '';
 
         $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
         $this->setTitle($title = "Log : {$log->date}");
         $this->addBreadcrumb($title);
 
-        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'level', 'search', 'entries'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'level', 'query', 'entries'));
     }
 
     /**
@@ -156,6 +157,7 @@ class LogViewerController extends Controller
 
         $levels  = $this->logViewer->levelsNames();
         $entries = $this->logViewer->entries($log->date, $level)->paginate($this->perPage);
+        $query   = '';
 
         $this->addBreadcrumbRoute(trans('foundation::log-viewer.titles.logs-list'), 'admin::foundation.system.log-viewer.logs.list');
 
@@ -163,7 +165,7 @@ class LogViewerController extends Controller
         $this->addBreadcrumbRoute($log->date, 'admin::foundation.system.log-viewer.logs.show', [$log->date]);
         $this->addBreadcrumb(ucfirst($level));
 
-        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'entries', 'level'));
+        return $this->view('admin.system.log-viewer.show', compact('log', 'levels', 'query', 'entries', 'level'));
     }
 
     /**
