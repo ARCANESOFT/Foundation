@@ -1,0 +1,141 @@
+$log-levels: (
+    'empty':     var(--skin-surface-1-bg-color),
+    'all':       #605CA8,
+    'emergency': #B71C1C,
+    'alert':     #D32F2F,
+    'critical':  #F44336,
+    'error':     #FF5722,
+    'warning':   #FF9100,
+    'notice':    #4CAF50,
+    'info':      #1976D2,
+    'debug':     #90CAF9,
+);
+
+.card-log-level {
+    overflow: hidden;
+
+    .card-log-icon {
+        width: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--skin-surface-1-bg-color);
+        font-size: 1.25rem;
+
+        &.bg-log-level-empty {
+            color: var(--skin-surface-text-normal-color);
+        }
+
+        &:not(.bg-log-level-empty) {
+            color: $white;
+        }
+    }
+}
+
+// LEVELS MENU
+.log-levels-menu-nav {
+    display: grid;
+    grid-gap: .5rem;
+
+    .log-levels-menu-nav-item {
+        display: flex;
+        padding: .5rem;
+        text-decoration: none;
+        align-items: baseline;
+        justify-content: space-between;
+        border-radius: 2px;
+
+        .level-name {
+            font-size: .85rem;
+            font-weight: 600;
+        }
+
+        &.level-empty {
+            display: none;
+
+            .level-name {
+                color: var(--skin-surface-text-normal-color);
+            }
+        }
+
+        &:not(.level-empty) {
+            .level-name {
+                color: $white;
+            }
+        }
+
+        &.active {
+            box-shadow: inset 0 0 4px rgba($black, 0.4);
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+
+        .log-levels-menu-nav-item {
+            flex-direction: row;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        grid-template-columns: repeat(9, 1fr);
+
+        .log-levels-menu-nav-item {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            &.level-empty {
+                display: flex;
+            }
+        }
+    }
+}
+
+.log-entry-stack-content {
+    color: var(--skin-surface-text-muted-color);
+    font-family: consolas, Menlo, Courier, monospace;
+    white-space: pre-line;
+}
+
+// BADGES
+.badge-log-level {
+    color: #FFF;
+}
+
+.badge.badge-log-level-env,
+.badge.badge-log-level-outline-env {
+    border-color: #6A1B9A;
+}
+
+.badge.badge-log-level-env {
+    background-color: #6A1B9A;
+    color: #FFF;
+}
+
+@each $level, $value in $log-levels {
+    .bg-log-level-#{$level} {
+        background-color: $value !important;
+    }
+
+    .badge.badge-log-level-#{$level},
+    .badge.badge-log-level-outline-#{$level} {
+        border-color: $value;
+    }
+
+    .badge.badge-log-level-#{$level} {
+        background-color: $value;
+        color: #FFF;
+    }
+
+    .badge {
+        &.badge-outline-log-level-#{$level} {
+            border-color: $value;
+        }
+    }
+}

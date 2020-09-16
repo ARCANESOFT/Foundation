@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Auth\Entities;
+
+use Illuminate\Support\Fluent;
+
+/**
+ * Class     SocialiteProvider
+ *
+ * @package  Arcanesoft\Foundation\Auth\Entities
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @property  string  $type
+ * @property  string  $name
+ * @property  string  $icon
+ * @property  string  $enabled
+ */
+class SocialiteProvider extends Fluent
+{
+    //
+}

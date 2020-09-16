@@ -1,6 +1,14 @@
-<?php namespace Arcanesoft\Foundation\Console;
+<?php
 
-use Arcanesoft\Foundation\Seeds\DatabaseSeeder;
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Console;
+
+use Arcanesoft\Foundation\Auth\Console\InstallCommand as AuthInstallCommand;
+use Arcanesoft\Foundation\Core\Console\InstallCommand as CoreInstallCommand;
+use Arcanesoft\Foundation\ModuleManifest;
+use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
+use Arcanesoft\Foundation\System\Console\InstallCommand as SystemInstallCommand;
 
 /**
  * Class     InstallCommand
@@ -20,14 +28,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'foundation:install';
+    protected $signature = 'arcanesoft:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Foundation install command.';
+    protected $description = 'Install ARCANESOFT';
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -35,70 +43,45 @@ class InstallCommand extends Command
      */
 
     /**
-     * Execute the console command.
+     * Handle the command.
+     *
+     * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    public function handle()
+    public function handle(ModuleManifest $manifest): void
     {
-        $this->arcanesoftHeader();
-
-        if ($this->confirm('Do you wish to publish the modules ?')) {
-            $this->publishAllModules();
-        }
-
-        if ($this->confirm('Do you wish to reset the migrations ?')) {
-            $this->refreshMigrations();
-            $this->installModules();
-        }
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Publish all modules: configs, migrations, assets ...
-     */
-    private function publishAllModules()
-    {
-        $this->frame('Publishing all the modules files');
         $this->line('');
 
-        $this->call('foundation:publish');
-        $this->call('optimize');
+        $this->installFoundation();
+        $this->installModules($manifest);
 
-        $this->comment('All files are published !');
         $this->line('');
+
+        $this->info("ARCANESOFT has been installed successfully.");
     }
 
     /**
-     * Refresh migrations.
+     * Install ARCANESOFT's Foundation.
      */
-    private function refreshMigrations()
+    protected function installFoundation(): void
     {
-        $this->frame('Reseting all the migrations');
-        $this->line('');
+        $this->comment('Installing Foundation...');
 
-        $this->call('migrate:fresh');
-
-        $this->line('');
+        $this->callMany([
+            CoreInstallCommand::class,
+            AuthInstallCommand::class,
+            SystemInstallCommand::class,
+        ]);
     }
 
     /**
-     * Seed all modules.
+     * Install ARCANESOFT's modules.
+     *
+     * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    private function installModules()
+    protected function installModules(ModuleManifest $manifest): void
     {
-        $this->frame('Installing the modules');
-        $this->line('');
+        $this->comment('Installing Modules...');
 
-        foreach ($this->config()->get('arcanesoft.foundation.modules.commands.install', []) as $command) {
-            $this->call($command);
-        }
-        $this->call('db:seed', ['--class' => DatabaseSeeder::class]);
-
-        $this->line('');
-        $this->comment('Modules installed !');
-        $this->line('');
+        $this->callMany($manifest->config('install'));
     }
 }

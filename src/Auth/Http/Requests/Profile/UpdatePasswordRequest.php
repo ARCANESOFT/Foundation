@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Auth\Http\Requests\Profile;
+
+use Arcanesoft\Foundation\Auth\Http\Requests\FormRequest;
+
+/**
+ * Class     UpdateUserPasswordRequest
+ *
+ * @package  Arcanesoft\Foundation\Auth\Http\Requests\Profile
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class UpdatePasswordRequest extends FormRequest
+{
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            'old_password' => ['required', 'string', 'min:8', 'password'],
+            'password'     => ['required', 'string', 'min:8', 'confirmed', 'different:old_password'],
+        ];
+    }
+
+    /**
+     * Get the validated data.
+     *
+     * @return array
+     */
+    public function getValidatedData(): array
+    {
+        return $this->all([
+            'password',
+        ]);
+    }
+}

@@ -1,11 +1,22 @@
-<?php namespace Arcanesoft\Foundation;
+<?php
 
-use Arcanesoft\Core\Bases\PackageServiceProvider;
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation;
+
+use Arcanesoft\Foundation\Auth\AuthServiceProvider;
+use Arcanesoft\Foundation\Authentication\AuthenticationServiceProvider;
+use Arcanesoft\Foundation\Core\CoreServiceProvider;
+use Arcanesoft\Foundation\Fortify\FortifyServiceProvider;
+use Arcanesoft\Foundation\Support\Providers\PackageServiceProvider;
+use Arcanesoft\Foundation\System\SystemServiceProvider;
+use Arcanesoft\Foundation\Views\ViewsServiceProvider;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Application;
 
 /**
  * Class     FoundationServiceProvider
  *
- * @package  Arcanesoft\Foundation
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class FoundationServiceProvider extends PackageServiceProvider
@@ -22,80 +33,86 @@ class FoundationServiceProvider extends PackageServiceProvider
      */
     protected $package = 'foundation';
 
+    /**
+     * Merge multiple config files into one instance (package name as root key).
+     *
+     * @var bool
+     */
+    protected $multiConfigs = true;
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
 
     /**
-     * Register the service provider.
+     * Register any application services.
      */
-    public function register()
+    public function register(): void
     {
-        parent::register();
-
         $this->registerConfig();
-        $this->registerSidebarItems();
 
         $this->registerProviders([
-            Providers\PackagesServiceProvider::class,
-            Providers\AuthorizationServiceProvider::class,
-            Providers\RouteServiceProvider::class,
-            Providers\ViewComposerServiceProvider::class,
+            CoreServiceProvider::class,
+            FortifyServiceProvider::class,
+            AuthenticationServiceProvider::class,
+            AuthServiceProvider::class,
+            SystemServiceProvider::class,
+            ViewsServiceProvider::class,
         ]);
-        $this->registerModuleProviders();
-        $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
 
-        $this->registerFoundationService();
+        $this->commands([
+            Console\DiscoverCommand::class,
+            Console\InstallCommand::class,
+            Console\PublishCommand::class,
+        ]);
+
+        $this->registerModuleManifest();
     }
 
     /**
      * Boot the service provider.
      */
-    public function boot()
+    public function boot(): void
     {
-        parent::boot();
+        $this->loadTranslations();
+        $this->loadViews();
 
-        // Publishes
-        $this->publishConfig();
-        $this->publishViews();
-        $this->publishTranslations();
-        $this->publishSidebarItems();
-    }
+        if ($this->app->runningUnitTests()) {
+            $this->loadFactories();
+        }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [
-            Contracts\Foundation::class,
-        ];
+        if ($this->app->runningInConsole()) {
+            $this->publishAssets();
+            $this->publishConfig();
+            $this->publishFactories();
+            $this->publishTranslations();
+            $this->publishViews();
+
+            Arcanesoft::$runsMigrations
+                ? $this->loadMigrations()
+                : $this->publishMigrations();
+        }
     }
 
     /* -----------------------------------------------------------------
-     |  Services Functions
+     |  Other Methods
      | -----------------------------------------------------------------
      */
 
     /**
-     * Register Foundation service.
+     * Register the module manifest.
      */
-    private function registerFoundationService()
+    protected function registerModuleManifest(): void
     {
-        $this->singleton(Contracts\Foundation::class, Foundation::class);
-    }
+        $this->singleton(PackageManifest::class, function (Application $app) {
+            return new PackageManifest(new Filesystem, $app->basePath());
+        });
 
-    /**
-     * Register ARCANESOFT's modules (providers).
-     */
-    private function registerModuleProviders()
-    {
-        $providers = $this->config()->get('arcanesoft.foundation.modules.providers', []);
-
-        if (count($providers) > 0)
-            $this->registerProviders($providers);
+        $this->singleton(ModuleManifest::class, function (Application $app) {
+            return new ModuleManifest(
+                new Filesystem, $app->basePath(), $app->bootstrapPath(Arcanesoft::ARCANESOFT_MODULES_CACHE)
+            );
+        });
     }
 }
