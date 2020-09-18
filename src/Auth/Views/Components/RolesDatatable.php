@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class     RolesDatatable
  *
- * @package  Arcanesoft\Foundation\Auth\Datatables
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RolesDatatable extends DatatableComponent

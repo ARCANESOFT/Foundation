@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Auth;
 /**
  * Class     Migration
  *
- * @package  Arcanesoft\Auth\Database
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Migration extends BaseMigration

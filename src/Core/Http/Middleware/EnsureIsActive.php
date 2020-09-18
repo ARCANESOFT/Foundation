@@ -11,7 +11,6 @@ use Illuminate\Http\{Request, Response};
 /**
  * Class     EnsureIsActive
  *
- * @package  Arcanesoft\Foundation\Core\Http\Middleware
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EnsureIsActive

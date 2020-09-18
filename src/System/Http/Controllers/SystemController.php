@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Policies\InformationPolicy;
 /**
  * Class     SystemController
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SystemController extends Controller

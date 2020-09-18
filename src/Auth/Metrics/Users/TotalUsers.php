@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     TotalUsers
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TotalUsers extends Value

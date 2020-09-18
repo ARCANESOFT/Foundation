@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Core\Events\UI;
 /**
  * Class     SidebarToggled
  *
- * @package  Arcanesoft\Foundation\Core\Events\UI
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SidebarToggled

@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Policies;
 
-use Arcanedev\LaravelPolicies\Ability;
 use Arcanesoft\Foundation\Auth\Models\Administrator;
 
 /**
  * Class     DependenciesPolicy
  *
- * @package  Arcanesoft\Foundation\System\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DependenciesPolicy extends AbstractPolicy

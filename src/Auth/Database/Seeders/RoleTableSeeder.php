@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Core\Database\RolesSeeder;
 /**
  * Class     RoleTableSeeder
  *
- * @package  Arcanesoft\Foundation\Auth\Database\Seeders
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RoleTableSeeder extends RolesSeeder

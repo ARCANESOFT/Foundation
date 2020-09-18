@@ -11,7 +11,6 @@ use Arcanesoft\Foundation\Auth\Repositories\SessionsRepository;
 /**
  * Class     SessionsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionsRoutes extends AbstractRouteRegistrar

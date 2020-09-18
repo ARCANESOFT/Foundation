@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\Administrator;
 /**
  * Class     LogViewerPolicy
  *
- * @package  Arcanesoft\Foundation\System\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LogViewerPolicy extends AbstractPolicy

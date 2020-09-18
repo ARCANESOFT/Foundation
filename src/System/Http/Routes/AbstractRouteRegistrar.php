@@ -8,9 +8,8 @@ use Arcanesoft\Foundation\Support\Http\AdminRouteRegistrar;
 use Closure;
 
 /**
- * Class     RouteRegistrar
+ * Class     AbstractRouteRegistrar
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AbstractRouteRegistrar extends AdminRouteRegistrar

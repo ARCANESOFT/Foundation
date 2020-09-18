@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Models;
 
 use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\CreatedPermissionsGroup;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\CreatingPermissionsGroup;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\DeletedPermissionsGroup;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\DeletingPermissionsGroup;
 use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\AttachedPermission;
 use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\AttachedPermissions;
 use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\AttachingPermission;
@@ -19,16 +15,12 @@ use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\DetachedPerm
 use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\DetachingAllPermissions;
 use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\DetachingPermission;
 use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions\DetachingPermissions;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\SavedPermissionsGroup;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\SavingPermissionsGroup;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\UpdatedPermissionsGroup;
-use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\UpdatingPermissionsGroup;
+use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\PermissionsGroupEvent;
 use Illuminate\Support\Str;
 
 /**
  * Class     PermissionsGroup
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  int                                       id
@@ -72,16 +64,7 @@ class PermissionsGroup extends Model
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'creating' => CreatingPermissionsGroup::class,
-        'created'  => CreatedPermissionsGroup::class,
-        'updating' => UpdatingPermissionsGroup::class,
-        'updated'  => UpdatedPermissionsGroup::class,
-        'saving'   => SavingPermissionsGroup::class,
-        'saved'    => SavedPermissionsGroup::class,
-        'deleting' => DeletingPermissionsGroup::class,
-        'deleted'  => DeletedPermissionsGroup::class,
-    ];
+    protected $dispatchesEvents = PermissionsGroupEvent::MODEL_EVENTS;
 
     /* -----------------------------------------------------------------
      |  Constructor

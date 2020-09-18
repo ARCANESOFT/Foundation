@@ -11,7 +11,6 @@ use Arcanesoft\Foundation\System\Policies\MaintenancePolicy;
 /**
  * Class     MaintenanceController
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MaintenanceController extends Controller

@@ -11,7 +11,6 @@ use Illuminate\Support\Arr;
 /**
  * Class     NotificationsComposer
  *
- * @package  Arcanesoft\Foundation\Core\Views\Composers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NotificationsComposer

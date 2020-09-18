@@ -19,9 +19,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\{Collection, Str};
 
 /**
- * Class     AdminsRepository
+ * Class     AdministratorsRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @mixin \Arcanesoft\Foundation\Auth\Models\Administrator

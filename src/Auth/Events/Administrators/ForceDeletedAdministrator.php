@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Administrators;
 /**
  * Class     ForceDeletedAdministrator
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ForceDeletedAdministrator extends AdministratorEvent

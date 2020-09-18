@@ -10,7 +10,6 @@ use Illuminate\Foundation\Events\Dispatchable;
 /**
  * Class     UserEvent
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class UserEvent

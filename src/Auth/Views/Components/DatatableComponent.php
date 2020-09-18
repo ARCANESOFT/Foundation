@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Views\Concerns\{WithPagination, WithSortField};
 /**
  * Class     DatatableComponent
  *
- * @package  Arcanesoft\Foundation\Auth\Views\Components
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class DatatableComponent extends Component

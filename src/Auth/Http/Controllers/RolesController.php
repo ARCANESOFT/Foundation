@@ -14,7 +14,6 @@ use Arcanesoft\Foundation\Support\Traits\HasNotifications;
 /**
  * Class     RolesController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RolesController extends Controller

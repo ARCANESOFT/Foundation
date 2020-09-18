@@ -13,7 +13,6 @@ use Laravel\Socialite\Facades\Socialite as LaravelSocialite;
 /**
  * Class     Socialite
  *
- * @package  Arcanesoft\Foundation\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Socialite

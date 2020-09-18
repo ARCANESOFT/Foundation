@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Views\Concerns\WithPagination;
 /**
  * Class     Datatable
  *
- * @package  Arcanesoft\Foundation\System\Views\Components
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Datatable extends Component

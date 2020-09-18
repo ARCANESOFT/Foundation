@@ -15,7 +15,6 @@ use Illuminate\Support\Str;
 /**
  * Class     DependenciesDatatable
  *
- * @package  Arcanesoft\Foundation\System\Views\Components
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DependenciesDatatable extends Datatable

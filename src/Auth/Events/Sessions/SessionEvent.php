@@ -9,11 +9,27 @@ use Arcanesoft\Foundation\Auth\Models\Session;
 /**
  * Class     SessionEvent
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Sessions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class SessionEvent
 {
+    /* -----------------------------------------------------------------
+     |  Constants
+     | -----------------------------------------------------------------
+     */
+
+    public const MODEL_EVENTS = [
+        'retrieved' => RetrievedSession::class,
+        'creating'  => CreatingSession::class,
+        'created'   => CreatedSession::class,
+        'updating'  => UpdatingSession::class,
+        'updated'   => UpdatedSession::class,
+        'saving'    => SavingSession::class,
+        'saved'     => SavedSession::class,
+        'deleting'  => DeletingSession::class,
+        'deleted'   => DeletedSession::class,
+    ];
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------

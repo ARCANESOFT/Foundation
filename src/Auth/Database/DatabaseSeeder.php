@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Database;
 
 use Arcanesoft\Foundation\Support\Database\Seeder;
-use Arcanesoft\Foundation\Auth\Database\Seeders\{
-    PermissionTableSeeder, RoleTableSeeder, UserTableSeeder
-};
+use Arcanesoft\Foundation\Auth\Database\Seeders\{PermissionTableSeeder, RoleTableSeeder};
 
 /**
  * Class     DatabaseSeeder
  *
- * @package  Arcanesoft\Foundation\Auth\Seeders
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DatabaseSeeder extends Seeder
@@ -32,7 +29,6 @@ class DatabaseSeeder extends Seeder
         return [
             PermissionTableSeeder::class,
             RoleTableSeeder::class,
-            UserTableSeeder::class,
         ];
     }
 }

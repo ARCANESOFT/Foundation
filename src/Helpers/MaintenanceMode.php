@@ -7,8 +7,9 @@ namespace Arcanesoft\Foundation\Helpers;
 /**
  * Class     MaintenanceMode
  *
- * @package  Arcanesoft\Foundation\Helpers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @TODO Update the maintenance mode Helper
  */
 class MaintenanceMode
 {

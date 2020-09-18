@@ -13,7 +13,6 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class     SessionServiceProvider
  *
- * @package  Arcanesoft\Foundation\Auth\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionServiceProvider extends ServiceProvider

@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 /**
  * Class     TotalPasswordResets
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\PasswordResets
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TotalPasswordResets extends Value

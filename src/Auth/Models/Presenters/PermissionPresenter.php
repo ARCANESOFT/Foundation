@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\Role;
 /**
  * Trait     PermissionPresenter
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Presenters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  \Illuminate\Database\Eloquent\Collection  roles

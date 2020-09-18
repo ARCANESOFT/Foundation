@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * Class     SocialiteProvider
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  int                         id

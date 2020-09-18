@@ -10,7 +10,6 @@ use Illuminate\Validation\Rules\Unique;
 /**
  * Class     EmailRule
  *
- * @package  Arcanesoft\Foundation\Auth\Rules\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EmailRule

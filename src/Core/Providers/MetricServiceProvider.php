@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arcanesoft\Foundation\Core\Providers;
 
 use Arcanesoft\Foundation\Support\Providers\MetricServiceProvider as ServiceProvider;
@@ -7,7 +9,6 @@ use Arcanesoft\Foundation\Support\Providers\MetricServiceProvider as ServiceProv
 /**
  * Class     MetricServiceProvider
  *
- * @package  Arcanesoft\Foundation\Core\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetricServiceProvider extends ServiceProvider

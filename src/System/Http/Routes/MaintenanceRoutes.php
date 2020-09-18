@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Http\Controllers\MaintenanceController;
 /**
  * Class     MaintenanceRoutes
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MaintenanceRoutes extends AbstractRouteRegistrar

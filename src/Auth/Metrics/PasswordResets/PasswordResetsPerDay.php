@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 /**
  * Class     PasswordResetsPerDay
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\PasswordResets
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PasswordResetsPerDay extends Trend

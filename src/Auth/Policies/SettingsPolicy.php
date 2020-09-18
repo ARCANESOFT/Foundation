@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\Administrator;
 /**
  * Class     SettingsPolicy
  *
- * @package  Arcanesoft\Foundation\Auth\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SettingsPolicy extends AbstractPolicy

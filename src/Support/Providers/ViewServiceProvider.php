@@ -10,7 +10,6 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class     ViewServiceProvider
  *
- * @package  Arcanesoft\Foundation\Support\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class ViewServiceProvider extends ServiceProvider

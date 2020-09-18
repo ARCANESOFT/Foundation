@@ -9,11 +9,26 @@ use Arcanesoft\Foundation\Auth\Models\PermissionsGroup;
 /**
  * Class     PermissionsGroupEvent
  *
- * @package  Arcanesoft\Foundation\Auth\Events\PermissionsGroups
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class PermissionsGroupEvent
 {
+    /* -----------------------------------------------------------------
+     |  Constants
+     | -----------------------------------------------------------------
+     */
+
+    public const MODEL_EVENTS = [
+        'creating' => CreatingPermissionsGroup::class,
+        'created'  => CreatedPermissionsGroup::class,
+        'updating' => UpdatingPermissionsGroup::class,
+        'updated'  => UpdatedPermissionsGroup::class,
+        'saving'   => SavingPermissionsGroup::class,
+        'saved'    => SavedPermissionsGroup::class,
+        'deleting' => DeletingPermissionsGroup::class,
+        'deleted'  => DeletedPermissionsGroup::class,
+    ];
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------

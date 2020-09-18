@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Models;
 
 use Arcanesoft\Foundation\Auth\Auth;
-use Carbon\Carbon;
-use Arcanesoft\Foundation\Auth\Events\Sessions\{CreatedSession,
-    CreatingSession, DeletedSession, DeletingSession, RetrievedSession, SavedSession, SavingSession,
-    UpdatedSession, UpdatingSession
-};
+use Arcanesoft\Foundation\Auth\Events\Sessions\SessionEvent;
 use Arcanesoft\Foundation\Auth\Models\Presenters\SessionPresenter;
+use Carbon\Carbon;
 
 /**
  * Class     Session
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  string                      id
@@ -85,17 +81,7 @@ class Session extends Model
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'retrieved' => RetrievedSession::class,
-        'creating'  => CreatingSession::class,
-        'created'   => CreatedSession::class,
-        'updating'  => UpdatingSession::class,
-        'updated'   => UpdatedSession::class,
-        'saving'    => SavingSession::class,
-        'saved'     => SavedSession::class,
-        'deleting'  => DeletingSession::class,
-        'deleted'   => DeletedSession::class,
-    ];
+    protected $dispatchesEvents = SessionEvent::MODEL_EVENTS;
 
     /* -----------------------------------------------------------------
      |  Constructor

@@ -47,8 +47,6 @@ class CreateAuthAdministratorsTable extends Migration
             $table->string('last_name', 30)->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->text('two_factor_secret')->nullable();
-            $table->text('two_factor_recovery_codes')->nullable();
             $table->rememberToken();
             $table->string('avatar')->nullable();
             $table->timestamp('last_activity_at')->nullable();

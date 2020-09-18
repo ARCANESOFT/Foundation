@@ -5,15 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Models;
 
 use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Events\Permissions\CreatedPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\CreatingPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\DeletedPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\DeletingPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\RetrievedPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\SavedPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\SavingPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\UpdatedPermission;
-use Arcanesoft\Foundation\Auth\Events\Permissions\UpdatingPermission;
+use Arcanesoft\Foundation\Auth\Events\Permissions\PermissionEvent;
 use Arcanesoft\Foundation\Auth\Models\Concerns\HasRoles;
 use Arcanesoft\Foundation\Auth\Models\Presenters\PermissionPresenter;
 use Illuminate\Support\Facades\Gate;
@@ -22,7 +14,6 @@ use Illuminate\Support\Str;
 /**
  * Class     Permission
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  int                         id
@@ -90,17 +81,7 @@ class Permission extends Model
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'retrieved' => RetrievedPermission::class,
-        'creating'  => CreatingPermission::class,
-        'created'   => CreatedPermission::class,
-        'updating'  => UpdatingPermission::class,
-        'updated'   => UpdatedPermission::class,
-        'saving'    => SavingPermission::class,
-        'saved'     => SavedPermission::class,
-        'deleting'  => DeletingPermission::class,
-        'deleted'   => DeletedPermission::class,
-    ];
+    protected $dispatchesEvents = PermissionEvent::MODEL_EVENTS;
 
     /* -----------------------------------------------------------------
      |  Constructor

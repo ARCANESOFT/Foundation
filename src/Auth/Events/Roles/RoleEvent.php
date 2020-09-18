@@ -9,11 +9,27 @@ use Arcanesoft\Foundation\Auth\Models\Role;
 /**
  * Class     RoleEvent
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class RoleEvent
 {
+    /* -----------------------------------------------------------------
+     |  Constants
+     | -----------------------------------------------------------------
+     */
+
+    public const MODEL_EVENTS = [
+        'retrieved' => RetrievedRole::class,
+        'creating'  => CreatingRole::class,
+        'created'   => CreatedRole::class,
+        'updating'  => UpdatingRole::class,
+        'updated'   => UpdatedRole::class,
+        'saving'    => SavingRole::class,
+        'saved'     => SavedRole::class,
+        'deleting'  => DeletingRole::class,
+        'deleted'   => DeletedRole::class,
+    ];
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------

@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
 /**
  * Class     SyncedRoles
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Administrators\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SyncedRoles extends AdministratorEvent

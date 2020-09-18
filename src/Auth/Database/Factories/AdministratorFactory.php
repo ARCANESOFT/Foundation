@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 /**
  * Class     AdministratorFactory
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Factories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AdministratorFactory extends Factory

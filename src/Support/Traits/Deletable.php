@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Support\Traits;
 /**
  * Trait     Deletable
  *
- * @package  Arcanesoft\Foundation\Support\Traits
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait Deletable

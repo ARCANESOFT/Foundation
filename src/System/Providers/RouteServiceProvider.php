@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\System\Http\Routes;
 /**
  * Class     RouteServiceProvider
  *
- * @package  Arcanesoft\Foundation\System\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RouteServiceProvider extends ServiceProvider

@@ -93,6 +93,7 @@ return [
             'permission-role'     => 'permission_role',
             'sessions'            => 'sessions',
             'socialite-providers' => 'socialite_providers',
+            'two_factors'         => 'two_factors',
         ],
 
          // Models
@@ -107,6 +108,7 @@ return [
             'password-resets'    => Arcanesoft\Foundation\Auth\Models\PasswordReset::class,
             'session'            => Arcanesoft\Foundation\Auth\Models\Session::class,
             'socialite-provider' => Arcanesoft\Foundation\Auth\Models\SocialiteProvider::class,
+            'two-factor'         => Arcanesoft\Foundation\Auth\Models\TwoFactor::class,
         ],
 
     ],

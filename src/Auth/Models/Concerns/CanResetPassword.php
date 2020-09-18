@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Notifications\Authentication\ResetPassword as Res
 /**
  * Trait     CanResetPassword
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait CanResetPassword

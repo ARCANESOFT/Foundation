@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Auth\Http\Requests\Users;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Arcanesoft\Foundation\Auth\Http\Routes\UsersRoutes;
 use Arcanesoft\Foundation\Auth\Rules\Users\EmailRule;
 
 /**
  * Class     UpdateUserRequest
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Requests\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class UpdateUserRequest extends UserFormRequest
+class UpdateUserRequest extends FormRequest
 {
     /* -----------------------------------------------------------------
      |  Main Methods

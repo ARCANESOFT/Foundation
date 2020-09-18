@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     UsersPerDay
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UsersPerDay extends Trend

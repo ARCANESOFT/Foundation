@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Sessions;
 /**
  * Class     CreatingSession
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Sessions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CreatingSession extends SessionEvent

@@ -3,6 +3,6 @@
         <b>{{ config('app.name') }}</b>&copy; &middot; {{ Arcanesoft\Foundation\Support\Date::since('2020') }} &middot; @lang('All Rights Reserved')
     </span>
     <span class="small float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
-        @lang('Created by') <b>ARCANEDEV</b>
+        @lang('Powered by') <b>ARCANESOFT</b>
     </span>
 </footer>

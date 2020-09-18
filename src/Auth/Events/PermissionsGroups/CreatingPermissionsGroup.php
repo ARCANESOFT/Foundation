@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\PermissionsGroups;
 /**
  * Class     CreatingPermissionsGroup
  *
- * @package  Arcanesoft\Foundation\Auth\Events\PermissionsGroups
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CreatingPermissionsGroup extends PermissionsGroupEvent

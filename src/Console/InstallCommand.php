@@ -13,7 +13,6 @@ use Arcanesoft\Foundation\System\Console\InstallCommand as SystemInstallCommand;
 /**
  * Class     InstallCommand
  *
- * @package  Arcanesoft\Foundation\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class InstallCommand extends Command

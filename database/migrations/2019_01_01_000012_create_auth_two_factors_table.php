@@ -7,13 +7,13 @@ use Arcanesoft\Foundation\Auth\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class     CreateAuthUsersTable
+ * Class     CreateAuthAdministratorsTable
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
- * @see  \Arcanesoft\Foundation\Auth\Models\User
+ * @see  \Arcanesoft\Foundation\Auth\Models\TwoFactor
  */
-class CreateAuthUsersTable extends Migration
+class CreateAuthTwoFactorsTable extends Migration
 {
     /* -----------------------------------------------------------------
      |  Constructor
@@ -27,7 +27,7 @@ class CreateAuthUsersTable extends Migration
     {
         parent::__construct();
 
-        $this->setTable(Auth::table('users', 'users', false));
+        $this->setTable(Auth::table('two_factors', 'two_factors', false));
     }
 
     /* -----------------------------------------------------------------
@@ -42,21 +42,12 @@ class CreateAuthUsersTable extends Migration
     {
         $this->createSchema(function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->string('username')->nullable();
-            $table->string('first_name', 30)->nullable();
-            $table->string('last_name', 30)->nullable();
-            $table->string('email')->unique();
-            $table->string('password')->nullable();
-            $table->rememberToken();
-            $table->string('avatar')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->timestamp('last_activity_at')->nullable();
+            $table->morphs('two_factorable');
+            $table->text('secret')->nullable();
+            $table->text('recovery_codes')->nullable();
             $table->timestamps();
-            $table->timestamp('activated_at')->nullable();
-            $table->softDeletes();
 
-            $table->index(['uuid', 'email']);
+            $table->unique(['two_factorable_type', 'two_factorable_id']);
         });
     }
 }

@@ -11,7 +11,6 @@ use Illuminate\Http\{JsonResponse, Request};
 /**
  * Class     Component
  *
- * @package  Arcanesoft\Foundation\Views
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @method  bool                                                      authorize()

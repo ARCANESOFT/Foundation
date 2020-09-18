@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Repositories\Authentication\TwoFactorAuthenticati
 /**
  * Trait     HasTwoFactorAuthentication
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories\Concerns\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HasTwoFactorAuthentication

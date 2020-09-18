@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Auth;
 /**
  * Class     SettingsRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SettingsRepository

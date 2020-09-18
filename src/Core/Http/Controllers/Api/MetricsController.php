@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class     MetricsController
  *
- * @package  Arcanesoft\Foundation\Core\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetricsController

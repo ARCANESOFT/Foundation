@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class     UniqueKey
  *
- * @package  Arcanesoft\Foundation\Auth\Rules\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UniqueKey implements Rule

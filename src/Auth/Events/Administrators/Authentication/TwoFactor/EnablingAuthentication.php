@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Events\Administrators\AdministratorEvent;
 /**
  * Class     EnablingAuthentication
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EnablingAuthentication extends AdministratorEvent

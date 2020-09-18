@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Repositories\PermissionsRepository;
 /**
  * Class     PermissionsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PermissionsRoutes extends AbstractRouteRegistrar

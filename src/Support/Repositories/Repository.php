@@ -11,7 +11,6 @@ use Illuminate\Support\Traits\ForwardsCalls;
 /**
  * Class     Repository
  *
- * @package  Arcanesoft\Foundation\Support\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @mixin \Illuminate\Database\Eloquent\Builder

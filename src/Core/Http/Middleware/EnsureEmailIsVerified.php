@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Core\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\{Request, Response};
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class     EnsureEmailIsVerified
@@ -79,7 +78,7 @@ class EnsureEmailIsVerified
         if ($request->expectsJson())
             abort(Response::HTTP_FORBIDDEN, 'Your email address is not verified.');
 
-        return Redirect::route($redirectToRoute);
+        return redirect()->route($redirectToRoute);
     }
 
     /**

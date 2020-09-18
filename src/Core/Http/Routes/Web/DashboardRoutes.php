@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Core\Http\Routes\AbstractRouteRegistrar;
 /**
  * Class     DashboardRoutes
  *
- * @package  Arcanesoft\Foundation\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DashboardRoutes extends AbstractRouteRegistrar

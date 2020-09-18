@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 /**
  * Class     ComponentsController
  *
- * @package  Arcanesoft\Foundation\Core\Http\Controllers\Api
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ComponentsController

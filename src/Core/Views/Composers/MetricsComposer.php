@@ -12,7 +12,6 @@ use Illuminate\Contracts\View\View;
 /**
  * Class     MetricsComposer
  *
- * @package  Arcanesoft\Foundation\Core\Views\Composers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetricsComposer

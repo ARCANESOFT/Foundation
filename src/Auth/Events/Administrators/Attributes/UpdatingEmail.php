@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Events\Administrators\AdministratorEvent;
 /**
  * Class     UpdatingEmail
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Administrators\Attributes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UpdatingEmail extends AdministratorEvent

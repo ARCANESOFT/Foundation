@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Http\Controllers\SettingsController;
 /**
  * Class     SettingsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SettingsRoutes extends AbstractRouteRegistrar

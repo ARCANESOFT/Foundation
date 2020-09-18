@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\Role;
 /**
  * Class     DetachingAdministrator
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Roles\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DetachingAdministrator extends RoleEvent

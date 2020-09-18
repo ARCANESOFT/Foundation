@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Core\Policies\DashboardPolicy;
 /**
  * Class     DashboardController
  *
- * @package  Arcanesoft\Foundation\Core\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DashboardController extends Controller

@@ -11,9 +11,8 @@ use Arcanesoft\Foundation\Auth\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
 /**
- * Class     UsersPerMonth
+ * Class     UsersPerHour
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UsersPerHour extends Trend

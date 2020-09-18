@@ -1,9 +1,12 @@
-<?php namespace Arcanesoft\Foundation\Helpers\UI\Actions\Concerns;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Helpers\UI\Actions\Concerns;
 
 /**
  * Trait     HasConfig
  *
- * @package  Arcanesoft\Foundation\Helpers\UI\Actions\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HasConfig

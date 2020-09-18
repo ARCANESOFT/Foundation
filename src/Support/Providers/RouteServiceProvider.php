@@ -9,7 +9,6 @@ use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
 /**
  * Class     RouteServiceProvider
  *
- * @package  Arcanesoft\Foundation\Support\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class RouteServiceProvider extends ServiceProvider

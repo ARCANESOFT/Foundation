@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arcanesoft\Foundation\Core\Http\Routes;
 
 use Arcanesoft\Foundation\Support\Http\AdminRouteRegistrar;

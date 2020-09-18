@@ -13,7 +13,6 @@ use Illuminate\Validation\ValidationException;
 /**
  * Class     TwoFactorLoginController
  *
- * @package  Arcanesoft\Foundation\Fortify\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class TwoFactorLoginController

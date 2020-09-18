@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class     PasswordResetsDatatable
  *
- * @package  Arcanesoft\Foundation\Auth\Datatables
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PasswordResetsDatatable extends DatatableComponent

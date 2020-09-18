@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\Role;
 /**
  * Class     AttachedPermission
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Roles\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AttachedPermission extends RoleEvent

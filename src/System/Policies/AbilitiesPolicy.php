@@ -10,7 +10,6 @@ use Arcanedev\LaravelPolicies\Ability;
 /**
  * Class     AbilitiesPolicy
  *
- * @package  Arcanesoft\Foundation\System\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AbilitiesPolicy extends AbstractPolicy

@@ -40,6 +40,7 @@ class CheckForMaintenanceMode extends Middleware
      * Determine if the request has a URI that should be accessible in maintenance mode.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return bool
      */
     protected function inExceptArray($request)

@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 /**
  * Class     PermissionsController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PermissionsController extends Controller

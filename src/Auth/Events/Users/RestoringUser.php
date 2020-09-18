@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Users;
 /**
  * Class     RestoringUser
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RestoringUser extends UserEvent

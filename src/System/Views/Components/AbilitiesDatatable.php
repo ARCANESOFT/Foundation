@@ -10,13 +10,11 @@ use Arcanesoft\Foundation\System\Policies\AbilitiesPolicy;
 use Arcanesoft\Foundation\Views\Concerns\WithSortField;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Collection, Str};
 
 /**
  * Class     AbilitiesDatatable
  *
- * @package  Arcanesoft\Foundation\System\Views\Components
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AbilitiesDatatable extends Datatable

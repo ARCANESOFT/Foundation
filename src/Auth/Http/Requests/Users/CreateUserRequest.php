@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Auth\Http\Requests\Users;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Arcanesoft\Foundation\Auth\Rules\Users\EmailRule;
 use Arcanesoft\Foundation\Fortify\Rules\Password;
 
 /**
  * Class     CreateUserRequest
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Requests\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CreateUserRequest extends UserFormRequest
+class CreateUserRequest extends FormRequest
 {
     /* -----------------------------------------------------------------
      |  Main Methods

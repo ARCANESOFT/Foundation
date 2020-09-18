@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     VerifiedEmails
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class VerifiedEmails extends NullablePartition

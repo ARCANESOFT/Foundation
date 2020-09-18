@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Http\Controllers\AbilitiesController;
 /**
  * Class     AbilitiesRoutes
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AbilitiesRoutes extends AbstractRouteRegistrar

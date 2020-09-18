@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 /**
  * Class     LogFilesCount
  *
- * @package  Arcanesoft\Foundation\System\Metrics\LogViewer
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LogFilesCount extends Value

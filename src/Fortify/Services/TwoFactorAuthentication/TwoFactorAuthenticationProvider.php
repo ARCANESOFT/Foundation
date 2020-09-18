@@ -10,7 +10,6 @@ use PragmaRX\Google2FA\Google2FA;
 /**
  * Class     TwoFactorAuthenticationProvider
  *
- * @package  Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProviderContract

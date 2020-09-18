@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Http\Requests;
 
-use Arcanesoft\Foundation\Auth\Models\Entities\TwoFactor;
+use Arcanesoft\Foundation\Auth\Models\TwoFactor;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
 use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider;
 use Illuminate\Foundation\Http\FormRequest;
@@ -12,7 +12,6 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class     TwoFactorLoginRequest
  *
- * @package  Arcanesoft\Foundation\Fortify\Http\Requests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  string|null  code
@@ -84,7 +83,7 @@ abstract class TwoFactorLoginRequest extends FormRequest
         if (is_null($this->code))
             return false;
 
-        $secret = $this->twoFactorEntity()->getDecryptedSecret();
+        $secret = $this->twoFactor()->decrypted_secret;
 
         return $this->getTwoFactorProvider()->verify($secret, $this->code);
     }
@@ -100,7 +99,7 @@ abstract class TwoFactorLoginRequest extends FormRequest
             return null;
         }
 
-        return $this->twoFactorEntity()->getValidRecoveryCode($this->recovery_code);
+        return $this->twoFactor()->getValidRecoveryCode($this->recovery_code);
     }
 
     /**
@@ -148,9 +147,9 @@ abstract class TwoFactorLoginRequest extends FormRequest
     /**
      * Get the user's two factory instance.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\Entities\TwoFactor
+     * @return \Arcanesoft\Foundation\Auth\Models\TwoFactor
      */
-    protected function twoFactorEntity(): TwoFactor
+    protected function twoFactor(): TwoFactor
     {
         return $this->challengedUser()->two_factor;
     }

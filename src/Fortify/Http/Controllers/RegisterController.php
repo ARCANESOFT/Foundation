@@ -12,7 +12,6 @@ use Illuminate\Http\{Request, Response};
 /**
  * Class     RegisterController
  *
- * @package  Arcanesoft\Foundation\Fortify\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class RegisterController

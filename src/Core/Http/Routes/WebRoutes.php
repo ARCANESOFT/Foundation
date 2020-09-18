@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Core\Http\Routes;
 /**
  * Class     WebRoutes
  *
- * @package  Arcanesoft\Foundation\Core\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class WebRoutes extends AbstractRouteRegistrar

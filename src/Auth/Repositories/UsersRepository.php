@@ -7,8 +7,8 @@ namespace Arcanesoft\Foundation\Auth\Repositories;
 use Arcanesoft\Foundation\Auth\Auth;
 use Arcanesoft\Foundation\Auth\Events\Users\ActivatedUser;
 use Arcanesoft\Foundation\Auth\Events\Users\ActivatingUser;
-use Arcanesoft\Foundation\Auth\Events\Users\Attributes\UpdatingPassword;
 use Arcanesoft\Foundation\Auth\Events\Users\Attributes\UpdatedPassword;
+use Arcanesoft\Foundation\Auth\Events\Users\Attributes\UpdatingPassword;
 use Arcanesoft\Foundation\Auth\Events\Users\DeactivatedUser;
 use Arcanesoft\Foundation\Auth\Events\Users\DeactivatingUser;
 use Arcanesoft\Foundation\Auth\Models\User;
@@ -19,7 +19,6 @@ use Illuminate\Support\Str;
 /**
  * Class     UsersRepository
  *
- * @package  Arcanesoft\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @mixin  \Arcanesoft\Foundation\Auth\Models\User

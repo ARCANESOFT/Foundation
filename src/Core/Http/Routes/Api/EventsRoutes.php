@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Core\Http\Routes\AbstractRouteRegistrar;
 /**
  * Class     EventsRoutes
  *
- * @package  Arcanesoft\Foundation\Core\Http\Routes\Api
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EventsRoutes extends AbstractRouteRegistrar

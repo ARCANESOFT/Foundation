@@ -1,13 +1,16 @@
-<?php namespace Arcanesoft\Foundation\Helpers\UI\Actions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Helpers\UI\Actions;
 
 use Arcanedev\Html\Elements\{A, I};
 use Arcanesoft\Foundation\Helpers\UI\Actions\Concerns\{HasConfig, HasTooltip};
 use Illuminate\Support\Arr;
 
 /**
- * Class     Link
+ * Class     LinkAction
  *
- * @package  Arcanesoft\Foundation\Helpers\UI\Actions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LinkAction extends A

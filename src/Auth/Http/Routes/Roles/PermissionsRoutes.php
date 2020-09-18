@@ -12,7 +12,6 @@ use Illuminate\Routing\Route;
 /**
  * Class     PermissionsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PermissionsRoutes extends AbstractRouteRegistrar

@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 /**
  * Class     EventsController
  *
- * @package  Arcanesoft\Foundation\Core\Http\Controllers\Api
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EventsController

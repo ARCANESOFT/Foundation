@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 /**
  * Class     PermissionRole
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Pivots
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  int                         permission_id

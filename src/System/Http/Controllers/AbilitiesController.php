@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Gate;
 /**
  * Class     AbilitiesController
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AbilitiesController extends Controller

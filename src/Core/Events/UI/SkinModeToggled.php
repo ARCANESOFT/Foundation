@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Core\Events\UI;
 /**
  * Class     SkinModeToggled
  *
- * @package  Arcanesoft\Foundation\Core\Events\UI
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SkinModeToggled

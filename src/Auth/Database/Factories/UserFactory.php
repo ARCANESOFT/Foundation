@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * Class     UserFactory
  *
- * @package  Arcanesoft\Foundation\Auth\Database\Factories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UserFactory extends Factory

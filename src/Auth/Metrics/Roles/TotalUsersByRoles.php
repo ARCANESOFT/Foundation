@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     TotalUsersByRoles
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TotalUsersByRoles extends Partition

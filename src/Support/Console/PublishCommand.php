@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 /**
  * Class     PublishCommand
  *
- * @package  Arcanesoft\Foundation\Support\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class PublishCommand extends Command

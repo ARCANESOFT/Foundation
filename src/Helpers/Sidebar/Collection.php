@@ -7,9 +7,8 @@ namespace Arcanesoft\Foundation\Helpers\Sidebar;
 use Illuminate\Support\Collection as BaseCollection;
 
 /**
- * Class     SidebarCollection
+ * Class     Collection
  *
- * @package  Arcanesoft\Foundation\Helpers\Sidebar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Collection extends BaseCollection

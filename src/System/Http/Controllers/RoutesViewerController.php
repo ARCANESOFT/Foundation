@@ -9,7 +9,6 @@ use Arcanedev\RouteViewer\Contracts\RouteViewer;
 /**
  * Class     RoutesViewerController
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RoutesViewerController extends Controller

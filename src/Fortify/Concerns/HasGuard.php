@@ -8,9 +8,8 @@ use Illuminate\Contracts\Auth\Factory as AuthContract;
 use Illuminate\Contracts\Auth\StatefulGuard;
 
 /**
- * Trait     HasAuth
+ * Trait     HasGuard
  *
- * @package  Arcanesoft\Foundation\Fortify\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HasGuard

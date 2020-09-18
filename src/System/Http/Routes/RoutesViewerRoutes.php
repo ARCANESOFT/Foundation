@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Http\Controllers\RoutesViewerController;
 /**
  * Class     RoutesViewerRoutes
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RoutesViewerRoutes extends AbstractRouteRegistrar

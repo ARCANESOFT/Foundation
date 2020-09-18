@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\Session;
 /**
  * Class     SessionsPolicy
  *
- * @package  Arcanesoft\Foundation\Auth\Policies
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionsPolicy extends AbstractPolicy

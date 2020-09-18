@@ -21,9 +21,9 @@ return [
         ],
 
         // Modules' sidebar items
-//        'arcanesoft.blog.sidebar.items',
-//        'arcanesoft.media.sidebar.items',
-//        'arcanesoft.passport.sidebar.items',
+        'arcanesoft.blog.sidebar.items',
+        'arcanesoft.media.sidebar.items',
+        'arcanesoft.passport.sidebar.items',
 
         // Authorization
         [
@@ -128,7 +128,7 @@ return [
             ],
         ],
 
-//        'arcanesoft.backups.sidebar.items',
+        'arcanesoft.backups.sidebar.items',
     ],
 
 ];

@@ -9,7 +9,6 @@ use Illuminate\Support\Fluent;
 /**
  * Class     SocialiteProvider
  *
- * @package  Arcanesoft\Foundation\Auth\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  string  $type

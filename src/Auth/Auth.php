@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 /**
  * Class     Auth
  *
- * @package  Arcanesoft\Foundation\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Auth

@@ -7,9 +7,8 @@ namespace Arcanesoft\Foundation\Auth\Models\Concerns;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class     Activatable
+ * Trait     Activatable
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property-read  bool                             is_active

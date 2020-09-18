@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Auth\Http\Requests\Profile;
 
-use Arcanesoft\Foundation\Auth\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class     UpdateUserPasswordRequest
+ * Class     UpdatePasswordRequest
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Requests\Profile
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UpdatePasswordRequest extends FormRequest
@@ -26,6 +25,7 @@ class UpdatePasswordRequest extends FormRequest
      */
     public function rules(): array
     {
+        // TODO: Replace with the new Password Object
         return [
             'old_password' => ['required', 'string', 'min:8', 'password'],
             'password'     => ['required', 'string', 'min:8', 'confirmed', 'different:old_password'],

@@ -10,9 +10,8 @@ use Arcanesoft\Foundation\Auth\Repositories\RolesRepository;
 use Illuminate\Routing\Route;
 
 /**
- * Class     UsersRoutes
+ * Class     AdministratorsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AdministratorsRoutes extends AbstractRouteRegistrar

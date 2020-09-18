@@ -9,11 +9,27 @@ use Arcanesoft\Foundation\Auth\Models\Permission;
 /**
  * Class     PermissionEvent
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class PermissionEvent
 {
+    /* -----------------------------------------------------------------
+     |  Constants
+     | -----------------------------------------------------------------
+     */
+
+    public const MODEL_EVENTS = [
+        'retrieved' => RetrievedPermission::class,
+        'creating'  => CreatingPermission::class,
+        'created'   => CreatedPermission::class,
+        'updating'  => UpdatingPermission::class,
+        'updated'   => UpdatedPermission::class,
+        'saving'    => SavingPermission::class,
+        'saved'     => SavedPermission::class,
+        'deleting'  => DeletingPermission::class,
+        'deleted'   => DeletedPermission::class,
+    ];
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------

@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Support\Http\Controller as BaseController;
 /**
  * Class     Controller
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Controller extends BaseController

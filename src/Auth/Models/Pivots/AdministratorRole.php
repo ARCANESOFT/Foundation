@@ -7,9 +7,8 @@ namespace Arcanesoft\Foundation\Auth\Models\Pivots;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * Class     AdminRole
+ * Class     AdministratorRole
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Pivots
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  int                         admin_id

@@ -9,7 +9,6 @@ use Arcanedev\Html\Elements\A;
 /**
  * Trait     WithSortField
  *
- * @package  Arcanesoft\Foundation\Views\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  string  sortField

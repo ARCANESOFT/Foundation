@@ -9,7 +9,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 /**
  * Trait     CanAuthorize
  *
- * @package  Arcanesoft\Foundation\Views\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait CanAuthorize

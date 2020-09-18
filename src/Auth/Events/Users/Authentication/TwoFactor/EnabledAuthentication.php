@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Events\Users\UserEvent;
 /**
  * Class     EnabledAuthentication
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EnabledAuthentication extends UserEvent

@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Http\Controllers\Controller;
 /**
  * Class     SessionsController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionsController extends Controller

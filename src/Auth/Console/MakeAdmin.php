@@ -12,7 +12,6 @@ use Illuminate\Console\Command;
 /**
  * Class     MakeAdmin
  *
- * @package  Arcanesoft\Foundation\Auth\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MakeAdmin extends Command

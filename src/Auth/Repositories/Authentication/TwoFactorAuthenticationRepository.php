@@ -4,34 +4,31 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Auth\Repositories\Authentication;
 
-use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\{
-    DisabledAuthentication as DisabledAuthenticationForAdministrator,
-    DisablingAuthentication as DisablingAuthenticationForAdministrator,
-    EnabledAuthentication as EnabledAuthenticationForAdministrator,
-    EnablingAuthentication as EnablingAuthenticationForAdministrator,
-    GeneratedRecoveryCode as GeneratedRecoveryCodeForAdministrator,
-    GeneratingRecoveryCode as GeneratingRecoveryCodeForAdministrator,
-    ReplacedRecoveryCode as ReplacedRecoveryCodeForAdministrator,
-    ReplacingRecoveryCode as ReplacingRecoveryCodeForAdministrator,
-};
-use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\{
-    DisabledAuthentication as DisabledAuthenticationForUser,
-    DisablingAuthentication as DisablingAuthenticationForUser,
-    EnabledAuthentication as EnabledAuthenticationForUser,
-    EnablingAuthentication as EnablingAuthenticationForUser,
-    GeneratedRecoveryCode as GeneratedRecoveryCodeForUser,
-    GeneratingRecoveryCode as GeneratingRecoveryCodeForUser,
-    ReplacedRecoveryCode as ReplacedRecoveryCodeForUser,
-    ReplacingRecoveryCode as ReplacingRecoveryCodeForUser,
-};
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\DisabledAuthentication as DisabledAuthenticationForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\DisablingAuthentication as DisablingAuthenticationForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\EnabledAuthentication as EnabledAuthenticationForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\EnablingAuthentication as EnablingAuthenticationForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\GeneratedRecoveryCode as GeneratedRecoveryCodeForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\GeneratingRecoveryCode as GeneratingRecoveryCodeForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\ReplacedRecoveryCode as ReplacedRecoveryCodeForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Administrators\Authentication\TwoFactor\ReplacingRecoveryCode as ReplacingRecoveryCodeForAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\DisabledAuthentication as DisabledAuthenticationForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\DisablingAuthentication as DisablingAuthenticationForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\EnabledAuthentication as EnabledAuthenticationForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\EnablingAuthentication as EnablingAuthenticationForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\GeneratedRecoveryCode as GeneratedRecoveryCodeForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\GeneratingRecoveryCode as GeneratingRecoveryCodeForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\ReplacedRecoveryCode as ReplacedRecoveryCodeForUser;
+use Arcanesoft\Foundation\Auth\Events\Users\Authentication\TwoFactor\ReplacingRecoveryCode as ReplacingRecoveryCodeForUser;
 use Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication\{RecoveryCode, TwoFactorAuthenticationProvider};
 use Illuminate\Support\Arr;
 
 /**
  * Class     TwoFactorAuthenticationRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @todo Complete the events
  */
 class TwoFactorAuthenticationRepository
 {
@@ -108,23 +105,20 @@ class TwoFactorAuthenticationRepository
     /**
      * Enable the two factor authentication.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\User|\Arcanesoft\Foundation\Auth\Models\Administrator  $user
+     * @param  \Arcanesoft\Foundation\Auth\Models\User|\Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $user
      *
      * @return bool
      */
     public function enable($user): bool
     {
-        $secret        = $this->provider->generateSecretKey();
-        $recoveryCodes = static::freshRecoveryCode();
-
-        $user->forceFill([
-            'two_factor_secret'         => encrypt($secret),
-            'two_factor_recovery_codes' => encrypt(json_encode($recoveryCodes)),
+        $twoFactor = $user->two_factor()->make()->fill([
+            'secret'         => $this->provider->generateSecretKey(),
+            'recovery_codes' => static::freshRecoveryCode(),
         ]);
 
-        $this->dispatchTwoFactorEvent(static::EVENT_ENABLING, $user);
-        $saved = $user->save();
-        $this->dispatchTwoFactorEvent(static::EVENT_ENABLED, $user);
+//        $this->dispatchTwoFactorEvent(static::EVENT_ENABLING, $user);
+        $saved = $twoFactor->save();
+//        $this->dispatchTwoFactorEvent(static::EVENT_ENABLED, $user);
 
         return $saved;
     }
@@ -138,14 +132,11 @@ class TwoFactorAuthenticationRepository
      */
     public function disable($user): bool
     {
-        $user->forceFill([
-            'two_factor_secret'         => null,
-            'two_factor_recovery_codes' => null,
-        ]);
+        $twoFactor = $user->two_factor;
 
-        $this->dispatchTwoFactorEvent(static::EVENT_DISABLING, $user);
-        $saved = $user->save();
-        $this->dispatchTwoFactorEvent(static::EVENT_DISABLED, $user);
+//        $this->dispatchTwoFactorEvent(static::EVENT_DISABLING, $user);
+        $saved = $twoFactor->delete();
+//        $this->dispatchTwoFactorEvent(static::EVENT_DISABLED, $user);
 
         return $saved;
     }
@@ -159,15 +150,13 @@ class TwoFactorAuthenticationRepository
      */
     public function generateNewRecoveryCodes($user): bool
     {
-        $recoveryCodes = static::freshRecoveryCode();
-
-        $user->forceFill([
-            'two_factor_recovery_codes' => encrypt(json_encode($recoveryCodes)),
+        $twoFactor = $user->two_factor->fill([
+            'recovery_codes' => static::freshRecoveryCode(),
         ]);
 
-        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_GENERATING, $user);
-        $saved = $user->save();
-        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_GENERATED, $user);
+//        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_GENERATING, $user);
+        $saved = $twoFactor->save();
+//        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_GENERATED, $user);
 
         return $saved;
     }
@@ -185,16 +174,16 @@ class TwoFactorAuthenticationRepository
         $recoveryCodes = str_replace(
             $code,
             RecoveryCode::generate(),
-            decrypt($user->two_factor_recovery_codes)
+            decrypt($user->two_factor->recovery_codes)
         );
 
-        $user->forceFill([
-            'two_factor_recovery_codes' => encrypt($recoveryCodes),
+        $user->two_factor->fill([
+            'recovery_codes' => json_decode($recoveryCodes),
         ]);
 
-        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_REPLACING, $user);
+//        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_REPLACING, $user);
         $saved = $user->save();
-        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_REPLACED, $user);
+//        $this->dispatchTwoFactorEvent(static::EVENT_RECOVERY_CODE_REPLACED, $user);
 
         return $saved;
     }

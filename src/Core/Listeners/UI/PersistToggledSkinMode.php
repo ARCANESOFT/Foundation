@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arcanesoft\Foundation\Core\Listeners\UI;
 
 use Arcanesoft\Foundation\Core\Events\UI\SkinModeToggled;
@@ -7,7 +9,6 @@ use Arcanesoft\Foundation\Core\Events\UI\SkinModeToggled;
 /**
  * Class     PersistToggledSkinMode
  *
- * @package  Arcanesoft\Foundation\Core\Listeners\UI
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PersistToggledSkinMode

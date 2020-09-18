@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 /**
  * Class     Manager
  *
- * @package  Arcanesoft\Foundation\Views
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Manager implements ManagerContract

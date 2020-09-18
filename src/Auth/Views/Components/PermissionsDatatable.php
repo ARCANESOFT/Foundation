@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * Class     PermissionsDatatable
  *
- * @package  Arcanesoft\Foundation\Auth\Datatables
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PermissionsDatatable extends DatatableComponent

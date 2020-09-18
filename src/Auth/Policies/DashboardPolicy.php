@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\Administrator;
 /**
  * Class     DashboardPolicy
  *
- * @package  Arcanesoft\Foundation\Policies\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DashboardPolicy extends AbstractPolicy

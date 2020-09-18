@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Http\Controllers\DependenciesController;
 /**
  * Class     DependenciesRoutes
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DependenciesRoutes extends AbstractRouteRegistrar

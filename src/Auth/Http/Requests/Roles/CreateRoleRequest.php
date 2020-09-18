@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Http\Requests\Roles;
 
 use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Http\Requests\FormRequest;
 use Arcanesoft\Foundation\Auth\Rules\Users\UniqueKey;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
  * Class     CreateRoleRequest
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Requests\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CreateRoleRequest extends FormRequest

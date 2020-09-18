@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Core\Events\UI\SidebarToggled;
 /**
  * Class     PersistToggledSidebar
  *
- * @package  Arcanesoft\Foundation\Core\Listeners\UI
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PersistToggledSidebar

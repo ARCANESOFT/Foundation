@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Helpers\Sidebar;
 /**
  * Class     Manager
  *
- * @package  Arcanesoft\Foundation\Helpers\Sidebar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Manager

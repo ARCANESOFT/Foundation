@@ -12,7 +12,6 @@ use Illuminate\Support\{Arr, Carbon, HtmlString, Str};
 /**
  * Trait     SessionPresenter
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Presenters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property-read  string                          device_name

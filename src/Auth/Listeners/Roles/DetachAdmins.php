@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Repositories\RolesRepository;
 /**
  * Class     DetachAdmins
  *
- * @package  Arcanesoft\Foundation\Auth\Listeners\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DetachAdmins

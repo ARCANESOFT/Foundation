@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\System\Http\Controllers;
 /**
  * Class     DependenciesController
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DependenciesController extends Controller

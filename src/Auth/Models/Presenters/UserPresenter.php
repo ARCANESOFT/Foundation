@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Models\Presenters;
 /**
  * Trait     UserPresenter
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Presenters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait UserPresenter

@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Support\Console\PublishCommand as Command;
 /**
  * Class     PublishCommand
  *
- * @package  Arcanesoft\Foundation\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PublishCommand extends Command

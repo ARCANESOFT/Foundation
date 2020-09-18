@@ -16,7 +16,6 @@ use Illuminate\Validation\ValidationException;
 /**
  * Class     RedirectIfTwoFactorWasEnabled
  *
- * @package  Arcanesoft\Foundation\Fortify\Actions\Authentication\Login
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class RedirectIfTwoFactorWasEnabled
@@ -101,7 +100,7 @@ abstract class RedirectIfTwoFactorWasEnabled
         if ( ! Auth::isTwoFactorEnabled())
             return false;
 
-        return optional($user)->two_factor_secret
+        return optional($user)->isTwoFactorEnabled()
             && in_array(HasTwoFactorAuthentication::class, class_uses_recursive($user));
     }
 

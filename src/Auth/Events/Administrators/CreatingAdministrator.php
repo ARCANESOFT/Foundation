@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Administrators;
 /**
  * Class     CreatingAdministrator
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CreatingAdministrator extends AdministratorEvent

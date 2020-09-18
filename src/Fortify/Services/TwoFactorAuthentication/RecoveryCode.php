@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 /**
  * Class     RecoveryCode
  *
- * @package  Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RecoveryCode

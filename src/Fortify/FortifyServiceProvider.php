@@ -11,7 +11,6 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class     FortifyServiceProvider
  *
- * @package  Arcanesoft\Foundation\Fortify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class FortifyServiceProvider extends ServiceProvider

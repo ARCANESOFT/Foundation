@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Http\Controllers\DashboardController;
 /**
  * Class     DashboardRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DashboardRoutes extends AbstractRouteRegistrar

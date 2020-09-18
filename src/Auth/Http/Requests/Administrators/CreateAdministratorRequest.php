@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Auth\Http\Requests\Administrators;
 
-use Arcanesoft\Foundation\Auth\Http\Requests\FormRequest;
 use Arcanesoft\Foundation\Auth\Rules\Administrators\EmailRule;
+use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class     CreateAdministratorRequest
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Requests\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CreateAdministratorRequest extends FormRequest

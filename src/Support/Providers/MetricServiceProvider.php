@@ -10,7 +10,6 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class     MetricServiceProvider
  *
- * @package  Arcanesoft\Foundation\Support\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class MetricServiceProvider extends ServiceProvider

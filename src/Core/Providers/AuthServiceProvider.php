@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Gate;
 /**
  * Class     AuthServiceProvider
  *
- * @package  Arcanesoft\Foundation\Core\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AuthServiceProvider extends ServiceProvider

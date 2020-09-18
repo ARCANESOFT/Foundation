@@ -11,10 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Trait     HasSessions
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- *
- * @mixin  \Illuminate\Database\Eloquent\Concerns\HasRelationships
  *
  * @property  \Illuminate\Database\Eloquent\Collection|\Arcanesoft\Foundation\Auth\Models\Session[]  sessions
  */

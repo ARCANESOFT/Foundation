@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Repositories\AdministratorsRepository;
 /**
  * Class     AdministratorsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AdministratorsRoutes extends AbstractRouteRegistrar

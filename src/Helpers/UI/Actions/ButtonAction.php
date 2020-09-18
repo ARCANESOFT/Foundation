@@ -1,4 +1,8 @@
-<?php namespace Arcanesoft\Foundation\Helpers\UI\Actions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Helpers\UI\Actions;
 
 use Arcanedev\Html\Elements\{Button as BaseButton, I};
 use Arcanesoft\Foundation\Helpers\UI\Actions\Concerns\{HasConfig, HasTooltip};
@@ -7,7 +11,6 @@ use Illuminate\Support\Arr;
 /**
  * Class     ButtonAction
  *
- * @package  Arcanesoft\Foundation\Helpers\UI\Actions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ButtonAction extends BaseButton

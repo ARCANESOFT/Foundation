@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Socialite;
 /**
  * Trait     SocialiteProviderPresenter
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Presenters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property-read  string  name

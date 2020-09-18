@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\Administrator;
 /**
  * Class     AdministratorEvent
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AdministratorEvent

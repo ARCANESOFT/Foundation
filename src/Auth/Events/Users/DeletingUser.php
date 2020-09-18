@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Users;
 /**
  * Class     DeletingUser
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DeletingUser extends UserEvent

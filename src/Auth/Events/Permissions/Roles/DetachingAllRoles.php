@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Events\Permissions\PermissionEvent;
 /**
  * Class     DetachingAllRoles
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Permissions\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DetachingAllRoles extends PermissionEvent

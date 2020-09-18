@@ -14,7 +14,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 /**
  * Class     Controller
  *
- * @package  Arcanesoft\Foundation\Support\Http
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Controller

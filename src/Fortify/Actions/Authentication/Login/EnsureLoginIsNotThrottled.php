@@ -14,7 +14,6 @@ use Illuminate\Validation\ValidationException;
 /**
  * Class     EnsureLoginIsNotThrottled
  *
- * @package  Arcanesoft\Foundation\Auth\Actions\Authentication\Login
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class EnsureLoginIsNotThrottled

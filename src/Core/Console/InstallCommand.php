@@ -8,9 +8,8 @@ use Arcanesoft\Foundation\Core\Database\DatabaseSeeder;
 use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
 
 /**
- * Class     SetupCommand
+ * Class     InstallCommand
  *
- * @package  Arcanesoft\Foundation\Core\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class InstallCommand extends Command

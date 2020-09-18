@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\PermissionsGroup;
 /**
  * Class     PermissionsGroupsRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @mixin  \Arcanesoft\Foundation\Auth\Models\PermissionsGroup

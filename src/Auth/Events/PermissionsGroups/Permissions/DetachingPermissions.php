@@ -8,9 +8,8 @@ use Arcanesoft\Foundation\Auth\Events\PermissionsGroups\PermissionsGroupEvent;
 use Arcanesoft\Foundation\Auth\Models\PermissionsGroup;
 
 /**
- * Class     DetachingPermissionsFromGroup
+ * Class     DetachingPermissions
  *
- * @package  Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DetachingPermissions extends PermissionsGroupEvent

@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\User;
 /**
  * Class     UpdatedEmail
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Users\Attributes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UpdatedEmail extends UserEvent

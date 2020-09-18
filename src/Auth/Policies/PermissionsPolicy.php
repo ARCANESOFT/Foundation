@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\{Administrator, Permission, Role};
 /**
  * Class     PermissionsPolicy
  *
- * @package  Arcanesoft\Foundation\Policies\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PermissionsPolicy extends AbstractPolicy

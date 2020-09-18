@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\View;
 /**
  * Class     ApplicationInfoComposer
  *
- * @package  Arcanesoft\Foundation\System\Views\Composers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ApplicationInfoComposer

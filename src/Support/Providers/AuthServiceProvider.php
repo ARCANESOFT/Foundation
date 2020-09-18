@@ -10,7 +10,6 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 /**
  * Class     AuthServiceProvider
  *
- * @package  Arcanesoft\Foundation\Support\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AuthServiceProvider extends ServiceProvider

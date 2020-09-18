@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * Trait     HasLinkedAccounts
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property-read  \Illuminate\Database\Eloquent\Collection|\Arcanesoft\Foundation\Auth\Models\SocialiteProvider[]  linkedAccounts

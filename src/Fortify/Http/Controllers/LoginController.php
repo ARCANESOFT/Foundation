@@ -11,7 +11,6 @@ use Illuminate\Pipeline\Pipeline;
 /**
  * Class     LoginController
  *
- * @package  Arcanesoft\Foundation\Fortify\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class LoginController

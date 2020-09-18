@@ -14,7 +14,6 @@ use BaconQrCode\Writer;
 /**
  * Class     QrCode
  *
- * @package  Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class QrCode

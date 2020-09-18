@@ -14,7 +14,6 @@ use Illuminate\Http\Response;
 /**
  * Class     SocialiteUsersRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SocialiteUsersRepository extends AbstractRepository

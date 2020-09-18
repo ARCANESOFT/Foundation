@@ -10,11 +10,9 @@ use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests;
 use Illuminate\Http\Request;
 
-
 /**
  * Class     EnsureIsAuthenticated
  *
- * @package  Arcanesoft\Foundation\Core\Http\Middleware
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EnsureIsAuthenticated implements AuthenticatesRequests
@@ -68,7 +66,7 @@ class EnsureIsAuthenticated implements AuthenticatesRequests
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->isAuthenticated();
+        $this->isAuthenticated($request);
 
         return $next($request);
     }
@@ -80,8 +78,10 @@ class EnsureIsAuthenticated implements AuthenticatesRequests
 
     /**
      * Determine if the user is logged in.
+     *
+     * @param  \Illuminate\Http\Request  $request
      */
-    protected function isAuthenticated()
+    protected function isAuthenticated(Request $request)
     {
         $guard = $this->getGuardName();
 

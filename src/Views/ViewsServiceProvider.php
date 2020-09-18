@@ -8,7 +8,6 @@ use Arcanesoft\Foundation\Views\Contracts\Manager as ManagerContract;
 /**
  * Class     ViewsServiceProvider
  *
- * @package  Arcanesoft\Foundation\Views
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ViewsServiceProvider extends ServiceProvider

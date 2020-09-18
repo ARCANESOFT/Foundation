@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 /**
  * Trait     HasPassword
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  string|null  password

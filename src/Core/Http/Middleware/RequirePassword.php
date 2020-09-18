@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Core\Http\Middleware;
 
-use Arcanesoft\Foundation\Auth\Http\Routes\Authentication\ConfirmPasswordRoutes;
+use Arcanesoft\Foundation\Authentication\Http\Routes\ConfirmPasswordRoutes;
 use Arcanesoft\Foundation\Fortify\Http\Middleware\RequirePassword as Middleware;
 use Illuminate\Http\Request;
 

@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Auth;
 /**
  * Class     PasswordReset
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  string                      email

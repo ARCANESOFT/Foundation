@@ -9,7 +9,6 @@ use Exception;
 /**
  * Class     ComponentNotFound
  *
- * @package  Arcanesoft\Foundation\Views\Exceptions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ComponentNotFound extends Exception

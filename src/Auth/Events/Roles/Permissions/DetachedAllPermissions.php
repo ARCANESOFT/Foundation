@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\Role;
 /**
  * Class     DetachedAllPermissions
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Roles\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DetachedAllPermissions extends RoleEvent

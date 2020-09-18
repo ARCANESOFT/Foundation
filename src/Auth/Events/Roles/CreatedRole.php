@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Roles;
 /**
  * Class     CreatedRole
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CreatedRole extends RoleEvent

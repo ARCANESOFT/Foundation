@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 /**
  * Class     Model
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Model extends BaseModel

@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\System\Views\Components;
 
 use Arcanedev\RouteViewer\Contracts\RouteViewer;
-use Arcanedev\RouteViewer\Entities\Route;
-use Arcanedev\RouteViewer\Entities\RouteCollection;
+use Arcanedev\RouteViewer\Entities\{Route, RouteCollection};
 use Arcanesoft\Foundation\System\Policies\RouteViewerPolicy;
 use Closure;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Arr, Str};
 
 /**
  * Class     RoutesDatatable
  *
- * @package  Arcanesoft\Foundation\System\Views\Components
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RoutesDatatable extends Datatable

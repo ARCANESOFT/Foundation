@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\Role;
 /**
  * Class     SyncingPermissions
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Roles\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SyncingPermissions extends RoleEvent

@@ -18,7 +18,6 @@ use Illuminate\Support\{Collection, Str};
 /**
  * Class     LogViewerController
  *
- * @package  Arcanesoft\Foundation\System\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LogViewerController extends Controller

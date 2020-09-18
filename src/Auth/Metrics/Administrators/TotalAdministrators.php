@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     TotalAdministrators
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TotalAdministrators extends Value

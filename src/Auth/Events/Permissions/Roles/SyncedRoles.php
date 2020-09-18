@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Collection;
 /**
  * Class     SyncedRoles
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Permissions\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SyncedRoles extends PermissionEvent

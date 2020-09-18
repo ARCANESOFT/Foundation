@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 /**
  * Trait     HandlesActions
  *
- * @package  Arcanesoft\Foundation\Views\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HandlesActions

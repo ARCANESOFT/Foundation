@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
 /**
  * Class     PermissionsRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @mixin  \Arcanesoft\Foundation\Auth\Models\Permission

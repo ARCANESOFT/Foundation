@@ -10,7 +10,6 @@ use Illuminate\Contracts\Auth\Guard;
 /**
  * Class     UpdateUserLastActivity
  *
- * @package  Arcanesoft\Foundation\Auth\Listeners\Sessions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UpdateUserLastActivity

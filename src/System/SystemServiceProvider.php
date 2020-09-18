@@ -11,7 +11,6 @@ use Illuminate\Contracts\Foundation\Application;
 /**
  * Class     SystemServiceProvider
  *
- * @package  Arcanesoft\Foundation\System
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SystemServiceProvider extends ServiceProvider

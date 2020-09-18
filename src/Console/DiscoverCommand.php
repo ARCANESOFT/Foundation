@@ -10,7 +10,6 @@ use Illuminate\Console\Command;
 /**
  * Class     DiscoverCommand
  *
- * @package  Arcanesoft\Foundation\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DiscoverCommand extends Command

@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 /**
  * Trait     HasRoles
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  \Illuminate\Database\Eloquent\Collection  roles

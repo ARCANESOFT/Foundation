@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\{Permission, PermissionsGroup};
 /**
  * Class     AttachedPermission
  *
- * @package  Arcanesoft\Foundation\Auth\Events\PermissionsGroups\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AttachedPermission extends PermissionsGroupEvent

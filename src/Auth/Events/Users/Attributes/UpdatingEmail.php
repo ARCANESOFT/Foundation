@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Events\Users\UserEvent;
 /**
  * Class     UpdatingEmail
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Users\Attributes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UpdatingEmail extends UserEvent

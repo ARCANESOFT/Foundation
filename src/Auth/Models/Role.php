@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Models;
 
 use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Events\Roles\{
-    Administrators\AttachedAdministrator, Administrators\AttachingAdministrator, Administrators\DetachedAdministrator,
-    Administrators\DetachingAdministrator, CreatedRole, CreatingRole, DeletedRole, DeletingRole, Permissions\AttachedPermission,
-    Permissions\AttachingPermission, RetrievedRole, SavedRole, SavingRole, UpdatedRole, UpdatingRole
-};
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\AttachedAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\AttachingAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachedAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachingAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\AttachedPermission;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\AttachingPermission;
+use Arcanesoft\Foundation\Auth\Events\Roles\RoleEvent;
 use Arcanesoft\Foundation\Auth\Models\Concerns\Activatable;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class     Role
  *
- * @package  Arcanesoft\Foundation\Auth\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property  int                                       id
@@ -71,17 +72,7 @@ class Role extends Model
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'retrieved' => RetrievedRole::class,
-        'creating'  => CreatingRole::class,
-        'created'   => CreatedRole::class,
-        'updating'  => UpdatingRole::class,
-        'updated'   => UpdatedRole::class,
-        'saving'    => SavingRole::class,
-        'saved'     => SavedRole::class,
-        'deleting'  => DeletingRole::class,
-        'deleted'   => DeletedRole::class,
-    ];
+    protected $dispatchesEvents = RoleEvent::MODEL_EVENTS;
 
     /**
      * The attributes that should be casted to native types.

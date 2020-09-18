@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Support;
 /**
  * Class     Date
  *
- * @package  Arcanesoft\Foundation\Support
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Date

@@ -9,7 +9,6 @@ use Illuminate\Support\{HtmlString, Str};
 /**
  * Trait     AuthenticatablePresenter
  *
- * @package  Arcanesoft\Foundation\Auth\Models\Presenters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @property-read  string                           display_name

@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 /**
  * Class     GeneratesUuid
  *
- * @package  Arcanesoft\Foundation\Auth\Listeners\Administrators
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class GeneratesUuid

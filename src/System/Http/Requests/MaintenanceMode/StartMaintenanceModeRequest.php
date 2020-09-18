@@ -9,7 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class     StartMaintenanceModeRequest
  *
- * @package  Arcanesoft\Foundation\Http\Requests\System
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class StartMaintenanceModeRequest extends FormRequest

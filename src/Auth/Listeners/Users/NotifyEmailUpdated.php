@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Events\Users\Attributes\UpdatedEmail;
 /**
  * Class     NotifyEmailUpdated
  *
- * @package  Arcanesoft\Foundation\Auth\Listeners\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NotifyEmailUpdated

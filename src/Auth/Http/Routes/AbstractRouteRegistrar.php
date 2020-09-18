@@ -10,7 +10,6 @@ use Closure;
 /**
  * Class     AbstractRouteRegistrar
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AbstractRouteRegistrar extends AdminRouteRegistrar

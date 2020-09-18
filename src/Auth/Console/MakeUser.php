@@ -11,7 +11,6 @@ use Illuminate\Console\Command;
 /**
  * Class     MakeUser
  *
- * @package  Arcanesoft\Auth\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MakeUser extends Command

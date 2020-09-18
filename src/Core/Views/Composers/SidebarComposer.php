@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\View;
 /**
  * Class     SidebarComposer
  *
- * @package  Arcanesoft\Foundation\Core\Views\Composers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SidebarComposer

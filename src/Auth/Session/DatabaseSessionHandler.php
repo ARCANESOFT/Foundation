@@ -13,9 +13,8 @@ use Illuminate\Support\{Arr, InteractsWithTime};
 use SessionHandlerInterface;
 
 /**
- * Class     ArcanesoftSessionHandler
+ * Class     DatabaseSessionHandler
  *
- * @package  Arcanesoft\Foundation\Auth\Session
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DatabaseSessionHandler implements ExistenceAwareInterface, SessionHandlerInterface

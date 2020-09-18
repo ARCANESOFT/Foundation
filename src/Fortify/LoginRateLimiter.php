@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 /**
  * Class     LoginRateLimiter
  *
- * @package  Arcanesoft\Foundation\Fortify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LoginRateLimiter

@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     ProfileController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ProfileController extends Controller

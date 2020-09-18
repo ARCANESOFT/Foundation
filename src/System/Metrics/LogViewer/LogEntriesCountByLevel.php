@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 /**
  * Class     LogEntriesCountByLevel
  *
- * @package  Arcanesoft\Foundation\System\Metrics\LogViewer
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LogEntriesCountByLevel extends Partition

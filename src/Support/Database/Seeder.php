@@ -10,7 +10,6 @@ use Illuminate\Database\Seeder as IlluminateSeeder;
 /**
  * Class     Seeder
  *
- * @package  Arcanesoft\Foundation\Support\Database
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class Seeder extends IlluminateSeeder

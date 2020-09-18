@@ -9,7 +9,6 @@ use Arcanedev\LaravelPolicies\Contracts\PolicyManager;
 /**
  * Trait     HasPolicyClasses
  *
- * @package  Arcanesoft\Foundation\Support\Providers\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HasPolicyClasses

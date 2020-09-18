@@ -13,7 +13,6 @@ use Illuminate\Http\JsonResponse;
 /**
  * Class     AdministratorsController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers\Roles
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AdministratorsController extends Controller

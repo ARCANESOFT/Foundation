@@ -106,7 +106,6 @@ class Administrator extends Authenticatable implements Impersonatable, CanBeActi
     protected $casts = [
         'last_activity_at' => 'datetime',
         'activated_at'     => 'datetime',
-        'two_factor'       => Casts\TwoFactorCast::class,
     ];
 
     /**

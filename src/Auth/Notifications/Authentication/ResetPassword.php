@@ -11,7 +11,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 /**
  * Class     ResetPassword
  *
- * @package  Arcanesoft\Foundation\Auth\Notifications\Authentication
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ResetPassword extends ResetPasswordNotification

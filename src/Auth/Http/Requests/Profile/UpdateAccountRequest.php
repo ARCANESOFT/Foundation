@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Auth\Http\Requests\Profile;
 
-use Arcanesoft\Foundation\Auth\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use Arcanesoft\Foundation\Auth\Rules\Users\EmailRule;
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
 
 /**
- * Class     UpdateUserAccountRequest
+ * Class     UpdateAccountRequest
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Requests\Profile
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UpdateAccountRequest extends FormRequest

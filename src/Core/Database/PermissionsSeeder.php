@@ -14,7 +14,6 @@ use Illuminate\Support\{Collection, Str};
 /**
  * Class     PermissionsSeeder
  *
- * @package  Arcanesoft\Foundation\Core\Database
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class PermissionsSeeder extends Seeder

@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Support\Providers\ViewServiceProvider as ServiceProvid
 /**
  * Class     ViewServiceProvider
  *
- * @package  Arcanesoft\Foundation\Core\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ViewServiceProvider extends ServiceProvider

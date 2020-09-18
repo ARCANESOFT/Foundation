@@ -8,10 +8,9 @@ use Arcanesoft\Foundation\Views\Component;
 use Illuminate\Http\Request;
 
 /**
- * Interface     Manager
+ * Interface  Manager
  *
- * @package  Arcanesoft\Foundation\Views\Contracts
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Manager
 {

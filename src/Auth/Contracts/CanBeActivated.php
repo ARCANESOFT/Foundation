@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Auth\Contracts;
 
 /**
- * Interface     CanActivate
+ * Interface  CanBeActivated
  *
- * @package  Arcanesoft\Foundation\Auth\Contracts
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface CanBeActivated
 {

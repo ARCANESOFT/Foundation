@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Http\Controllers\LogViewerController;
 /**
  * Class     LogViewerRoutes
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LogViewerRoutes extends AbstractRouteRegistrar

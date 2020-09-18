@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Date;
 /**
  * Class     RolesSeeder
  *
- * @package  Arcanesoft\Foundation\Core\Database
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class RolesSeeder extends Seeder

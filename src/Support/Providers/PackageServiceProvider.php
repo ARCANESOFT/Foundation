@@ -9,7 +9,6 @@ use Arcanedev\Support\Providers\PackageServiceProvider as ServiceProvider;
 /**
  * Class     PackageServiceProvider
  *
- * @package  Arcanesoft\Foundation\Support\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class PackageServiceProvider extends ServiceProvider

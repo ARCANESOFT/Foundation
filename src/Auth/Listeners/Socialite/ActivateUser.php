@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Repositories\UsersRepository;
 /**
  * Class     ActivateUser
  *
- * @package  Arcanesoft\Foundation\Auth\Listeners\Socialite
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ActivateUser

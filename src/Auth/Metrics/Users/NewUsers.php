@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     NewUsers
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NewUsers extends RangedValue

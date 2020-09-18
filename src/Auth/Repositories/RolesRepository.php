@@ -6,17 +6,20 @@ namespace Arcanesoft\Foundation\Auth\Repositories;
 
 use Arcanesoft\Foundation\Auth\Auth;
 use Arcanesoft\Foundation\Auth\Models\{Administrator, Role, Permission};
-use Arcanesoft\Foundation\Auth\Events\Roles\{
-    Administrators\DetachedAdministrator, Administrators\DetachedAllAdministrators, Administrators\DetachingAdministrator,
-    Administrators\DetachingAllAdministrators, Permissions\DetachedPermission, Permissions\DetachingAllPermissions,
-    Permissions\DetachedAllPermissions, Permissions\DetachingPermission, Permissions\SyncedPermissions,
-    Permissions\SyncingPermissions
-};
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachedAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachedAllAdministrators;
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachingAdministrator;
+use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachingAllAdministrators;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachedAllPermissions;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachedPermission;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachingAllPermissions;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachingPermission;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\SyncedPermissions;
+use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\SyncingPermissions;
 
 /**
  * Class     RolesRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
  * @mixin  \Arcanesoft\Foundation\Auth\Models\Role

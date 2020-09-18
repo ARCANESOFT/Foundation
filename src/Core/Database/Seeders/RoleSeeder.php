@@ -7,9 +7,8 @@ namespace Arcanesoft\Foundation\Core\Database\Seeders;
 use Arcanesoft\Foundation\Core\Database\RolesSeeder as Seeder;
 
 /**
- * Class     RoleTableSeeder
+ * Class     RoleSeeder
  *
- * @package  Arcanesoft\Foundation\Core\Database\Seeders
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RoleSeeder extends Seeder

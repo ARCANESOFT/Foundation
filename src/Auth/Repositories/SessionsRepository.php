@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Models\Session;
 /**
  * Class     SessionsRepository
  *
- * @package  Arcanesoft\Foundation\Auth\Repositories
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionsRepository extends AbstractRepository

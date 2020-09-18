@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\System\Database\DatabaseSeeder;
 /**
  * Class     InstallCommand
  *
- * @package  Arcanesoft\Foundation\System\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class InstallCommand extends Command

@@ -14,7 +14,6 @@ use Illuminate\Validation\ValidationException;
 /**
  * Class     AttemptToAuthenticate
  *
- * @package  Arcanesoft\Foundation\Fortify\Actions\Authentication\Login
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AttemptToAuthenticate

@@ -8,9 +8,8 @@ use Arcanesoft\Foundation\Auth\Auth;
 use Illuminate\Support\{Arr, HtmlString};
 
 /**
- * Class     SidebarItem
+ * Class     Item
  *
- * @package  Arcanesoft\Foundation\Helpers\Sidebar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Item

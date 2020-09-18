@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Http\Controllers\ProfileController;
 /**
  * Class     ProfileRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ProfileRoutes extends AbstractRouteRegistrar

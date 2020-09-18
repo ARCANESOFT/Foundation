@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 /**
  * Class     PrepareAuthenticatedSession
  *
- * @package  Arcanesoft\Foundation\Auth\Actions\Authentication\Login
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class PrepareAuthenticatedSession

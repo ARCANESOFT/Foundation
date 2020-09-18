@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arcanesoft\Foundation\Support\Http\Concerns;
 
 use Illuminate\Http\JsonResponse;
@@ -7,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 /**
  * Trait     HasJsonResponses
  *
- * @package  Arcanesoft\Foundation\Support\Http\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HasJsonResponses

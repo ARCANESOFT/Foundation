@@ -11,7 +11,6 @@ use ReflectionProperty;
 /**
  * Trait     InteractsWithProperties
  *
- * @package  Arcanesoft\Foundation\Views\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait InteractsWithProperties

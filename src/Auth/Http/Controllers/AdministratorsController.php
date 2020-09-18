@@ -14,7 +14,6 @@ use Arcanesoft\Foundation\Support\Traits\HasNotifications;
 /**
  * Class     AdministratorsController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class AdministratorsController extends Controller

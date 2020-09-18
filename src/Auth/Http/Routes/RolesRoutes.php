@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Auth\Repositories\RolesRepository;
 /**
  * Class     RolesRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RolesRoutes extends AbstractRouteRegistrar

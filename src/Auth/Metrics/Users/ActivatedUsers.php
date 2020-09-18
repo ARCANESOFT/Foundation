@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 /**
  * Class     ActivatedUsers
  *
- * @package  Arcanesoft\Foundation\Auth\Metrics\Users
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ActivatedUsers extends NullablePartition

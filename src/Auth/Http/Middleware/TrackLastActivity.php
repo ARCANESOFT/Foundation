@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class     TrackLastActivity
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Middleware
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TrackLastActivity

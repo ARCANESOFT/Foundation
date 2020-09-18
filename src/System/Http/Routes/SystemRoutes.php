@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\System\Http\Controllers\SystemController;
 /**
  * Class     SystemRoutes
  *
- * @package  Arcanesoft\Foundation\System\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SystemRoutes extends AbstractRouteRegistrar

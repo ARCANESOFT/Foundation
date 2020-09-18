@@ -7,7 +7,6 @@ namespace Arcanesoft\Foundation\Auth\Events\Socialite;
 /**
  * Class     UserRegistered
  *
- * @package  Arcanesoft\Foundation\Auth\Events\Socialite
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UserRegistered

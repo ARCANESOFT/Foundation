@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 /**
  * Class     InstallCommand
  *
- * @package  Arcanesoft\Foundation\Support\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class InstallCommand extends Command

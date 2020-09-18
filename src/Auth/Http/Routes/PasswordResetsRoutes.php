@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Http\Controllers\PasswordResetsController;
 /**
  * Class     PasswordResetsRoutes
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Routes
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PasswordResetsRoutes extends AbstractRouteRegistrar

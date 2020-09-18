@@ -15,7 +15,6 @@ use Arcanesoft\Foundation\Auth\Repositories\UsersRepository;
 /**
  * Class     UsersController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class UsersController extends Controller

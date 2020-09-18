@@ -10,7 +10,6 @@ use Arcanesoft\Foundation\Support\Traits\HasNotifications;
 /**
  * Class     PasswordResetsController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PasswordResetsController extends Controller

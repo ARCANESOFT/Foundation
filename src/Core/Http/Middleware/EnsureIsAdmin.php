@@ -12,7 +12,6 @@ use Illuminate\Http\{Request, Response};
 /**
  * Class     EnsureIsAdmin
  *
- * @package  Arcanesoft\Foundation\Core\Http\Middleware
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EnsureIsAdmin

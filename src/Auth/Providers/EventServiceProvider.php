@@ -9,7 +9,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 /**
  * Class     EventServiceProvider
  *
- * @package  Arcanesoft\Foundation\Auth\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class EventServiceProvider extends ServiceProvider

@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\View;
 /**
  * Class     RequiredPhpExtensionsComposer
  *
- * @package  Arcanesoft\Foundation\System\Views\Composers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RequiredPhpExtensionsComposer

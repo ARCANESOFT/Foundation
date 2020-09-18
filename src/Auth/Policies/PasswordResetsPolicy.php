@@ -9,7 +9,6 @@ use Arcanesoft\Foundation\Auth\Models\Administrator;
 /**
  * Class     PasswordResetsPolicy
  *
- * @package  Arcanesoft\Foundation\Policies\Auth
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PasswordResetsPolicy extends AbstractPolicy

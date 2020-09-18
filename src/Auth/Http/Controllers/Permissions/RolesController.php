@@ -12,7 +12,6 @@ use Arcanesoft\Foundation\Auth\Repositories\PermissionsRepository;
 /**
  * Class     RolesController
  *
- * @package  Arcanesoft\Foundation\Auth\Http\Controllers\Permissions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class RolesController extends Controller

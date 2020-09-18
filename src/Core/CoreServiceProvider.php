@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 /**
  * Class     CoreServiceProvider
  *
- * @package  Arcanesoft\Foundation\Core
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CoreServiceProvider extends ServiceProvider
