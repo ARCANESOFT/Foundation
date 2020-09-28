@@ -1,21 +1,12 @@
-let mix = require('laravel-mix');
-
-/*--------------------------------------------------------------------------
- | Mix Configuration
- |--------------------------------------------------------------------------
- */
-
+const mix = require('laravel-mix');
 const options = require('../options.mix');
-
-mix.setPublicPath(options.assetsPath);
-mix.setResourceRoot(options.resourceRoot);
 
 /*--------------------------------------------------------------------------
  | Mix Asset Management
  |--------------------------------------------------------------------------
  */
 
-mix.ts(`${__dirname}/js/main.ts`, 'js/arcanesoft.js');
-mix.sass(`${__dirname}/scss/main.scss`, 'css/arcanesoft.css');
+mix.ts(path.join(__dirname, 'js/main.ts'), 'js/arcanesoft.js');
+mix.sass(path.join(__dirname, 'scss/main.scss'), 'css/arcanesoft.css');
 
-mix.copyDirectory(`${__dirname}/svg`, `${options.assetsPath}/svg/arcanesoft`);
+mix.copyDirectory(path.join(__dirname, 'svg'), `${options.assetsPath}/svg/arcanesoft`);

@@ -8,6 +8,13 @@
     </div>
     <div class="navbar-menu-wrapper">
         <ul class="navbar-nav flex-row align-items-center navbar-nav-right">
+            @if(app('router')->has('public::index'))
+            <li class="nav-item d-none d-lg-block">
+                <a href="{{ route('public::index') }}" target="_blank" rel="noopener" title="@lang('Homepage')"
+                   class="navbar-link-item navbar-link-icon"><i class="fas fa-fw fa-home"></i></a>
+            </li>
+            @endif
+
             <li class="nav-item d-none d-lg-block">
                 <v-fullscreen-toggler></v-fullscreen-toggler>
             </li>
@@ -39,8 +46,8 @@
 
                     <div class="dropdown-divider"></div>
                     {{-- LOGOUT --}}
-                    <a href="#" @click.prevent="logout('{{ route('admin::auth.logout') }}', $event)"
-                       class="dropdown-item">@lang('Logout')</a>
+                    <button @click.prevent="logout('{{ route('admin::auth.logout') }}')"
+                       class="dropdown-item">@lang('Logout')</button>
                 </div>
             </li>
         </ul>

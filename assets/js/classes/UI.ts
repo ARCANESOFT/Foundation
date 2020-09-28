@@ -1,5 +1,5 @@
 import LoadingButton from './UI/LoadingButton';
-import toastEvents from '../vue-components/Toasts/events';
+import toastEvents from '../vue/components/Toasts/events';
 
 export default class {
     toast(toast) {

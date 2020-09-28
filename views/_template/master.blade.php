@@ -24,7 +24,7 @@
         @include(Arcanesoft\Foundation\Core\Views\Composers\SidebarComposer::VIEW)
 
         <main class="main-container d-flex flex-column h-100">
-            <div class="page-container flex-shrink-0">
+            <div class="page-container flex-grow-1">
                 @include('foundation::_template.page-header')
 
                 <section class="content-wrapper p-3">
@@ -41,7 +41,7 @@
             @include('foundation::_template.footer')
         </main>
 
-        <toasts-manager-component></toasts-manager-component>
+        <v-toasts-manager></v-toasts-manager>
     </div>
 
     {{-- MODALS --}}

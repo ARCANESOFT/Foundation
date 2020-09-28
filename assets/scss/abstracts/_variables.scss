@@ -248,10 +248,10 @@ $avatar-sizes: (
     "xxl": 8rem,
 ) !default;
 
-// SKINS
+// THEMES
 
 $skins: (
-    light:   (
+    'light': (
         body-bg-color:                #E9ECEF,
         body-font-color:              $gray-800,
 
@@ -279,8 +279,15 @@ $skins: (
         breadcrumbs-item-hover-color: $gray-800,
         breadcrumbs-active-color:     $gray-600,
         breadcrumbs-divider-color:    $gray-600,
+
+        sidebar-bg-color:              $gray-100,
+        sidebar-text-normal-color:     $gray-800,
+        sidebar-text-hover-color:      $gray-600,
+        sidebar-link-active-bg:        #34314F,
+        sidebar-link-active-color:     $gray-100,
+
     ),
-    dark:   (
+    'dark':  (
         body-bg-color:                #181818,
         body-font-color:              $gray-200,
 
@@ -308,6 +315,12 @@ $skins: (
         breadcrumbs-item-hover-color: $gray-300,
         breadcrumbs-active-color:     $gray-500,
         breadcrumbs-divider-color:    $gray-500,
+
+        sidebar-bg-color:              #202020,
+        sidebar-text-normal-color:     $gray-200,
+        sidebar-text-hover-color:      $gray-300,
+        sidebar-link-active-bg:        #34314F,
+        sidebar-link-active-color:     $gray-100,
     ),
 );
 

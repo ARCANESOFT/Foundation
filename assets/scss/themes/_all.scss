@@ -21,9 +21,11 @@
         --skin-footer-text-normal-color:  var(--skin-surface-text-normal-color);
 
         // SIDEBAR
-        --skin-sidebar-bg-color:          #{map-get($skin-colors, "accent-bg-color")};
-        --skin-sidebar-text-normal-color: #{map-get($skin-colors, "accent-text-normal-color")};
-        --skin-sidebar-text-hover-color:  #{map-get($skin-colors, "accent-text-hover-color")};
+        --skin-sidebar-bg-color:          #{map-get($skin-colors, "sidebar-bg-color")};
+        --skin-sidebar-text-normal-color: #{map-get($skin-colors, "sidebar-text-normal-color")};
+        --skin-sidebar-text-hover-color:  #{map-get($skin-colors, "sidebar-text-hover-color")};
+        --skin-sidebar-link-active-bg:    #{map-get($skin-colors, "sidebar-link-active-bg")};
+        --skin-sidebar-link-active-color: #{map-get($skin-colors, "sidebar-link-active-color")};
 
         // INPUT
         --skin-input-bg-color:            var(--skin-body-bg-color);
@@ -45,4 +47,5 @@
 }
 
 // SKINS
-@import "light", "dark";
+@import "light";
+@import "dark";

@@ -79,11 +79,11 @@ class Manager implements ManagerContract
     /**
      * Make a component.
      *
-     * @param string $name
+     * @param  string  $name
      *
-     * @return \Arcanedev\Components\Component
+     * @return \Arcanesoft\Foundation\Views\Component
      *
-     * @throws \Arcanedev\Components\Exceptions\ComponentNotFound
+     * @throws \Arcanesoft\Foundation\Views\Exceptions\ComponentNotFound
      */
     public function make(string $name): Component
     {
@@ -96,7 +96,7 @@ class Manager implements ManagerContract
     /**
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return \Arcanedev\Components\Component
+     * @return \Arcanesoft\Foundation\Views\Component
      */
     public function resolve(Request $request): Component
     {

@@ -6,11 +6,15 @@
         "moduleResolution": "node",
         "noEmit": false,
         "allowJs": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "types": [
+            "jest",
+            "lodash",
+            "node"
+        ]
     },
     "include": [
         "js/**/*",
-        "tests/**/*.test.ts",
-        "../../node_modules/@types"
+        "tests/**/*.test.ts"
     ]
 }

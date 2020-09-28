@@ -1,17 +1,13 @@
-import Vue from 'vue'
+import {App} from "@vue/runtime-core";
+import app from './../vue/App'
 import UI from './UI'
-import EventEmitter, {EventType} from "./Utilities/EventEmitter";
-
-Vue.config.ignoredElements = [
-    // Use a `RegExp` to ignore all elements that start with "x-" (2.5+ only)
-    /^x-/,
-]
+import EventEmitter, {EventType} from "./Utilities/EventEmitter"
 
 export default class Arcanesoft {
     // Properties
     //----------------------------------
 
-    public app: Vue
+    public app: App
     public emitter: EventEmitter
     public ui: UI
     protected _config: Object
@@ -20,8 +16,9 @@ export default class Arcanesoft {
     // Constructor
     //----------------------------------
 
-    public constructor(config: {}) {
-        this._config = config
+    public constructor(config?: {}) {
+        this.app = app
+        this._config = config || {}
         this.emitter = new EventEmitter
         this.ui = new UI
     }
@@ -35,31 +32,7 @@ export default class Arcanesoft {
 
         this.$emit('arcanesoft::starting', this)
 
-        let _this = this
-
-        this.app = new Vue({
-            el: _this._config['el'],
-            store: _this._config['store'],
-            components: _this._config['components'] || {},
-
-            mounted: () => {
-                _this.initComponents(document)
-            },
-
-            methods: {
-                logout(url: string) {
-                    _this.request()
-                        .delete(url)
-                        .then((response) => response.data.redirect)
-                        .then((redirectUrl) => {
-                            location.replace(redirectUrl)
-                        })
-                        .catch(() => {
-                            location.reload()
-                        })
-                },
-            }
-        })
+        this.app.mount(this._config['rootContainer'])
 
         this.$emit('arcanesoft::started', this)
 
@@ -90,7 +63,7 @@ export default class Arcanesoft {
     /**
      * Unregister an listener on the event bus
      */
-    public $off(type: EventType | '*', handler): void {
+    public $off(type: EventType | '*', handler?: Function): void {
         this.emitter.off(type, handler)
     }
 

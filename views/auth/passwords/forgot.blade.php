@@ -8,46 +8,43 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-6 col-xxl-4">
-            <div class="card shadow-sm">
-                <div class="card-header p-3">
-                    <h3 class="h5 font-weight-light text-uppercase text-muted text-center m-0">@lang('Confirm Password')</h3>
-                </div>
-                <div class="card-body">
+        <div class="col-md-8 col-lg-6 col-xxl-4">
+            <x-arc:card>
+                <x-arc:card-header class="text-center">@lang('Reset Password')</x-arc:card-header>
+
+                <x-arc:card-body>
                     <p class="small">@lang('No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.')</p>
 
                     @if (session('status'))
                         <p class="font-weight-bold small text-success">{{ session('status') }}</p>
                     @endif
 
-                    <form action="{{ route(Arcanesoft\Foundation\Authentication\Http\Routes\PasswordResetRoutes::EMAIL) }}" method="POST">
-                        @csrf
-
-                        <div class="row g-3">
-                            <div class="col-lg-12">
-                                {{-- EMAIL --}}
-                                <div class="form-label-group">
-                                    <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                           class="form-control {{ $errors->first('email', 'is-invalid') }}"
-                                           placeholder="@lang('E-Mail Address')" required autofocus>
-                                    <label for="email">@lang('E-Mail Address')</label>
-                                    @error('email')
-                                    <span class="invalid-feedback font-weight-bold" role="alert">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                    <x-arc:form
+                        action="{{ route(Arcanesoft\Foundation\Authentication\Http\Routes\PasswordResetRoutes::EMAIL) }}"
+                        method="POST">
+                        <div class="row row-cols-1 g-3">
+                            {{-- EMAIL --}}
+                            <div class="col">
+                                <x-arc:input-control
+                                    type="email" name="email" label="E-Mail Address"
+                                    required autofocus autocomplete="username" grouped="true"/>
                             </div>
-                            <div class="col-lg-12">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">@lang('Email Password Reset Link')</button>
+                            {{-- SUBMIT BUTTON --}}
+                            <div class="col">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                    @lang('Email Password Reset Link')
+                                </button>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </x-arc:form>
+                </x-arc:card-body>
+
                 @if (app('router')->has($route = Arcanesoft\Foundation\Authentication\Http\Routes\LoginRoutes::LOGIN_CREATE))
-                    <div class="card-footer py-3 text-center">
+                    <x-arc:card-footer class="text-center">
                         <a href="{{ route($route) }}" class="text-decoration-none">@lang("Just remember your password? Login")</a>
-                    </div>
+                    </x-arc:card-footer>
                 @endif
-            </div>
+            </x-arc:card>
         </div>
     </div>
 @endsection

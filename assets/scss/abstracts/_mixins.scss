@@ -6,8 +6,14 @@
 
 // Skins
 @mixin skin-mode($mode) {
-    body[data-skin-mode='#{$mode}'] {
-        @content;
+    body {
+        &[data-skin-mode='#{$mode}'] {
+            @content;
+        }
+
+        &:not([data-skin-mode]) {
+            @media (prefers-color-scheme: $mode) { @content; }
+        }
     }
 }
 
