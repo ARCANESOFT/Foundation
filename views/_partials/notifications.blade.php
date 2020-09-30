@@ -11,9 +11,7 @@
             <p class="mb-0">{{ $notification['content'] }}</p>
             @endif
         </div>
-        <button type="button" class="close" data-dismiss="alert" aria-label="{{ __('Close') }}">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <x-arc:button-close data-dismiss="alert"/>
     </div>
 @endforeach
 

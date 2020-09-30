@@ -2,7 +2,16 @@
 
 return [
 
+    /* -----------------------------------------------------------------
+     |  Blade components
+     | -----------------------------------------------------------------
+     */
+
     'components' => [
+
+        // Buttons
+        'arc:button-close'     => Arcanesoft\Foundation\Views\Components\Buttons\Close::class,
+
         // Form
         'arc:form'             => Arcanesoft\Foundation\Views\Components\Forms\Form::class,
 
@@ -23,6 +32,7 @@ return [
 
         // Pagination
         'arc:pagination-pages' => Arcanesoft\Foundation\Views\Components\Pagination\Pages::class
+
     ],
 
 ];
