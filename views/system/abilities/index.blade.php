@@ -7,5 +7,5 @@
 @section('content')
     @include('foundation::system._includes.system-nav')
 
-    <v-datatable name="{{ Arcanesoft\Foundation\System\Views\Components\AbilitiesDatatable::NAME }}"></v-datatable>
+    <v-datatable name="{{ Arcanesoft\Foundation\System\Views\Components\AbilitiesDatatable::NAME }}"/>
 @endsection

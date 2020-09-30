@@ -4,19 +4,19 @@
  * @var  array                                                 $fields
  */
 ?>
-<div class="card card-borderless shadow-sm">
+<x-arc:card>
     @if ($packages->isNotEmpty())
-        <div class="card-header px-2">
+        <x-arc:card-header>
             @include('foundation::_components.datatable.datatable-header')
-        </div>
-        <table class="table table-borderless table-hover mb-0">
+        </x-arc:card-header>
+        <x-arc:card-table>
             <thead>
-            <tr>
-                <th class="font-weight-light text-uppercase text-muted">{{ $fields['name'] }}</th>
-                <th class="font-weight-light text-uppercase text-muted">{{ $fields['description'] }}</th>
-                <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['version'] }}</th>
-                <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
-            </tr>
+                <tr>
+                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['name'] }}</th>
+                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['description'] }}</th>
+                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['version'] }}</th>
+                    <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($packages as $package)
@@ -37,11 +37,11 @@
                 </tr>
             @endforeach
             </tbody>
-        </table>
-        <div class="card-footer px-2">
+        </x-arc:card-table>
+        <x-arc:card-footer>
             @include('foundation::_components.datatable.datatable-footer', ['paginator' => $packages])
-        </div>
+        </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')
     @endif
-</div>
+</x-arc:card>

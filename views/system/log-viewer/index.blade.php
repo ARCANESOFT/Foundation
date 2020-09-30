@@ -5,67 +5,66 @@
 @endsection
 
 @section('content')
-    <div class="card card-borderless shadow-sm">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead>
-                    <tr>
-                        @foreach($headers as $key => $header)
-                        <th scope="col" class="font-weight-light text-uppercase text-muted {{ $key === 'date' ? 'text-left' : 'text-center' }}">
-                            {{ $header }}
-                        </th>
-                        @endforeach
-                        <th scope="col" class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @forelse($rows as $date => $row)
-                    <tr>
-                        @foreach($row as $key => $value)
-                            <td class="small {{ $key === 'date' ? 'text-left' : 'text-center' }}">
-                                @if ($key == 'date')
-                                    <span class="text-muted">{{ $value }}</span>
-                                @elseif ($value === 0)
-                                    <span class="text-muted">-</span>
-                                @else
-                                    <span class="badge badge-outline-log-level-{{ $key }} text-muted">{{ $value }}</span>
-                                @endif
-                            </td>
-                        @endforeach
-                        <td class="text-right">
-                            @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('show'))
-                                <a href="{{ route('admin::system.log-viewer.logs.show', [$date]) }}"
-                                   class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                    <i class="far fa-fw fa-eye"></i>
-                                </a>
-                            @endcan
-
-                            @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
-                                <a href="{{ route('admin::system.log-viewer.logs.download', [$date]) }}"
-                                   class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Download')">
-                                    <i class="fas fa-fw fa-download"></i>
-                                </a>
-                            @endcan
-
-                            @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
-                                <button onclick="Foundation.$emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
-                                        class="btn btn-sm btn-light text-danger" data-toggle="tooltip" title="@lang('Delete')">
-                                    <i class="far fa-fw fa-trash-alt"></i>
-                                </button>
-                            @endcan
+    <x-arc:card>
+        <x-arc:card-header>@lang('Logs')</x-arc:card-header>
+        <x-arc:card-table>
+            <thead>
+                <tr>
+                    @foreach($headers as $key => $header)
+                    <th scope="col" class="font-weight-light text-uppercase text-muted {{ $key === 'date' ? 'text-left' : 'text-center' }}">
+                        {{ $header }}
+                    </th>
+                    @endforeach
+                    <th scope="col" class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
+                </tr>
+            </thead>
+            <tbody>
+            @forelse($rows as $date => $row)
+                <tr>
+                    @foreach($row as $key => $value)
+                        <td class="small {{ $key === 'date' ? 'text-left' : 'text-center' }}">
+                            @if ($key == 'date')
+                                <span class="text-muted">{{ $value }}</span>
+                            @elseif ($value === 0)
+                                <span class="text-muted">-</span>
+                            @else
+                                <span class="badge border border-log-level-{{ $key }} text-muted">{{ $value }}</span>
+                            @endif
                         </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="11" class="text-center">
-                            <span class="badge badge-secondary">@lang('The list is empty!')</span>
-                        </td>
-                    </tr>
-                @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    @endforeach
+                    <td class="text-right">
+                        @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('show'))
+                            <a href="{{ route('admin::system.log-viewer.logs.show', [$date]) }}"
+                               class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
+                                <i class="far fa-fw fa-eye"></i>
+                            </a>
+                        @endcan
+
+                        @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
+                            <a href="{{ route('admin::system.log-viewer.logs.download', [$date]) }}"
+                               class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Download')">
+                                <i class="fas fa-fw fa-download"></i>
+                            </a>
+                        @endcan
+
+                        @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
+                            <button onclick="Foundation.$emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
+                                    class="btn btn-sm btn-light text-danger" data-toggle="tooltip" title="@lang('Delete')">
+                                <i class="far fa-fw fa-trash-alt"></i>
+                            </button>
+                        @endcan
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="11" class="text-center">
+                        <span class="badge badge-secondary">@lang('The list is empty!')</span>
+                    </td>
+                </tr>
+            @endforelse
+            </tbody>
+        </x-arc:card-table>
+    </x-arc:card>
 @endsection
 
 {{-- DELETE MODAL/SCRIPT --}}

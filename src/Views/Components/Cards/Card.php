@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Support\Cards;
+namespace Arcanesoft\Foundation\Views\Components\Cards;
 
 use Illuminate\View\Component;
 
 /**
- * Class     Header
+ * Class     Card
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Header extends Component
+class Card extends Component
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -25,6 +25,6 @@ class Header extends Component
      */
     public function render()
     {
-        return view('foundation::_components.support.cards.header');
+        return view('foundation::_components.cards.card');
     }
 }

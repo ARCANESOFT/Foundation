@@ -8,55 +8,59 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <div class="card card-borderless shadow-sm">
-                <div class="card-header">@lang('Ability')</div>
-                <table class="table table-hover mb-0">
+        <div class="col-lg-6">
+            <x-arc:card>
+                <x-arc:card-header>@lang('Ability')</x-arc:card-header>
+                <x-arc:card-table>
                     <tbody>
                         <tr>
-                            <th>@lang('Key') :</th>
+                            <th class="font-weight-light text-uppercase text-muted">@lang('Key')</th>
                             <td class="text-right">
-                                <span class="badge badge-outline-dark">{{ $ability->key() }}</span>
+                                <span class="badge border border-muted text-muted">{{ $ability->key() }}</span>
                             </td>
                         </tr>
                         <tr>
-                            <th>@lang('Method') :</th>
-                            <td class="text-right">
-                                <code>{{ $ability->isClosure() ? 'Closure' : $ability->method() }}</code>
+                            <th class="font-weight-light text-uppercase text-muted">@lang('Method')</th>
+                            <td class="text-right font-monospace small">
+                                @if($ability->isClosure())
+                                    Closure
+                                @else
+                                    @php([$class, $method] = explode('@', $ability->method()))
+                                    <abbr title="{{ $ability->method() }}">{{ class_basename($class).'@'.$method }}</abbr>
+                                @endif
                             </td>
                         </tr>
                         <tr>
-                            <th>@lang('Category') :</th>
-                            <td class="text-right">{{ $ability->meta('category') }}</td>
+                            <th class="font-weight-light text-uppercase text-muted">@lang('Category')</th>
+                            <td class="text-right small">{{ $ability->meta('category') }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('Name') :</th>
-                            <td class="text-right">{{ $ability->meta('name') }}</td>
+                            <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
+                            <td class="text-right small">{{ $ability->meta('name') }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('Description') :</th>
-                            <td class="text-right">{{ $ability->meta('description') }}</td>
+                            <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
+                            <td class="text-right small">{{ $ability->meta('description') }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('Registered') :</th>
+                            <th class="font-weight-light text-uppercase text-muted">@lang('Registered')</th>
                             <td class="text-right">
                                 @if ($ability->meta('is_registered', false))
-                                    <span class="badge badge-outline-success">@lang('Yes')</span>
+                                    <span class="badge border border-success text-success">@lang('Yes')</span>
                                 @else
-                                    <span class="badge badge-outline-secondary">@lang('No')</span>
+                                    <span class="badge border border-secondary text-secondary">@lang('No')</span>
                                 @endif
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </x-arc:card-table>
                 @can(Arcanesoft\Foundation\System\Policies\AbilitiesPolicy::ability('index'))
-                <div class="card-footer text-right px-2">
-                    <a href="{{ route('admin::system.abilities.index') }}" class="btn btn-sm btn-light">
-                        @lang('Return back')
-                    </a>
-                </div>
+                <x-arc:card-footer class="text-right">
+                    <a href="{{ route('admin::system.abilities.index') }}"
+                       class="btn btn-sm btn-light">@lang('Return back')</a>
+                </x-arc:card-footer>
                 @endcan
-            </div>
+            </x-arc:card>
         </div>
     </div>
 @endsection

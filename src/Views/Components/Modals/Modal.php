@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Support\Cards;
+namespace Arcanesoft\Foundation\Views\Components\Modals;
 
 use Illuminate\View\Component;
 
 /**
- * Class     Card
+ * Class     Modal
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Card extends Component
+class Modal extends Component
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -25,6 +25,6 @@ class Card extends Component
      */
     public function render()
     {
-        return view('foundation::_components.support.cards.card');
+        return view('foundation::_components.modals.modal');
     }
 }

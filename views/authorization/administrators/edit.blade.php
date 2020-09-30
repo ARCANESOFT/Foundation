@@ -15,9 +15,9 @@
     {{ form()->open(['route' => ['admin::auth.administrators.update', $administrator], 'method' => 'PUT']) }}
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
-                <div class="card card-borderless shadow-sm">
-                    <div class="card-header">@lang('Administrator')</div>
-                    <div class="card-body">
+                <x-arc:card class="card card-borderless shadow-sm">
+                    <x-arc:card-header>@lang('Administrator')</x-arc:card-header>
+                    <x-arc:card-body>
                         <div class="row g-3">
                             {{-- FIRST NAME --}}
                             <div class="col-lg-6">
@@ -46,40 +46,39 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between">
+                    </x-arc:card-body>
+                    <x-arc:card-footer class="d-flex justify-content-between">
                         <a href="{{ route('admin::auth.administrators.index') }}" class="btn btn-sm btn-light">
                             @lang('Cancel')
                         </a>
                         <button type="submit" class="btn btn-sm btn-primary">@lang('Save')</button>
-                    </div>
-                </div>
+                    </x-arc:card-footer>
+                </x-arc:card>
             </div>
             <div class="col-lg-6 col-xl-7">
-                <div class="card card-borderless shadow-sm">
-                    <div class="card-header px-2">@lang('Roles')</div>
-                    <table class="table table-borderless table-hover mb-0">
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Roles')</x-arc:card-header>
+                    <x-arc:card-table class="table table-borderless table-hover mb-0">
                         <thead>
-                        <tr>
-                            <th class="font-weight-light text-uppercase text-muted">#</th>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
-                        </tr>
+                            <tr>
+                                <th class="font-weight-light text-uppercase text-muted">#</th>
+                                <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
+                                <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach($roles as $role)
                             <tr>
                                 <td>
-                                    @php($roleKey = $role->getRouteKey())
-                                    {{ form()->checkbox('roles[]', $roleKey, in_array($roleKey, old('roles', $administrator->roles->pluck($role->getRouteKeyName())->toArray()))) }}
+                                    {{ form()->checkbox('roles[]', $role->getRouteKey(), in_array($role->getRouteKey(), old('roles', $administrator->roles->pluck($role->getRouteKeyName())->toArray()))) }}
                                 </td>
                                 <td class="small">{{ $role->name }}</td>
                                 <td class="small">{{ $role->description }}</td>
                             </tr>
                         @endforeach
                         </tbody>
-                    </table>
-                </div>
+                    </x-arc:card-table>
+                </x-arc:card>
             </div>
         </div>
     {{ form()->close() }}

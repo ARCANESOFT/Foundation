@@ -1,6 +1,6 @@
-<div class="card card-borderless shadow-sm">
-    <div class="card-header px-2 font-weight-light text-uppercase text-muted">@lang('Application')</div>
-    <table class="table table-borderless mb-0">
+<x-arc:card>
+    <x-arc:card-header>@lang('Application')</x-arc:card-header>
+    <x-arc:card-table>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('URL')</td>
             <td class="text-right small">{{ $applicationInfo['url'] }}</td>
@@ -73,5 +73,5 @@
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['session_driver'] }}</span>
             </td>
         </tr>
-    </table>
-</div>
+    </x-arc:card-table>
+</x-arc:card>

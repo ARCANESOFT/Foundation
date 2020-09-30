@@ -1,8 +1,6 @@
-<div class="card card-borderless shadow-sm">
-    <div class="card-header px-2 font-weight-light text-uppercase text-muted">
-        @lang('Required PHP Extensions')
-    </div>
-    <table class="table table-borderless mb-0">
+<x-arc:card>
+    <x-arc:card-header>@lang('Required PHP Extensions')</x-arc:card-header>
+    <x-arc:card-table>
         @foreach($requiredPhpExtensions as $extension => $loaded)
         <tr>
             <td class="text-monospace text-muted small">{{ $extension }}</td>
@@ -19,5 +17,5 @@
             </td>
         </tr>
         @endforeach
-    </table>
-</div>
+    </x-arc:card-table>
+</x-arc:card>

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Support\Cards;
+namespace Arcanesoft\Foundation\Views\Components\Cards;
 
 use Illuminate\View\Component;
 
 /**
- * Class     Body
+ * Class     Footer
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Body extends Component
+class Footer extends Component
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -25,6 +25,6 @@ class Body extends Component
      */
     public function render()
     {
-        return view('foundation::_components.support.cards.body');
+        return view('foundation::_components.cards.footer');
     }
 }

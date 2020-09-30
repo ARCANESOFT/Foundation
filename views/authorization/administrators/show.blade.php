@@ -9,13 +9,13 @@
 @section('content')
     <div class="row g-4">
         <div class="col-lg-5">
-            <div class="card card-borderless shadow-sm">
-                <div class="card-body d-flex justify-content-center p-3">
+            <x-arc:card>
+                <x-arc:card-body class="d-flex justify-content-center">
                     <div class="avatar avatar-xxl rounded-circle bg-light">
                         {{ html()->image($administrator->avatar, $administrator->full_name, []) }}
                     </div>
-                </div>
-                <table class="table table-md table-borderless mb-0">
+                </x-arc:card-body>
+                <x-arc:card-table>
                     <tbody>
                         <tr>
                             <td class="font-weight-light text-uppercase text-muted">@lang('Full Name')</td>
@@ -78,8 +78,8 @@
                             </tr>
                         @endif
                     </tbody>
-                </table>
-                <div class="card-footer text-right px-2">
+                </x-arc:card-table>
+                <x-arc:card-footer class="text-right">
                     <div class="input-group justify-content-end">
                         {{-- UPDATE --}}
                         @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('update'), [$administrator])
@@ -137,59 +137,60 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
+                </x-arc:card-footer>
+            </x-arc:card>
         </div>
+
         <div class="col-lg-7">
             <div class="row g-4">
                 {{-- ROLES --}}
                 <div class="col-12">
-                    <div class="card card-borderless shadow-sm">
-                        <div class="card-header px-2">@lang('Roles')</div>
-                        <table class="table table-borderless table-hover table-md mb-0">
+                    <x-arc:card>
+                        <x-arc:card-header>@lang('Roles')</x-arc:card-header>
+                        <x-arc:card-table class="table-hover">
                             <thead>
-                            <tr>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
-                                <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
-                            </tr>
+                                <tr>
+                                    <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
+                                    <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
+                                    <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @forelse($administrator->roles as $role)
-                                <?php /** @var  Arcanesoft\Foundation\Auth\Models\Role  $role */ ?>
-                                <tr>
-                                    <td class="small">{{ $role->name }}</td>
-                                    <td class="small">{{ $role->description }}</td>
-                                    <td class="text-right">
-                                        <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light"
-                                           data-toggle="tooltip" title="@lang('Show')">
-                                            <i class="far fa-fw fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center">@lang('The list is empty !')</td>
-                                </tr>
-                            @endforelse
+                                @forelse($administrator->roles as $role)
+                                    <?php /** @var  Arcanesoft\Foundation\Auth\Models\Role  $role */ ?>
+                                    <tr>
+                                        <td class="small">{{ $role->name }}</td>
+                                        <td class="small">{{ $role->description }}</td>
+                                        <td class="text-right">
+                                            <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light"
+                                               data-toggle="tooltip" title="@lang('Show')">
+                                                <i class="far fa-fw fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center">@lang('The list is empty !')</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
-                        </table>
-                    </div>
+                        </x-arc:card-table>
+                    </x-arc:card>
                 </div>
 
                 {{-- SESSION --}}
                 <div class="col-12">
-                    <div class="card card-borderless shadow-sm">
-                        <div class="card-header px-2">@lang('Sessions')</div>
-                        <table class="table table-borderless table-hover table-md mb-0">
+                    <x-arc:card>
+                        <x-arc:card-header>@lang('Sessions')</x-arc:card-header>
+                        <x-arc:card-table class="table-hover">
                             <thead>
-                            <tr>
-                                <th></th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('IP')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Device')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Last activity')</th>
-                                <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
-                            </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="font-weight-light text-uppercase text-muted">@lang('IP')</th>
+                                    <th class="font-weight-light text-uppercase text-muted">@lang('Device')</th>
+                                    <th class="font-weight-light text-uppercase text-muted">@lang('Last activity')</th>
+                                    <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($administrator->sessions as $session)
@@ -208,8 +209,8 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                        </table>
-                    </div>
+                        </x-arc:card-table>
+                    </x-arc:card>
                 </div>
             </div>
         </div>

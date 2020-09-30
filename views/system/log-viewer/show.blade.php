@@ -13,24 +13,9 @@
 
 @section('content')
     {{-- Log Details --}}
-    <div class="card card-borderless shadow-sm mb-4">
-        <div class="card-header d-flex align-items-center justify-content-between px-2">
-            <span class="badge badge-outline-secondary">{{ $log->date }}</span>
-            <div>
-                @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
-                    <a href="{{ route('admin::system.log-viewer.logs.download', [$log->date]) }}" class="btn btn-sm btn-light">
-                        <i class="fa fa-download"></i> @lang('Download')
-                    </a>
-                @endcan
-
-                @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
-                    <button onclick="Foundation.$emit('foundation::system.log-viewer.delete')" class="btn btn-sm btn-danger">
-                        <i class="far fa-fw fa-trash-alt"></i> @lang('Delete')
-                    </button>
-                @endcan
-            </div>
-        </div>
-        <table class="table table-borderless mb-0">
+    <x-arc:card class="mb-4">
+        <x-arc:card-header>{{ $log->date }}</x-arc:card-header>
+        <x-arc:card-table>
             <tbody>
                 <tr>
                     <th class="font-weight-light text-uppercase text-muted">@lang('Path')</th>
@@ -49,64 +34,79 @@
                     <td class="small">{{ $log->updatedAt() }}</td>
                 </tr>
             </tbody>
-        </table>
-    </div>
+        </x-arc:card-table>
+        <x-arc:card-footer class="d-flex justify-content-between">
+            @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
+                <a href="{{ route('admin::system.log-viewer.logs.download', [$log->date]) }}" class="btn btn-sm btn-light">
+                    <i class="fa fa-download"></i> @lang('Download')
+                </a>
+            @endcan
+
+            @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
+                <button onclick="Foundation.$emit('foundation::system.log-viewer.delete')" class="btn btn-sm btn-danger">
+                    <i class="far fa-fw fa-trash-alt"></i> @lang('Delete')
+                </button>
+            @endcan
+        </x-arc:card-footer>
+    </x-arc:card>
 
     {{-- SEARCH FORM --}}
-    <div class="card card-borderless shadow-sm mb-4">
-        <div class="card-body p-2">
-            <form action="{{ route('admin::system.log-viewer.logs.search', [$log->date, $level]) }}" method="GET">
+    <x-arc:card class="mb-4">
+        <x-arc:card-body>
+            <x-arc:form
+                action="{{ route('admin::system.log-viewer.logs.search', [$log->date, $level]) }}"
+                method="GET">
                 <div class="input-group">
                     <input type="text" id="query" name="query" class="form-control"  value="{{ $query }}"
-                           placeholder="@lang('Type here to search')" aria-label="@lang('Type here to search')" aria-describedby="search-btn">
+                           placeholder="@lang('Type here to search')" aria-label="@lang('Type here to search')"
+                           aria-describedby="search-btn">
                     @unless (is_null($query))
                         <a href="{{ route('admin::system.log-viewer.logs.show', [$log->date]) }}" class="btn btn-secondary">
                             (@lang(':total results', ['total' => $entries->count()])) <i class="fa fa-fw fa-times"></i>
                         </a>
                     @endunless
-                    <button type="button" id="search-btn" class="btn btn-primary">
+                    <button type="button" id="search-btn" class="btn btn-primary" title="Search">
                         <span class="fa fa-fw fa-search"></span>
                     </button>
                 </div>
-            </form>
-        </div>
-    </div>
+            </x-arc:form>
+        </x-arc:card-body>
+    </x-arc:card>
 
     {{-- Log Levels Menu --}}
     <nav class="log-levels-menu-nav mb-4">
         @foreach($log->menu() as $levelKey => $item)
             @if ($item['count'] === 0)
-                <a href="#" class="log-levels-menu-nav-item shadow-sm bg-log-level-empty disabled {{ $level === $levelKey ? 'active' : ''}}">
-                    <span class="level-name text-muted mb-1">{{ $item['name'] }}</span>
-                    <span class="badge badge-light text-muted">-</span>
+                <a class="d-flex flex-row flex-lg-column align-items-baseline align-items-lg-center justify-content-between p-2 text-decoration-none rounded log-levels-menu-nav-item shadow-sm bg-white" disabled>
+                    <span class="mb-1 text-uppercase text-muted {{ $level === $levelKey ? 'font-weight-bold' : ''}}">{{ $item['name'] }}</span>
+                    <span class="text-muted">-</span>
                 </a>
             @else
-                <a href="{{ $item['url'] }}" class="log-levels-menu-nav-item shadow-sm bg-log-level-{{ $levelKey }} {{ $level === $levelKey ? 'active' : ''}}">
-                    <span class="level-name mb-1">{{ $item['name'] }}</span>
-                    <span class="badge badge-light">{{ $item['count'] }}</span>
+                <a href="{{ $item['url'] }}"
+                   class="d-flex flex-row flex-lg-column align-items-baseline align-items-lg-center justify-content-between p-2 text-decoration-none rounded log-levels-menu-nav-item shadow-sm bg-white {{ $level === $levelKey ? 'active' : ''}}">
+                    <span class="mb-1 text-uppercase text-dark {{ $level === $levelKey ? 'font-weight-bold' : ''}}">{{ $item['name'] }}</span>
+                    <span class="badge bg-log-level-{{ $levelKey }} text-white">{{ $item['count'] }}</span>
                 </a>
             @endif
         @endforeach
     </nav>
 
     {{-- Log Entries --}}
-    <div class="mb-4">
-        @if ($entries->hasPages())
-            <span class="badge badge-info">
-                @lang('Page :current of :last', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()])
-            </span>
-        @endif
-    </div>
+    @if ($entries->hasPages())
+        <div class="mb-4 text-right">
+            <x-arc:pagination-pages :paginator="$entries"/>
+        </div>
+    @endif
 
     <section class="timeline-container">
         @foreach($entries as $key => $entry)
-            <div class="timeline-item card card-borderless shadow-sm mb-4">
+            <x-arc:card class="timeline-item mb-4">
                 <div class="timeline-dot shadow-sm text-white bg-log-level-{{ $entry->level }}">{{ $entry->icon() }}</div>
-                <div class="card-header d-flex px-3 py-2">
+                <x-arc:card-header class="d-flex align-items-center">
                     <div>
-                        <span class="badge badge-outline-dark">{{ $entry->datetime->format('H:i:s') }}</span>
-                        <span class="badge badge-log-level-outline-env">{{ $entry->env }}</span>
-                        <span class="badge badge-log-level-outline-{{ $entry->level }}">{{ $entry->name() }}</span>
+                        <span class="d-inline-block badge border border-dark text-dark mr-1">{{ $entry->datetime->format('H:i:s') }}</span>
+                        <span class="d-inline-block badge border border-log-level-env text-dark mr-1">{{ $entry->env }}</span>
+                        <span class="d-inline-block badge border border-log-level-{{ $entry->level }} text-dark">{{ $entry->name() }}</span>
                     </div>
 
                     @if ($entry->hasStack())
@@ -122,14 +122,13 @@
                             <i class="fa fa-toggle-on"></i> @lang('Context')
                         </a>
                     @endif
-                </div>
-                <div class="card-body p-3">
-                    {{ $entry->header }}
+                </x-arc:card-header>
+                <x-arc:card-body>
+                    <p class="small m-0">{{ $entry->header }}</p>
 
                     @if ($entry->hasStack())
-                    <div id="log-entry-stack-{{ $key }}" class="log-entry-stack-content small collapse">
-                        {{ $entry->stack() }}
-                    </div>
+                    <div id="log-entry-stack-{{ $key }}"
+                         class="log-entry-stack-content font-monospace small collapse">{{ $entry->stack() }}</div>
                     @endif
 
                     @if ($entry->hasContext())
@@ -137,8 +136,8 @@
                         <pre>{{ json_encode($entry->context(), JSON_PRETTY_PRINT) }}</pre>
                     </div>
                     @endif
-                </div>
-            </div>
+                </x-arc:card-body>
+            </x-arc:card>
         @endforeach
     </section>
 

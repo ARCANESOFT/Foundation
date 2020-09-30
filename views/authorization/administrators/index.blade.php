@@ -11,7 +11,7 @@
         @endcan
 
         @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('index'))
-        <div class="btn-group ml-auto" role="group" aria-label="Administrators lists">
+        <div class="btn-group ml-1" role="group" aria-label="Administrators lists">
             <a href="{{ route('admin::auth.administrators.index') }}"
                class="btn btn-sm btn-secondary {{ active(['admin::auth.administrators.index']) }}">@lang('All')</a>
             <a href="{{ route('admin::auth.administrators.trash') }}"
@@ -20,7 +20,7 @@
         @endcan
 
         @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('create'))
-        {{ arcanesoft\ui\action_link('add', route('admin::auth.administrators.create'))->size('sm') }}
+        {{ arcanesoft\ui\action_link('add', route('admin::auth.administrators.create'))->size('sm')->pushClass('ml-1') }}
         @endcan
     </div>
 @endpush
