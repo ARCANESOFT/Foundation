@@ -1,4 +1,4 @@
-import {App} from "@vue/runtime-core";
+import { App } from "@vue/runtime-core";
 import app from './../vue/App'
 import UI from './UI'
 import EventEmitter, {EventType} from "./Utilities/EventEmitter"

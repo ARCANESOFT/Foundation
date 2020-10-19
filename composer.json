@@ -20,7 +20,7 @@
         "arcanedev/laravel-html": "^8.0",
         "arcanedev/gravatar": "^5.0",
         "arcanedev/laravel-impersonator": "^4.0",
-        "arcanedev/laravel-metrics": "^3.0",
+        "arcanedev/laravel-metrics": "^3.1",
         "arcanedev/laravel-policies": "^3.0",
         "arcanedev/log-viewer": "^8.0",
         "arcanedev/notify": "^7.0",
@@ -47,7 +47,8 @@
         }
     },
     "scripts": {
-        "test": "phpunit --testdox"
+        "test": "phpunit",
+        "test:dox": "phpunit --testdox"
     },
     "extra": {
         "branch-alias": {

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Core\Views\Composers;
 
-use Arcanedev\Html\Elements\Element;
 use Arcanedev\LaravelMetrics\Contracts\Manager;
-use Arcanedev\LaravelMetrics\Metrics\Metric;
 use Illuminate\Contracts\View\View;
 
 /**
@@ -60,13 +58,9 @@ class MetricsComposer
      */
     public function compose(View $view): void
     {
-        $metrics = $this->manager->makeSelected()
-            ->filter(function ($metric) {
-                return $metric->authorizedToSee(request());
-            })
-            ->transform(function (Metric $metric) {
-                return Element::withTag("{$metric->type()}-metric")->attribute(':metric', $metric->toJson());
-            });
+        $metrics = $this->manager->makeSelected()->filter(function ($metric) {
+            return $metric->authorizedToSee(request());
+        });
 
         $view->with('foundationMetrics', $metrics);
     }

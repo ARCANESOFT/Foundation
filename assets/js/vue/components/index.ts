@@ -1,26 +1,33 @@
-import Datatable from './Views/Datatable'
-import { ValueMetric, TrendMetric, RangedValueMetric, PartitionMetric } from './Metrics'
-import {TuiEditor, TuiViewer} from './Forms/TuiEditor'
-import ToastsManagerComponent from './Toasts/ToastsManagerComponent'
-import SkinModeTogglerComponent from './Navbar/SkinModeTogglerComponent'
-import SidebarTogglerComponent from './Navbar/SidebarTogglerComponent'
-import RatingInputComponent from './Forms/Rating/RatingInputComponent'
-import NotificationsNavbarComponent from './Navbar/Notifications/NotificationsNavbarComponent'
-import FullscreenTogglerComponent from './Navbar/FullscreenTogglerComponent'
+import Datatable from './wire/datatable'
+import ToastsManager from './toasts/manager'
+import Metric from './metrics'
+// import Metric, { ValueMetric, TrendMetric, RangedValueMetric, PartitionMetric } from './metrics'
+import TuiEditor from './forms/tui-editor/editor'
+import TuiViewer from './forms/tui-editor/viewer'
+import RatingInput from './forms/rating/input'
+import SidebarToggler from './navbar/togglers/sidebar'
+import SkinModeToggler from './navbar/togglers/skin-mode'
+import FullscreenToggler from './navbar/togglers/fullscreen'
+import NavbarNotifications from './navbar/notifications/notifications'
 
 export default {
     'v-datatable':              Datatable,
-    'v-notifications-navbar':   NotificationsNavbarComponent,
-    'v-fullscreen-toggler':     FullscreenTogglerComponent,
-    'v-rating-input':           RatingInputComponent,
-    'v-sidebar-toggler':        SidebarTogglerComponent,
-    'v-skin-mode-toggler':      SkinModeTogglerComponent,
-    'v-toasts-manager':         ToastsManagerComponent,
+    'v-toasts-manager':         ToastsManager,
+
+    // Navbar
+    'v-navbar-notifications':   NavbarNotifications,
+    'v-fullscreen-toggler':     FullscreenToggler,
+    'v-sidebar-toggler':        SidebarToggler,
+    'v-skin-mode-toggler':      SkinModeToggler,
+
+    // Inputs
+    'v-rating-input':           RatingInput,
     'v-markdown-editor':        TuiEditor,
     'v-markdown-viewer':        TuiViewer,
 
-    'ranged-value-metric':      RangedValueMetric,
-    'trend-metric':             TrendMetric,
-    'partition-metric':         PartitionMetric,
-    'value-metric':             ValueMetric,
+    'v-metric':                 Metric,
+    // 'v-ranged-value-metric':    RangedValueMetric,
+    // 'v-trend-metric':           TrendMetric,
+    // 'v-partition-metric':       PartitionMetric,
+    // 'v-value-metric':           ValueMetric,
 }

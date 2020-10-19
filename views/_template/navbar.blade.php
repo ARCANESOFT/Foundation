@@ -20,7 +20,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <v-notifications-navbar></v-notifications-navbar>
+                <v-navbar-notifications></v-navbar-notifications>
             </li>
 
             <li class="nav-item">

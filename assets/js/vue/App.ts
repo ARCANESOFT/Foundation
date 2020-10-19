@@ -1,7 +1,7 @@
-import { createApp, onMounted } from "vue"
+import { createApp, onMounted } from 'vue'
 
-import plugins from "./plugins"
-import components from "./components"
+import plugins from './plugins'
+import components from './components'
 
 // Creating the Vue App
 

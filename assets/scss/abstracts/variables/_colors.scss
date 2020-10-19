@@ -51,3 +51,17 @@ $social-colors: (
     "twitter":   #2CAAE1,
     "youtube":   #E52D27,
 );
+
+$log-level-colors: (
+    'empty':     var(--skin-surface-1-bg-color),
+    'env':       #6A1B9A,
+    'all':       #605CA8,
+    'emergency': #B71C1C,
+    'alert':     #D32F2F,
+    'critical':  #F44336,
+    'error':     #FF5722,
+    'warning':   #FF9100,
+    'notice':    #4CAF50,
+    'info':      #1976D2,
+    'debug':     #90CAF9,
+);
