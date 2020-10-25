@@ -91,7 +91,7 @@
                             {{-- ACTIVATE --}}
                             @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
                                 <li>
-                                    <button onclick="Foundation.$emit('auth::users.activate')" class="dropdown-item">
+                                    <button onclick="ARCANESOFT.emit('auth::users.activate')" class="dropdown-item">
                                         @lang($user->isActive() ? 'Deactivate' : 'Activate')
                                     </button>
                                 </li>
@@ -100,7 +100,7 @@
                             {{-- RESTORE --}}
                             @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
                                 <li>
-                                    <button onclick="Foundation.$emit('auth::users.restore')" class="dropdown-item">
+                                    <button onclick="ARCANESOFT.emit('auth::users.restore')" class="dropdown-item">
                                         @lang('Restore')
                                     </button>
                                 </li>
@@ -111,7 +111,7 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <button class="dropdown-item text-danger"
-                                            onclick="Foundation.$emit('auth::users.delete')">
+                                            onclick="ARCANESOFT.emit('auth::users.delete')">
                                         @lang('Delete')
                                     </button>
                                 </li>
@@ -181,21 +181,22 @@
     @push('scripts')
         <script>
             let activateUserModal = twbs.Modal.make('div#activate-user-modal')
-            let activateUserForm  = Form.make('form#activate-user-form')
+            let activateUserForm  = components.form('form#activate-user-form')
 
-            Foundation.$on('auth::users.activate', () => {
+            ARCANESOFT.on('auth::users.activate', () => {
                 activateUserModal.show()
             })
 
             activateUserForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
+                let submitBtn = components.loadingButton(
                     activateUserForm.elt().querySelector('button[type="submit"]')
                 );
                 submitBtn.loading()
 
-                request()
+                ARCANESOFT
+                    .request()
                     .put(activateUserForm.getAction())
                     .then((response) => {
                         if (response.data.code === 'success') {
@@ -247,27 +248,28 @@
     @push('scripts')
         <script>
             let deleteUserModal = twbs.Modal.make('div#delete-user-modal')
-            let deleteUserForm  = Form.make('form#delete-user-form')
+            let deleteUserForm  = components.form('form#delete-user-form')
 
-            Foundation.$on('auth::users.delete', () => {
-                deleteUserModal.show();
-            });
+            ARCANESOFT.on('auth::users.delete', () => {
+                deleteUserModal.show()
+            })
 
             deleteUserForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
+                let submitBtn = components.loadingButton(
                     deleteUserForm.elt().querySelector('button[type="submit"]')
-                );
+                )
                 submitBtn.loading()
 
-                request()
+                ARCANESOFT
+                    .request()
                     .delete(deleteUserForm.getAction())
                     .then((response) => {
                         if (response.data.code === 'success') {
                             deleteUserModal.hide()
                             @if ($user->trashed())
-                            location.replace("{{ route('admin::auth.users.index') }}");
+                            location.replace("{{ route('admin::auth.users.index') }}")
                             @else
                             location.reload()
                             @endif
@@ -317,21 +319,22 @@
     @push('scripts')
         <script>
             let restoreUserModal = twbs.Modal.make('div#restore-user-modal')
-            let restoreUserForm  = Form.make('form#restore-user-form')
+            let restoreUserForm  = components.form('form#restore-user-form')
 
-            Foundation.$on('auth::users.restore', () => {
+            ARCANESOFT.on('auth::users.restore', () => {
                 restoreUserModal.show()
             })
 
             restoreUserForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
+                let submitBtn = components.loadingButton(
                     restoreUserForm.elt().querySelector('button[type="submit"]')
                 );
                 submitBtn.loading()
 
-                request()
+                ARCANESOFT
+                    .request()
                     .put(restoreUserForm.getAction())
                     .then((response) => {
                         if (response.data.code === 'success') {

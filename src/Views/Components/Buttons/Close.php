@@ -25,6 +25,6 @@ class Close extends Component
      */
     public function render()
     {
-        return view('foundation::_components.buttons.close');
+        return view()->make('foundation::_components.buttons.close');
     }
 }

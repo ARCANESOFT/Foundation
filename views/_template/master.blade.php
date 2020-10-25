@@ -50,6 +50,6 @@
     {{-- SCRIPTS --}}
     <script src="{{ asset(mix('js/arcanesoft.js', 'assets')) }}"></script>
     @stack('scripts')
-    <script defer>Foundation.run()</script>
+    <script defer>ARCANESOFT.run()</script>
 </body>
 </html>

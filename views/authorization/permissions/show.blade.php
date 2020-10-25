@@ -120,7 +120,7 @@
                                     @can(Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::ability('roles.detach'), [$permission, $role])
                                         <button class="btn btn-sm btn-danger"
                                                 data-toggle="tooltip" data-placement="top" title="@lang('Detach')"
-                                                onclick="Foundation.$emit('auth::permissions.detach-role', {id: '{{ $role->getRouteKey() }}', name: '{{ $role->name }}'})">
+                                                onclick="ARCANESOFT.emit('auth::permissions.detach-role', {id: '{{ $role->getRouteKey() }}', name: '{{ $role->name }}'})">
                                             <i class="fas fa-fw fa-unlink"></i>
                                         </button>
                                     @endcan
@@ -161,16 +161,15 @@
                 {{ form()->close() }}
             </div>
         </div>
-
     @endpush
 
     @push('scripts')
         <script>
-            let detachRoleModal = twbs.Modal.make('div#detach-role-modal')
-            let detachRoleForm  = Form.make('form#detach-role-form')
+            let detachRoleModal  = twbs.Modal.make('div#detach-role-modal')
+            let detachRoleForm   = components.form('form#detach-role-form')
             let detachRoleAction = detachRoleForm.getAction()
 
-            Foundation.$on('auth::permissions.detach-role', ({id, name}) => {
+            ARCANESOFT.on('auth::permissions.detach-role', ({id, name}) => {
                 detachRoleForm.setAction(detachRoleAction.replace(':id', id))
 
                 detachRoleModal._element.querySelector('.modal-body').innerHTML = "@lang('Are you sure you want to detach role: :name ?')".replace(':name', name)
@@ -181,7 +180,7 @@
             detachRoleForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
+                let submitBtn = components.loadingButton(
                     detachRoleForm.elt().querySelector('button[type="submit"]')
                 )
                 submitBtn.loading()

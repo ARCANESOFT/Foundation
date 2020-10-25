@@ -40,8 +40,8 @@ abstract class ControlComponent extends InputComponent
         string $name,
         string $id = null,
         string $type = 'text',
-        string $value = null,
-        string $label = null
+        ?string $value = null,
+        ?string $label = null
     ) {
         parent::__construct($name, $id);
 

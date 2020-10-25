@@ -18,8 +18,8 @@
     <div id="app" class="d-flex flex-column h-100">
         <header class="text-center py-4">
             <a href="{{ route('public::index') }}" class="d-inline-block">
-                <img src="{{ asset('assets/svg/logo.svg') }}" alt="{{ config('app.name') }}" role="presentation"
-                     width="72" height="72">
+                <img src="{{ asset('assets/svg/arcanesoft/logo.svg') }}" alt="{{ config('app.name') }}"
+                     role="presentation" width="72" height="72">
             </a>
         </header>
 

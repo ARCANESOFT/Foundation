@@ -6,19 +6,19 @@
 ?>
 
 <x-arc:card>
-    @if ($administrators->isNotEmpty())
+    @if($administrators->isNotEmpty())
         <x-arc:card-header>
-            @include('foundation::_components.datatable.datatable-header')
+            @include('foundation::_includes.datatable.datatable-header')
         </x-arc:card-header>
-        <x-arc:card-table class="table table-borderless table-hover mb-0">
+        <x-arc:card-table>
             <thead>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['first_name'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['last_name'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['email'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['created_at'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['status'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
+                    <x-arc:table-th>{{ $fields['first_name'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['last_name'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['email'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['created_at'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-center">{{ $fields['status'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-right">{{ $fields['actions'] }}</x-arc:table-th>
                 </tr>
             </thead>
             <tbody>
@@ -30,86 +30,47 @@
                         <td class="small text-muted">{{ $administrator->created_at }}</td>
                         <td class="text-center">
                             <span class="status {{ $administrator->isActive() ? 'bg-success status-animated' : 'bg-secondary' }}"
-                                  data-toggle="tooltip" data-placement="top" title="@lang($administrator->isActive() ? 'Activated' : 'Deactivated')"></span>
+                                  data-toggle="tooltip" title="@lang($administrator->isActive() ? 'Activated' : 'Deactivated')"></span>
                         </td>
-                        <td>
-                            <div class="input-group justify-content-end">
-                                {{-- SHOW --}}
-                                @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('show'), [$administrator])
-                                    <a href="{{ route('admin::auth.administrators.show', [$administrator]) }}"
-                                       class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                        <i class="far fa-fw fa-eye"></i>
-                                    </a>
-                                @else
-                                    <button class="btn btn-sm btn-light disabled" tabindex="-1" aria-disabled="true" data-toggle="tooltip" title="@lang('Show')">
-                                        <i class="far fa-fw fa-eye"></i>
-                                    </button>
-                                @endcan
+                        <td class="text-right">
+                            {{-- SHOW --}}
+                            <x-arc:datatable-action
+                                type="show"
+                                action="{{ route('admin::auth.administrators.show', [$administrator]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"/>
 
-                                {{-- DROPDOWN --}}
-                                <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-fw fa-ellipsis-v"></i> <span class="sr-only">@lang('Toggle Dropdown')</span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    {{-- UPDATE --}}
-                                    <li>
-                                        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('update'), [$administrator])
-                                            <a class="dropdown-item" href="{{ route('admin::auth.administrators.edit', [$administrator]) }}">@lang('Edit')</a>
-                                        @else
-                                            <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                                @lang('Edit')
-                                            </button>
-                                        @endcan
-                                    </li>
+                            {{-- EDIT --}}
+                            <x-arc:datatable-action
+                                type="edit"
+                                action="{{ route('admin::auth.administrators.edit', [$administrator]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('update', [$administrator]) }}"/>
 
-                                    {{-- ACTIVATE --}}
-                                    <li>
-                                        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-                                            <button class="dropdown-item"
-                                                    onclick="Foundation.$emit('authorization::administrators.activate', {id: '{{ $administrator->getRouteKey() }}', status: '{{ $administrator->isActive() ? 'activated' : 'deactivated' }}'})">
-                                                @lang($administrator->isActive() ? 'Deactivate' : 'Activate')
-                                            </button>
-                                        @else
-                                            <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                                @lang($administrator->isActive() ? 'Deactivate' : 'Activate')
-                                            </button>
-                                        @endcan
-                                    </li>
+                            {{-- ACTIVATE/DEACTIVATE --}}
+                            <x-arc:datatable-action
+                                type="{{ $administrator->isActive() ? 'deactivate' : 'activate' }}"
+                                action="ARCANESOFT.emit('authorization::administrators.activate', {id: '{{ $administrator->getRouteKey() }}', status: '{{ $administrator->isActive() ? 'activated' : 'deactivated' }}'})"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('activate', [$administrator]) }}"/>
 
-                                    {{-- RESTORE --}}
-                                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-                                        <li>
-                                            <button class="dropdown-item"
-                                                    onclick="Foundation.$emit('authorization::administrators.restore', {id: '{{ $administrator->getRouteKey() }}' })">
-                                                @lang('Restore')
-                                            </button>
-                                        </li>
-                                    @endcan
+                            {{-- RESTORE --}}
+                            @if($trash)
+                                <x-arc:datatable-action
+                                    type="restore"
+                                    action="ARCANESOFT.emit('authorization::administrators.restore', {id: '{{ $administrator->getRouteKey() }}' })"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('restore', [$administrator]) }}"/>
+                            @endif
 
-                                    <li><hr class="dropdown-divider"></li>
-
-                                    {{-- DELETE --}}
-                                    <li>
-                                        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-                                            <button class="dropdown-item text-danger"
-                                                    onclick="Foundation.$emit('authorization::administrators.delete', {id: '{{ $administrator->getRouteKey() }}' })">
-                                                @lang('Delete')
-                                            </button>
-                                        @else
-                                            <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                                @lang('Delete')
-                                            </button>
-                                        @endcan
-                                    </li>
-                                </ul>
-                            </div>
+                            {{-- DELETE --}}
+                            <x-arc:datatable-action
+                                type="delete"
+                                action="ARCANESOFT.emit('authorization::administrators.delete', {id: '{{ $administrator->getRouteKey() }}' })"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('delete', [$administrator]) }}"/>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </x-arc:card-table>
         <x-arc:card-footer>
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $administrators])
+            <x-arc:datatable-pagination :paginator="$administrators"/>
         </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')

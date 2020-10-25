@@ -25,6 +25,6 @@ class Modal extends Component
      */
     public function render()
     {
-        return view('foundation::_components.modals.modal');
+        return view()->make('foundation::_components.modals.modal');
     }
 }

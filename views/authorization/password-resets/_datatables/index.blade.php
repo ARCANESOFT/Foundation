@@ -5,17 +5,17 @@
  */
 ?>
 
-<div class="card card-borderless shadow-sm">
+<x-arc:card>
     @if ($passwordResets->isNotEmpty())
-        <div class="card-header px-2">
-            @include('foundation::_components.datatable.datatable-header')
-        </div>
-        <table class="table table-borderless table-hover table-md mb-0">
+        <x-arc:card-header>
+            @include('foundation::_includes.datatable.datatable-header')
+        </x-arc:card-header>
+        <x-arc:card-table>
             <thead>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['email'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['created_at'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
+                    <x-arc:table-th>{{ $fields['email'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['created_at'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-right">{{ $fields['actions'] }}</x-arc:table-th>
                 </tr>
             </thead>
             <tbody>
@@ -27,11 +27,11 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-        <div class="card-footer px-2">
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $passwordResets])
-        </div>
+        </x-arc:card-table>
+        <x-arc:card-footer>
+            <x-arc:datatable-pagination :paginator="$passwordResets"/>
+        </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')
     @endif
-</div>
+</x-arc:card>

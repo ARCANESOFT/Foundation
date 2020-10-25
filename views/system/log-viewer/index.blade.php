@@ -48,7 +48,7 @@
                         @endcan
 
                         @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
-                            <button onclick="Foundation.$emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
+                            <button onclick="ARCANESOFT.emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
                                     class="btn btn-sm btn-light text-danger" data-toggle="tooltip" title="@lang('Delete')">
                                 <i class="far fa-fw fa-trash-alt"></i>
                             </button>
@@ -98,12 +98,12 @@
     @endpush
 
     @push('scripts')
-        <script>
+        <script defer>
             let deleteLogModal  = twbs.Modal.make('div#delete-log-modal')
             let deleteLogForm   = Form.make('form#delete-log-form')
             let deleteLogAction = deleteLogForm.getAction()
 
-            Foundation.$on('foundation::system.log-viewer.delete', ({date}) => {
+            ARCANESOFT.on('foundation::system.log-viewer.delete', ({date}) => {
                 deleteLogForm.setAction(deleteLogAction.replace(':id', date))
                 deleteLogModal.show()
             })
@@ -111,12 +111,13 @@
             deleteLogForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
+                let submitBtn = ARCANESOFT.ui.loadingButton(
                     deleteLogForm.elt().querySelector('button[type="submit"]')
                 )
                 submitBtn.loading()
 
-                request()
+                ARCANESOFT
+                    .request()
                     .delete(deleteLogForm.getAction())
                     .then((response) => {
                         if (response.data.code === 'success') {

@@ -41,6 +41,13 @@ class Password implements Rule
     protected $requireNumeric = false;
 
     /**
+     * Indicates if the password must contain one special character.
+     *
+     * @var bool
+     */
+    protected $requireSpecialCharacter = false;
+
+    /**
      * Indicates if the password can be nullable.
      *
      * @var bool
@@ -100,6 +107,18 @@ class Password implements Rule
     public function requireNumeric()
     {
         $this->requireNumeric = true;
+
+        return $this;
+    }
+
+    /**
+     * Indicate that at least one special character is required.
+     *
+     * @return $this
+     */
+    public function requireSpecialCharacter()
+    {
+        $this->requireSpecialCharacter = true;
 
         return $this;
     }
@@ -188,35 +207,41 @@ class Password implements Rule
     public function passes($attribute, $value): bool
     {
         if ($this->requireUppercase && Str::lower($value) === $value)
-            return false;
+            return $this->fail('The :attribute must contain at least one uppercase character.');
 
         if ($this->requireNumeric && ! preg_match('/[0-9]/', $value))
-            return false;
+            return $this->fail('The :attribute must contain at least one number.');
 
-        return Str::length($value) >= $this->length;
+        if ($this->requireSpecialCharacter && ! preg_match('/[\W_]/', $value))
+            return $this->fail('The :attribute must contain at least one special character.');
+
+        if (Str::length($value) < $this->length)
+            return $this->fail("The :attribute must be at least {$this->length} characters.");
+
+        return true;
+    }
+
+    /**
+     * Determines the validation did not pass.
+     *
+     * @param  string  $message
+     *
+     * @return bool
+     */
+    protected function fail(string $message): bool
+    {
+        $this->withMessage($message);
+
+        return false;
     }
 
     /**
      * Get the validation error message.
      *
-     * @return string
+     * @return string|array
      */
-    public function message(): string
+    public function message()
     {
-        if ($this->message) {
-            return $this->message;
-        }
-
-        if ($this->requireUppercase && ! $this->requireNumeric) {
-            return __('The :attribute must be at least '.$this->length.' characters and contain at least one uppercase character.');
-        }
-        elseif ($this->requireNumeric && ! $this->requireUppercase) {
-            return __('The :attribute must be at least '.$this->length.' characters and contain at least one number.');
-        }
-        elseif ($this->requireUppercase && $this->requireNumeric) {
-            return __('The :attribute must be at least '.$this->length.' characters and contain at least one uppercase character and number.');
-        }
-
-        return __('The :attribute must be at least '.$this->length.' characters.');
+        return $this->message;
     }
 }

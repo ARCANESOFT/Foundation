@@ -53,7 +53,7 @@ trait WithPagination
      */
     public function paginationView(): string
     {
-        return 'foundation::_components.datatable.pagination';
+        return 'foundation::_includes.datatable.pagination';
     }
 
     /**

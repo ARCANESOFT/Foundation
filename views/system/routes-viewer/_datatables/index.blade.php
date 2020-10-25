@@ -5,7 +5,7 @@
         <div class="card-header px-2">
             <div class="row g-3">
                 <div class="col-sm-4 col-md-3 col-xl-2 col-xxl-1">
-                    @include('foundation::_components.datatable.per-page-select')
+                    @include('foundation::_includes.datatable.per-page-select')
                 </div>
                 <div class="col-sm-4 col-md-3 col-xl-2 col-xxl-1">
                     <div class="input-group">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4 col-md-6 col-xl-8 col-xxl-10">
-                    @include('foundation::_components.datatable.search-input')
+                    @include('foundation::_includes.datatable.search-input')
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
             </tbody>
         </table>
         <div class="card-footer px-2">
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $routes])
+            @include('foundation::_includes.datatable.datatable-footer', ['paginator' => $routes])
         </div>
     @else
         @include('foundation::_partials.no-data-found')

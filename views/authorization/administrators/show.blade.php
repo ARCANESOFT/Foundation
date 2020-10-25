@@ -1,9 +1,10 @@
+
 @extends(arcanesoft\foundation()->template())
 
 <?php /** @var  Arcanesoft\Foundation\Auth\Models\Administrator  $administrator */ ?>
 
 @section('page-title')
-    <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang('Administrator\'s details')</small>
+    <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang("Administrator's details")</small>
 @endsection
 
 @section('content')
@@ -79,80 +80,50 @@
                         @endif
                     </tbody>
                 </x-arc:card-table>
-                <x-arc:card-footer class="text-right">
-                    <div class="input-group justify-content-end">
-                        {{-- UPDATE --}}
-                        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('update'), [$administrator])
-                            <a href="{{ route('admin::auth.administrators.edit', [$administrator]) }}"
-                               class="btn btn-sm btn-light">@lang('Edit')</a>
-                        @else
-                            <button class="btn btn-sm btn-light" tabindex="-1" aria-disabled="true">
-                                @lang('Edit')
-                            </button>
-                        @endcan
+                <x-arc:card-footer class="d-flex justify-content-end">
+                    {{-- UPDATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('update'), [$administrator])
+                        <a href="{{ route('admin::auth.administrators.edit', [$administrator]) }}"
+                           class="btn btn-sm btn-secondary">@lang('Edit')</a>
+                    @endcan
 
-                        {{-- DROPDOWN --}}
-                        <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-fw fa-ellipsis-v"></i> <span class="sr-only">@lang('Toggle Dropdown')</span>
+                    {{-- ACTIVATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
+                        <button class="btn btn-sm btn-secondary ml-2" onclick="ARCANESOFT.emit('authorization::administrators.activate')">
+                            @lang($administrator->isActive() ? 'Deactivate' : 'Activate')
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ACTIVATE --}}
-                            <li>
-                                @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-                                    <button class="dropdown-item"
-                                            onclick="Foundation.$emit('authorization::administrators.activate')">
-                                        @lang($administrator->isActive() ? 'Deactivate' : 'Activate')
-                                    </button>
-                                @else
-                                    <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                        @lang($administrator->isActive() ? 'Deactivate' : 'Activate')
-                                    </button>
-                                @endcan
-                            </li>
+                    @endcan
 
-                            {{-- RESTORE --}}
-                            @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-                                <li>
-                                    <button class="dropdown-item"
-                                            onclick="Foundation.$emit('authorization::administrators.restore')">
-                                        @lang('Restore')
-                                    </button>
-                                </li>
-                            @endcan
+                    {{-- RESTORE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+                        <button class="btn btn-sm btn-secondary ml-2" onclick="ARCANESOFT.emit('authorization::administrators.restore')">
+                            @lang('Restore')
+                        </button>
+                    @endcan
 
-                            <li><hr class="dropdown-divider"></li>
-
-                            {{-- DELETE --}}
-                            <li>
-                                @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-                                    <button class="dropdown-item text-danger"
-                                            onclick="Foundation.$emit('authorization::administrators.delete')">
-                                        @lang('Delete')
-                                    </button>
-                                @else
-                                    <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                        @lang('Delete')
-                                    </button>
-                                @endcan
-                            </li>
-                        </ul>
-                    </div>
+                    {{-- DELETE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
+                        <button class="btn btn-sm btn-danger ml-2"
+                                onclick="ARCANESOFT.emit('authorization::administrators.delete')">
+                            @lang('Delete')
+                        </button>
+                    @endcan
                 </x-arc:card-footer>
             </x-arc:card>
         </div>
 
         <div class="col-lg-7">
-            <div class="row g-4">
+            <div class="row row-cols-1 g-4">
                 {{-- ROLES --}}
-                <div class="col-12">
+                <div class="col">
                     <x-arc:card>
                         <x-arc:card-header>@lang('Roles')</x-arc:card-header>
                         <x-arc:card-table class="table-hover">
                             <thead>
                                 <tr>
-                                    <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
-                                    <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
-                                    <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
+                                    <x-arc:table-th label="Name"/>
+                                    <x-arc:table-th label="Description"/>
+                                    <x-arc:table-th label="Actions" class="text-right"/>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,7 +141,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="text-center">@lang('The list is empty !')</td>
+                                        <td colspan="3" class="text-muted text-center">@lang('The list is empty !')</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -179,21 +150,21 @@
                 </div>
 
                 {{-- SESSION --}}
-                <div class="col-12">
+                <div class="col">
                     <x-arc:card>
                         <x-arc:card-header>@lang('Sessions')</x-arc:card-header>
                         <x-arc:card-table class="table-hover">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th class="font-weight-light text-uppercase text-muted">@lang('IP')</th>
-                                    <th class="font-weight-light text-uppercase text-muted">@lang('Device')</th>
-                                    <th class="font-weight-light text-uppercase text-muted">@lang('Last activity')</th>
-                                    <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
+                                    <x-arc:table-th />
+                                    <x-arc:table-th label="IP"/>
+                                    <x-arc:table-th label="Device"/>
+                                    <x-arc:table-th label="Last activity"/>
+                                    <x-arc:table-th label="Actions" class="text-right"/>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($administrator->sessions as $session)
+                            @forelse($administrator->sessions as $session)
                                 <tr>
                                     <td>
                                         {{ $session->device_icon }}
@@ -207,7 +178,11 @@
                                     <td class="small">{{ $session->last_activity_at->diffForHumans() }}</td>
                                     <td></td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-muted text-center">@lang('The list is empty !')</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </x-arc:card-table>
                     </x-arc:card>
@@ -217,206 +192,93 @@
     </div>
 @endsection
 
-@push('modals')
-    {{-- ACIVATE MODAL --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-        <div class="modal fade" id="activate-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="activateUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.administrators.activate', $administrator], 'method' => 'PUT', 'id' => 'activate-user-form']) }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="activateUserTitle">@lang($administrator->isActive() ? 'Deactivate User' : 'Activate User')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div id="activateUserMessage" class="modal-body">
-                            @lang($administrator->isActive() ? 'Are you sure you want to deactivate user ?' : 'Are you sure you want to activate user ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                            {{ arcanesoft\ui\action_button($administrator->isActive() ? 'deactivate' : 'activate')->submit() }}
-                        </div>
-                    </div>
-                {{ form()->close() }}
-            </div>
-        </div>
-    @endcan
+{{-- ACIVATE MODAL --}}
+@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
+    @php($actionType = $administrator->isActive() ? 'deactivate' : 'activate')
+    @push('modals')
+        <x-arc:modal-action
+            type="{{ $actionType }}"
+            action="{{ route('admin::auth.administrators.activate', [$administrator]) }}" method="PUT"
+            title="{{ $administrator->isActive() ? 'Deactivate User' : 'Activate User' }}"
+            body="{{ $administrator->isActive() ? 'Are you sure you want to deactivate administrator ?' : 'Are you sure you want to activate administrator ?' }}"
+        />
+    @endpush
 
-    {{-- DELETE MODAL --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-        <div class="modal fade" id="delete-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="deleteUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.administrators.delete', $administrator], 'method' => 'DELETE', 'id' => 'delete-user-form']) }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="deleteUserTitle">@lang('Delete User')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @lang('Are you sure you want to delete this user ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                            {{ arcanesoft\ui\action_button('delete')->submit() }}
-                        </div>
-                    </div>
-                {{ form()->close() }}
-            </div>
-        </div>
-    @endcan
+    @push('scripts')
+        <script defer>
+            let activateModal = components.modal('div#{{ $actionType }}-modal')
+            let activateForm  = components.form('form#{{ $actionType }}-form')
 
-    {{-- RESTORE MODAL --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-        <div class="modal fade" id="restore-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="restoreUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.administrators.restore', $administrator], 'method' => 'PUT', 'id' => 'restore-user-form']) }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="restoreUserTitle">@lang('Restore User')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @lang('Are you sure you want to restore this user ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                            {{ arcanesoft\ui\action_button('restore')->submit() }}
-                        </div>
-                    </div>
-                {{ form()->close() }}
-            </div>
-        </div>
-    @endcan
-@endpush
-
-@push('scripts')
-    {{-- ACTIVATE SCRIPT --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-        <script>
-            let activateUserModal = twbs.Modal.make('div#activate-user-modal')
-            let activateUserForm  = Form.make('form#activate-user-form')
-
-            Foundation.$on('authorization::administrators.activate', () => {
-                activateUserModal.show()
+            ARCANESOFT.on('authorization::administrators.activate', () => {
+                activateModal.show()
             });
 
-            activateUserForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = Foundation.ui.loadingButton(
-                    activateUserForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                request()
-                    .put(activateUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            activateUserModal.hide()
-                            location.reload()
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            activateForm.onSubmit('PUT', () => {
+                activateModal.hide()
+                location.reload()
             })
         </script>
-    @endcan
+    @endpush
+@endcan
 
-    {{-- DELETE SCRIPT --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-        <script>
-            let deleteUserModal = twbs.Modal.make('div#delete-user-modal')
-            let deleteUserForm  = Form.make('form#delete-user-form')
+{{-- DELETE MODAL --}}
+@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
+    @push('modals')
+        <x-arc:modal-action
+            type="delete"
+            action="{{ route('admin::auth.administrators.delete', [$administrator]) }}" method="DELETE"
+            title="Delete Administrator"
+            body="Are you sure you want to delete this administrator ?"
+        />
+    @endpush
 
-            Foundation.$on('authorization::administrators.delete', () => {
-                deleteUserModal.show()
+    @push('scripts')
+        <script defer>
+            let deleteModal = components.modal('div#delete-modal')
+            let deleteForm  = components.form('form#delete-form')
+
+            ARCANESOFT.on('authorization::administrators.delete', () => {
+                deleteModal.show()
             })
 
-            deleteUserForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = Foundation.ui.loadingButton(
-                    deleteUserForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                request()
-                    .delete(deleteUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            deleteUserModal.hide()
-                            @if ($administrator->trashed())
-                            location.replace("{{ route('admin::auth.administrators.index') }}")
-                            @else
-                            location.reload()
-                            @endif
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            deleteForm.onSubmit('DELETE', () => {
+                deleteModal.hide()
+                @if ($administrator->trashed())
+                location.replace("{{ route('admin::auth.administrators.index') }}")
+                @else
+                location.reload()
+                @endif
             })
         </script>
-    @endcan
+    @endpush
+@endcan
 
-    {{-- RESTORE SCRIPT --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-        <script>
-            let restoreUserModal = twbs.Modal.make('div#restore-user-modal')
-            let restoreUserForm  = Form.make('form#restore-user-form')
+{{-- RESTORE MODAL --}}
+@if($administrator->trashed())
+@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+    @push('modals')
+        <x-arc:modal-action
+            type="restore"
+            action="{{ route('admin::auth.administrators.restore', [$administrator]) }}" method="PUT"
+            title="Restore Administrator"
+            body="Are you sure you want to restore this administrator ?"
+        />
+    @endpush
 
-            Foundation.$on('authorization::administrators.restore', () => {
-                restoreUserModal.show()
+    @push('scripts')
+        <script defer>
+            let restoreModal = components.modal('div#restore-modal')
+            let restoreForm  = components.form('form#restore-form')
+
+            ARCANESOFT.on('authorization::administrators.restore', () => {
+                restoreModal.show()
             });
 
-            restoreUserForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = Foundation.ui.loadingButton(
-                    restoreUserForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                request()
-                    .put(restoreUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            restoreUserModal.hide()
-                            location.reload()
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            restoreForm.onSubmit('PUT', () => {
+                restoreModal.hide()
+                location.reload()
             })
         </script>
-    @endcan
-@endpush
-
+    @endpush
+@endcan
+@endif

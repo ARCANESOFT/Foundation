@@ -1,5 +1,5 @@
 @foreach($foundationNotifications as $notification)
-    <div class="alert alert-with-icon alert-{{ $notification['type'] }}" role="alert">
+    <div class="alert alert-with-icon alert-{{ $notification['type'] }} alert-dismissible" role="alert">
         @if($notification['icon'])
         <div class="alert-icon">
             <i class="fas fa-fw fa-1x {{ $notification['icon'] }}"></i>

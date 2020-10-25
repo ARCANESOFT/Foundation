@@ -15,12 +15,12 @@
     {{ form()->open(['route' => ['admin::auth.administrators.update', $administrator], 'method' => 'PUT']) }}
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
-                <x-arc:card class="card card-borderless shadow-sm">
+                <x-arc:card>
                     <x-arc:card-header>@lang('Administrator')</x-arc:card-header>
                     <x-arc:card-body>
                         <div class="row g-3">
                             {{-- FIRST NAME --}}
-                            <div class="col-lg-6">
+                            <div class="col-12 col-xl-6">
                                 <label for="first_name" class="form-label font-weight-light text-uppercase text-muted">@lang('First Name')</label>
                                 {{ form()->text('first_name', old('first_name', $administrator->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid'), 'required']) }}
                                 @error('first_name')
@@ -29,7 +29,7 @@
                             </div>
 
                             {{-- LAST NAME --}}
-                            <div class="col-lg-6">
+                            <div class="col-12 col-xl-6">
                                 <label for="last_name" class="form-label font-weight-light text-uppercase text-muted">@lang('Last Name')</label>
                                 {{ form()->text('last_name', old('last_name', $administrator->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'required']) }}
                                 @error('last_name')
@@ -48,7 +48,7 @@
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <a href="{{ route('admin::auth.administrators.index') }}" class="btn btn-sm btn-light">
+                        <a href="{{ route('admin::auth.administrators.show', [$administrator]) }}" class="btn btn-sm btn-light">
                             @lang('Cancel')
                         </a>
                         <button type="submit" class="btn btn-sm btn-primary">@lang('Save')</button>
@@ -61,9 +61,9 @@
                     <x-arc:card-table class="table table-borderless table-hover mb-0">
                         <thead>
                             <tr>
-                                <th class="font-weight-light text-uppercase text-muted">#</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
+                                <x-arc:table-th label="#"/>
+                                <x-arc:table-th label="Name"/>
+                                <x-arc:table-th label="Description"/>
                             </tr>
                         </thead>
                         <tbody>

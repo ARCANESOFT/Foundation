@@ -58,6 +58,6 @@ class Form extends Component
      */
     public function render()
     {
-        return view('foundation::_components.forms.form');
+        return view()->make('foundation::_components.forms.form');
     }
 }

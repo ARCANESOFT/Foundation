@@ -7,8 +7,7 @@
  */
 
 $attributes = $attributes->merge([
-    'class'       => 'form-control'.$errors->first($name, ' is-invalid'),
-    'placeholder' => $label,
+    'class' => 'form-control'.$errors->first($name, ' is-invalid'),
 ]);
 ?>
 
@@ -21,7 +20,7 @@ $attributes = $attributes->merge([
     @enderror
 </div>
 @else
-    <label for="{{ $name }}" class="form-label">{{ $label }}</label>
+    <label for="{{ $name }}" class="form-label font-weight-light text-uppercase text-muted">{{ $label }}</label>
     <input type="password" id="{{ $id }}" name="{{ $name }}" {{ $attributes }}>
     @error($name)
     <span class="invalid-feedback" role="alert">{{ $message }}</span>

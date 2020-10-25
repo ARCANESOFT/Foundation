@@ -7,7 +7,7 @@
 <x-arc:card>
     @if ($abilities->isNotEmpty())
         <x-arc:card-header>
-            @include('foundation::_components.datatable.datatable-header')
+            @include('foundation::_includes.datatable.datatable-header')
         </x-arc:card-header>
         <x-arc:card-table>
             <thead>
@@ -51,7 +51,7 @@
             </tbody>
         </x-arc:card-table>
         <x-arc:card-footer>
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $abilities])
+            @include('foundation::_includes.datatable.datatable-footer', ['paginator' => $abilities])
         </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')

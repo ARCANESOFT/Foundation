@@ -5,50 +5,48 @@
  */
 ?>
 
-<div class="card card-borderless shadow-sm">
+<x-arc:card>
     @if ($permissions->isNotEmpty())
-        <div class="card-header px-2">
-            @include('foundation::_components.datatable.datatable-header')
-        </div>
-        <div class="table-responsive">
-            <table class="table table-borderless table-hover table-md mb-0">
-                <thead>
+        <x-arc:card-header>
+            @include('foundation::_includes.datatable.datatable-header')
+        </x-arc:card-header>
+
+        <x-arc:card-table>
+            <thead>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['group'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['category'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['name'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['description'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['roles'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
+                    <x-arc:table-th>{{ $fields['group'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['category'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['name'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['description'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-center">{{ $fields['roles'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-right">{{ $fields['actions'] }}</x-arc:table-th>
                 </tr>
-                </thead>
-                <tbody>
-                @foreach ($permissions as $permission)
-                    <tr>
-                        <td class="small">{{ $permission->group->name }}</td>
-                        <td class="small">{{ $permission->category }}</td>
-                        <td class="small">{{ $permission->name }}</td>
-                        <td class="small">{{ $permission->description }}</td>
-                        <td class="text-center">
-                            {{ arcanesoft\ui\count_pill($permission->roles_count) }}
-                        </td>
-                        <td class="text-right">
-                            @can(Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::ability('show'), [$permission])
-                                <a href="{{ route('admin::auth.permissions.show', [$permission]) }}"
-                                   class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                    <i class="far fa-fw fa-eye"></i>
-                                </a>
-                            @endcan
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer px-2">
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $permissions])
-        </div>
+            </thead>
+            <tbody>
+            @foreach ($permissions as $permission)
+                <tr>
+                    <td class="small">{{ $permission->group->name }}</td>
+                    <td class="small">{{ $permission->category }}</td>
+                    <td class="small">{{ $permission->name }}</td>
+                    <td class="small">{{ $permission->description }}</td>
+                    <td class="text-center">
+                        {{ arcanesoft\ui\count_pill($permission->roles_count) }}
+                    </td>
+                    <td class="text-right">
+                        {{-- SHOW --}}
+                        <x-arc:datatable-action
+                            type="show"
+                            action="{{ route('admin::auth.permissions.show', [$permission]) }}"
+                            allowed="{{ Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::can('show', [$permission]) }}"/>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </x-arc:card-table>
+        <x-arc:card-footer>
+            <x-arc:datatable-pagination :paginator="$permissions" />
+        </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')
     @endif
-</div>
+</x-arc:card>

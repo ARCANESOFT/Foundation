@@ -26,7 +26,7 @@
                             {{-- EMAIL --}}
                             <div class="col">
                                 <x-arc:input-control
-                                    type="email" name="email" label="E-Mail Address"
+                                    type="email" name="email" label="E-Mail Address" placeholder="E-Mail Address"
                                     required autofocus autocomplete="username" grouped="true"/>
                             </div>
                             {{-- SUBMIT BUTTON --}}

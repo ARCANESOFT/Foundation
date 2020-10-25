@@ -13,9 +13,29 @@ use Arcanesoft\Foundation\Views\Components\Forms\ControlComponent;
  */
 class Checkbox extends ControlComponent
 {
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
+
     /** @var bool */
     public $checked;
 
+    /* -----------------------------------------------------------------
+     |  Constructor
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Checkbox constructor.
+     *
+     * @param  string       $name
+     * @param  string|null  $id
+     * @param  string       $type
+     * @param  string       $value
+     * @param  string|null  $label
+     * @param  bool         $checked
+     */
     public function __construct(
         string $name,
         string $id = null,
@@ -42,6 +62,6 @@ class Checkbox extends ControlComponent
      */
     public function render()
     {
-        return view('foundation::_components.forms.controls.checkbox');
+        return view()->make('foundation::_components.forms.controls.checkbox');
     }
 }

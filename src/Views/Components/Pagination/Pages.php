@@ -49,6 +49,6 @@ class Pages extends Component
      */
     public function render()
     {
-        return view('foundation::_components.pagination.pages');
+        return view()->make('foundation::_components.pagination.pages');
     }
 }

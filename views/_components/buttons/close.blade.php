@@ -1,2 +1,1 @@
-<button {{ $attributes->merge(['type' => 'button', 'class' => 'btn-close']) }}
-        aria-label="@lang('Close')"></button>
+<button {{ $attributes->merge(['type' => 'button', 'class' => 'btn-close', 'aria-label' => __('Close')]) }}></button>

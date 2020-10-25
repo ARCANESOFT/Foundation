@@ -25,14 +25,14 @@
                             <div class="col">
                                 {{-- EMAIL --}}
                                 <x-arc:input-control
-                                    type="email" name="email" label="E-Mail Address"
+                                    type="email" name="email" label="E-Mail Address" placeholder="E-Mail Address"
                                     required autofocus autocomplete="username" grouped="true"/>
                             </div>
 
                             <div class="col">
                                 {{-- PASSWORD --}}
                                 <x-arc:password-control
-                                    name="password" label="Password"
+                                    name="password" label="Password" placeholder="Password"
                                     required autocomplete="current-password" grouped="true"/>
                             </div>
 

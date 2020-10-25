@@ -43,7 +43,7 @@
             @endcan
 
             @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
-                <button onclick="Foundation.$emit('foundation::system.log-viewer.delete')" class="btn btn-sm btn-danger">
+                <button onclick="ARCANESOFT.emit('foundation::system.log-viewer.delete')" class="btn btn-sm btn-danger">
                     <i class="far fa-fw fa-trash-alt"></i> @lang('Delete')
                 </button>
             @endcan
@@ -179,19 +179,20 @@
             let deleteLogModal = twbs.Modal.make('div#delete-log-modal')
             let deleteLogForm  = Form.make('form#delete-log-form')
 
-            Foundation.$on('foundation::system.log-viewer.delete', () => {
+            ARCANESOFT.on('foundation::system.log-viewer.delete', () => {
                 deleteLogModal.show()
             });
 
             deleteLogForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
+                let submitBtn = ARCANESOFT.ui.loadingButton(
                     deleteLogForm.elt().querySelector('button[type="submit"]')
                 )
                 submitBtn.loading()
 
-                request()
+                ARCANESOFT
+                    .request()
                     .delete(deleteLogForm.getAction())
                     .then((response) => {
                         if (response.data.code === 'success') {

@@ -5,21 +5,21 @@
  */
 ?>
 
-<div class="card card-borderless shadow-sm">
+<x-arc:card>
     @if ($users->isNotEmpty())
-        <div class="card-header px-2">
-            @include('foundation::_components.datatable.datatable-header')
-        </div>
-        <table class="table table-borderless table-hover mb-0">
+        <x-arc:card-header>
+            @include('foundation::_includes.datatable.datatable-header')
+        </x-arc:card-header>
+        <x-arc:card-table>
             <thead>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['avatar'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['first_name'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['last_name'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['email'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['created_at'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['status'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
+                    <x-arc:table-th>{{ $fields['avatar'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['first_name'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['last_name'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['email'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['created_at'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-center">{{ $fields['status'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-right">{{ $fields['actions'] }}</x-arc:table-th>
                 </tr>
             </thead>
             <tbody>
@@ -36,70 +36,47 @@
                             <span class="status {{ $user->isActive() ? 'status-animated bg-success' : 'bg-secondary' }}"
                                   data-toggle="tooltip" data-placement="top" title="@lang($user->isActive() ? 'Activated' : 'Deactivated')"></span>
                         </td>
-                        <td>
-                            <div class="input-group justify-content-end">
-                                {{-- SHOW --}}
-                                @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('show'), [$user])
-                                <a href="{{ route('admin::auth.users.show', [$user]) }}"
-                                   class="btn btn-sm btn-light" data-toggle="tooltip" data-original-title="@lang('Show')">
-                                    <i class="far fa-fw fa-eye"></i>
-                                </a>
-                                @endcan
+                        <td class="text-right">
+                            {{-- SHOW --}}
+                            <x-arc:datatable-action
+                                type="show"
+                                action="{{ route('admin::auth.users.show', [$user]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('show', [$user]) }}"/>
 
-                                {{-- DROPDOWN --}}
-                                <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-fw fa-ellipsis-h"></i> <span class="sr-only">@lang('Toggle Dropdown')</span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    {{-- UPDATE --}}
-                                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('update'), [$user])
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('admin::auth.users.edit', [$user]) }}">@lang('Edit')</a>
-                                        </li>
-                                    @endcan
+                            {{-- EDIT --}}
+                            <x-arc:datatable-action
+                                type="edit"
+                                action="{{ route('admin::auth.users.edit', [$user]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('update', [$user]) }}"/>
 
-                                    {{-- ACTIVATE --}}
-                                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
-                                        <li>
-                                            <button class="dropdown-item"
-                                                    onclick="Foundation.$emit('auth::users.activate', {id: '{{ $user->getRouteKey() }}', status: '{{ $user->isActive() ? 'activated' : 'deactivated' }}'})">
-                                                @lang($user->isActive() ? 'Deactivate' : 'Activate')
-                                            </button>
-                                        </li>
-                                    @endcan
+                            {{-- ACTIVATE/DEACTIVATE --}}
+                            <x-arc:datatable-action
+                                type="{{ $user->isActive() ? 'deactivate' : 'activate' }}"
+                                action="ARCANESOFT.emit('authorization::users.activate', {id: '{{ $user->getRouteKey() }}', status: '{{ $user->isActive() ? 'activated' : 'deactivated' }}'})"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('activate', [$user]) }}"/>
 
-                                    {{-- RESTORE --}}
-                                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
-                                        <li>
-                                            <button class="dropdown-item"
-                                                    onclick="Foundation.$emit('auth::users.restore', {id: '{{ $user->getRouteKey() }}' })">
-                                                @lang('Restore')
-                                            </button>
-                                        </li>
-                                    @endcan
+                            {{-- RESTORE --}}
+                            @if($trash)
+                                <x-arc:datatable-action
+                                    type="restore"
+                                    action="ARCANESOFT.emit('authorization::users.restore', {id: '{{ $user->getRouteKey() }}' })"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('restore', [$user]) }}"/>
+                            @endif
 
-                                    <li><hr class="dropdown-divider"></li>
-
-                                    {{-- DELETE --}}
-                                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'), [$user])
-                                        <li>
-                                            <button class="dropdown-item text-danger"
-                                                    onclick="Foundation.$emit('auth::users.delete', {id: '{{ $user->getRouteKey() }}' })">
-                                                @lang('Delete')
-                                            </button>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </div>
+                            {{-- DELETE --}}
+                            <x-arc:datatable-action
+                                type="delete"
+                                action="ARCANESOFT.emit('authorization::users.delete', {id: '{{ $user->getRouteKey() }}' })"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('delete', [$user]) }}"/>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-        <div class="card-footer px-2">
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $users])
-        </div>
+        </x-arc:card-table>
+        <x-arc:card-footer>
+            <x-arc:datatable-pagination :paginator="$users"/>
+        </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')
     @endif
-</div>
+</x-arc:card>

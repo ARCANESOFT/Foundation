@@ -8,7 +8,7 @@
 <div class="card card-borderless shadow-sm">
     @if ($roles->isNotEmpty())
         <div class="card-header px-2">
-            @include('foundation::_components.datatable.datatable-header')
+            @include('foundation::_includes.datatable.datatable-header')
         </div>
         <table class="table table-borderless table-hover table-md mb-0">
             <thead>
@@ -99,7 +99,7 @@
             </tbody>
         </table>
         <div class="card-footer px-2">
-            @include('foundation::_components.datatable.datatable-footer', ['paginator' => $roles])
+            <x-arc:datatable-pagination :paginator="$roles"/>
         </div>
     @else
         @include('foundation::_partials.no-data-found')

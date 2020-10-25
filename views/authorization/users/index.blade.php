@@ -29,58 +29,55 @@
 @endpush
 
 @section('content')
-    <v-datatable name="{{ Arcanesoft\Foundation\Auth\Views\Components\UsersDatatable::NAME }}"
-                 :trash="{{ $trash ? 'true' : 'false' }}"></v-datatable>
+    <v-datatable
+        name="{{ Arcanesoft\Foundation\Auth\Views\Components\UsersDatatable::NAME }}"
+        :trash="{{ $trash ? 'true' : 'false' }}"/>
 @endsection
 
 {{-- ACTIVATE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'))
     @push('modals')
-        <div class="modal fade" id="activate-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="activateUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.users.activate', ':id'], 'method' => 'PUT', 'id' => 'activate-user-form']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="activateUserTitle"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div id="activateUserMessage" class="modal-body">
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                        {{ arcanesoft\ui\action_button('activate')->id('activateUserBtn')->submit() }}
-                        {{ arcanesoft\ui\action_button('deactivate')->id('deactivateUserBtn')->submit() }}
-                    </div>
-                </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal id="activate-user-modal" aria-labelledby="activate-user-modal-title" data-backdrop="static">
+            <x-arc:form action="{{ route('admin::auth.users.activate', [':id']) }}" method="PUT" id="activate-user-form">
+                <x-arc:modal-header>
+                    <x-arc:modal-title id="activate-user-modal-title"/>
+                </x-arc:modal-header>
+                <x-arc:modal-body id="activate-user-modal-message"/>
+                <x-arc:modal-footer class="justify-content-between">
+                    <x-arc:modal-cancel-button/>
+                    {{ arcanesoft\ui\action_button('activate')->id('activate-user-btn')->submit() }}
+                    {{ arcanesoft\ui\action_button('deactivate')->id('deactivate-user-btn')->submit() }}
+                </x-arc:modal-footer>
+            </x-arc:form>
+        </x-arc:modal>
     @endpush
 
     @push('scripts')
-        <script>
-            let activateUserModal  = twbs.Modal.make('div#activate-user-modal')
-            let activateUserForm   = Form.make('form#activate-user-form')
-            let activateUserAction = activateUserForm.getAction()
+        <script defer>
+            let activateUserModal  = components.modal('div#activate-user-modal')
+            let activateUserForm   = components.form('form#activate-user-form')
+            let activateUserAction = activateUserForm.action()
 
-            Foundation.$on('auth::users.activate', ({id, status}) => {
-                activateUserForm.setAction(activateUserAction.replace(":id", id))
-                let modal = activateUserModal._element
+            ARCANESOFT.on('authorization::users.activate', ({id, status}) => {
+                activateUserForm.action(activateUserAction.replace(":id", id))
+                const modal = activateUserModal.elt()
+
+                let modalTitle = modal.querySelector('#activate-user-modal-title')
+                let modalMessage = modal.querySelector('#activate-user-modal-message')
+                let activateBtn = modal.querySelector('#activate-user-btn')
+                let deactivateBtn = modal.querySelector('#deactivate-user-btn')
 
                 if (status === 'activated') {
-                    modal.querySelector('#activateUserTitle').innerHTML = '@lang("Deactivate User")'
-                    modal.querySelector('#activateUserMessage').innerHTML = '@lang("Are you sure you want to deactivate this user ?")'
-                    modal.querySelector('#activateUserBtn').style.display = 'none'
-                    modal.querySelector('#deactivateUserBtn').style.display = ''
+                    modalTitle.innerHTML = '@lang("Deactivate User")'
+                    modalMessage.innerHTML = '@lang("Are you sure you want to deactivate this user ?")'
+                    activateBtn.style.display = 'none'
+                    deactivateBtn.style.display = ''
                 }
                 else {
-                    modal.querySelector('#activateUserTitle').innerHTML = '@lang("Activate User")'
-                    modal.querySelector('#activateUserMessage').innerHTML = '@lang("Are you sure you want to activate this user ?")'
-                    modal.querySelector('#activateUserBtn').style.display = ''
-                    modal.querySelector('#deactivateUserBtn').style.display = 'none'
+                    modalTitle.innerHTML = '@lang("Activate User")'
+                    modalMessage.innerHTML = '@lang("Are you sure you want to activate this user ?")'
+                    activateBtn.style.display = ''
+                    deactivateBtn.style.display = 'none'
                 }
 
                 activateUserModal.show();
@@ -89,31 +86,31 @@
             activateUserForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
-                    activateUserForm.elt().querySelector('button[type="submit"]:not([style*="display: none"])')
-                )
+                let submitBtn = activateUserForm.submitButton('button[type="submit"]:not([style*="display: none"])')
+
                 submitBtn.loading()
 
                 request()
-                    .put(activateUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
+                    .put(activateUserForm.action().toString())
+                    .then(({ data }) => {
+                        if (data && data.code === 'success') {
                             activateUserModal.hide()
                             location.reload()
                         }
                         else {
                             alert('ERROR ! Check the console !')
-                            submitBtn.reset()
                         }
                     })
                     .catch((error) => {
                         alert('AJAX ERROR ! Check the console !')
+                    })
+                    .finally(() => {
                         submitBtn.reset()
                     })
             })
 
             activateUserModal.on('hidden', () => {
-                activateUserForm.setAction(activateUserAction)
+                activateUserForm.action(activateUserAction.toString())
             })
         </script>
     @endpush
@@ -122,70 +119,63 @@
 {{-- DELETE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'))
     @push('modals')
-        <div class="modal fade" id="delete-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.users.delete', ':id'], 'method' => 'DELETE', 'id' => 'delete-user-form']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modelTitleId">@lang('Delete User')</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        @lang('Are you sure you want to delete this user ?')
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                        {{ arcanesoft\ui\action_button('delete')->submit() }}
-                    </div>
-                </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal id="delete-user-modal" aria-labelledby="delete-user-modal-title" data-backdrop="static">
+            <x-arc:form action="{{ route('admin::auth.users.delete', [':id']) }}" method="DELETE" id="delete-user-form">
+                <x-arc:modal-header>
+                    <x-arc:modal-title id="delete-user-modal-title">@lang('Delete User')</x-arc:modal-title>
+                </x-arc:modal-header>
+                <x-arc:modal-body id="delete-user-modal-message">
+                    @lang('Are you sure you want to delete this user ?')
+                </x-arc:modal-body>
+                <x-arc:modal-footer class="justify-content-between">
+                    <x-arc:modal-cancel-button/>
+                    {{ arcanesoft\ui\action_button('delete')->submit() }}
+                </x-arc:modal-footer>
+            </x-arc:form>
+        </x-arc:modal>
     @endpush
 
     @push('scripts')
-        <script>
-            let deleteUserModal = twbs.Modal.make('div#delete-user-modal')
-            let deleteUserForm  = Form.make('form#delete-user-form')
-            let deleteUserAction = deleteUserForm.getAction()
+        <script defer>
+            let deleteUserModal  = components.modal('div#delete-user-modal')
+            let deleteUserForm   = components.form('form#delete-user-form')
+            let deleteUserAction = deleteUserForm.action()
 
-            Foundation.$on('auth::users.delete', ({id}) => {
-                deleteUserForm.setAction(deleteUserAction.replace(':id', id))
+            ARCANESOFT.on('authorization::users.delete', ({id}) => {
+                deleteUserForm.action(deleteUserAction.replace(':id', id))
+
                 deleteUserModal.show()
             })
 
             deleteUserForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
-                    deleteUserForm.elt().querySelector('button[type="submit"]')
-                )
+                let submitBtn = deleteUserForm.submitButton()
+
                 submitBtn.loading()
 
                 request()
-                    .delete(deleteUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
+                    .delete(deleteUserForm.action().toString())
+                    .then(({ data }) => {
+                        if (data && data.code === 'success') {
                             deleteUserModal.hide()
                             location.reload()
                         }
                         else {
                             alert('ERROR ! Check the console !')
-                            submitBtn.reset()
                         }
                     })
                     .catch((error) => {
                         alert('AJAX ERROR ! Check the console !')
                         console.log(error)
+                    })
+                    .finally(() => {
                         submitBtn.reset()
                     })
             })
 
             deleteUserModal.on('hidden', () => {
-                deleteUserForm.setAction(deleteUserAction)
+                deleteUserForm.action(deleteUserAction.toString())
             })
         </script>
     @endpush
@@ -195,70 +185,63 @@
 @if ($trash)
 @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'))
     @push('modals')
-        <div class="modal fade" id="restore-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.users.restore', ':id'], 'method' => 'PUT', 'id' => 'restore-user-form']) }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="modelTitleId">@lang('Restore User')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @lang('Are you sure you want to restore this user ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                            {{ arcanesoft\ui\action_button('restore')->submit() }}
-                        </div>
-                    </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal id="restore-user-modal" aria-labelledby="restore-user-modal-title" data-backdrop="static">
+            <x-arc:form action="{{ route('admin::auth.users.restore', [':id']) }}" method="PUT" id="restore-user-form">
+                <x-arc:modal-header>
+                    <x-arc:modal-title id="restore-user-modal-title">@lang('Restore User')</x-arc:modal-title>
+                </x-arc:modal-header>
+                <x-arc:modal-body id="restore-user-modal-message">
+                    @lang('Are you sure you want to restore this user ?')
+                </x-arc:modal-body>
+                <x-arc:modal-footer class="justify-content-between">
+                    <x-arc:modal-cancel-button/>
+                    {{ arcanesoft\ui\action_button('restore')->submit() }}
+                </x-arc:modal-footer>
+            </x-arc:form>
+        </x-arc:modal>
     @endpush
 
     @push('scripts')
         <script>
-            let restoreUserModal  = twbs.Modal.make('div#restore-user-modal')
-            let restoreUserForm   = Form.make('form#restore-user-form')
-            let restoreUserAction = restoreUserForm.getAction()
+            let restoreUserModal  = components.modal('div#restore-user-modal')
+            let restoreUserForm   = components.form('form#restore-user-form')
+            let restoreUserAction = restoreUserForm.action()
 
-            Foundation.$on('auth::users.restore', ({id}) => {
-                restoreUserForm.setAction(restoreUserAction.replace(':id', id))
+            ARCANESOFT.on('authorization::users.restore', ({id}) => {
+                restoreUserForm.action(restoreUserAction.replace(':id', id))
+
                 restoreUserModal.show()
             })
 
             restoreUserForm.on('submit', (event) => {
                 event.preventDefault()
 
-                let submitBtn = Foundation.ui.loadingButton(
-                    restoreUserForm.elt().querySelector('button[type="submit"]')
-                );
+                let submitBtn = restoreUserForm.submitButton()
+
                 submitBtn.loading()
 
                 request()
-                    .put(restoreUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
+                    .put(restoreUserForm.action().toString())
+                    .then(({ data }) => {
+                        if (data && data.code === 'success') {
                             restoreUserModal.hide()
                             location.reload()
                         }
                         else {
                             alert('ERROR ! Check the console !')
-                            submitBtn.reset()
                         }
                     })
                     .catch((error) => {
                         alert('AJAX ERROR ! Check the console !')
                         console.log(error)
+                    })
+                    .finally(() => {
                         submitBtn.reset()
                     })
-            });
+            })
 
             restoreUserModal.on('hidden', () => {
-                restoreUserForm.setAction(restoreUserAction)
+                restoreUserForm.setAction(restoreUserAction.toString())
             })
         </script>
     @endpush
