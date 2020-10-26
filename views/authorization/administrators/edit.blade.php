@@ -20,38 +20,30 @@
                     <x-arc:card-body>
                         <div class="row g-3">
                             {{-- FIRST NAME --}}
-                            <div class="col-12 col-xl-6">
-                                <label for="first_name" class="form-label font-weight-light text-uppercase text-muted">@lang('First Name')</label>
-                                {{ form()->text('first_name', old('first_name', $administrator->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid'), 'required']) }}
-                                @error('first_name')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
+                            <div class="col-12 col-xxl-6">
+                                <x-arc:input-control
+                                    type="text" name="first_name" :value="old('first_name', $administrator->first_name)"
+                                    label="First Name" required/>
                             </div>
 
                             {{-- LAST NAME --}}
-                            <div class="col-12 col-xl-6">
-                                <label for="last_name" class="form-label font-weight-light text-uppercase text-muted">@lang('Last Name')</label>
-                                {{ form()->text('last_name', old('last_name', $administrator->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'required']) }}
-                                @error('last_name')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
+                            <div class="col-12 col-xxl-6">
+                                <x-arc:input-control
+                                    type="text" name="last_name" :value="old('last_name', $administrator->last_name)"
+                                    label="Last Name" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
-                                <label for="email" class="form-label font-weight-light text-uppercase text-muted">@lang('Email')</label>
-                                {{ form()->email('email', old('email', $administrator->email), ['class' => 'form-control'.$errors->first('email', ' is-invalid'), 'required']) }}
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
+                                <x-arc:input-control
+                                    type="email" name="email" :value="old('email', $administrator->email)"
+                                    label="Email" required/>
                             </div>
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <a href="{{ route('admin::auth.administrators.show', [$administrator]) }}" class="btn btn-sm btn-light">
-                            @lang('Cancel')
-                        </a>
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('Save')</button>
+                        <x-arc:form-cancel-button to="{{ route('admin::auth.administrators.show', [$administrator]) }}"/>
+                        <x-arc:form-submit-button type="save"/>
                     </x-arc:card-footer>
                 </x-arc:card>
             </div>

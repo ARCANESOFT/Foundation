@@ -71,6 +71,11 @@ class UsersRoutes extends AbstractRouteRegistrar
                          ->middleware(['ajax'])
                          ->name('activate');
 
+                    // admin::auth.users.deactivate
+                    $this->put('deactivate', [UsersController::class, 'deactivate'])
+                         ->middleware(['ajax'])
+                         ->name('deactivate');
+
                     // admin::auth.users.delete
                     $this->delete('delete', [UsersController::class, 'delete'])
                          ->middleware(['ajax'])

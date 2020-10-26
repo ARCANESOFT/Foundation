@@ -1,7 +1,7 @@
 @extends(arcanesoft\foundation()->template())
 
 @section('page-title')
-    <i class="fas fa-fw fa-clipboard-list"></i> @lang('LogViewer')
+    <i class="fas fa-fw fa-clipboard-list" xmlns:x-arc="http://www.w3.org/1999/html"></i> @lang('LogViewer')
 @endsection
 
 @section('content')
@@ -11,11 +11,11 @@
             <thead>
                 <tr>
                     @foreach($headers as $key => $header)
-                    <th scope="col" class="font-weight-light text-uppercase text-muted {{ $key === 'date' ? 'text-left' : 'text-center' }}">
-                        {{ $header }}
-                    </th>
+                        <x-arc:table-th
+                            label="{{ $header }}" scope="col"
+                            class="{{ $key === 'date' ? 'text-left' : 'text-center' }}"/>
                     @endforeach
-                    <th scope="col" class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
+                    <x-arc:table-th label="Actions" scope="col" class="text-right"/>
                 </tr>
             </thead>
             <tbody>
@@ -33,13 +33,14 @@
                         </td>
                     @endforeach
                     <td class="text-right">
-                        @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('show'))
-                            <a href="{{ route('admin::system.log-viewer.logs.show', [$date]) }}"
-                               class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                <i class="far fa-fw fa-eye"></i>
-                            </a>
-                        @endcan
+                        {{-- SHOW --}}
+                        <x-arc:datatable-action
+                            type="show"
+                            action="{{ route('admin::system.log-viewer.logs.show', [$date]) }}"
+                            allowed="{{ Arcanesoft\Foundation\System\Policies\LogViewerPolicy::can('show') }}"
+                        />
 
+                        {{-- DOWNLOAD --}}
                         @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
                             <a href="{{ route('admin::system.log-viewer.logs.download', [$date]) }}"
                                class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Download')">
@@ -47,12 +48,12 @@
                             </a>
                         @endcan
 
-                        @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
-                            <button onclick="ARCANESOFT.emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
-                                    class="btn btn-sm btn-light text-danger" data-toggle="tooltip" title="@lang('Delete')">
-                                <i class="far fa-fw fa-trash-alt"></i>
-                            </button>
-                        @endcan
+                        {{-- DELETE --}}
+                        <x-arc:datatable-action
+                            type="delete"
+                            action="ARCANESOFT.emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
+                            allowed="{{ Arcanesoft\Foundation\System\Policies\LogViewerPolicy::can('delete') }}"
+                        />
                     </td>
                 </tr>
             @empty
@@ -70,74 +71,32 @@
 {{-- DELETE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
     @push('modals')
-        <div class="modal fade" id="delete-log-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="deleteLogTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <form action="{{ route('admin::system.log-viewer.logs.delete', [':id']) }}" id="delete-log-form">
-                    @csrf
-                    @method('DELETE')
-
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="deleteLogTitle">@lang('Delete Log')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="@lang('Close')">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @lang('Are you sure you want to delete this log ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button data-dismiss="modal" class="btn btn-light">@lang('Cancel')</button>
-                            <button type="submit" class="btn btn-danger">@lang('Delete')</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <x-arc:modal-action
+            type="delete"
+            action="{{ route('admin::system.log-viewer.logs.delete', [':date']) }}" method="DELETE"
+            title="Delete Log File"
+            body="Are you sure you want to delete this log file ?"
+        />
     @endpush
 
     @push('scripts')
         <script defer>
-            let deleteLogModal  = twbs.Modal.make('div#delete-log-modal')
-            let deleteLogForm   = Form.make('form#delete-log-form')
-            let deleteLogAction = deleteLogForm.getAction()
+            let deleteModal  = components.modal('div#delete-modal')
+            let deleteForm   = components.form('form#delete-form')
+            let deleteAction = deleteForm.getAction()
 
             ARCANESOFT.on('foundation::system.log-viewer.delete', ({date}) => {
-                deleteLogForm.setAction(deleteLogAction.replace(':id', date))
-                deleteLogModal.show()
+                deleteForm.setAction(deleteAction.replace(':date', date))
+                deleteModal.show()
             })
 
-            deleteLogForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = ARCANESOFT.ui.loadingButton(
-                    deleteLogForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                ARCANESOFT
-                    .request()
-                    .delete(deleteLogForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            deleteLogModal.hide()
-                            location.replace("{{ route('admin::system.log-viewer.index') }}")
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            deleteForm.onSubmit('DELETE', () => {
+                deleteModal.hide()
+                location.reload()
             })
 
-            deleteLogModal.on('hidden', () => {
-                deleteLogForm.setAction(deleteLogAction);
+            deleteModal.on('hidden', () => {
+                deleteForm.setAction(deleteAction);
             })
         </script>
     @endpush

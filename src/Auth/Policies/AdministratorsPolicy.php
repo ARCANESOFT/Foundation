@@ -78,8 +78,14 @@ class AdministratorsPolicy extends AbstractPolicy
 
             // admin::auth.administrators.activate
             $this->makeAbility('activate')->setMetas([
-                'name'        => 'Activate/Deactivate a administrator',
-                'description' => 'Ability to activate/deactivate a administrator',
+                'name'        => 'Activate an administrator',
+                'description' => 'Ability to deactivate a administrator',
+            ]),
+
+            // admin::auth.administrators.deactivate
+            $this->makeAbility('deactivate')->setMetas([
+                'name'        => 'Deactivate an administrator',
+                'description' => 'Ability to deactivate an administrator',
             ]),
 
             // admin::auth.administrators.delete
@@ -171,7 +177,7 @@ class AdministratorsPolicy extends AbstractPolicy
     }
 
     /**
-     * Allow to update a administrator.
+     * Allow to activate an administrator.
      *
      * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
      * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|null   $model
@@ -180,6 +186,29 @@ class AdministratorsPolicy extends AbstractPolicy
      */
     public function activate(Administrator $administrator, Administrator $model = null)
     {
+        if ( ! is_null($model) && $model->isActive())
+            return false;
+
+        if ($administrator->is($model))
+            return false;
+
+        if ( ! is_null($model) && $model->isSuperAdmin())
+            return false;
+    }
+
+    /**
+     * Allow to deactivate an administrator.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|null   $model
+     *
+     * @return \Illuminate\Auth\Access\Response|bool|void
+     */
+    public function deactivate(Administrator $administrator, Administrator $model = null)
+    {
+        if ( ! is_null($model) && ! $model->isActive())
+            return false;
+
         if ($administrator->is($model))
             return false;
 

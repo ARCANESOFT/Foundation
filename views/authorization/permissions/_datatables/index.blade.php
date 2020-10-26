@@ -30,7 +30,7 @@
                     <td class="small">{{ $permission->name }}</td>
                     <td class="small">{{ $permission->description }}</td>
                     <td class="text-center">
-                        {{ arcanesoft\ui\count_pill($permission->roles_count) }}
+                        <x-arc:badge-count value="{{ $permission->roles_count }}"/>
                     </td>
                     <td class="text-right">
                         {{-- SHOW --}}

@@ -78,8 +78,14 @@ class UsersPolicy extends AbstractPolicy
 
             // admin::auth.users.activate
             $this->makeAbility('activate')->setMetas([
-                'name'        => 'Activate/Deactivate a user',
-                'description' => 'Ability to activate/deactivate a user',
+                'name'        => 'Activate a user',
+                'description' => 'Ability to activate a user',
+            ]),
+
+            // admin::auth.users.deactivate
+            $this->makeAbility('deactivate')->setMetas([
+                'name'        => 'Deactivate a user',
+                'description' => 'Ability to deactivate a user',
             ]),
 
             // admin::auth.users.delete
@@ -182,7 +188,7 @@ class UsersPolicy extends AbstractPolicy
     }
 
     /**
-     * Allow to update a user.
+     * Allow to activate a user.
      *
      * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
      * @param  \Arcanesoft\Foundation\Auth\Models\User|null            $user
@@ -191,7 +197,22 @@ class UsersPolicy extends AbstractPolicy
      */
     public function activate(Administrator $administrator, User $user = null)
     {
-        //
+        if ( ! is_null($user) && $user->isActive())
+            return false;
+    }
+
+    /**
+     * Allow to deactivate a user.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Auth\Models\User|null            $user
+     *
+     * @return \Illuminate\Auth\Access\Response|bool|void
+     */
+    public function deactivate(Administrator $administrator, User $user = null)
+    {
+        if ( ! is_null($user) && ! $user->isActive())
+            return false;
     }
 
     /**

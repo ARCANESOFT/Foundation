@@ -15,10 +15,7 @@ $attributes = $attributes->merge([
 
 @if ($allowed)
     @if($actionTag() === Arcanesoft\Foundation\Views\Components\Datatable\Action::ACTION_TAG_BUTTON)
-        <?php
-            $isDangerAction = $type === Arcanesoft\Foundation\Views\Components\Datatable\Action::ACTION_TYPE_DELETE;
-        ?>
-        <button {{ $attributes->merge(['onclick' => $action, 'class' => $isDangerAction ? 'text-danger' : '']) }}>
+        <button {{ $attributes->merge(['onclick' => $action, 'class' => $isDestructiveAction() ? 'text-danger' : '']) }}>
             <i class="{{ $actionIcon }}"></i>
         </button>
     @else

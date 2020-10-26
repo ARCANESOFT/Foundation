@@ -4,49 +4,59 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Views\Components\Forms\Controls;
 
-use Arcanesoft\Foundation\Views\Components\Forms\ControlComponent;
+use Illuminate\View\Component;
 
 /**
- * Class     Input
+ * Class     Textarea
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Input extends ControlComponent
+class Textarea extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var  bool */
-    public $grouped;
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var string|null
+     */
+    public $id;
+
+    /**
+     * @var string|null
+     */
+    public $value;
+
+    /**
+     * @var string|null
+     */
+    public $label;
 
     /* -----------------------------------------------------------------
-     |  Properties
+     |  Constructor
      | -----------------------------------------------------------------
      */
 
     /**
-     * Input constructor.
+     * Textarea constructor.
      *
      * @param  string       $name
      * @param  string|null  $id
-     * @param  string       $type
      * @param  string|null  $value
      * @param  string|null  $label
-     * @param  bool         $grouped
      */
-    public function __construct(
-        string $name,
-        string $id = null,
-        string $type = 'text',
-        ?string $value = '',
-        ?string $label = null,
-        bool $grouped = false
-    ) {
-        parent::__construct($name, $id, $type, $value, $label);
-
-        $this->grouped = $grouped;
+    public function __construct(string $name, ?string $id = null, ?string $value = '', ?string $label = null)
+    {
+        $this->name  = $name;
+        $this->id    = $id;
+        $this->value = $value;
+        $this->label = $label;
     }
 
     /* -----------------------------------------------------------------
@@ -61,6 +71,6 @@ class Input extends ControlComponent
      */
     public function render()
     {
-        return view()->make('foundation::_components.forms.controls.input');
+        return view()->make('foundation::_components.forms.controls.textarea');
     }
 }

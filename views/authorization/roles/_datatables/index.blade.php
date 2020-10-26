@@ -5,21 +5,21 @@
  */
 ?>
 
-<div class="card card-borderless shadow-sm">
+<x-arc:card>
     @if ($roles->isNotEmpty())
-        <div class="card-header px-2">
+        <x-arc:card-header>
             @include('foundation::_includes.datatable.datatable-header')
-        </div>
-        <table class="table table-borderless table-hover table-md mb-0">
+        </x-arc:card-header>
+        <x-arc:card-table>
             <thead>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['name'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['description'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted">{{ $fields['created_at'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['administrators'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['locked'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-center">{{ $fields['status'] }}</th>
-                    <th class="font-weight-light text-uppercase text-muted text-right">{{ $fields['actions'] }}</th>
+                    <x-arc:table-th>{{ $fields['name'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['description'] }}</x-arc:table-th>
+                    <x-arc:table-th>{{ $fields['created_at'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-center">{{ $fields['administrators'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-center">{{ $fields['locked'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-center">{{ $fields['status'] }}</x-arc:table-th>
+                    <x-arc:table-th class="text-right">{{ $fields['actions'] }}</x-arc:table-th>
                 </tr>
             </thead>
             <tbody>
@@ -28,80 +28,56 @@
                         <td class="small">{{ $role->name }}</td>
                         <td class="small">{{ $role->description }}</td>
                         <td class="small text-muted">{{ $role->created_at }}</td>
-                        <td class="text-center">{{ arcanesoft\ui\count_pill($role->administrators_count) }}</td>
+                        <td class="text-center">
+                            <x-arc:badge-count value="{{ $role->administrators_count }}"/>
+                        </td>
                         <td class="text-center">
                             <span class="status {{ $role->isLocked() ? 'bg-danger' : 'bg-secondary' }}"
-                                  data-toggle="tooltip" data-placement="top" title="@lang($role->isLocked() ? 'Locked' : 'Unlocked')"></span>
+                                  data-toggle="tooltip" title="@lang($role->isLocked() ? 'Locked' : 'Unlocked')"></span>
                         </td>
                         <td class="text-center">
-                            <span class="status {{ $role->isActive() ? 'status-animated bg-success' : 'bg-secondary' }}"
-                                  data-toggle="tooltip" data-placement="top" title="@lang($role->isActive() ? 'Activated' : 'Deactivated')"></span>
+                            <x-arc:badge-active value="{{ $role->isActive() }}" icon="true"/>
                         </td>
-                        <td>
-                            <div class="input-group justify-content-end">
-                                {{-- SHOW --}}
-                                @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('show'), [$role])
-                                    <a href="{{ route('admin::auth.roles.show', [$role]) }}"
-                                       class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                        <i class="far fa-fw fa-eye"></i>
-                                    </a>
-                                @endcan
+                        <td class="text-right">
+                            {{-- SHOW --}}
+                            <x-arc:datatable-action
+                                type="show"
+                                action="{{ route('admin::auth.roles.show', [$role]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('show', [$role]) }}"/>
 
-                                {{-- DROPDOWN --}}
-                                <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-fw fa-ellipsis-v"></i> <span class="sr-only">@lang('Toggle Dropdown')</span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        {{-- UPDATE --}}
-                                        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('update'), [$role])
-                                            <a class="dropdown-item" href="{{ route('admin::auth.roles.show', [$role]) }}">
-                                                @lang('Edit')
-                                            </a>
-                                        @else
-                                            <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                                @lang('Edit')
-                                            </button>
-                                        @endcan
-                                    </li>
-                                    <li>
-                                        {{-- ACTIVATE --}}
-                                        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('activate'), [$role])
-                                            <button class="dropdown-item"
-                                                    onclick="Foundation.$emit('auth::roles.activate', {id: '{{ $role->getRouteKey() }}', status: '{{ $role->isActive() ? 'activated' : 'deactivated' }}'})">
-                                                @lang($role->isActive() ? 'Deactivate' : 'Activate')
-                                            </button>
-                                        @else
-                                            <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                                @lang($role->isActive() ? 'Deactivate' : 'Activate')
-                                            </button>
-                                        @endcan
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        {{-- DELETE --}}
-                                        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('delete'), [$role])
-                                            <button class="dropdown-item text-danger"
-                                                    onclick="Foundation.$emit('auth::roles.delete', {id: '{{ $role->getRouteKey() }}' })">
-                                                @lang('Delete')
-                                            </button>
-                                        @else
-                                            <button class="dropdown-item disabled" tabindex="-1" aria-disabled="true">
-                                                @lang('Delete')
-                                            </button>
-                                        @endcan
-                                    </li>
-                                </ul>
-                            </div>
+                            {{-- UPDATE --}}
+                            <x-arc:datatable-action
+                                type="edit"
+                                action="{{ route('admin::auth.roles.edit', [$role]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('update', [$role]) }}"/>
+
+                            {{-- ACTIVATE/DEACTIVATE --}}
+                            @if ($role->isActive())
+                                <x-arc:datatable-action
+                                    type="deactivate"
+                                    action="ARCANESOFT.emit('authorization::roles.deactivate', {id: '{{ $role->getRouteKey() }}'})"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('deactivate', [$role]) }}"/>
+                            @else
+                                <x-arc:datatable-action
+                                    type="activate"
+                                    action="ARCANESOFT.emit('authorization::roles.activate', {id: '{{ $role->getRouteKey() }}'})"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('activate', [$role]) }}"/>
+                            @endif
+
+                            {{-- DELETE --}}
+                            <x-arc:datatable-action
+                                type="delete"
+                                action="ARCANESOFT.emit('authorization::roles.delete', {id: '{{ $role->getRouteKey() }}' })"
+                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('delete', [$role]) }}"/>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-        <div class="card-footer px-2">
+        </x-arc:card-table>
+        <x-arc:card-footer>
             <x-arc:datatable-pagination :paginator="$roles"/>
-        </div>
+        </x-arc:card-footer>
     @else
         @include('foundation::_partials.no-data-found')
     @endif
-</div>
+</x-arc:card>

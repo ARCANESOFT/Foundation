@@ -14,14 +14,14 @@
                 <x-arc:card-table>
                     <tbody>
                         <tr>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Key')</th>
+                            <x-arc:table-th label="Key"/>
                             <td class="text-right">
                                 <span class="badge border border-muted text-muted">{{ $ability->key() }}</span>
                             </td>
                         </tr>
                         <tr>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Method')</th>
-                            <td class="text-right font-monospace small">
+                            <x-arc:table-th label="Method"/>
+                            <td class="text-right small font-monospace">
                                 @if($ability->isClosure())
                                     Closure
                                 @else
@@ -31,35 +31,39 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Category')</th>
+                            <x-arc:table-th label="Category"/>
                             <td class="text-right small">{{ $ability->meta('category') }}</td>
                         </tr>
                         <tr>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
+                            <x-arc:table-th label="Name"/>
                             <td class="text-right small">{{ $ability->meta('name') }}</td>
                         </tr>
                         <tr>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
+                            <x-arc:table-th label="Description"/>
                             <td class="text-right small">{{ $ability->meta('description') }}</td>
                         </tr>
                         <tr>
-                            <th class="font-weight-light text-uppercase text-muted">@lang('Registered')</th>
+                            <x-arc:table-th label="Registered"/>
                             <td class="text-right">
                                 @if ($ability->meta('is_registered', false))
-                                    <span class="badge border border-success text-success">@lang('Yes')</span>
+                                    <span class="badge border border-success text-success" data-toggle="tooltip" title="@lang('Yes')">
+                                        <i class="fas fa-fw fa-check"></i>
+                                    </span>
                                 @else
-                                    <span class="badge border border-secondary text-secondary">@lang('No')</span>
+                                    <span class="badge border border-secondary text-secondary" data-toggle="tooltip" title="@lang('No')">
+                                        <i class="fas fa-fw fa-ban"></i>
+                                    </span>
                                 @endif
                             </td>
                         </tr>
                     </tbody>
                 </x-arc:card-table>
-                @can(Arcanesoft\Foundation\System\Policies\AbilitiesPolicy::ability('index'))
-                <x-arc:card-footer class="text-right">
-                    <a href="{{ route('admin::system.abilities.index') }}"
-                       class="btn btn-sm btn-light">@lang('Return back')</a>
+                <x-arc:card-footer>
+                    @can(Arcanesoft\Foundation\System\Policies\AbilitiesPolicy::ability('index'))
+                        <a href="{{ route('admin::system.abilities.index') }}"
+                           class="btn btn-sm btn-light">@lang('Return back')</a>
+                    @endcan
                 </x-arc:card-footer>
-                @endcan
             </x-arc:card>
         </div>
     </div>

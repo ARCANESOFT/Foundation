@@ -18,28 +18,27 @@
         <x-arc:card-table>
             <tbody>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">@lang('Path')</th>
-                    <td class="font-monospace small">{{ $log->getPath() }}</td>
+                    <x-arc:table-th label="Path"/>
+                    <td class="small font-monospace">{{ $log->getPath() }}</td>
                 </tr>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">@lang('Size')</th>
-                    <td class="small">{{ $log->size() }}</td>
+                    <x-arc:table-th label="Size"/>
+                    <td class="small font-monospace">{{ $log->size() }}</td>
                 </tr>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">@lang('Created at')</th>
+                    <x-arc:table-th label="Created at"/>
                     <td class="small">{{ $log->createdAt() }}</td>
                 </tr>
                 <tr>
-                    <th class="font-weight-light text-uppercase text-muted">@lang('Updated at')</th>
+                    <x-arc:table-th label="Updated at"/>
                     <td class="small">{{ $log->updatedAt() }}</td>
                 </tr>
             </tbody>
         </x-arc:card-table>
         <x-arc:card-footer class="d-flex justify-content-between">
             @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
-                <a href="{{ route('admin::system.log-viewer.logs.download', [$log->date]) }}" class="btn btn-sm btn-light">
-                    <i class="fa fa-download"></i> @lang('Download')
-                </a>
+                <a href="{{ route('admin::system.log-viewer.logs.download', [$log->date]) }}"
+                   class="btn btn-sm btn-secondary"><i class="fas fa-fw fa-download"></i> @lang('Download')</a>
             @endcan
 
             @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
@@ -101,7 +100,9 @@
     <section class="timeline-container">
         @foreach($entries as $key => $entry)
             <x-arc:card class="timeline-item mb-4">
-                <div class="timeline-dot shadow-sm text-white bg-log-level-{{ $entry->level }}">{{ $entry->icon() }}</div>
+                <div class="timeline-dot d-flex justify-content-center shadow-sm text-white bg-log-level-{{ $entry->level }}">
+                    {{ $entry->icon() }}
+                </div>
                 <x-arc:card-header class="d-flex align-items-center">
                     <div>
                         <span class="d-inline-block badge border border-dark text-dark mr-1">{{ $entry->datetime->format('H:i:s') }}</span>
@@ -112,14 +113,14 @@
                     @if ($entry->hasStack())
                         <a class="btn btn-sm btn-light ml-auto" role="button" data-toggle="collapse"
                            href="#log-entry-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
-                            <i class="fa fa-toggle-on"></i> @lang('Stack')
+                            <i class="fas fa-fw fa-toggle-on"></i> @lang('Stack')
                         </a>
                     @endif
 
                     @if ($entry->hasContext())
                         <a class="btn btn-sm btn-light ml-auto" role="button" data-toggle="collapse"
                            href="#log-entry-context-{{ $key }}" aria-expanded="false" aria-controls="log-context-{{ $key }}">
-                            <i class="fa fa-toggle-on"></i> @lang('Context')
+                            <i class="fas fa-fw fa-toggle-on"></i> @lang('Context')
                         </a>
                     @endif
                 </x-arc:card-header>
@@ -147,68 +148,26 @@
 {{-- DELETE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
     @push('modals')
-        <div class="modal fade" id="delete-log-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="deleteLogTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <form action="{{ route('admin::system.log-viewer.logs.delete', [$log->date]) }}" id="delete-log-form">
-                    @csrf
-                    @method('DELETE')
-
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="deleteLogTitle">@lang('Delete Log')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="@lang('Close')">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @lang('Are you sure you want to delete this log ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                            {{ arcanesoft\ui\action_button('delete')->submit() }}
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <x-arc:modal-action
+            type="delete"
+            action="{{ route('admin::system.log-viewer.logs.delete', [$log->date]) }}" method="DELETE"
+            title="Delete Log File"
+            body="Are you sure you want to delete this log file ?"
+        />
     @endpush
 
     @push('scripts')
-        <script>
-            let deleteLogModal = twbs.Modal.make('div#delete-log-modal')
-            let deleteLogForm  = Form.make('form#delete-log-form')
+        <script defer>
+            let deleteModal = components.modal('div#delete-modal')
+            let deleteForm  = components.form('form#delete-form')
 
             ARCANESOFT.on('foundation::system.log-viewer.delete', () => {
-                deleteLogModal.show()
-            });
+                deleteModal.show()
+            })
 
-            deleteLogForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = ARCANESOFT.ui.loadingButton(
-                    deleteLogForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                ARCANESOFT
-                    .request()
-                    .delete(deleteLogForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            deleteLogModal.hide()
-                            location.replace("{{ route('admin::system.log-viewer.index') }}")
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            deleteForm.onSubmit('DELETE', () => {
+                deleteModal.hide()
+                location.replace("{{ route('admin::system.log-viewer.index') }}")
             })
         </script>
     @endpush

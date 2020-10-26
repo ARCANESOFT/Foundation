@@ -7,47 +7,41 @@
 <?php /** @var  App\Models\User|mixed  $user */ ?>
 
 @section('content')
-    {{ form()->open(['route' => ['admin::auth.users.update', $user], 'method' => 'PUT']) }}
+    <x-arc:form action="{{ route('admin::auth.users.update', [$user]) }}" method="PUT">
         <div class="row">
             <div class="col-md-6">
-                <div class="card card-borderless shadow-sm">
-                    <div class="card-header">@lang('User')</div>
-                    <div class="card-body">
+                <x-arc:card>
+                    <x-arc:card-header>@lang('User')</x-arc:card-header>
+                    <x-arc:card-body>
                         <div class="row g-3">
                             {{-- FIRST NAME --}}
-                            <div class="col-lg-6">
-                                <label for="first_name" class="form-label font-weight-light text-uppercase">@lang('First Name')</label>
-                                {{ form()->text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid')]) }}
-                                @error('first_name')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
+                            <div class="col-12 col-xxl-6">
+                                <x-arc:input-control
+                                    type="text" name="first_name" :value="old('first_name', $user->first_name)"
+                                    label="First Name" required/>
                             </div>
 
                             {{-- LAST NAME --}}
-                            <div class="col-lg-6">
-                                <label for="last_name" class="form-label font-weight-light text-uppercase">@lang('Last Name')</label>
-                                {{ form()->text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid')]) }}
-                                @error('last_name')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
+                            <div class="col-12 col-xxl-6">
+                                <x-arc:input-control
+                                    type="text" name="last_name" :value="old('last_name', $user->last_name)"
+                                    label="First Name" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
-                                <label for="email" class="form-label font-weight-light text-uppercase">@lang('Email')</label>
-                                {{ form()->email('email', old('email', $user->email), ['class' => 'form-control'.$errors->first('email', ' is-invalid')]) }}
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
+                                <x-arc:input-control
+                                    type="email" name="email" :value="old('email', $user->email)"
+                                    label="Email" required/>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between">
-                        <a href="{{ route('admin::auth.users.show', [$user]) }}" class="btn btn-sm btn-light">@lang('Cancel')</a>
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('Save')</button>
-                    </div>
-                </div>
+                    </x-arc:card-body>
+                    <x-arc:card-footer class="d-flex justify-content-between">
+                        <x-arc:form-cancel-button to="{{ route('admin::auth.users.show', [$user]) }}"/>
+                        <x-arc:form-submit-button type="save"/>
+                    </x-arc:card-footer>
+                </x-arc:card>
             </div>
         </div>
-    {{ form()->close() }}
+    </x-arc:form>
 @endsection

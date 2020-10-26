@@ -19,12 +19,13 @@ class Action extends Component
      | -----------------------------------------------------------------
      */
 
-    const ACTION_TYPE_SHOW       = 'show';
-    const ACTION_TYPE_EDIT       = 'edit';
     const ACTION_TYPE_ACTIVATE   = 'activate';
     const ACTION_TYPE_DEACTIVATE = 'deactivate';
-    const ACTION_TYPE_RESTORE    = 'restore';
     const ACTION_TYPE_DELETE     = 'delete';
+    const ACTION_TYPE_DETACH     = 'detach';
+    const ACTION_TYPE_EDIT       = 'edit';
+    const ACTION_TYPE_RESTORE    = 'restore';
+    const ACTION_TYPE_SHOW       = 'show';
 
     const ACTION_TAG_BUTTON     = 'button';
     const ACTION_TAG_LINK       = 'link';
@@ -49,12 +50,13 @@ class Action extends Component
      * @var array
      */
     protected $allowedTypes = [
-        self::ACTION_TYPE_SHOW,
-        self::ACTION_TYPE_EDIT,
         self::ACTION_TYPE_ACTIVATE,
         self::ACTION_TYPE_DEACTIVATE,
-        self::ACTION_TYPE_RESTORE,
         self::ACTION_TYPE_DELETE,
+        self::ACTION_TYPE_DETACH,
+        self::ACTION_TYPE_EDIT,
+        self::ACTION_TYPE_RESTORE,
+        self::ACTION_TYPE_SHOW,
     ];
 
     /* -----------------------------------------------------------------
@@ -145,15 +147,33 @@ class Action extends Component
     public function actionTag(): string
     {
         return [
-            static::ACTION_TYPE_SHOW       => static::ACTION_TAG_LINK,
-            static::ACTION_TYPE_EDIT       => static::ACTION_TAG_LINK,
-
             static::ACTION_TYPE_ACTIVATE   => static::ACTION_TAG_BUTTON,
             static::ACTION_TYPE_DEACTIVATE => static::ACTION_TAG_BUTTON,
-            static::ACTION_TYPE_RESTORE    => static::ACTION_TAG_BUTTON,
             static::ACTION_TYPE_DELETE     => static::ACTION_TAG_BUTTON,
+            static::ACTION_TYPE_DETACH     => static::ACTION_TAG_BUTTON,
+            static::ACTION_TYPE_EDIT       => static::ACTION_TAG_LINK,
+            static::ACTION_TYPE_RESTORE    => static::ACTION_TAG_BUTTON,
+            static::ACTION_TYPE_SHOW       => static::ACTION_TAG_LINK,
         ][$this->type];
     }
+
+    /**
+     * Determine if the action is destructive.
+     *
+     * @return bool
+     */
+    public function isDestructiveAction(): bool
+    {
+        return in_array($this->type, [
+            static::ACTION_TYPE_DETACH,
+            static::ACTION_TYPE_DELETE,
+        ]);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
 
     /**
      * Get the action's icons.
@@ -163,12 +183,13 @@ class Action extends Component
     protected function actionIcons(): array
     {
         return [
-            static::ACTION_TYPE_SHOW       => 'far fa-fw fa-eye',
-            static::ACTION_TYPE_EDIT       => 'far fa-fw fa-edit',
             static::ACTION_TYPE_ACTIVATE   => 'far fa-fw fa-check-circle',
             static::ACTION_TYPE_DEACTIVATE => 'fas fa-fw fa-ban',
-            static::ACTION_TYPE_RESTORE    => 'fas fa-fw fa-recycle',
             static::ACTION_TYPE_DELETE     => 'far fa-fw fa-trash-alt',
+            static::ACTION_TYPE_DETACH     => 'fas fa-fw fa-unlink',
+            static::ACTION_TYPE_EDIT       => 'far fa-fw fa-edit',
+            static::ACTION_TYPE_RESTORE    => 'fas fa-fw fa-recycle',
+            static::ACTION_TYPE_SHOW       => 'far fa-fw fa-eye',
         ];
     }
 
@@ -180,12 +201,13 @@ class Action extends Component
     protected function actionNames(): array
     {
         return [
-            static::ACTION_TYPE_SHOW       => 'Show',
-            static::ACTION_TYPE_EDIT       => 'Edit',
             static::ACTION_TYPE_ACTIVATE   => 'Activate',
             static::ACTION_TYPE_DEACTIVATE => 'Deactivate',
-            static::ACTION_TYPE_RESTORE    => 'Restore',
             static::ACTION_TYPE_DELETE     => 'Delete',
+            static::ACTION_TYPE_DETACH     => 'Detach',
+            static::ACTION_TYPE_EDIT       => 'Edit',
+            static::ACTION_TYPE_RESTORE    => 'Restore',
+            static::ACTION_TYPE_SHOW       => 'Show',
         ];
     }
 }

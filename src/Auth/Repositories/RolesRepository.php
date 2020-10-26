@@ -6,10 +6,14 @@ namespace Arcanesoft\Foundation\Auth\Repositories;
 
 use Arcanesoft\Foundation\Auth\Auth;
 use Arcanesoft\Foundation\Auth\Models\{Administrator, Role, Permission};
+use Arcanesoft\Foundation\Auth\Events\Roles\ActivatedRole;
+use Arcanesoft\Foundation\Auth\Events\Roles\ActivatingRole;
 use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachedAdministrator;
 use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachedAllAdministrators;
 use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachingAdministrator;
 use Arcanesoft\Foundation\Auth\Events\Roles\Administrators\DetachingAllAdministrators;
+use Arcanesoft\Foundation\Auth\Events\Roles\DeactivatedRole;
+use Arcanesoft\Foundation\Auth\Events\Roles\DeactivatingRole;
 use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachedAllPermissions;
 use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachedPermission;
 use Arcanesoft\Foundation\Auth\Events\Roles\Permissions\DetachingAllPermissions;
@@ -284,7 +288,47 @@ class RolesRepository extends AbstractRepository
      */
     public function toggleActive(Role $role): bool
     {
-        return $role->isActive() ? $role->deactivate() : $role->activate();
+        return $role->isActive()
+            ? $this->deactivateOne($role)
+            : $this->activateOne($role);
+    }
+
+    /**
+     * Activate the given role.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\Role  $role
+     *
+     * @return bool
+     */
+    public function activateOne(Role $role): bool
+    {
+        if ($role->isActive())
+            return false;
+
+        event(new ActivatingRole($role));
+        $result = $role->forceFill(['activated_at' => $role->freshTimestamp()])->save();
+        event(new ActivatedRole($role));
+
+        return $result;
+    }
+
+    /**
+     * Deactivate the given role.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\Role  $role
+     *
+     * @return bool
+     */
+    public function deactivateOne(Role $role): bool
+    {
+        if ( ! $role->isActive())
+            return false;
+
+        event(new DeactivatingRole($role));
+        $result = $role->forceFill(['activated_at' => null])->save();
+        event(new DeactivatedRole($role));
+
+        return $result;
     }
 
     /**

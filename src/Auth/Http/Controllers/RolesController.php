@@ -167,6 +167,7 @@ class RolesController extends Controller
         $this->authorize(RolesPolicy::ability('update'));
 
         $data = $request->getValidatedData();
+
         $rolesRepo->updateOne($role, $data);
 
         if (empty($permissions = $data['permissions'] ?: []))
@@ -191,12 +192,34 @@ class RolesController extends Controller
 
         $rolesRepo->toggleActive($role);
 
-        $this->notifySuccess(
-            __($role->isActive() ? 'Role Activated' : 'Role Deactivated'),
-            __($role->isActive() ? 'The role has been successfully activated!' : 'The role has been successfully deactivated!')
+        static::notifySuccess(
+            'Role Activated',
+            'The role has been successfully activated!'
         );
 
-        return $this->jsonResponseSuccess();
+        return static::jsonResponseSuccess();
+    }
+
+    /**
+     * Deactivate the role.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\Role                   $role
+     * @param  \Arcanesoft\Foundation\Auth\Repositories\RolesRepository  $rolesRepo
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deactivate(Role $role, RolesRepository $rolesRepo)
+    {
+        $this->authorize(RolesPolicy::ability('deactivate'), [$role]);
+
+        $rolesRepo->deactivateOne($role);
+
+        static::notifySuccess(
+            'Role Deactivated',
+            'The role has been successfully deactivated!'
+        );
+
+        return static::jsonResponseSuccess();
     }
 
     /**
@@ -213,6 +236,6 @@ class RolesController extends Controller
 
         $rolesRepo->deleteOne($role);
 
-        return $this->jsonResponseSuccess();
+        return static::jsonResponseSuccess();
     }
 }

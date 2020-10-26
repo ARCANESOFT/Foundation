@@ -6,6 +6,7 @@ namespace Arcanesoft\Foundation\Views;
 
 use Arcanesoft\Foundation\Support\Providers\ServiceProvider;
 use Arcanesoft\Foundation\Views\Contracts\Manager as ManagerContract;
+use Illuminate\Support\Collection;
 use Illuminate\View\Compilers\BladeCompiler;
 
 /**
@@ -61,8 +62,13 @@ class ViewsServiceProvider extends ServiceProvider
     private function registerBladeComponents(): void
     {
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade, $app) {
+            $prefix     = $app['config']->get('arcanesoft.foundation.view.prefix', '');
+            $components = $app['config']->get('arcanesoft.foundation.view.components', []);
+
             $blade->components(
-                $app['config']->get('arcanesoft.foundation.view.components')
+                Collection::make($components)->mapWithKeys(function ($component, $key) use ($prefix) {
+                    return ["{$prefix}{$key}" => $component];
+                })->toArray()
             );
         });
     }

@@ -97,8 +97,8 @@ class UsersDatatable extends DatatableComponent
     {
         return [
             'avatar'     => '',
-            'first_name' => $this->renderSortField('first_name', 'First name'),
-            'last_name'  => $this->renderSortField('last_name', 'Last name'),
+            'first_name' => $this->renderSortField('first_name', 'First Name'),
+            'last_name'  => $this->renderSortField('last_name', 'Last Name'),
             'email'      => $this->renderSortField('email', 'Email'),
             'created_at' => $this->renderSortField('created_at', 'Created at'),
             'status'     => __('Status'),

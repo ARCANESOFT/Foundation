@@ -67,6 +67,11 @@ class RolesRoutes extends AbstractRouteRegistrar
                          ->middleware(['ajax'])
                          ->name('activate');
 
+                    // admin::auth.roles.deactivate
+                    $this->put('deactivate', [RolesController::class, 'deactivate'])
+                         ->middleware(['ajax'])
+                         ->name('deactivate');
+
                     // admin::auth.roles.delete
                     $this->delete('delete', [RolesController::class, 'delete'])
                          ->middleware(['ajax'])

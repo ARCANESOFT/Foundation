@@ -12,51 +12,44 @@
 @endsection
 
 @section('content')
-    {{ form()->open(['route' => ['admin::auth.roles.update', $role], 'method' => 'PUT']) }}
+    <x-arc:form action="{{ route('admin::auth.roles.update', [$role]) }}" method="PUT">
         <div class="row">
             <div class="col-md-4">
                 {{-- ROLE --}}
-                <div class="card card-borderless shadow-sm mb-3">
-                    <div class="card-header">@lang('Role')</div>
-                    <div class="card-body">
-                        {{-- NAME --}}
-                        <div class="mb-3">
-                            <label for="name" class="form-label">@lang('Name')</label>
-                            {{ form()->text('name', old('name', $role->name), ['class' => 'form-control'.$errors->first('name', ' is-invalid'), 'required']) }}
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Role')</x-arc:card-header>
+                    <x-arc:card-body>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                {{-- NAME --}}
+                                <x-arc:input-control
+                                    type="text" name="name" :value="old('name', $role->name)" label="Name" required/>
+                            </div>
+                            <div class="col-12">
+                                {{-- DESCRIPTION --}}
+                                <x-arc:textarea-control
+                                    name="description" :value="old('description', $role->description)" label="Description" required/>
+                            </div>
                         </div>
-
-                        {{-- DESCRIPTION --}}
-                        <div>
-                            <label for="description" class="form-label">@lang('Description')</label>
-                            {{ form()->text('description', old('description', $role->description), ['class' => 'form-control'.$errors->first('description', ' is-invalid'), 'required']) }}
-                            @error('description')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between">
-                        <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light">@lang('Cancel')</a>
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            @lang('Save')
-                        </button>
-                    </div>
-                </div>
+                    </x-arc:card-body>
+                    <x-arc:card-footer class="d-flex justify-content-between">
+                        <x-arc:form-cancel-button to="{{ route('admin::auth.roles.show', [$role]) }}"/>
+                        <x-arc:form-submit-button type="save"/>
+                    </x-arc:card-footer>
+                </x-arc:card>
             </div>
             <div class="col-md-8">
                 {{-- PERMISSIONS --}}
-                <div class="card card-borderless shadow-sm mb-3">
-                    <div class="card-header px-2">@lang('Permissions')</div>
-                    <table class="table table-borderless table-hover mb-0">
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Permissions')</x-arc:card-header>
+                    <x-arc:card-table>
                         <thead>
                             <tr>
-                                <th class="font-weight-light text-uppercase text-muted">#</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Group')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Category')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Name')</th>
-                                <th class="font-weight-light text-uppercase text-muted">@lang('Description')</th>
+                                <x-arc:table-th label="#"/>
+                                <x-arc:table-th label="Group"/>
+                                <x-arc:table-th label="Category"/>
+                                <x-arc:table-th label="Name"/>
+                                <x-arc:table-th label="Description"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,9 +69,9 @@
                             </tr>
                         @endforelse
                         </tbody>
-                    </table>
-                </div>
+                    </x-arc:card-table>
+                </x-arc:card>
             </div>
         </div>
-    {{ form()->close() }}
+    </x-arc:form>
 @endsection

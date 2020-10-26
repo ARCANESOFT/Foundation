@@ -26,15 +26,16 @@
                 @foreach($users as $user)
                     <tr>
                         <td>
-                            <div class="avatar avatar-sm bg-light">{{ $user->avatar_img }}</div>
+                            <div class="avatar avatar-sm rounded-circle bg-light">
+                                <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}">
+                            </div>
                         </td>
                         <td class="small">{{ $user->first_name }}</td>
                         <td class="small">{{ $user->last_name }}</td>
                         <td class="small">{{ $user->email }}</td>
                         <td class="small text-muted">{{ $user->created_at }}</td>
                         <td class="text-center">
-                            <span class="status {{ $user->isActive() ? 'status-animated bg-success' : 'bg-secondary' }}"
-                                  data-toggle="tooltip" data-placement="top" title="@lang($user->isActive() ? 'Activated' : 'Deactivated')"></span>
+                            <x-arc:badge-active value="{{ $user->isActive() }}" icon="true"/>
                         </td>
                         <td class="text-right">
                             {{-- SHOW --}}
@@ -50,10 +51,17 @@
                                 allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('update', [$user]) }}"/>
 
                             {{-- ACTIVATE/DEACTIVATE --}}
-                            <x-arc:datatable-action
-                                type="{{ $user->isActive() ? 'deactivate' : 'activate' }}"
-                                action="ARCANESOFT.emit('authorization::users.activate', {id: '{{ $user->getRouteKey() }}', status: '{{ $user->isActive() ? 'activated' : 'deactivated' }}'})"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('activate', [$user]) }}"/>
+                            @if ($user->isActive())
+                                <x-arc:datatable-action
+                                    type="deactivate"
+                                    action="ARCANESOFT.emit('authorization::users.deactivate', {id: '{{ $user->getRouteKey() }}'})"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('deactivate', [$user]) }}"/>
+                            @else
+                                <x-arc:datatable-action
+                                    type="activate"
+                                    action="ARCANESOFT.emit('authorization::users.activate', {id: '{{ $user->getRouteKey() }}'})"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('activate', [$user]) }}"/>
+                            @endif
 
                             {{-- RESTORE --}}
                             @if($trash)

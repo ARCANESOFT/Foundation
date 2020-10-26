@@ -112,8 +112,9 @@ class UsersController extends Controller
 
         $user = $usersRepo->createOne($request->validated());
 
-        $this->notifySuccess(
-            __('User Created'), __('A new user has been successfully created!')
+        static::notifySuccess(
+            'User Created',
+            'A new user has been successfully created!'
         );
 
         return redirect()->route('admin::auth.users.show', [$user]);
@@ -166,8 +167,9 @@ class UsersController extends Controller
 
         $usersRepo->updateOne($user, $request->validated());
 
-        $this->notifySuccess(
-            __('User Updated'), __('The user has been successfully updated!')
+        static::notifySuccess(
+            'User Updated',
+            'The user has been successfully updated!'
         );
 
         return redirect()->route('admin::auth.users.show', [$user]);
@@ -187,11 +189,31 @@ class UsersController extends Controller
 
         $usersRepo->toggleActive($user);
 
-        $activated = $user->isActive();
+        static::notifySuccess(
+            'User Activated',
+            'The user has been successfully activated!'
+        );
 
-        $this->notifySuccess(
-            __($activated ? 'User Activated' : 'User Deactivated'),
-            __($activated ? 'The user has been successfully activated!' : 'The user has been successfully deactivated!')
+        return static::jsonResponseSuccess();
+    }
+
+    /**
+     * Activate/Deactivate the user.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\User                   $user
+     * @param  \Arcanesoft\Foundation\Auth\Repositories\UsersRepository  $usersRepo
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deactivate(User $user, UsersRepository $usersRepo)
+    {
+        $this->authorize(UsersPolicy::ability('deactivate'), [$user]);
+
+        $usersRepo->deactivateOne($user);
+
+        static::notifySuccess(
+            'User Deactivated',
+            'The user has been successfully deactivated!'
         );
 
         return static::jsonResponseSuccess();
@@ -211,9 +233,9 @@ class UsersController extends Controller
 
         $usersRepo->deleteOne($user);
 
-        $this->notifySuccess(
-            __('User Deleted'),
-            __('The user has been successfully deleted!')
+        static::notifySuccess(
+            'User Deleted',
+            'The user has been successfully deleted!'
         );
 
         return static::jsonResponseSuccess();
@@ -233,9 +255,9 @@ class UsersController extends Controller
 
         $usersRepo->restoreOne($user);
 
-        $this->notifySuccess(
-            __('User Restored'),
-            __('The user has been successfully restored!')
+        static::notifySuccess(
+            'User Restored',
+            'The user has been successfully restored!'
         );
 
         return static::jsonResponseSuccess();
@@ -258,8 +280,8 @@ class UsersController extends Controller
         }
 
         $this->notifyError(
-            __('Impersonation Not Allowed'),
-            __('You\'re not allowed to impersonate this user')
+            'Impersonation Not Allowed',
+            "You're not allowed to impersonate this user"
         );
 
         return redirect()->back();

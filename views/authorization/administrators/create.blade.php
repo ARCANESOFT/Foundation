@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    {{ form()->open(['route' => 'admin::auth.administrators.store', 'method' => 'POST']) }}
+    <x-arc:form action="{{ route('admin::auth.administrators.store') }}" method="POST">
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
                 <x-arc:card>
@@ -20,20 +20,23 @@
                         <div class="row g-3">
                             {{-- FIRST NAME --}}
                             <div class="col-12 col-xxl-6">
-                                <x-arc:input-control type="text" name="first_name" :value="old('first_name')"
-                                                     label="First Name" required/>
+                                <x-arc:input-control
+                                    type="text" name="first_name" :value="old('first_name')"
+                                    label="First Name" required/>
                             </div>
 
                             {{-- LAST NAME --}}
                             <div class="col-12 col-xxl-6">
-                                <x-arc:input-control type="text" name="last_name" :value="old('last_name')"
-                                                     label="Last Name" required/>
+                                <x-arc:input-control
+                                    type="text" name="last_name" :value="old('last_name')"
+                                    label="Last Name" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
-                                <x-arc:input-control type="email" name="email" :value="old('email')"
-                                                     label="Email" required/>
+                                <x-arc:input-control
+                                    type="email" name="email" :value="old('email')"
+                                    label="Email" required/>
                             </div>
 
                             {{-- PASSWORD --}}
@@ -48,10 +51,8 @@
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <a href="{{ route('admin::auth.administrators.index') }}" class="btn btn-sm btn-light">
-                            @lang('Cancel')
-                        </a>
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('Save')</button>
+                        <x-arc:form-cancel-button to="{{ route('admin::auth.administrators.index') }}"/>
+                        <x-arc:form-submit-button type="save"/>
                     </x-arc:card-footer>
                 </x-arc:card>
             </div>
@@ -81,5 +82,5 @@
                 </x-arc:card>
             </div>
         </div>
-    {{ form()->close() }}
+    </x-arc:form>
 @endsection

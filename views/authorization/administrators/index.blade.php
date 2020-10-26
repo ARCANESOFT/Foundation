@@ -20,7 +20,9 @@
         @endcan
 
         @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('create'))
-        {{ arcanesoft\ui\action_link('add', route('admin::auth.administrators.create'))->size('sm')->pushClass('ml-1') }}
+            <a href="{{ route('admin::auth.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
+                <i class="fa fa-fw fa-plus"></i> @lang('Add')
+            </a>
         @endcan
     </div>
 @endpush
@@ -35,53 +37,22 @@
 {{-- ACIVATE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'))
     @push('modals')
-        <x-arc:modal id="activate-modal" aria-labelledby="activate-modal-title" data-backdrop="static">
-            <x-arc:form action="{{ route('admin::auth.administrators.activate', [':id']) }}" method="PUT" id="activate-form">
-                <x-arc:modal-header>
-                    <x-arc:modal-title id="activate-modal-title"/>
-                </x-arc:modal-header>
-                <x-arc:modal-body id="activate-modal-message">
-                </x-arc:modal-body>
-                <x-arc:modal-footer class="justify-content-between">
-                    <x-arc:modal-cancel-button/>
-                    <x-arc:modal-action-button type="activate" id="activate-btn"/>
-                    <x-arc:modal-action-button type="deactivate" id="deactivate-btn"/>
-                </x-arc:modal-footer>
-            </x-arc:form>
-        </x-arc:modal>
+        <x-arc:modal-action
+            type="activate"
+            action="{{ route('admin::auth.administrators.activate', [':id']) }}" method="PUT"
+            title="Activate Administrator"
+            body="Are you sure you want to activate this administrator ?"
+        />
     @endpush
 
     @push('scripts')
         <script>
-            let activateModal = components.modal('div#activate-modal')
-            let activateForm = components.form('form#activate-form', {
-                submitBtnSelector: 'button[type="submit"]:not([style*="display: none"])'
-            })
+            let activateModal  = components.modal('div#activate-modal')
+            let activateForm   = components.form('form#activate-form')
             let activateAction = activateForm.action()
 
-            ARCANESOFT.on('authorization::administrators.activate', ({id, status}) => {
+            ARCANESOFT.on('authorization::administrators.activate', ({id}) => {
                 activateForm.action(activateAction.replace(':id', id))
-
-                const modal = activateModal.elt()
-
-                let modalTitle    = modal.querySelector('#activate-modal-title')
-                let modalMessage  = modal.querySelector('#activate-modal-message')
-                let activateBtn   = modal.querySelector('button#activate-btn')
-                let deactivateBtn = modal.querySelector('button#deactivate-btn')
-
-                if (status === 'activated') {
-                    modalTitle.innerHTML = "@lang('Deactivate Administrator')"
-                    modalMessage.innerHTML = "@lang('Are you sure you want to deactivate this administrator ?')"
-                    activateBtn.style.display = 'none'
-                    deactivateBtn.style.display = ''
-                }
-                else {
-                    modalTitle.innerHTML = "@lang('Activate Administrator')"
-                    modalMessage.innerHTML = "@lang('Are you sure you want to activate this administrator ?')"
-                    activateBtn.style.display = ''
-                    deactivateBtn.style.display = 'none'
-                }
-
                 activateModal.show()
             })
 
@@ -92,6 +63,40 @@
 
             activateModal.on('hidden', () => {
                 activateForm.action(activateAction.toString())
+            })
+        </script>
+    @endpush
+@endcan
+
+{{-- DEACIVATE MODAL/SCRIPT --}}
+@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('deactivate'))
+    @push('modals')
+        <x-arc:modal-action
+            type="deactivate"
+            action="{{ route('admin::auth.administrators.deactivate', [':id']) }}" method="PUT"
+            title="Deactivate Administrator"
+            body="Are you sure you want to deactivate this administrator ?"
+        />
+    @endpush
+
+    @push('scripts')
+        <script>
+            let deactivateModal  = components.modal('div#deactivate-modal')
+            let deactivateForm   = components.form('form#deactivate-form')
+            let deactivateAction = deactivateForm.action()
+
+            ARCANESOFT.on('authorization::administrators.deactivate', ({id, status}) => {
+                deactivateForm.action(deactivateAction.replace(':id', id))
+                deactivateModal.show()
+            })
+
+            deactivateForm.onSubmit('PUT', () => {
+                deactivateModal.hide()
+                location.reload()
+            })
+
+            deactivateModal.on('hidden', () => {
+                deactivateForm.action(deactivateAction.toString())
             })
         </script>
     @endpush
@@ -151,7 +156,6 @@
 
             ARCANESOFT.on('authorization::administrators.restore', ({id}) => {
                 restoreForm.action(restoreAction.replace(':id', id))
-
                 restoreModal.show()
             })
 
@@ -167,4 +171,3 @@
     @endpush
 @endcan
 @endif
-

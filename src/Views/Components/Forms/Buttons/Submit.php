@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Modals\Buttons;
+namespace Arcanesoft\Foundation\Views\Components\Forms\Buttons;
 
 use Illuminate\View\Component;
 use InvalidArgumentException;
 
 /**
- * Class     Action
+ * Class     Submit
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Action extends Component
+class Submit extends Component
 {
     /* -----------------------------------------------------------------
      |  Constants
@@ -21,9 +21,9 @@ class Action extends Component
 
     const ACTION_TYPE_ACTIVATE   = 'activate';
     const ACTION_TYPE_DEACTIVATE = 'deactivate';
-    const ACTION_TYPE_DELETE     = 'delete';
-    const ACTION_TYPE_DETACH     = 'detach';
     const ACTION_TYPE_RESTORE    = 'restore';
+    const ACTION_TYPE_SAVE       = 'save';
+    const ACTION_TYPE_DELETE     = 'delete';
 
     /* -----------------------------------------------------------------
      |  Properties
@@ -41,13 +41,13 @@ class Action extends Component
      */
 
     /**
-     * Action constructor.
+     * Submit constructor.
      *
      * @param  string  $type
      */
     public function __construct(string $type)
     {
-        $this->setType($type);
+        $this->type = $type;
     }
 
     /* -----------------------------------------------------------------
@@ -66,10 +66,7 @@ class Action extends Component
      */
     protected function setType(string $type)
     {
-        throw_unless(
-            in_array($type, $this->getAllowedTypes()),
-            new InvalidArgumentException("Invalid datatable action type: {$type}")
-        );
+        $this->checkType($type);
 
         $this->type = $type;
 
@@ -106,22 +103,6 @@ class Action extends Component
         return $this->actionIcons()[$this->type];
     }
 
-    /**
-     * Get the allowed types.
-     *
-     * @return string[]
-     */
-    protected function getAllowedTypes(): array
-    {
-        return [
-            static::ACTION_TYPE_ACTIVATE,
-            static::ACTION_TYPE_DEACTIVATE,
-            static::ACTION_TYPE_DELETE,
-            static::ACTION_TYPE_DETACH,
-            static::ACTION_TYPE_RESTORE,
-        ];
-    }
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -134,7 +115,37 @@ class Action extends Component
      */
     public function render()
     {
-        return view()->make('foundation::_components.modals.buttons.action');
+        return view()->make('foundation::_components.forms.buttons.submit');
+    }
+
+    /* -----------------------------------------------------------------
+     |  Check Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Check the given type.
+     *
+     * @param  string  $type
+     */
+    protected function checkType(string $type)
+    {
+        throw_unless(
+            $this->isAllowedType($type),
+            new InvalidArgumentException("Invalid action type: {$type}")
+        );
+    }
+
+    /**
+     * Check is allowed type.
+     *
+     * @param  string  $type
+     *
+     * @return bool
+     */
+    protected function isAllowedType(string $type): bool
+    {
+        return in_array($type, $this->getAllowedTypes());
     }
 
     /* -----------------------------------------------------------------
@@ -143,18 +154,18 @@ class Action extends Component
      */
 
     /**
-     * Get the action's titles.
+     * Get the allowed types.
      *
      * @return string[]
      */
-    protected function actionNames(): array
+    protected function getAllowedTypes(): array
     {
         return [
-            static::ACTION_TYPE_ACTIVATE   => 'Activate',
-            static::ACTION_TYPE_DEACTIVATE => 'Deactivate',
-            static::ACTION_TYPE_DELETE     => 'Delete',
-            static::ACTION_TYPE_DETACH     => 'Detach',
-            static::ACTION_TYPE_RESTORE    => 'Restore',
+            static::ACTION_TYPE_ACTIVATE,
+            static::ACTION_TYPE_DEACTIVATE,
+            static::ACTION_TYPE_RESTORE,
+            static::ACTION_TYPE_SAVE,
+            static::ACTION_TYPE_DELETE,
         ];
     }
 
@@ -168,9 +179,25 @@ class Action extends Component
         return [
             static::ACTION_TYPE_ACTIVATE   => 'far fa-fw fa-check-circle',
             static::ACTION_TYPE_DEACTIVATE => 'fas fa-fw fa-ban',
-            static::ACTION_TYPE_DELETE     => 'far fa-fw fa-trash-alt',
-            static::ACTION_TYPE_DETACH     => 'fas fa-fw fa-unlink',
             static::ACTION_TYPE_RESTORE    => 'fas fa-fw fa-recycle',
+            static::ACTION_TYPE_SAVE       => 'far fa-fw fa-save',
+            static::ACTION_TYPE_DELETE     => 'far fa-fw fa-trash-alt',
+        ];
+    }
+
+    /**
+     * Get the action's titles.
+     *
+     * @return string[]
+     */
+    protected function actionNames(): array
+    {
+        return [
+            static::ACTION_TYPE_ACTIVATE   => 'Activate',
+            static::ACTION_TYPE_DEACTIVATE => 'Deactivate',
+            static::ACTION_TYPE_RESTORE    => 'Restore',
+            static::ACTION_TYPE_SAVE       => 'Save',
+            static::ACTION_TYPE_DELETE     => 'Delete',
         ];
     }
 
@@ -182,11 +209,11 @@ class Action extends Component
     protected function actionClasses(): array
     {
         return [
-            static::ACTION_TYPE_ACTIVATE   => 'btn btn-success',
-            static::ACTION_TYPE_DEACTIVATE => 'btn btn-secondary',
-            static::ACTION_TYPE_DELETE     => 'btn btn-danger',
-            static::ACTION_TYPE_DETACH     => 'btn btn-danger',
-            static::ACTION_TYPE_RESTORE    => 'btn btn-primary',
+            static::ACTION_TYPE_ACTIVATE   => 'btn btn-sm btn-success',
+            static::ACTION_TYPE_DEACTIVATE => 'btn btn-sm btn-secondary',
+            static::ACTION_TYPE_RESTORE    => 'btn btn-sm btn-primary',
+            static::ACTION_TYPE_SAVE       => 'btn btn-sm btn-primary',
+            static::ACTION_TYPE_DELETE     => 'btn btn-sm btn-danger',
         ];
     }
 }

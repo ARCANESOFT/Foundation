@@ -216,47 +216,6 @@ class Role extends Model
      */
 
     /**
-     * Activate the model.
-     *
-     * @param  bool  $save
-     *
-     * @return bool
-     */
-    public function activate(bool $save = true): bool
-    {
-        return $this->switchActive(true, $save);
-    }
-
-    /**
-     * Deactivate the model.
-     *
-     * @param  bool  $save
-     *
-     * @return bool
-     */
-    public function deactivate(bool $save = true): bool
-    {
-        return $this->switchActive(false, $save);
-    }
-
-    /**
-     * Activate/deactivate the model.
-     *
-     * @param  bool  $active
-     * @param  bool  $save
-     *
-     * @return bool
-     */
-    protected function switchActive($active, $save = true): bool
-    {
-        $this->forceFill([
-            'activated_at' => $active === true ? $this->freshTimestamp() : null,
-        ]);
-
-        return $save ? $this->save() : false;
-    }
-
-    /**
      * Attach a permission to a role.
      *
      * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|int  $administrator

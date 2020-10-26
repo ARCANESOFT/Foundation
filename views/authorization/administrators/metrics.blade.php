@@ -17,7 +17,9 @@
         @endcan
 
         @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('create'))
-        {{ arcanesoft\ui\action_link('add', route('admin::auth.administrators.create'))->size('sm') }}
+            <a href="{{ route('admin::auth.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
+                <i class="fa fa-fw fa-plus"></i> @lang('Add')
+            </a>
         @endcan
     </div>
 @endpush

@@ -76,6 +76,12 @@ class RolesPolicy extends AbstractPolicy
                 'description' => 'Ability to activate a role',
             ]),
 
+            // admin::auth.roles.deactivate
+            $this->makeAbility('deactivate')->setMetas([
+                'name'        => 'Deactivate a role',
+                'description' => 'Ability to deactivate a role',
+            ]),
+
             // admin::auth.roles.delete
             $this->makeAbility('delete')->setMetas([
                 'name'        => 'Delete a role',
@@ -154,7 +160,7 @@ class RolesPolicy extends AbstractPolicy
     }
 
     /**
-     * Activate to update a role.
+     * Allow to activate a role.
      *
      * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
      * @param  \Arcanesoft\Foundation\Auth\Models\Role|null            $role
@@ -164,6 +170,26 @@ class RolesPolicy extends AbstractPolicy
     public function activate(Administrator $administrator, Role $role = null)
     {
         if (static::isRoleLocked($role))
+            return false;
+
+        if ( ! is_null($role) && $role->isActive())
+            return false;
+    }
+
+    /**
+     * Allow to deactivate a role.
+     *
+     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Auth\Models\Role|null            $role
+     *
+     * @return \Illuminate\Auth\Access\Response|bool|void
+     */
+    public function deactivate(Administrator $administrator, Role $role = null)
+    {
+        if (static::isRoleLocked($role))
+            return false;
+
+        if ( ! is_null($role) && ! $role->isActive())
             return false;
     }
 

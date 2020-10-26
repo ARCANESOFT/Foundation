@@ -27,7 +27,7 @@ trait HasNotifications
      */
     protected static function notifySuccess(string $message, string $content, array $extra = [])
     {
-        return static::notify($message, 'success', array_merge($extra, compact('content')));
+        return static::notify($message, 'success', array_merge($extra, ['content' => __($content)]));
     }
 
     /**
@@ -41,7 +41,7 @@ trait HasNotifications
      */
     protected static function notifyError(string $message, string $content, array $extra = [])
     {
-        return static::notify($message, 'danger', array_merge($extra, compact('content')));
+        return static::notify($message, 'danger', array_merge($extra, ['content' => __($content)]));
     }
 
     /**
@@ -55,7 +55,7 @@ trait HasNotifications
      */
     protected static function notifyWarning(string $message, string $content, array $extra = [])
     {
-        return static::notify($message, 'warning', array_merge($extra, compact('content')));
+        return static::notify($message, 'warning', array_merge($extra, ['content' => __($content)]));
     }
 
     /**
@@ -69,7 +69,7 @@ trait HasNotifications
      */
     protected static function notifyInfo(string $message, string $content, array $extra = [])
     {
-        return static::notify($message, 'info', array_merge($extra, compact('content')));
+        return static::notify($message, 'info', array_merge($extra, ['content' => __($content)]));
     }
 
     /**
@@ -83,6 +83,6 @@ trait HasNotifications
      */
     protected static function notify(string $message, string $type, array $extra = [])
     {
-        return notify()->flash($message, $type, $extra);
+        return notify()->flash(__($message), $type, $extra);
     }
 }

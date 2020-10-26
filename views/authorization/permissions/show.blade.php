@@ -9,127 +9,140 @@
 @section('content')
     <div class="row">
         <div class="col-md-5 col-lg-4">
-            {{-- Permission --}}
-            <div class="card card-borderless shadow-sm mb-3">
-                <div class="card-header px-2">@lang('Permission')</div>
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Group')</td>
-                            <td class="text-right small">{{ $permission->group->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Category')</td>
-                            <td class="text-right small">{{ $permission->category }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Name')</td>
-                            <td class="text-right small">{{ $permission->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Description')</td>
-                            <td class="text-right small">{{ $permission->description }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Roles')</td>
-                            <td class="text-right">{{ arcanesoft\ui\count_pill($roles->count()) }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Created at')</td>
-                            <td class="text-right small text-muted">{{ $permission->created_at }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            {{-- Gate --}}
-            @can(Arcanesoft\Foundation\System\Policies\AbilitiesPolicy::ability('show'))
-            <div class="card card-borderless shadow-sm mb-3">
-                <div class="card-header px-2">@lang('Gate')</div>
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Ability')</td>
-                            <td class="text-right">
-                                <div class="badge badge-outline-dark">{{ $permission->ability }}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Registered')</td>
-                            <td class="text-right">
-                                @if ($permission->isAbilityRegistered())
-                                    <i class="fas fa-fw fa-check text-success" data-toggle="tooltip" title="@lang('Yes')"></i>
-                                @else
-                                    <i class="fas fa-fw fa-ban text-secondary" data-toggle="tooltip" title="@lang('No')"></i>
-                                @endif
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="card-footer text-right px-2">
-                    <a href="{{ route('admin::system.abilities.show', $permission->ability) }}" class="btn btn-sm btn-light">
-                        @lang('Show')
-                    </a>
+            <div class="row row-cols-1 g-4">
+                <div class="col">
+                    {{-- Permission --}}
+                    <x-arc:card>
+                        <x-arc:card-header>@lang('Permission')</x-arc:card-header>
+                        <x-arc:card-table>
+                            <tbody>
+                            <tr>
+                                <x-arc:table-th label="Group"/>
+                                <td class="text-right small">{{ $permission->group->name }}</td>
+                            </tr>
+                            <tr>
+                                <x-arc:table-th label="Category"/>
+                                <td class="text-right small">{{ $permission->category }}</td>
+                            </tr>
+                            <tr>
+                                <x-arc:table-th label="Name"/>
+                                <td class="text-right small">{{ $permission->name }}</td>
+                            </tr>
+                            <tr>
+                                <x-arc:table-th label="Description"/>
+                                <td class="text-right small">{{ $permission->description }}</td>
+                            </tr>
+                            <tr>
+                                <x-arc:table-th label="Roles"/>
+                                <td class="text-right">
+                                    <x-arc:badge-count value="{{ $roles->count() }}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <x-arc:table-th label="Created at"/>
+                                <td class="text-right small text-muted">{{ $permission->created_at }}</td>
+                            </tr>
+                            </tbody>
+                        </x-arc:card-table>
+                    </x-arc:card>
+                </div>
+                <div class="col">
+                    {{-- Gate --}}
+                    @can(Arcanesoft\Foundation\System\Policies\AbilitiesPolicy::ability('show'))
+                        <x-arc:card>
+                            <x-arc:card-header>@lang('Gate')</x-arc:card-header>
+                            <x-arc:card-table>
+                                <tbody>
+                                <tr>
+                                    <x-arc:table-th label="Ability"/>
+                                    <td class="text-right">
+                                        <div class="badge border border-secondary text-secondary font-monospace">{{ $permission->ability }}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <x-arc:table-th label="Registered"/>
+                                    <td class="text-right">
+                                        @if ($permission->isAbilityRegistered())
+                                            <span class="badge border border-success text-success" data-toggle="tooltip" title="@lang('Yes')">
+                                                <i class="fas fa-fw fa-check"></i>
+                                            </span>
+                                        @else
+                                            <span class="badge border border-secondary text-secondary" data-toggle="tooltip" title="@lang('No')">
+                                                <i class="fas fa-fw fa-ban"></i>
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </x-arc:card-table>
+                            <x-arc:card-footer class="d-flex justify-content-end">
+                                {{-- SHOW --}}
+                                <a href="{{ route('admin::system.abilities.show', $permission->ability) }}"
+                                   class="btn btn-sm btn-secondary">@lang('Show')</a>
+                            </x-arc:card-footer>
+                        </x-arc:card>
+                    @endcan
                 </div>
             </div>
-            @endcan
         </div>
         <div class="col-md-7 col-lg-8">
             {{-- ROLES --}}
             @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('index'))
-            <div class="card card-borderless shadow-sm mb-3">
-                <div class="card-header px-2">@lang('Roles')</div>
-                <table class="table table-borderless table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th class="font-weight-light text-uppercase text-muted ">@lang('Name')</th>
-                            <th class="font-weight-light text-uppercase text-muted ">@lang('Description')</th>
-                            <th class="font-weight-light text-uppercase text-muted text-center">@lang('Users')</th>
-                            <th class="font-weight-light text-uppercase text-muted text-center">@lang('Locked')</th>
-                            <th class="font-weight-light text-uppercase text-muted text-center">@lang('Status')</th>
-                            <th class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($roles as $role)
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Roles')</x-arc:card-header>
+                    <x-arc:card-table class="table-hover">
+                        <thead>
                             <tr>
-                                <td class="small">{{ $role->name }}</td>
-                                <td class="small">{{ $role->description }}</td>
-                                <td class="text-center">{{ arcanesoft\ui\count_pill($role->administrators->count()) }}</td>
-                                <td class="text-center">
-                                    @if($role->isLocked())
-                                        <span class="status status-danger" data-toggle="tooltip" data-placement="top" title="@lang('Locked')"></span>
-                                    @else
-                                        <span class="status status-secondary" data-toggle="tooltip" data-placement="top" title="@lang('Unlocked')"></span>
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    @if($role->isActive())
-                                        <span class="status status-success status-animated" data-toggle="tooltip" data-placement="top" title="@lang('Activated')"></span>
-                                    @else
-                                        <span class="status status-secondary" data-toggle="tooltip" data-placement="top" title="@lang('Deactivated')"></span>
-                                    @endif
-                                </td>
-                                <td class="text-right">
-                                    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('show'), [$role])
-                                        <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                            <i class="far fa-fw fa-eye"></i>
-                                        </a>
-                                    @endcan
-
-                                    @can(Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::ability('roles.detach'), [$permission, $role])
-                                        <button class="btn btn-sm btn-danger"
-                                                data-toggle="tooltip" data-placement="top" title="@lang('Detach')"
-                                                onclick="ARCANESOFT.emit('auth::permissions.detach-role', {id: '{{ $role->getRouteKey() }}', name: '{{ $role->name }}'})">
-                                            <i class="fas fa-fw fa-unlink"></i>
-                                        </button>
-                                    @endcan
-                                </td>
+                                <x-arc:table-th label="Name"/>
+                                <x-arc:table-th label="Description"/>
+                                <x-arc:table-th label="Users" class="text-center"/>
+                                <x-arc:table-th label="Locked" class="text-center"/>
+                                <x-arc:table-th label="Status" class="text-center"/>
+                                <x-arc:table-th label="Actions" class="text-right"/>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach($roles as $role)
+                                <tr>
+                                    <td class="small">{{ $role->name }}</td>
+                                    <td class="small">{{ $role->description }}</td>
+                                    <td class="text-center">
+                                        <x-arc:badge-count value="{{ $role->administrators->count() }}"/>
+                                    </td>
+                                    <td class="text-center">
+                                        @if($role->isLocked())
+                                            <span class="status bg-danger" data-toggle="tooltip" title="@lang('Locked')"></span>
+                                        @else
+                                            <span class="status bg-secondary" data-toggle="tooltip" title="@lang('Unlocked')"></span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if($role->isActive())
+                                            <span class="status bg-success" data-toggle="tooltip" title="@lang('Activated')"></span>
+                                        @else
+                                            <span class="status bg-secondary" data-toggle="tooltip" title="@lang('Deactivated')"></span>
+                                        @endif
+                                    </td>
+                                    <td class="text-right">
+                                        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('show'), [$role])
+                                            <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
+                                                <i class="far fa-fw fa-eye"></i>
+                                            </a>
+                                        @endcan
+
+                                        @can(Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::ability('roles.detach'), [$permission, $role])
+                                            <button class="btn btn-sm btn-danger"
+                                                    data-toggle="tooltip" data-placement="top" title="@lang('Detach')"
+                                                    onclick="ARCANESOFT.emit('auth::permissions.detach-role', {id: '{{ $role->getRouteKey() }}', name: '{{ $role->name }}'})">
+                                                <i class="fas fa-fw fa-unlink"></i>
+                                            </button>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </x-arc:card-table>
+                </x-arc:card>
             @endcan
         </div>
     </div>

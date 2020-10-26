@@ -9,18 +9,20 @@
 @section('content')
     <div class="row g-4">
         <div class="col-lg-5">
-            <div class="card card-borderless shadow-sm">
-                <div class="card-body d-flex justify-content-center p-3">
-                    <div class="avatar avatar-xxl bg-light">{{ $user->avatar_img }}</div>
-                </div>
-                <table class="table table-borderless mb-0">
+            <x-arc:card>
+                <x-arc:card-body class="d-flex justify-content-center">
+                    <div class="avatar avatar-xxl rounded-circle bg-light">
+                        <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}">
+                    </div>
+                </x-arc:card-body>
+                <x-arc:card-table>
                     <tbody>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Full Name')</td>
+                            <x-arc:table-th label="Full Name"/>
                             <td class="text-right small">{{ $user->full_name }}</td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Email')</td>
+                            <x-arc:table-th label="Email"/>
                             <td class="text-right small">
                                 {{ $user->email }}
                                 @if ($user->hasVerifiedEmail())
@@ -30,14 +32,14 @@
                         </tr>
                         @if ($user->hasVerifiedEmail())
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Email Verified at')</td>
+                            <x-arc:table-th label="Email Verified at"/>
                             <td class="text-muted text-right small">{{ $user->email_verified_at }}</td>
                         </tr>
                         @endif
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Status')</td>
+                            <x-arc:table-th label="Status"/>
                             <td class="text-right">
-                                @if ( ! $user->isActive())
+                                @if ($user->isActive())
                                     <span class="badge border border-success text-muted">
                                         <i class="fas fa-fw fa-check text-success"></i> @lang('Activated')
                                     </span>
@@ -49,309 +51,207 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Last activity')</td>
+                            <x-arc:table-th label="Last Activity"/>
                             <td class="text-right text-muted small">{{ $user->last_activity }}</td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Created at')</td>
+                            <x-arc:table-th label="Created at"/>
                             <td class="text-right text-muted small">{{ $user->created_at }}</td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Updated at')</td>
+                            <x-arc:table-th label="Updated at"/>
                             <td class="text-right text-muted small">{{ $user->updated_at }}</td>
                         </tr>
                         @if ($user->trashed())
                             <tr>
+                                <x-arc:table-th label="Deleted at"/>
                                 <td class="font-weight-light text-uppercase text-muted">@lang('Deleted at')</td>
                                 <td class="text-right text-muted small">{{ $user->deleted_at }}</td>
                             </tr>
                         @endif
                     </tbody>
-                </table>
-                <div class="card-footer text-right px-2">
-                    <div class="input-group justify-content-end">
-                        {{-- EDIT --}}
-                        @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('update'), [$user])
-                            <a href="{{ route('admin::auth.users.edit', [$user]) }}"
-                               class="btn btn-sm btn-light">@lang('Edit')</a>
-                        @endcan
+                </x-arc:card-table>
+                <x-arc:card-footer class="d-flex justify-content-end">
+                    {{-- UPDATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('update'), [$user])
+                        <a href="{{ route('admin::auth.users.edit', [$user]) }}"
+                           class="btn btn-sm btn-secondary">@lang('Edit')</a>
+                    @endcan
 
-                        <button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-fw fa-ellipsis-v"></i> <span class="sr-only">@lang('Toggle Dropdown')</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- IMPERSONATE --}}
-                            @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('impersonate'), [$user])
-                                <li>
-                                    <a href="{{ route('admin::auth.users.impersonate', [$user]) }}"
-                                       class="dropdown-item">@lang('Impersonate')</a>
-                                </li>
-                            @endcan
+                    {{-- IMPERSONATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('impersonate'), [$user])
+                        <a href="{{ route('admin::auth.users.impersonate', [$user]) }}"
+                           class="btn btn-sm btn-secondary ml-2">@lang('Impersonate')</a>
+                    @endcan
 
-                            {{-- ACTIVATE --}}
-                            @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
-                                <li>
-                                    <button onclick="ARCANESOFT.emit('auth::users.activate')" class="dropdown-item">
-                                        @lang($user->isActive() ? 'Deactivate' : 'Activate')
-                                    </button>
-                                </li>
-                            @endcan
+                    {{-- ACTIVATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
+                        <button class="btn btn-sm btn-secondary ml-2"
+                                onclick="ARCANESOFT.emit('authorization::users.activate')">@lang('Activate')</button>
+                    @endcan
 
-                            {{-- RESTORE --}}
-                            @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
-                                <li>
-                                    <button onclick="ARCANESOFT.emit('auth::users.restore')" class="dropdown-item">
-                                        @lang('Restore')
-                                    </button>
-                                </li>
-                            @endcan
+                    {{-- DEACTIVATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('deactivate'), [$user])
+                        <button class="btn btn-sm btn-secondary ml-2"
+                                onclick="ARCANESOFT.emit('authorization::users.deactivate')">@lang('Deactivate')</button>
+                    @endcan
 
-                            {{-- DELETE --}}
-                            @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'), [$user])
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <button class="dropdown-item text-danger"
-                                            onclick="ARCANESOFT.emit('auth::users.delete')">
-                                        @lang('Delete')
-                                    </button>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                    {{-- RESTORE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
+                        <button class="btn btn-sm btn-secondary ml-2"
+                                onclick="ARCANESOFT.emit('authorization::users.restore')">@lang('Restore')</button>
+                    @endcan
+
+                    {{-- DELETE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'), [$user])
+                        <button class="btn btn-sm btn-danger ml-2"
+                                onclick="ARCANESOFT.emit('authorization::users.delete')">@lang('Delete')</button>
+                    @endcan
+                </x-arc:card-footer>
+            </x-arc:card>
         </div>
         <div class="col-lg-7">
             @if ($user->linkedAccounts->isNotEmpty())
-            <div class="card card-borderless shadow-sm">
-                <div class="card-header px-2">@lang('Linked Accounts')</div>
-                <table class="table table-borderless mb-0">
-                    <thead>
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Provider')</td>
-                            <td class="font-weight-light text-uppercase text-muted text-center">@lang('Created at')</td>
-                            <td class="font-weight-light text-uppercase text-muted text-center">@lang('Updated at')</td>
-                            <td class="font-weight-light text-uppercase text-muted text-right">@lang('Actions')</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($user->linkedAccounts as $linkedAccount)
-                        <tr>
-                            <td>{{ $linkedAccount->name }}</td>
-                            <td class="small text-muted text-center">{{ $linkedAccount->created_at }}</td>
-                            <td class="small text-muted text-center">{{ $linkedAccount->updated_at }}</td>
-                            <td class="text-right"></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Linked Accounts')</x-arc:card-header>
+                    <x-arc:card-table>
+                        <thead>
+                            <tr>
+                                <x-arc:table-th label="Provider"/>
+                                <x-arc:table-th label="Created at" class="text-center"/>
+                                <x-arc:table-th label="Updated at" class="text-center"/>
+                                <x-arc:table-th label="Actions" class="text-right"/>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($user->linkedAccounts as $linkedAccount)
+                            <tr>
+                                <td>{{ $linkedAccount->name }}</td>
+                                <td class="small text-muted text-center">{{ $linkedAccount->created_at }}</td>
+                                <td class="small text-muted text-center">{{ $linkedAccount->updated_at }}</td>
+                                <td class="text-right"></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </x-arc:card-table>
+                </x-arc:card>
             @endif
         </div>
     </div>
 @endsection
 
-{{-- ACIVATE MODAL/SCRIPT --}}
+{{-- ACIVATE MODAL --}}
 @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
     @push('modals')
-        <div class="modal fade" id="activate-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="activateUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.users.activate', $user], 'method' => 'PUT', 'id' => 'activate-user-form']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="activateUserTitle">@lang($user->isActive() ? 'Deactivate User' : 'Activate User')</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div id="activateUserMessage" class="modal-body">
-                        @lang($user->isActive() ? 'Are you sure you want to deactivate user ?' : 'Are you sure you want to activate user ?')
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                        {{ arcanesoft\ui\action_button($user->isActive() ? 'deactivate' : 'activate')->submit() }}
-                    </div>
-                </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal-action
+            type="activate"
+            action="{{ route('admin::auth.users.activate', [$user]) }}" method="PUT"
+            title="Activate User" body="Are you sure you want to activate this user ?"
+        />
     @endpush
 
     @push('scripts')
-        <script>
-            let activateUserModal = twbs.Modal.make('div#activate-user-modal')
-            let activateUserForm  = components.form('form#activate-user-form')
+        <script defer>
+            let activateModal = components.modal('div#activate-modal')
+            let activateForm  = components.form('form#activate-form')
 
-            ARCANESOFT.on('auth::users.activate', () => {
-                activateUserModal.show()
-            })
+            ARCANESOFT.on('authorization::users.activate', () => {
+                activateModal.show()
+            });
 
-            activateUserForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = components.loadingButton(
-                    activateUserForm.elt().querySelector('button[type="submit"]')
-                );
-                submitBtn.loading()
-
-                ARCANESOFT
-                    .request()
-                    .put(activateUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            activateUserModal.hide()
-                            location.reload()
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            activateForm.onSubmit('PUT', () => {
+                activateModal.hide()
+                location.reload()
             })
         </script>
     @endpush
 @endcan
 
-{{-- DELETE MODAL/SCRIPT --}}
+{{-- ACIVATE MODAL --}}
+@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('deactivate'), [$user])
+    @push('modals')
+        <x-arc:modal-action
+            type="deactivate"
+            action="{{ route('admin::auth.users.deactivate', [$user]) }}" method="PUT"
+            title="Deactivate User" body="Are you sure you want to deactivate this user ?"
+        />
+    @endpush
+
+    @push('scripts')
+        <script defer>
+            let deactivateModal = components.modal('div#deactivate-modal')
+            let deactivateForm  = components.form('form#deactivate-form')
+
+            ARCANESOFT.on('authorization::users.deactivate', () => {
+                deactivateModal.show()
+            });
+
+            deactivateForm.onSubmit('PUT', () => {
+                deactivateModal.hide()
+                location.reload()
+            })
+        </script>
+    @endpush
+@endcan
+
+{{-- DELETE MODAL --}}
 @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'), [$user])
     @push('modals')
-        <div class="modal fade" id="delete-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="deleteUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.users.delete', $user], 'method' => 'DELETE', 'id' => 'delete-user-form']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="deleteUserTitle">@lang('Delete User')</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        @lang('Are you sure you want to delete this user ?')
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                        {{ arcanesoft\ui\action_button('delete')->submit() }}
-                    </div>
-                </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal-action
+            type="delete"
+            action="{{ route('admin::auth.users.delete', [$user]) }}" method="DELETE"
+            title="Delete User"
+            body="Are you sure you want to delete this user ?"
+        />
     @endpush
 
     @push('scripts')
-        <script>
-            let deleteUserModal = twbs.Modal.make('div#delete-user-modal')
-            let deleteUserForm  = components.form('form#delete-user-form')
+        <script defer>
+            let deleteModal = components.modal('div#delete-modal')
+            let deleteForm  = components.form('form#delete-form')
 
-            ARCANESOFT.on('auth::users.delete', () => {
-                deleteUserModal.show()
+            ARCANESOFT.on('authorization::users.delete', () => {
+                deleteModal.show()
             })
 
-            deleteUserForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = components.loadingButton(
-                    deleteUserForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                ARCANESOFT
-                    .request()
-                    .delete(deleteUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            deleteUserModal.hide()
-                            @if ($user->trashed())
-                            location.replace("{{ route('admin::auth.users.index') }}")
-                            @else
-                            location.reload()
-                            @endif
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            deleteForm.onSubmit('DELETE', () => {
+                deleteModal.hide()
+                @if ($user->trashed())
+                location.replace("{{ route('admin::auth.users.index') }}")
+                @else
+                location.reload()
+                @endif
             })
         </script>
     @endpush
 @endcan
 
-{{-- RESTORE MODAL/SCRIPT --}}
+{{-- RESTORE MODAL --}}
+@if($user->trashed())
 @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
     @push('modals')
-        <div class="modal fade" id="restore-user-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="restoreUserTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.users.restore', ':id'], 'method' => 'PUT', 'id' => 'restore-user-form']) }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="restoreUserTitle">@lang('Restore User')</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @lang('Are you sure you want to restore this user ?')
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                            {{ arcanesoft\ui\action_button('restore')->submit() }}
-                        </div>
-                    </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal-action
+            type="restore"
+            action="{{ route('admin::auth.users.restore', [$user]) }}" method="PUT"
+            title="Restore User"
+            body="Are you sure you want to restore this user ?"
+        />
     @endpush
 
     @push('scripts')
-        <script>
-            let restoreUserModal = twbs.Modal.make('div#restore-user-modal')
-            let restoreUserForm  = components.form('form#restore-user-form')
+        <script defer>
+            let restoreModal = components.modal('div#restore-modal')
+            let restoreForm  = components.form('form#restore-form')
 
-            ARCANESOFT.on('auth::users.restore', () => {
-                restoreUserModal.show()
-            })
+            ARCANESOFT.on('authorization::users.restore', () => {
+                restoreModal.show()
+            });
 
-            restoreUserForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = components.loadingButton(
-                    restoreUserForm.elt().querySelector('button[type="submit"]')
-                );
-                submitBtn.loading()
-
-                ARCANESOFT
-                    .request()
-                    .put(restoreUserForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            restoreUserModal.hide()
-                            location.reload()
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        console.log(error)
-                        submitBtn.reset()
-                    })
+            restoreForm.onSubmit('PUT', () => {
+                restoreModal.hide()
+                location.reload()
             })
         </script>
     @endpush
 @endcan
+@endif

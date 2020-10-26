@@ -10,20 +10,21 @@
 @section('content')
     <div class="row g-4">
         <div class="col-lg-5">
+            {{-- ADMINISTRATOR --}}
             <x-arc:card>
                 <x-arc:card-body class="d-flex justify-content-center">
                     <div class="avatar avatar-xxl rounded-circle bg-light">
-                        {{ html()->image($administrator->avatar, $administrator->full_name, []) }}
+                        <img src="{{ $administrator->avatar }}" alt="{{ $administrator->full_name }}">
                     </div>
                 </x-arc:card-body>
                 <x-arc:card-table>
                     <tbody>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Full Name')</td>
+                            <x-arc:table-th label="Full Name"/>
                             <td class="text-right">{{ $administrator->full_name }}</td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Email')</td>
+                            <x-arc:table-th label="Email"/>
                             <td class="small text-right">
                                 {{ $administrator->email }}
                                 @if ($administrator->hasVerifiedEmail())
@@ -34,14 +35,14 @@
                         </tr>
                         @if ($administrator->hasVerifiedEmail())
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Email Verified at')</td>
+                            <x-arc:table-th label="Email Verified at"/>
                             <td class="text-right">
                                 <small class="text-muted">{{ $administrator->email_verified_at }}</small>
                             </td>
                         </tr>
                         @endif
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Status')</td>
+                            <x-arc:table-th label="Status"/>
                             <td class="text-right">
                                 @if ($administrator->isActive())
                                     <span class="badge border border-success text-muted">
@@ -61,20 +62,20 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Last activity')</td>
+                            <x-arc:table-th label="Last Activity"/>
                             <td class="text-right"><small class="text-muted">{{ $administrator->last_activity }}</small></td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Created at')</td>
+                            <x-arc:table-th label="Created at"/>
                             <td class="text-right"><small class="text-muted">{{ $administrator->created_at }}</small></td>
                         </tr>
                         <tr>
-                            <td class="font-weight-light text-uppercase text-muted">@lang('Updated at')</td>
+                            <x-arc:table-th label="Updated at"/>
                             <td class="text-right"><small class="text-muted">{{ $administrator->updated_at }}</small></td>
                         </tr>
                         @if ($administrator->trashed())
                             <tr>
-                                <td class="font-weight-light text-uppercase text-muted">@lang('Deleted at')</td>
+                                <x-arc:table-th label="Deleted at"/>
                                 <td class="text-right"><small class="text-muted">{{ $administrator->deleted_at }}</small></td>
                             </tr>
                         @endif
@@ -83,30 +84,32 @@
                 <x-arc:card-footer class="d-flex justify-content-end">
                     {{-- UPDATE --}}
                     @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('update'), [$administrator])
-                        <a href="{{ route('admin::auth.administrators.edit', [$administrator]) }}"
-                           class="btn btn-sm btn-secondary">@lang('Edit')</a>
+                        <a class="btn btn-sm btn-secondary"
+                           href="{{ route('admin::auth.administrators.edit', [$administrator]) }}">@lang('Edit')</a>
                     @endcan
 
                     {{-- ACTIVATE --}}
                     @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ml-2" onclick="ARCANESOFT.emit('authorization::administrators.activate')">
-                            @lang($administrator->isActive() ? 'Deactivate' : 'Activate')
-                        </button>
+                        <button class="btn btn-sm btn-secondary ml-2"
+                                onclick="ARCANESOFT.emit('authorization::administrators.activate')">@lang('Activate')</button>
+                    @endcan
+
+                    {{-- DEACTIVATE --}}
+                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
+                        <button class="btn btn-sm btn-secondary ml-2"
+                                onclick="ARCANESOFT.emit('authorization::administrators.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- RESTORE --}}
                     @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ml-2" onclick="ARCANESOFT.emit('authorization::administrators.restore')">
-                            @lang('Restore')
-                        </button>
+                        <button class="btn btn-sm btn-secondary ml-2"
+                                onclick="ARCANESOFT.emit('authorization::administrators.restore')">@lang('Restore')</button>
                     @endcan
 
                     {{-- DELETE --}}
                     @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
                         <button class="btn btn-sm btn-danger ml-2"
-                                onclick="ARCANESOFT.emit('authorization::administrators.delete')">
-                            @lang('Delete')
-                        </button>
+                                onclick="ARCANESOFT.emit('authorization::administrators.delete')">@lang('Delete')</button>
                     @endcan
                 </x-arc:card-footer>
             </x-arc:card>
@@ -194,20 +197,18 @@
 
 {{-- ACIVATE MODAL --}}
 @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-    @php($actionType = $administrator->isActive() ? 'deactivate' : 'activate')
     @push('modals')
         <x-arc:modal-action
-            type="{{ $actionType }}"
+            type="activate"
             action="{{ route('admin::auth.administrators.activate', [$administrator]) }}" method="PUT"
-            title="{{ $administrator->isActive() ? 'Deactivate User' : 'Activate User' }}"
-            body="{{ $administrator->isActive() ? 'Are you sure you want to deactivate administrator ?' : 'Are you sure you want to activate administrator ?' }}"
+            title="Activate Administrator" body="Are you sure you want to activate this administrator ?"
         />
     @endpush
 
     @push('scripts')
         <script defer>
-            let activateModal = components.modal('div#{{ $actionType }}-modal')
-            let activateForm  = components.form('form#{{ $actionType }}-form')
+            let activateModal = components.modal('div#activate-modal')
+            let activateForm  = components.form('form#activate-form')
 
             ARCANESOFT.on('authorization::administrators.activate', () => {
                 activateModal.show()
@@ -215,6 +216,33 @@
 
             activateForm.onSubmit('PUT', () => {
                 activateModal.hide()
+                location.reload()
+            })
+        </script>
+    @endpush
+@endcan
+
+{{-- DEACIVATE MODAL --}}
+@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
+    @push('modals')
+        <x-arc:modal-action
+            type="deactivate"
+            action="{{ route('admin::auth.administrators.deactivate', [$administrator]) }}" method="PUT"
+            title="Deactivate Administrator" body="Are you sure you want to deactivate this administrator ?"
+        />
+    @endpush
+
+    @push('scripts')
+        <script defer>
+            let deactivateModal = components.modal('div#deactivate-modal')
+            let deactivateForm  = components.form('form#deactivate-form')
+
+            ARCANESOFT.on('authorization::administrators.deactivate', () => {
+                deactivateModal.show()
+            });
+
+            deactivateForm.onSubmit('PUT', () => {
+                deactivateModal.hide()
                 location.reload()
             })
         </script>

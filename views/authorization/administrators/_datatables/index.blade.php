@@ -29,8 +29,7 @@
                         <td class="small">{{ $administrator->email }}</td>
                         <td class="small text-muted">{{ $administrator->created_at }}</td>
                         <td class="text-center">
-                            <span class="status {{ $administrator->isActive() ? 'bg-success status-animated' : 'bg-secondary' }}"
-                                  data-toggle="tooltip" title="@lang($administrator->isActive() ? 'Activated' : 'Deactivated')"></span>
+                            <x-arc:badge-active value="{{ $administrator->isActive() }}" icon="true"/>
                         </td>
                         <td class="text-right">
                             {{-- SHOW --}}
@@ -39,17 +38,24 @@
                                 action="{{ route('admin::auth.administrators.show', [$administrator]) }}"
                                 allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"/>
 
-                            {{-- EDIT --}}
+                            {{-- UPDATE --}}
                             <x-arc:datatable-action
                                 type="edit"
                                 action="{{ route('admin::auth.administrators.edit', [$administrator]) }}"
                                 allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('update', [$administrator]) }}"/>
 
                             {{-- ACTIVATE/DEACTIVATE --}}
-                            <x-arc:datatable-action
-                                type="{{ $administrator->isActive() ? 'deactivate' : 'activate' }}"
-                                action="ARCANESOFT.emit('authorization::administrators.activate', {id: '{{ $administrator->getRouteKey() }}', status: '{{ $administrator->isActive() ? 'activated' : 'deactivated' }}'})"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('activate', [$administrator]) }}"/>
+                            @if ($administrator->isActive())
+                                <x-arc:datatable-action
+                                    type="deactivate"
+                                    action="ARCANESOFT.emit('authorization::administrators.deactivate', {id: '{{ $administrator->getRouteKey() }}'})"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('deactivate', [$administrator]) }}"/>
+                            @else
+                                <x-arc:datatable-action
+                                    type="activate"
+                                    action="ARCANESOFT.emit('authorization::administrators.activate', {id: '{{ $administrator->getRouteKey() }}'})"
+                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('activate', [$administrator]) }}"/>
+                            @endif
 
                             {{-- RESTORE --}}
                             @if($trash)

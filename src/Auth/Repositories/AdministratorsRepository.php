@@ -187,7 +187,7 @@ class AdministratorsRepository extends AbstractRepository
     }
 
     /**
-     * Activate/Deactivate a user.
+     * Activate/Deactivate an administrator.
      *
      * @param  \Arcanesoft\Foundation\Auth\Models\Administrator  $administrator
      *
@@ -196,8 +196,8 @@ class AdministratorsRepository extends AbstractRepository
     public function toggleActive(Administrator $administrator): bool
     {
         return $administrator->isActive()
-            ? $this->deactivate($administrator)
-            : $this->activate($administrator);
+            ? $this->deactivateOne($administrator)
+            : $this->activateOne($administrator);
     }
 
     /**
@@ -207,7 +207,7 @@ class AdministratorsRepository extends AbstractRepository
      *
      * @return bool
      */
-    public function activate(Administrator $administrator)
+    public function activateOne(Administrator $administrator)
     {
         if ($administrator->isActive())
             return false;
@@ -226,7 +226,7 @@ class AdministratorsRepository extends AbstractRepository
      *
      * @return bool
      */
-    public function deactivate(Administrator $administrator): bool
+    public function deactivateOne(Administrator $administrator): bool
     {
         if ( ! $administrator->isActive())
             return false;
