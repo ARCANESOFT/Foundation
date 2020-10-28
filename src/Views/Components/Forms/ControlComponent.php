@@ -47,6 +47,6 @@ abstract class ControlComponent extends InputComponent
 
         $this->type = $type;
         $this->value = $value ?: old($name);
-        $this->label = __($label ?: $name);
+        $this->label = $label ?: $name;
     }
 }

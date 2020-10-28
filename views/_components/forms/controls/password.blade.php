@@ -15,14 +15,10 @@ $attributes = $attributes->merge([
 <div class="form-label-group">
     <input type="password" id="{{ $id }}" name="{{ $name }}" {{ $attributes }}>
     <label for="{{ $name }}">{{ $label }}</label>
-    @error($name)
-    <span class="invalid-feedback" role="alert">{{ $message }}</span>
-    @enderror
+    <x-arc:form-error name="{{ $name }}"/>
 </div>
 @else
-    <label for="{{ $name }}" class="form-label font-weight-light text-uppercase text-muted">{{ $label }}</label>
+    <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
     <input type="password" id="{{ $id }}" name="{{ $name }}" {{ $attributes }}>
-    @error($name)
-    <span class="invalid-feedback" role="alert">{{ $message }}</span>
-    @enderror
+    <x-arc:form-error name="{{ $name }}"/>
 @endif

@@ -10,11 +10,11 @@
 $attributes = $attributes->merge([
     'name'  => $name,
     'id'    => $id,
-    'class' => 'form-control'.$errors->first($name, ' is-invalid'),
+    'class' => $errors->first($name, ' is-invalid'),
 ]);
 ?>
 
 <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
-<textarea {{ $attributes }}>@if($value){{ $value }}@endif</textarea>
+<{{$component}} {{ $attributes }}>{{ $slot }}</{{$component}}>
 <x-arc:form-error name="{{ $name }}"/>
 

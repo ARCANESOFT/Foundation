@@ -21,6 +21,8 @@ return [
 
         // Form
         'form'             => Arcanesoft\Foundation\Views\Components\Forms\Form::class,
+        'form-error'       => Arcanesoft\Foundation\Views\Components\Forms\Error::class,
+        'form-label'       => Arcanesoft\Foundation\Views\Components\Forms\Label::class,
 
         // Form Inputs
         'password'         => Arcanesoft\Foundation\Views\Components\Forms\Inputs\Password::class,
@@ -28,8 +30,10 @@ return [
         // Form Controls
         'checkbox-control' => Arcanesoft\Foundation\Views\Components\Forms\Controls\Checkbox::class,
         'input-control'    => Arcanesoft\Foundation\Views\Components\Forms\Controls\Input::class,
+        'select-control'   => Arcanesoft\Foundation\Views\Components\Forms\Controls\Select::class,
         'textarea-control' => Arcanesoft\Foundation\Views\Components\Forms\Controls\Textarea::class,
         'password-control' => Arcanesoft\Foundation\Views\Components\Forms\Controls\Password::class,
+        'vue-control'      => Arcanesoft\Foundation\Views\Components\Forms\Controls\Vue::class,
 
         // Form Actions
         'form-submit-button' => Arcanesoft\Foundation\Views\Components\Forms\Buttons\Submit::class,
