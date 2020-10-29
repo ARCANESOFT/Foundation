@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authentication\Http\Controllers;
 
 use Arcanesoft\Foundation\Authentication\Http\Requests\SendPasswordResetLinkRequest;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\PasswordResetLinkController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\SendsPasswordResetLink;
 use Illuminate\Http\Request;
 
 /**
@@ -13,8 +13,15 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class PasswordResetLinkController extends Controller
+class PasswordResetLinkController
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use SendsPasswordResetLink;
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -29,7 +36,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create(Request $request)
     {
-        return view('foundation::auth.passwords.forgot');
+        return view()->make('foundation::authentication.passwords.forgot');
     }
 
     /**

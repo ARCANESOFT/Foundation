@@ -1,4 +1,4 @@
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\Role  $role */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\Role  $role */ ?>
 
 @if($role->administrators->isNotEmpty())
     <table id="administrators-table" class="table table-borderless table-hover mb-0">
@@ -31,15 +31,15 @@
                     {{-- SHOW --}}
                     <x-arc:datatable-action
                         type="show"
-                        action="{{ route('admin::auth.administrators.show', [$administrator]) }}"
-                        allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"
+                        action="{{ route('admin::authorization.administrators.show', [$administrator]) }}"
+                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"
                     />
 
                     {{-- DETACH --}}
                     <x-arc:datatable-action
                         type="detach"
-                        action="ARCANESOFT.emit('auth::roles.administrators.detach', {id: '{{ $administrator->getRouteKey() }}'})"
-                        allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"
+                        action="ARCANESOFT.emit('authorization::roles.administrators.detach', {id: '{{ $administrator->getRouteKey() }}'})"
+                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"
                     />
                 </td>
             </tr>
@@ -48,12 +48,12 @@
     </table>
 
     {{-- DETACH MODAL/SCRIPT --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('users.detach'), [$role])
+    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('users.detach'), [$role])
         @push('modals')
             <x-arc:modal-action
                 type="detach"
                 id="detach-administrator"
-                action="{{ route('admin::auth.roles.administrators.detach', [$role, ':id']) }}" method="DELETE"
+                action="{{ route('admin::authorization.roles.administrators.detach', [$role, ':id']) }}" method="DELETE"
                 title="Detach Administrator"
                 body="Are you sure you want to detach this administrator ?"
             />
@@ -65,7 +65,7 @@
                 let detachAdministratorForm   = components.form('form#detach-administrator-form')
                 let detachAdministratorAction = detachAdministratorForm.getAction()
 
-                ARCANESOFT.on('auth::roles.administrators.detach', ({id}) => {
+                ARCANESOFT.on('authorization::roles.administrators.detach', ({id}) => {
                     detachAdministratorModal.show()
                     detachAdministratorForm.action(detachAdministratorAction.replace(':id', id))
                 })

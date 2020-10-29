@@ -2,8 +2,8 @@
 
 <?php
 /**
- * @var  Arcanesoft\Foundation\Auth\Models\Role                                                   $role
- * @var  Arcanesoft\Foundation\Auth\Models\Permission[]|\Illuminate\Database\Eloquent\Collection  $permissions
+ * @var  Arcanesoft\Foundation\Authorization\Models\Role                                                   $role
+ * @var  Arcanesoft\Foundation\Authorization\Models\Permission[]|\Illuminate\Database\Eloquent\Collection  $permissions
  */
 ?>
 
@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <x-arc:form action="{{ route('admin::auth.roles.update', [$role]) }}" method="PUT">
+    <x-arc:form action="{{ route('admin::authorization.roles.update', [$role]) }}" method="PUT">
         <div class="row">
             <div class="col-md-4">
                 {{-- ROLE --}}
@@ -33,7 +33,7 @@
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <x-arc:form-cancel-button to="{{ route('admin::auth.roles.show', [$role]) }}"/>
+                        <x-arc:form-cancel-button to="{{ route('admin::authorization.roles.show', [$role]) }}"/>
                         <x-arc:form-submit-button type="save"/>
                     </x-arc:card-footer>
                 </x-arc:card>

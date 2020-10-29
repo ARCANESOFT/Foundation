@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Tests\Concerns\Factories;
 
-use Arcanesoft\Foundation\Auth\Database\Factories\AdministratorFactory;
-use Arcanesoft\Foundation\Auth\Models\Administrator;
+use Arcanesoft\Foundation\Authorization\Database\Factories\AdministratorFactory;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 
 /**
  * Trait     CanCreateAdministrators
@@ -22,7 +22,7 @@ trait CanCreateAdministrators
     /**
      * Get the administrator factory builder.
      *
-     * @return \Arcanesoft\Foundation\Auth\Database\Factories\AdministratorFactory
+     * @return \Arcanesoft\Foundation\Authorization\Database\Factories\AdministratorFactory
      */
     protected static function administratorFactory(): AdministratorFactory
     {
@@ -34,7 +34,7 @@ trait CanCreateAdministrators
      *
      * @param  array  $attributes
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\Administrator
+     * @return \Arcanesoft\Foundation\Authorization\Models\Administrator
      */
     protected static function createAdministrator(array $attributes = []): Administrator
     {
@@ -46,7 +46,7 @@ trait CanCreateAdministrators
      *
      * @param  array  $attributes
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\Administrator
+     * @return \Arcanesoft\Foundation\Authorization\Models\Administrator
      */
     protected static function makeAdministrator(array $attributes = []): Administrator
     {

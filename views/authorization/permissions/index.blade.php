@@ -5,5 +5,6 @@
 @endsection
 
 @section('content')
-    <v-datatable name="{{ Arcanesoft\Foundation\Auth\Views\Components\PermissionsDatatable::NAME }}"></v-datatable>
+    <v-datatable
+        name="{{ Arcanesoft\Foundation\Authorization\Views\Components\PermissionsDatatable::NAME }}"></v-datatable>
 @endsection

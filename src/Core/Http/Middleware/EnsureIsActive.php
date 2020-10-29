@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Core\Http\Middleware;
 
-use Arcanesoft\Foundation\Auth\Contracts\CanBeActivated;
+use Arcanesoft\Foundation\Authorization\Contracts\CanBeActivated;
 use Closure;
 use Illuminate\Http\{Request, Response};
 

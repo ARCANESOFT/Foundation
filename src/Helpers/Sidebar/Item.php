@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Helpers\Sidebar;
 
-use Arcanesoft\Foundation\Auth\Auth;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Illuminate\Support\{Arr, HtmlString};
 
 /**
@@ -212,7 +212,7 @@ class Item
     /**
      * Check if can see the item.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed|null  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed|null  $administrator
      *
      * @return bool
      */
@@ -251,7 +251,7 @@ class Item
     /**
      * Check if the authenticated admin has the allowed role.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator  $administrator
      *
      * @return bool
      */
@@ -263,7 +263,7 @@ class Item
     /**
      * Check if the authenticated admin has the allowed permission.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator  $admin
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator  $admin
      *
      * @return bool
      */
@@ -281,7 +281,7 @@ class Item
     /**
      * Check if the authenticated admin can access the item's children.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator  $administrator
      *
      * @return bool
      */

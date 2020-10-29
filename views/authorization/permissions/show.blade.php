@@ -1,6 +1,6 @@
 @extends(arcanesoft\foundation()->template())
 
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\Permission  $permission */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\Permission  $permission */ ?>
 
 @section('page-title')
     <i class="fas fa-fw fa-shield-alt"></i> @lang('Permissions') <small>@lang("Permission's details")</small>
@@ -87,7 +87,7 @@
         </div>
         <div class="col-md-7 col-lg-8">
             {{-- ROLES --}}
-            @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('index'))
+            @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('index'))
                 <x-arc:card>
                     <x-arc:card-header>@lang('Roles')</x-arc:card-header>
                     <x-arc:card-table class="table-hover">
@@ -124,19 +124,17 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('show'), [$role])
-                                            <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light" data-toggle="tooltip" title="@lang('Show')">
-                                                <i class="far fa-fw fa-eye"></i>
-                                            </a>
-                                        @endcan
+                                        {{-- SHOW --}}
+                                        <x-arc:datatable-action
+                                            type="show"
+                                            action="{{ route('admin::authorization.roles.show', [$role]) }}"
+                                            allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('show', [$role]) }}"/>
 
-                                        @can(Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::ability('roles.detach'), [$permission, $role])
-                                            <button class="btn btn-sm btn-danger"
-                                                    data-toggle="tooltip" data-placement="top" title="@lang('Detach')"
-                                                    onclick="ARCANESOFT.emit('auth::permissions.detach-role', {id: '{{ $role->getRouteKey() }}', name: '{{ $role->name }}'})">
-                                                <i class="fas fa-fw fa-unlink"></i>
-                                            </button>
-                                        @endcan
+                                        {{-- DETACH --}}
+                                        <x-arc:datatable-action
+                                            type="detach"
+                                            action="ARCANESOFT.emit('authorization::permissions.roles.detach', {id: '{{ $role->getRouteKey() }}' })"
+                                            allowed="{{ Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::can('roles.detach', [$permission, $role]) }}"/>
                                     </td>
                                 </tr>
                             @endforeach
@@ -149,75 +147,34 @@
 @endsection
 
 {{-- DETACH ROLE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::ability('roles.detach'), $permission)
+@can(Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::ability('roles.detach'), $permission)
     @push('modals')
-        <div class="modal fade" id="detach-role-modal" data-backdrop="static"
-             tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {{ form()->open(['route' => ['admin::auth.permissions.roles.detach', $permission, ':id'], 'method' => 'DELETE', 'id' => 'detach-role-form']) }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modelTitleId">@lang('Detach Role')</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        {{ arcanesoft\ui\action_button('cancel')->attribute('data-dismiss', 'modal') }}
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-fw fa-unlink"></i> @lang('Detach')
-                        </button>
-                    </div>
-                </div>
-                {{ form()->close() }}
-            </div>
-        </div>
+        <x-arc:modal-action
+            type="detach" id="detach-role"
+            action="{{ route('admin::authorization.permissions.roles.detach', [$permission, ':id']) }}" method="DELETE"
+            title="Detach Role"
+            body="Are you sure you want to delete this role ?"
+        />
     @endpush
 
     @push('scripts')
         <script>
-            let detachRoleModal  = twbs.Modal.make('div#detach-role-modal')
+            let detachRoleModal  = components.modal('div#detach-role-modal')
             let detachRoleForm   = components.form('form#detach-role-form')
-            let detachRoleAction = detachRoleForm.getAction()
+            let detachRoleAction = detachRoleForm.action()
 
-            ARCANESOFT.on('auth::permissions.detach-role', ({id, name}) => {
-                detachRoleForm.setAction(detachRoleAction.replace(':id', id))
-
-                detachRoleModal._element.querySelector('.modal-body').innerHTML = "@lang('Are you sure you want to detach role: :name ?')".replace(':name', name)
-
+            ARCANESOFT.on('authorization::permissions.roles.detach', ({id}) => {
+                detachRoleForm.action(detachRoleAction.replace(':id', id))
                 detachRoleModal.show();
             });
 
-            detachRoleForm.on('submit', (event) => {
-                event.preventDefault()
-
-                let submitBtn = components.loadingButton(
-                    detachRoleForm.elt().querySelector('button[type="submit"]')
-                )
-                submitBtn.loading()
-
-                request()
-                    .delete(detachRoleForm.getAction())
-                    .then((response) => {
-                        if (response.data.code === 'success') {
-                            detachRoleModal.hide()
-                            location.reload()
-                        }
-                        else {
-                            alert('ERROR ! Check the console !')
-                            submitBtn.reset()
-                        }
-                    })
-                    .catch((error) => {
-                        alert('AJAX ERROR ! Check the console !')
-                        submitBtn.reset()
-                    })
-            });
+            detachRoleForm.onSubmit('DELETE', () => {
+                detachRoleModal.hide()
+                location.reload()
+            })
 
             detachRoleModal.on('hidden', () => {
-                detachRoleForm.setAction(detachRoleAction);
+                detachRoleForm.action(detachRoleAction.toString());
             });
         </script>
     @endpush

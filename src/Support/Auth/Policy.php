@@ -29,7 +29,7 @@ abstract class Policy extends AbstractPolicy
     /**
      * Get the authenticated user.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\Administrator|\Arcanesoft\Foundation\Auth\Models\User|mixed
+     * @return \Arcanesoft\Foundation\Authorization\Models\Administrator|\Arcanesoft\Foundation\Authorization\Models\User|mixed
      */
     public static function user()
     {

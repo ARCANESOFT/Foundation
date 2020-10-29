@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Core\Database;
 
-use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Repositories\{PermissionsRepository, RolesRepository};
+use Arcanesoft\Foundation\Authorization\Auth;
+use Arcanesoft\Foundation\Authorization\Repositories\{PermissionsRepository, RolesRepository};
 use Arcanesoft\Foundation\Support\Database\Seeder;
 use Illuminate\Support\{Arr, Collection, Str};
 use Illuminate\Support\Facades\Date;
@@ -47,7 +47,7 @@ abstract class RolesSeeder extends Seeder
     /**
      * Get the roles repository.
      *
-     * @return \Arcanesoft\Foundation\Auth\Repositories\RolesRepository|mixed
+     * @return \Arcanesoft\Foundation\Authorization\Repositories\RolesRepository|mixed
      */
     private function getRolesRepository()
     {
@@ -57,7 +57,7 @@ abstract class RolesSeeder extends Seeder
     /**
      * Get the permissions repository.
      *
-     * @return \Arcanesoft\Foundation\Auth\Repositories\PermissionsRepository|mixed
+     * @return \Arcanesoft\Foundation\Authorization\Repositories\PermissionsRepository|mixed
      */
     private function getPermissionsRepository()
     {

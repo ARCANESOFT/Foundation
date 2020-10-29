@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify;
 
-use Arcanesoft\Foundation\Auth\Auth;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;

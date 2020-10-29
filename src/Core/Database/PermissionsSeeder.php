@@ -6,8 +6,8 @@ namespace Arcanesoft\Foundation\Core\Database;
 
 use Arcanedev\LaravelPolicies\Ability;
 use Arcanedev\LaravelPolicies\Contracts\PolicyManager;
-use Arcanesoft\Foundation\Auth\Models\Permission;
-use Arcanesoft\Foundation\Auth\Repositories\PermissionsGroupsRepository;
+use Arcanesoft\Foundation\Authorization\Models\Permission;
+use Arcanesoft\Foundation\Authorization\Repositories\PermissionsGroupsRepository;
 use Arcanesoft\Foundation\Support\Database\Seeder;
 use Illuminate\Support\{Collection, Str};
 
@@ -27,11 +27,11 @@ abstract class PermissionsSeeder extends Seeder
      * Seed permissions.
      *
      * @param  array                                                     $group
-     * @param  \Arcanesoft\Foundation\Auth\Models\Permission[]|iterable  $permissions
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Permission[]|iterable  $permissions
      */
     public function seed(array $group, iterable $permissions)
     {
-        /** @var  \Arcanesoft\Foundation\Auth\Repositories\PermissionsGroupsRepository  $repo */
+        /** @var  \Arcanesoft\Foundation\Authorization\Repositories\PermissionsGroupsRepository  $repo */
         $repo = $this->container->make(PermissionsGroupsRepository::class);
 
         $repo->createOneWithPermissions($group, $permissions);

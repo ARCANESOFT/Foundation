@@ -101,14 +101,14 @@ return [
 
         'models' => [
             'user'               => App\Models\User::class,
-            'administrator'      => Arcanesoft\Foundation\Auth\Models\Administrator::class,
-            'role'               => Arcanesoft\Foundation\Auth\Models\Role::class,
-            'permission'         => Arcanesoft\Foundation\Auth\Models\Permission::class,
-            'permissions-group'  => Arcanesoft\Foundation\Auth\Models\PermissionsGroup::class,
-            'password-resets'    => Arcanesoft\Foundation\Auth\Models\PasswordReset::class,
-            'session'            => Arcanesoft\Foundation\Auth\Models\Session::class,
-            'socialite-provider' => Arcanesoft\Foundation\Auth\Models\SocialiteProvider::class,
-            'two-factor'         => Arcanesoft\Foundation\Auth\Models\TwoFactor::class,
+            'administrator'      => Arcanesoft\Foundation\Authorization\Models\Administrator::class,
+            'role'               => Arcanesoft\Foundation\Authorization\Models\Role::class,
+            'permission'         => Arcanesoft\Foundation\Authorization\Models\Permission::class,
+            'permissions-group'  => Arcanesoft\Foundation\Authorization\Models\PermissionsGroup::class,
+            'password-resets'    => Arcanesoft\Foundation\Authorization\Models\PasswordReset::class,
+            'session'            => Arcanesoft\Foundation\Authorization\Models\Session::class,
+            'socialite-provider' => Arcanesoft\Foundation\Authorization\Models\SocialiteProvider::class,
+            'two-factor'         => Arcanesoft\Foundation\Authorization\Models\TwoFactor::class,
         ],
 
     ],

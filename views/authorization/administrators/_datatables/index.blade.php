@@ -1,6 +1,6 @@
 <?php
 /**
- * @var  Arcanesoft\Foundation\Auth\Models\Administrator[]|Illuminate\Pagination\LengthAwarePaginator  $administrators
+ * @var  Arcanesoft\Foundation\Authorization\Models\Administrator[]|Illuminate\Pagination\LengthAwarePaginator  $administrators
  * @var  array                                                                                         $fields
  */
 ?>
@@ -35,26 +35,26 @@
                             {{-- SHOW --}}
                             <x-arc:datatable-action
                                 type="show"
-                                action="{{ route('admin::auth.administrators.show', [$administrator]) }}"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"/>
+                                action="{{ route('admin::authorization.administrators.show', [$administrator]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"/>
 
                             {{-- UPDATE --}}
                             <x-arc:datatable-action
                                 type="edit"
-                                action="{{ route('admin::auth.administrators.edit', [$administrator]) }}"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('update', [$administrator]) }}"/>
+                                action="{{ route('admin::authorization.administrators.edit', [$administrator]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('update', [$administrator]) }}"/>
 
                             {{-- ACTIVATE/DEACTIVATE --}}
                             @if ($administrator->isActive())
                                 <x-arc:datatable-action
                                     type="deactivate"
                                     action="ARCANESOFT.emit('authorization::administrators.deactivate', {id: '{{ $administrator->getRouteKey() }}'})"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('deactivate', [$administrator]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('deactivate', [$administrator]) }}"/>
                             @else
                                 <x-arc:datatable-action
                                     type="activate"
                                     action="ARCANESOFT.emit('authorization::administrators.activate', {id: '{{ $administrator->getRouteKey() }}'})"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('activate', [$administrator]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('activate', [$administrator]) }}"/>
                             @endif
 
                             {{-- RESTORE --}}
@@ -62,14 +62,14 @@
                                 <x-arc:datatable-action
                                     type="restore"
                                     action="ARCANESOFT.emit('authorization::administrators.restore', {id: '{{ $administrator->getRouteKey() }}' })"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('restore', [$administrator]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('restore', [$administrator]) }}"/>
                             @endif
 
                             {{-- DELETE --}}
                             <x-arc:datatable-action
                                 type="delete"
                                 action="ARCANESOFT.emit('authorization::administrators.delete', {id: '{{ $administrator->getRouteKey() }}' })"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::can('delete', [$administrator]) }}"/>
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('delete', [$administrator]) }}"/>
                         </td>
                     </tr>
                 @endforeach

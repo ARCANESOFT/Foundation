@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Policies;
 
-use Arcanesoft\Foundation\Auth\Models\Administrator;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 
 /**
  * Class     DependenciesPolicy
@@ -64,7 +64,7 @@ class DependenciesPolicy extends AbstractPolicy
     /**
      * Allow to access all the dependencies.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $administrator
      *
      * @return \Illuminate\Auth\Access\Response|bool|void
      */
@@ -76,7 +76,7 @@ class DependenciesPolicy extends AbstractPolicy
     /**
      * Allow to access all the dependency.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $administrator
      *
      * @return \Illuminate\Auth\Access\Response|bool|void
      */

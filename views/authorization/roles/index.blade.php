@@ -6,12 +6,12 @@
 
 @push('content-nav')
     <div class="mb-3 text-right">
-        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('metrics'))
-            <a href="{{ route('admin::auth.roles.metrics') }}" class="btn btn-sm btn-secondary {{ active(['admin::auth.roles.metrics']) }}">@lang('Metrics')</a>
+        @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('metrics'))
+            <a href="{{ route('admin::authorization.roles.metrics') }}" class="btn btn-sm btn-secondary {{ active(['admin::authorization.roles.metrics']) }}">@lang('Metrics')</a>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('create'))
-            <a href="{{ route('admin::auth.roles.create') }}" class="btn btn-primary btn-sm ml-1">
+        @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('create'))
+            <a href="{{ route('admin::authorization.roles.create') }}" class="btn btn-primary btn-sm ml-1">
                 <i class="fa fa-fw fa-plus"></i> @lang('Add')
             </a>
         @endcan
@@ -19,15 +19,15 @@
 @endpush
 
 @section('content')
-    <v-datatable name="{{ Arcanesoft\Foundation\Auth\Views\Components\RolesDatatable::NAME }}"></v-datatable>
+    <v-datatable name="{{ Arcanesoft\Foundation\Authorization\Views\Components\RolesDatatable::NAME }}"></v-datatable>
 @endsection
 
 {{-- ACIVATE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('activate'))
+@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'))
     @push('modals')
         <x-arc:modal-action
             type="activate"
-            action="{{ route('admin::auth.roles.activate', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.roles.activate', [':id']) }}" method="PUT"
             title="Activate Role"
             body="Are you sure you want to activate this role ?"
         />
@@ -57,11 +57,11 @@
 @endcan
 
 {{-- DEACIVATE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('deactivate'))
+@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('deactivate'))
     @push('modals')
         <x-arc:modal-action
             type="deactivate"
-            action="{{ route('admin::auth.roles.deactivate', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.roles.deactivate', [':id']) }}" method="PUT"
             title="Deactivate Role"
             body="Are you sure you want to deactivate this role ?"
         />
@@ -91,11 +91,11 @@
 @endcan
 
 {{-- DELETE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('delete'))
+@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('delete'))
     @push('modals')
         <x-arc:modal-action
             type="delete"
-            action="{{ route('admin::auth.roles.delete', [':id']) }}" method="DELETE"
+            action="{{ route('admin::authorization.roles.delete', [':id']) }}" method="DELETE"
             title="Delete Role"
             body="Are you sure you want to delete this role ?"
         />

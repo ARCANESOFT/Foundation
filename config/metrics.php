@@ -12,29 +12,29 @@ return [
     'registered' => [
 
         // Auth - Administrators
-        Arcanesoft\Foundation\Auth\Metrics\Administrators\TotalAdministrators::class,
-        Arcanesoft\Foundation\Auth\Metrics\Administrators\NewAdministrators::class,
-        Arcanesoft\Foundation\Auth\Metrics\Administrators\ActivatedAdministrators::class,
-        Arcanesoft\Foundation\Auth\Metrics\Administrators\AdministratorsPerDay::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Administrators\TotalAdministrators::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Administrators\NewAdministrators::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Administrators\ActivatedAdministrators::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Administrators\AdministratorsPerDay::class,
 
         // Auth - Users
-        Arcanesoft\Foundation\Auth\Metrics\Users\ActivatedUsers::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\NewUsers::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\TotalUsers::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerMinute::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerHour::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerDay::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerWeek::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerMonth::class,
-        Arcanesoft\Foundation\Auth\Metrics\Users\VerifiedEmails::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\ActivatedUsers::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\NewUsers::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\TotalUsers::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerMinute::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerHour::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerDay::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerWeek::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerMonth::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Users\VerifiedEmails::class,
 
         // Auth - Roles
-        Arcanesoft\Foundation\Auth\Metrics\Roles\TotalRoles::class,
-        Arcanesoft\Foundation\Auth\Metrics\Roles\TotalUsersByRoles::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Roles\TotalRoles::class,
+        Arcanesoft\Foundation\Authorization\Metrics\Roles\TotalUsersByRoles::class,
 
         // Auth - Password Resets
-        Arcanesoft\Foundation\Auth\Metrics\PasswordResets\PasswordResetsPerDay::class,
-        Arcanesoft\Foundation\Auth\Metrics\PasswordResets\TotalPasswordResets::class,
+        Arcanesoft\Foundation\Authorization\Metrics\PasswordResets\PasswordResetsPerDay::class,
+        Arcanesoft\Foundation\Authorization\Metrics\PasswordResets\TotalPasswordResets::class,
 
         // System - LogViewer
         Arcanesoft\Foundation\System\Metrics\LogViewer\LogFilesCount::class,
@@ -55,34 +55,34 @@ return [
         'authorization' => [
             'dashboard' => [
                 'index' => [
-                    Arcanesoft\Foundation\Auth\Metrics\Users\TotalUsers::class,
-                    Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerDay::class,
+                    Arcanesoft\Foundation\Authorization\Metrics\Users\TotalUsers::class,
+                    Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerDay::class,
                 ],
             ],
 
             'users' => [
-                Arcanesoft\Foundation\Auth\Metrics\Users\TotalUsers::class,
-                Arcanesoft\Foundation\Auth\Metrics\Users\NewUsers::class,
-                Arcanesoft\Foundation\Auth\Metrics\Users\VerifiedEmails::class,
-                Arcanesoft\Foundation\Auth\Metrics\Users\ActivatedUsers::class,
-                Arcanesoft\Foundation\Auth\Metrics\Users\UsersPerDay::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Users\TotalUsers::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Users\NewUsers::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Users\VerifiedEmails::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Users\ActivatedUsers::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Users\UsersPerDay::class,
             ],
 
             'administrators' => [
-                Arcanesoft\Foundation\Auth\Metrics\Administrators\TotalAdministrators::class,
-                Arcanesoft\Foundation\Auth\Metrics\Administrators\NewAdministrators::class,
-                Arcanesoft\Foundation\Auth\Metrics\Administrators\ActivatedAdministrators::class,
-                Arcanesoft\Foundation\Auth\Metrics\Administrators\AdministratorsPerDay::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Administrators\TotalAdministrators::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Administrators\NewAdministrators::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Administrators\ActivatedAdministrators::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Administrators\AdministratorsPerDay::class,
             ],
 
             'roles' => [
-                Arcanesoft\Foundation\Auth\Metrics\Roles\TotalUsersByRoles::class,
-                Arcanesoft\Foundation\Auth\Metrics\Roles\TotalRoles::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Roles\TotalUsersByRoles::class,
+                Arcanesoft\Foundation\Authorization\Metrics\Roles\TotalRoles::class,
             ],
 
             'password-resets' => [
-                Arcanesoft\Foundation\Auth\Metrics\PasswordResets\TotalPasswordResets::class,
-                Arcanesoft\Foundation\Auth\Metrics\PasswordResets\PasswordResetsPerDay::class,
+                Arcanesoft\Foundation\Authorization\Metrics\PasswordResets\TotalPasswordResets::class,
+                Arcanesoft\Foundation\Authorization\Metrics\PasswordResets\PasswordResetsPerDay::class,
             ],
         ],
     ],

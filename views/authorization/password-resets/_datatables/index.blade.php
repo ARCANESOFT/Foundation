@@ -1,6 +1,6 @@
 <?php
 /**
- * @var  \Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Auth\Models\PasswordReset[]  $passwordResets
+ * @var  \Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Authorization\Models\PasswordReset[]  $passwordResets
  * @var  array                                                                                          $fields
  */
 ?>

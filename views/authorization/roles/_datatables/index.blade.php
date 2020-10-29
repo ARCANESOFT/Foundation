@@ -1,6 +1,6 @@
 <?php
 /**
- * @var  Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Auth\Models\Role[]  $roles
+ * @var  Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Authorization\Models\Role[]  $roles
  * @var  array                                                                                $fields
  */
 ?>
@@ -42,33 +42,33 @@
                             {{-- SHOW --}}
                             <x-arc:datatable-action
                                 type="show"
-                                action="{{ route('admin::auth.roles.show', [$role]) }}"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('show', [$role]) }}"/>
+                                action="{{ route('admin::authorization.roles.show', [$role]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('show', [$role]) }}"/>
 
                             {{-- UPDATE --}}
                             <x-arc:datatable-action
                                 type="edit"
-                                action="{{ route('admin::auth.roles.edit', [$role]) }}"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('update', [$role]) }}"/>
+                                action="{{ route('admin::authorization.roles.edit', [$role]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('update', [$role]) }}"/>
 
                             {{-- ACTIVATE/DEACTIVATE --}}
                             @if ($role->isActive())
                                 <x-arc:datatable-action
                                     type="deactivate"
                                     action="ARCANESOFT.emit('authorization::roles.deactivate', {id: '{{ $role->getRouteKey() }}'})"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('deactivate', [$role]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('deactivate', [$role]) }}"/>
                             @else
                                 <x-arc:datatable-action
                                     type="activate"
                                     action="ARCANESOFT.emit('authorization::roles.activate', {id: '{{ $role->getRouteKey() }}'})"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('activate', [$role]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('activate', [$role]) }}"/>
                             @endif
 
                             {{-- DELETE --}}
                             <x-arc:datatable-action
                                 type="delete"
                                 action="ARCANESOFT.emit('authorization::roles.delete', {id: '{{ $role->getRouteKey() }}' })"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('delete', [$role]) }}"/>
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('delete', [$role]) }}"/>
                         </td>
                     </tr>
                 @endforeach

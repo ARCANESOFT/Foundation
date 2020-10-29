@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Arcanesoft\Foundation\Auth\Auth;
-use Arcanesoft\Foundation\Auth\Database\Migration;
+use Arcanesoft\Foundation\Authorization\Auth;
+use Arcanesoft\Foundation\Authorization\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Database\Schema\Blueprint;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
- * @see  \Arcanesoft\Foundation\Auth\Models\Administrator
+ * @see  \Arcanesoft\Foundation\Authorization\Models\Administrator
  */
 class CreateAuthAdministratorsTable extends Migration
 {

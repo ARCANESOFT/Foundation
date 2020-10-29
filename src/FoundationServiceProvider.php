@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation;
 
-use Arcanesoft\Foundation\Auth\AuthServiceProvider;
+use Arcanesoft\Foundation\Authorization\AuthServiceProvider;
 use Arcanesoft\Foundation\Authentication\AuthenticationServiceProvider;
 use Arcanesoft\Foundation\Core\CoreServiceProvider;
 use Arcanesoft\Foundation\Fortify\FortifyServiceProvider;

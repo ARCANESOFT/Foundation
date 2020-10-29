@@ -50,7 +50,7 @@ abstract class TestCase extends OrchestraTestCase
         // Configuration
         $app['config']->set(
             'arcanesoft.foundation.auth.database.models.user',
-            \Arcanesoft\Foundation\Auth\Models\User::class
+            \Arcanesoft\Foundation\Authorization\Models\User::class
         );
 
         static::setupAuthConfig($app['config']);
@@ -79,12 +79,12 @@ abstract class TestCase extends OrchestraTestCase
         $config->set('auth.providers', [
             'users' => [
                 'driver' => 'eloquent',
-                'model'  => \Arcanesoft\Foundation\Auth\Models\User::class,
+                'model'  => \Arcanesoft\Foundation\Authorization\Models\User::class,
             ],
 
             'administrators' => [
                 'driver' => 'eloquent',
-                'model'  => \Arcanesoft\Foundation\Auth\Models\Administrator::class,
+                'model'  => \Arcanesoft\Foundation\Authorization\Models\Administrator::class,
             ],
         ]);
     }

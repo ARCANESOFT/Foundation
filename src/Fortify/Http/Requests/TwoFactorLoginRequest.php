@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Http\Requests;
 
-use Arcanesoft\Foundation\Auth\Models\TwoFactor;
+use Arcanesoft\Foundation\Authorization\Models\TwoFactor;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
 use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider;
 use Illuminate\Foundation\Http\FormRequest;
@@ -105,7 +105,7 @@ abstract class TwoFactorLoginRequest extends FormRequest
     /**
      * Get the user that is attempting the two factor challenge.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\Administrator|\Arcanesoft\Foundation\Auth\Models\User|mixed|null
+     * @return \Arcanesoft\Foundation\Authorization\Models\Administrator|\Arcanesoft\Foundation\Authorization\Models\User|mixed|null
      */
     public function challengedUser()
     {
@@ -147,7 +147,7 @@ abstract class TwoFactorLoginRequest extends FormRequest
     /**
      * Get the user's two factory instance.
      *
-     * @return \Arcanesoft\Foundation\Auth\Models\TwoFactor
+     * @return \Arcanesoft\Foundation\Authorization\Models\TwoFactor
      */
     protected function twoFactor(): TwoFactor
     {

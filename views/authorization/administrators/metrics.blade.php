@@ -6,18 +6,18 @@
 
 @push('content-nav')
     <div class="mt-2 mb-3 text-right">
-        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('metrics'))
-        <a href="{{ route('admin::auth.administrators.metrics') }}"
-           class="btn btn-sm btn-secondary {{ active(['admin::auth.administrators.metrics']) }}">@lang('Metrics')</a>
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('metrics'))
+        <a href="{{ route('admin::authorization.administrators.metrics') }}"
+           class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.metrics']) }}">@lang('Metrics')</a>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('index'))
-        <a href="{{ route('admin::auth.administrators.index') }}"
-           class="btn btn-sm btn-secondary {{ active(['admin::auth.administrators.index']) }}">@lang('List of administrators')</a>
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('index'))
+        <a href="{{ route('admin::authorization.administrators.index') }}"
+           class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.index']) }}">@lang('List of administrators')</a>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('create'))
-            <a href="{{ route('admin::auth.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('create'))
+            <a href="{{ route('admin::authorization.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
                 <i class="fa fa-fw fa-plus"></i> @lang('Add')
             </a>
         @endcan

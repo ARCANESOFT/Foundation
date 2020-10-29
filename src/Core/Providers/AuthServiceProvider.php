@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Core\Providers;
 
-use Arcanesoft\Foundation\Auth\Models\Administrator;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 use Arcanesoft\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

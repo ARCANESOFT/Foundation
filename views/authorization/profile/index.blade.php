@@ -4,81 +4,73 @@
     <i class="fas fa-fw fa-user"></i> @lang('Profile')
 @endsection
 
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\User  $user */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\User  $user */ ?>
 
 @section('content')
     <div class="row">
         <div class="col-md-6">
             {{-- ACCOUNT --}}
-            {{ form()->open(['route' => 'admin::auth.profile.account.update', 'method' => 'PUT']) }}
-                <div class="card card-borderless">
-                    <div class="card-header">@lang('Account')</div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="first_name" class="control-label">@lang('First Name')</label>
-                            {{ form()->text('first_name', old('first_name', $user->first_name), ['class' => 'form-control'.$errors->first('first_name', ' is-invalid'), 'required']) }}
-                            @error('first_name')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
-                        </div>
+            <x-arc:form action="{{ route('admin::authorization.profile.account.update') }}" method="PUT">
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Account')</x-arc:card-header>
+                    <x-arc:card-body>
+                        <div class="row g-3">
+                            {{-- FIRST NAME --}}
+                            <div class="col-12 col-xxl-6">
+                                <x-arc:input-control
+                                    type="text" name="first_name" :value="old('first_name', $user->first_name)"
+                                    label="First Name" required/>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="last_name" class="control-label">@lang('Last Name')</label>
-                            {{ form()->text('last_name', old('last_name', $user->last_name), ['class' => 'form-control'.$errors->first('last_name', ' is-invalid'), 'required']) }}
-                            @error('last_name')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
-                        </div>
+                            {{-- LAST NAME --}}
+                            <div class="col-12 col-xxl-6">
+                                <x-arc:input-control
+                                    type="text" name="last_name" :value="old('last_name', $user->last_name)"
+                                    label="Last Name" required/>
+                            </div>
 
-                        <div class="form-group mb-0">
-                            <label for="email" class="control-label">@lang('Email')</label>
-                            {{ form()->email('email', old('email', $user->email), ['class' => 'form-control'.$errors->first('email', ' is-invalid'), 'required']) }}
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
+                            {{-- EMAIL --}}
+                            <div class="col-12">
+                                <x-arc:input-control
+                                    type="email" name="email" :value="old('email', $user->email)"
+                                    label="Email" required/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-end">
-                        {{ arcanesoft\ui\action_button('update')->size('sm')->submit() }}
-                    </div>
-                </div>
-            {{ form()->close() }}
+                    </x-arc:card-body>
+                    <x-arc:card-footer class="d-flex justify-content-end">
+                        <x-arc:form-submit-button type="save"/>
+                    </x-arc:card-footer>
+                </x-arc:card>
+            </x-arc:form>
         </div>
         <div class="col-md-6">
             {{-- PASSWORD --}}
-            {{ form()->open(['route' => 'admin::auth.profile.password.update', 'method' => 'PUT']) }}
-                <div class="card card-borderless">
-                    <div class="card-header">@lang('Edit Password')</div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="old_password" class="control-label">@lang('Old Password')</label>
-                            {{ form()->password('old_password', ['class' => 'form-control'.$errors->first('old_password', ' is-invalid'), 'placeholder' => __('Old Password')]) }}
-                            @error('old_password')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
-                        </div>
+            <x-arc:form action="{{ route('admin::authorization.profile.password.update') }}" method="PUT">
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Edit Password')</x-arc:card-header>
+                    <x-arc:card-body>
+                        <div class="row g-3">
+                            {{-- OLD PASSWORD --}}
+                            <div class="col-12">
+                                <x-arc:password-control name="old_password" label="Old Password" required/>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="password" class="control-label">@lang('Password')</label>
-                            {{ form()->password('password', ['class' => 'form-control'.$errors->first('password', ' is-invalid'), 'placeholder' => __('Password')]) }}
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
-                        </div>
+                            {{-- PASSWORD --}}
+                            <div class="col-12">
+                                <x-arc:password-control name="password" label="Password" required/>
+                            </div>
 
-                        <div class="form-group mb-0">
-                            <label for="password_confirmation" class="control-label">@lang('Confirm Password')</label>
-                            {{ form()->password('password_confirmation', ['class' => 'form-control'.$errors->first('password_confirmation', ' is-invalid'), 'placeholder' => __('Confirm Password')]) }}
-                            @error('password_confirmation')
-                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                            @enderror
+                            {{-- PASSWORD CONFIRMATION --}}
+                            <div class="col-12">
+                                <x-arc:password-control name="password_confirmation" label="Confirm Password" required/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-end">
-                        {{ arcanesoft\ui\action_button('update')->size('sm')->submit() }}
-                    </div>
-                </div>
-            {{ form()->close() }}
+                    </x-arc:card-body>
+                    <x-arc:card-footer class="d-flex justify-content-end">
+                        <x-arc:form-submit-button type="save"/>
+                    </x-arc:card-footer>
+                </x-arc:card>
+            </x-arc:form>
         </div>
     </div>
 @endsection

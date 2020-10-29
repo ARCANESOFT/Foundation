@@ -44,7 +44,7 @@
             </div>
 
             @if ($authentication['socialite']['enabled'])
-                <?php $providers = Arcanesoft\Foundation\Auth\Socialite::getProviders(); ?>
+                <?php $providers = Arcanesoft\Foundation\Authorization\Socialite::getProviders(); ?>
                 <div class="card shadow-sm mb-4">
                     <div class="card-header">Socialite</div>
                     <table class="table table-borderless mb-0">

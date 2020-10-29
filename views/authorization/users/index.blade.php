@@ -8,22 +8,22 @@
 
 @push('content-nav')
     <div class="mt-2 mb-3 text-right">
-        @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('metrics'))
-        <a href="{{ route('admin::auth.users.metrics') }}"
-           class="btn btn-sm btn-secondary {{ active(['admin::auth.users.metrics']) }}">@lang('Metrics')</a>
+        @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('metrics'))
+        <a href="{{ route('admin::authorization.users.metrics') }}"
+           class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.metrics']) }}">@lang('Metrics')</a>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('index'))
+        @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('index'))
         <div class="btn-group ml-auto" role="group" aria-label="@lang("Users's List")">
-            <a href="{{ route('admin::auth.users.index') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::auth.users.index']) }}">@lang('All')</a>
-            <a href="{{ route('admin::auth.users.trash') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::auth.users.trash']) }}">@lang('Trash')</a>
+            <a href="{{ route('admin::authorization.users.index') }}"
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.index']) }}">@lang('All')</a>
+            <a href="{{ route('admin::authorization.users.trash') }}"
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.trash']) }}">@lang('Trash')</a>
         </div>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('create'))
-            <a href="{{ route('admin::auth.users.create') }}" class="btn btn-primary btn-sm ml-1">
+        @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('create'))
+            <a href="{{ route('admin::authorization.users.create') }}" class="btn btn-primary btn-sm ml-1">
                 <i class="fa fa-fw fa-plus"></i> @lang('Add')
             </a>
         @endcan
@@ -32,16 +32,16 @@
 
 @section('content')
     <v-datatable
-        name="{{ Arcanesoft\Foundation\Auth\Views\Components\UsersDatatable::NAME }}"
+        name="{{ Arcanesoft\Foundation\Authorization\Views\Components\UsersDatatable::NAME }}"
         :data='@json(compact('trash'))'/>
 @endsection
 
 {{-- ACIVATE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'))
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('activate'))
     @push('modals')
         <x-arc:modal-action
             type="activate"
-            action="{{ route('admin::auth.users.activate', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.users.activate', [':id']) }}" method="PUT"
             title="Activate User"
             body="Are you sure you want to activate this user ?"
         />
@@ -71,11 +71,11 @@
 @endcan
 
 {{-- DEACIVATE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('deactivate'))
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('deactivate'))
     @push('modals')
         <x-arc:modal-action
             type="deactivate"
-            action="{{ route('admin::auth.users.deactivate', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.users.deactivate', [':id']) }}" method="PUT"
             title="Deactivate User"
             body="Are you sure you want to deactivate this user ?"
         />
@@ -105,11 +105,11 @@
 @endcan
 
 {{-- DELETE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'))
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('delete'))
     @push('modals')
         <x-arc:modal-action
             type="delete"
-            action="{{ route('admin::auth.users.delete', [':id']) }}" method="DELETE"
+            action="{{ route('admin::authorization.users.delete', [':id']) }}" method="DELETE"
             title="Delete User"
             body="Are you sure you want to delete this user ?"
         />
@@ -140,11 +140,11 @@
 
 {{-- RESTORE MODAL/SCRIPT --}}
 @if ($trash)
-    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'))
+    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'))
         @push('modals')
             <x-arc:modal-action
                 type="restore"
-                action="{{ route('admin::auth.users.restore', [':id']) }}" method="PUT"
+                action="{{ route('admin::authorization.users.restore', [':id']) }}" method="PUT"
                 title="Restore User"
                 body="Are you sure you want to restore this user ?"
             />

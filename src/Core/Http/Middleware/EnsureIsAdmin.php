@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Core\Http\Middleware;
 
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
-use Arcanesoft\Foundation\Auth\Models\Administrator;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 use Closure;
 use Illuminate\Http\{Request, Response};
 
@@ -53,7 +53,7 @@ class EnsureIsAdmin
     /**
      * Check the authenticated user is an administrator.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $user
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $user
      *
      * @return bool
      */

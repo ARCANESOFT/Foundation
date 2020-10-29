@@ -6,7 +6,7 @@ namespace Arcanesoft\Foundation\Authentication\Http\Controllers;
 
 use Arcanesoft\Foundation\Authentication\Http\Requests\ResetPasswordRequest;
 use Arcanesoft\Foundation\Authentication\Http\Routes\LoginRoutes;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\ResetPasswordController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
 /**
@@ -14,8 +14,15 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ResetPasswordController extends Controller
+class ResetPasswordController
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use ResetsPasswords;
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -30,7 +37,7 @@ class ResetPasswordController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('foundation::auth.passwords.reset', [
+        return view()->make('foundation::authentication.passwords.reset', [
             'token' => $request->route('token'),
             'email' => $request->input('email'),
         ]);

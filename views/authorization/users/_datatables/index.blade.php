@@ -1,6 +1,6 @@
 <?php
 /**
- * @var  Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Auth\Models\User[]  $users
+ * @var  Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Authorization\Models\User[]  $users
  * @var  array                                                                                $fields
  */
 ?>
@@ -41,26 +41,26 @@
                             {{-- SHOW --}}
                             <x-arc:datatable-action
                                 type="show"
-                                action="{{ route('admin::auth.users.show', [$user]) }}"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('show', [$user]) }}"/>
+                                action="{{ route('admin::authorization.users.show', [$user]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::can('show', [$user]) }}"/>
 
                             {{-- EDIT --}}
                             <x-arc:datatable-action
                                 type="edit"
-                                action="{{ route('admin::auth.users.edit', [$user]) }}"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('update', [$user]) }}"/>
+                                action="{{ route('admin::authorization.users.edit', [$user]) }}"
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::can('update', [$user]) }}"/>
 
                             {{-- ACTIVATE/DEACTIVATE --}}
                             @if ($user->isActive())
                                 <x-arc:datatable-action
                                     type="deactivate"
                                     action="ARCANESOFT.emit('authorization::users.deactivate', {id: '{{ $user->getRouteKey() }}'})"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('deactivate', [$user]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::can('deactivate', [$user]) }}"/>
                             @else
                                 <x-arc:datatable-action
                                     type="activate"
                                     action="ARCANESOFT.emit('authorization::users.activate', {id: '{{ $user->getRouteKey() }}'})"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('activate', [$user]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::can('activate', [$user]) }}"/>
                             @endif
 
                             {{-- RESTORE --}}
@@ -68,14 +68,14 @@
                                 <x-arc:datatable-action
                                     type="restore"
                                     action="ARCANESOFT.emit('authorization::users.restore', {id: '{{ $user->getRouteKey() }}' })"
-                                    allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('restore', [$user]) }}"/>
+                                    allowed="{{ Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::can('restore', [$user]) }}"/>
                             @endif
 
                             {{-- DELETE --}}
                             <x-arc:datatable-action
                                 type="delete"
                                 action="ARCANESOFT.emit('authorization::users.delete', {id: '{{ $user->getRouteKey() }}' })"
-                                allowed="{{ Arcanesoft\Foundation\Auth\Policies\UsersPolicy::can('delete', [$user]) }}"/>
+                                allowed="{{ Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::can('delete', [$user]) }}"/>
                         </td>
                     </tr>
                 @endforeach

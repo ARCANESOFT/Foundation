@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <x-arc:form action="{{ route('admin::auth.users.store') }}" method="POST">
+    <x-arc:form action="{{ route('admin::authorization.users.store') }}" method="POST">
         <div class="row">
             <div class="col-md-6">
                 <x-arc:card>
@@ -47,7 +47,7 @@
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <x-arc:form-cancel-button to="{{ route('admin::auth.users.index') }}"/>
+                        <x-arc:form-cancel-button to="{{ route('admin::authorization.users.index') }}"/>
                         <x-arc:form-submit-button type="save"/>
                     </x-arc:card-footer>
                 </x-arc:card>

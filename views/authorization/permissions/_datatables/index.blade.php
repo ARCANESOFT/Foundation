@@ -1,6 +1,6 @@
 <?php
 /**
- * @var  Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Auth\Models\Permission[]  $permissions
+ * @var  Illuminate\Pagination\LengthAwarePaginator|Arcanesoft\Foundation\Authorization\Models\Permission[]  $permissions
  * @var  array                                                                                      $fields
  */
 ?>
@@ -36,8 +36,8 @@
                         {{-- SHOW --}}
                         <x-arc:datatable-action
                             type="show"
-                            action="{{ route('admin::auth.permissions.show', [$permission]) }}"
-                            allowed="{{ Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::can('show', [$permission]) }}"/>
+                            action="{{ route('admin::authorization.permissions.show', [$permission]) }}"
+                            allowed="{{ Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::can('show', [$permission]) }}"/>
                     </td>
                 </tr>
             @endforeach

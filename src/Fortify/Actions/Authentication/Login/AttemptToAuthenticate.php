@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Actions\Authentication\Login;
 
-use Arcanesoft\Foundation\Auth\Auth;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
 use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
 use Closure;

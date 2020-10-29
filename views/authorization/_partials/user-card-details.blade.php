@@ -1,4 +1,4 @@
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\User  $user */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\User  $user */ ?>
 
 <div class="card card-borderless shadow-sm mb-3">
     <div class="card-body d-flex justify-content-center p-3">
@@ -63,12 +63,12 @@
         </tbody>
     </table>
     <div class="card-footer text-right px-2">
-        @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('show'), $user)
-            {{ arcanesoft\ui\action_link('show', route('admin::auth.users.show', [$user]))->size('sm') }}
+        @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('show'), $user)
+            {{ arcanesoft\ui\action_link('show', route('admin::authorization.users.show', [$user]))->size('sm') }}
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('update'), $user)
-            {{ arcanesoft\ui\action_link('edit', route('admin::auth.users.edit', [$user]))->size('sm') }}
+        @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('update'), $user)
+            {{ arcanesoft\ui\action_link('edit', route('admin::authorization.users.edit', [$user]))->size('sm') }}
         @endcan
     </div>
 </div>

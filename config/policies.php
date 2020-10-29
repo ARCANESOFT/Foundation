@@ -18,13 +18,13 @@ return [
     Arcanesoft\Foundation\System\Policies\RouteViewerPolicy::class,
 
     // Auth
-    Arcanesoft\Foundation\Auth\Policies\DashboardPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\UsersPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\RolesPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\PasswordResetsPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\SessionsPolicy::class,
-    Arcanesoft\Foundation\Auth\Policies\SettingsPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\DashboardPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\PasswordResetsPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\SessionsPolicy::class,
+    Arcanesoft\Foundation\Authorization\Policies\SettingsPolicy::class,
 
 ];

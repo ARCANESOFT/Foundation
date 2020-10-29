@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 
 use Arcanedev\Support\Routing\RouteRegistrar;
-use Arcanesoft\Foundation\Auth\Auth;
+use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authentication\Http\Controllers\{LoginController, TwoFactorLoginController};
 use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
 

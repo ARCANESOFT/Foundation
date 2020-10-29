@@ -6,7 +6,7 @@ namespace Arcanesoft\Foundation\Authentication\Http\Controllers;
 
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
 use Arcanesoft\Foundation\Core\Http\Routes\Web\DashboardRoutes;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\ConfirmPasswordController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\ConfirmsPasswords;
 use Illuminate\Http\Request;
 
 /**
@@ -14,13 +14,14 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ConfirmPasswordController extends Controller
+class ConfirmPasswordController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use ConfirmsPasswords;
     use UseAdministratorGuard;
 
     /* -----------------------------------------------------------------
@@ -37,7 +38,7 @@ class ConfirmPasswordController extends Controller
      */
     public function create(Request $request)
     {
-        return view('foundation::auth.passwords.confirm');
+        return view()->make('foundation::authentication.passwords.confirm');
     }
 
     /**

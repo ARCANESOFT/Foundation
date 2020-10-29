@@ -33,8 +33,6 @@ class CoreServiceProvider extends ServiceProvider
             Providers\ViewServiceProvider::class,
         ]);
 
-        $this->registerModulesServiceProviders();
-
         $this->extendMetricsAuthorization();
     }
 
@@ -42,16 +40,6 @@ class CoreServiceProvider extends ServiceProvider
      |  Other Methods
      | -----------------------------------------------------------------
      */
-
-    /**
-     * Register the ARCANESOFT's modules.
-     */
-    private function registerModulesServiceProviders(): void
-    {
-        $this->registerProviders(
-            $this->app['config']->get('arcanesoft.foundation.modules.providers', [])
-        );
-    }
 
     /**
      * Extend metrics authorization.

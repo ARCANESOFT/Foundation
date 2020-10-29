@@ -6,21 +6,22 @@
 
 @push('content-nav')
     <div class="mt-2 mb-3 text-right">
-        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('metrics'))
-        <a href="{{ route('admin::auth.administrators.metrics') }}" class="btn btn-sm btn-secondary {{ active(['admin::auth.administrators.metrics']) }}">@lang('Metrics')</a>
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('metrics'))
+            <a href="{{ route('admin::authorization.administrators.metrics') }}"
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.metrics']) }}">@lang('Metrics')</a>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('index'))
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('index'))
         <div class="btn-group ml-1" role="group" aria-label="Administrators lists">
-            <a href="{{ route('admin::auth.administrators.index') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::auth.administrators.index']) }}">@lang('All')</a>
-            <a href="{{ route('admin::auth.administrators.trash') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::auth.administrators.trash']) }}">@lang('Trash')</a>
+            <a href="{{ route('admin::authorization.administrators.index') }}"
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.index']) }}">@lang('All')</a>
+            <a href="{{ route('admin::authorization.administrators.trash') }}"
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.trash']) }}">@lang('Trash')</a>
         </div>
         @endcan
 
-        @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('create'))
-            <a href="{{ route('admin::auth.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('create'))
+            <a href="{{ route('admin::authorization.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
                 <i class="fa fa-fw fa-plus"></i> @lang('Add')
             </a>
         @endcan
@@ -29,17 +30,17 @@
 
 @section('content')
     <v-datatable
-        name="{{ Arcanesoft\Foundation\Auth\Views\Components\AdministratorsDatatable::NAME }}"
+        name="{{ Arcanesoft\Foundation\Authorization\Views\Components\AdministratorsDatatable::NAME }}"
         :data='@json(compact('trash'))'></v-datatable>
 @endsection
 
 
 {{-- ACIVATE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'))
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'))
     @push('modals')
         <x-arc:modal-action
             type="activate"
-            action="{{ route('admin::auth.administrators.activate', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.administrators.activate', [':id']) }}" method="PUT"
             title="Activate Administrator"
             body="Are you sure you want to activate this administrator ?"
         />
@@ -69,11 +70,11 @@
 @endcan
 
 {{-- DEACIVATE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('deactivate'))
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'))
     @push('modals')
         <x-arc:modal-action
             type="deactivate"
-            action="{{ route('admin::auth.administrators.deactivate', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.administrators.deactivate', [':id']) }}" method="PUT"
             title="Deactivate Administrator"
             body="Are you sure you want to deactivate this administrator ?"
         />
@@ -103,11 +104,11 @@
 @endcan
 
 {{-- DELETE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'))
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'))
     @push('modals')
         <x-arc:modal-action
             type="delete"
-            action="{{ route('admin::auth.administrators.delete', [':id']) }}" method="DELETE"
+            action="{{ route('admin::authorization.administrators.delete', [':id']) }}" method="DELETE"
             title="Delete Administrator"
             body="Are you sure you want to delete this administrator ?"
         />
@@ -138,11 +139,11 @@
 
 {{-- RESTORE MODAL/SCRIPT --}}
 @if ($trash)
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'))
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'))
     @push('modals')
         <x-arc:modal-action
             type="restore"
-            action="{{ route('admin::auth.administrators.restore', [':id']) }}" method="PUT"
+            action="{{ route('admin::authorization.administrators.restore', [':id']) }}" method="PUT"
             title="Restore Administrator"
             body="Are you sure you want to restore this administrator ?"
         />

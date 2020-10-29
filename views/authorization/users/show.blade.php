@@ -73,37 +73,37 @@
                 </x-arc:card-table>
                 <x-arc:card-footer class="d-flex justify-content-end">
                     {{-- UPDATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('update'), [$user])
-                        <a href="{{ route('admin::auth.users.edit', [$user]) }}"
+                    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('update'), [$user])
+                        <a href="{{ route('admin::authorization.users.edit', [$user]) }}"
                            class="btn btn-sm btn-secondary">@lang('Edit')</a>
                     @endcan
 
                     {{-- IMPERSONATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('impersonate'), [$user])
-                        <a href="{{ route('admin::auth.users.impersonate', [$user]) }}"
+                    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('impersonate'), [$user])
+                        <a href="{{ route('admin::authorization.users.impersonate', [$user]) }}"
                            class="btn btn-sm btn-secondary ml-2">@lang('Impersonate')</a>
                     @endcan
 
                     {{-- ACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('activate'), [$user])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::users.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('deactivate'), [$user])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('deactivate'), [$user])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::users.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- RESTORE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'), [$user])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::users.restore')">@lang('Restore')</button>
                     @endcan
 
                     {{-- DELETE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'), [$user])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('delete'), [$user])
                         <button class="btn btn-sm btn-danger ml-2"
                                 onclick="ARCANESOFT.emit('authorization::users.delete')">@lang('Delete')</button>
                     @endcan
@@ -141,11 +141,11 @@
 @endsection
 
 {{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('activate'), [$user])
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('activate'), [$user])
     @push('modals')
         <x-arc:modal-action
             type="activate"
-            action="{{ route('admin::auth.users.activate', [$user]) }}" method="PUT"
+            action="{{ route('admin::authorization.users.activate', [$user]) }}" method="PUT"
             title="Activate User" body="Are you sure you want to activate this user ?"
         />
     @endpush
@@ -168,11 +168,11 @@
 @endcan
 
 {{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('deactivate'), [$user])
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('deactivate'), [$user])
     @push('modals')
         <x-arc:modal-action
             type="deactivate"
-            action="{{ route('admin::auth.users.deactivate', [$user]) }}" method="PUT"
+            action="{{ route('admin::authorization.users.deactivate', [$user]) }}" method="PUT"
             title="Deactivate User" body="Are you sure you want to deactivate this user ?"
         />
     @endpush
@@ -195,11 +195,11 @@
 @endcan
 
 {{-- DELETE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('delete'), [$user])
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('delete'), [$user])
     @push('modals')
         <x-arc:modal-action
             type="delete"
-            action="{{ route('admin::auth.users.delete', [$user]) }}" method="DELETE"
+            action="{{ route('admin::authorization.users.delete', [$user]) }}" method="DELETE"
             title="Delete User"
             body="Are you sure you want to delete this user ?"
         />
@@ -217,7 +217,7 @@
             deleteForm.onSubmit('DELETE', () => {
                 deleteModal.hide()
                 @if ($user->trashed())
-                location.replace("{{ route('admin::auth.users.index') }}")
+                location.replace("{{ route('admin::authorization.users.index') }}")
                 @else
                 location.reload()
                 @endif
@@ -228,11 +228,11 @@
 
 {{-- RESTORE MODAL --}}
 @if($user->trashed())
-@can(Arcanesoft\Foundation\Auth\Policies\UsersPolicy::ability('restore'), [$user])
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'), [$user])
     @push('modals')
         <x-arc:modal-action
             type="restore"
-            action="{{ route('admin::auth.users.restore', [$user]) }}" method="PUT"
+            action="{{ route('admin::authorization.users.restore', [$user]) }}" method="PUT"
             title="Restore User"
             body="Are you sure you want to restore this user ?"
         />

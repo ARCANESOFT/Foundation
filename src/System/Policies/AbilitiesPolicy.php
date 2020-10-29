@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Policies;
 
-use Arcanesoft\Foundation\Auth\Models\Administrator;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 use Arcanedev\LaravelPolicies\Ability;
 
 /**
@@ -70,7 +70,7 @@ class AbilitiesPolicy extends AbstractPolicy
     /**
      * Allow to access all the abilities.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $administrator
      *
      * @return \Illuminate\Auth\Access\Response|bool|void
      */
@@ -82,7 +82,7 @@ class AbilitiesPolicy extends AbstractPolicy
     /**
      * Allow to access all the abilities.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $administrator
      * @param  \Arcanedev\LaravelPolicies\Ability|null                 $ability
      *
      * @return \Illuminate\Auth\Access\Response|bool|void

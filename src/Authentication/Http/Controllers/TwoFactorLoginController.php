@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authentication\Http\Controllers;
 
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\TwoFactorLoginController as Controller;
+use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesWithTwoFactorChallenge;
 use Illuminate\Http\Request;
 
 /**
@@ -13,13 +13,14 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TwoFactorLoginController extends Controller
+class TwoFactorLoginController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use AuthenticatesWithTwoFactorChallenge;
     use UseAdministratorGuard;
 
     /* -----------------------------------------------------------------

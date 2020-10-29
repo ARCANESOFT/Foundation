@@ -1,4 +1,4 @@
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\Role  $role */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\Role  $role */ ?>
 
 @if($role->permissions->isNotEmpty())
     <x-arc:card-table class="table-hover">
@@ -22,14 +22,14 @@
                     {{-- SHOW --}}
                     <x-arc:datatable-action
                         type="show"
-                        action="{{ route('admin::auth.permissions.show', [$permission]) }}"
-                        allowed="{{ Arcanesoft\Foundation\Auth\Policies\PermissionsPolicy::can('show', [$permission]) }}"/>
+                        action="{{ route('admin::authorization.permissions.show', [$permission]) }}"
+                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::can('show', [$permission]) }}"/>
 
                     {{-- DETACH --}}
                     <x-arc:datatable-action
                         type="detach"
-                        action="ARCANESOFT.emit('auth::roles.permissions.detach', {id: '{{ $permission->getRouteKey() }}'})"
-                        allowed="{{ Arcanesoft\Foundation\Auth\Policies\RolesPolicy::can('permissions.detach', [$role, $permission]) }}"/>
+                        action="ARCANESOFT.emit('authorization::roles.permissions.detach', {id: '{{ $permission->getRouteKey() }}'})"
+                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('permissions.detach', [$role, $permission]) }}"/>
                 </td>
             </tr>
             @endforeach
@@ -37,12 +37,12 @@
     </x-arc:card-table>
 
     {{-- DETACH MODAL/SCRIPT --}}
-    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('permissions.detach'), [$role])
+    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('permissions.detach'), [$role])
         @push('modals')
             <x-arc:modal-action
                 type="detach"
                 id="detach-permission"
-                action="{{ route('admin::auth.roles.permissions.detach', [$role, ':id']) }}" method="DELETE"
+                action="{{ route('admin::authorization.roles.permissions.detach', [$role, ':id']) }}" method="DELETE"
                 title="Detach Permission"
                 body="Are you sure you want to detach this permission ?"
             />
@@ -54,7 +54,7 @@
                 let detachPermissionForm   = components.form('form#detach-permission-form')
                 let detachPermissionAction = detachPermissionForm.getAction()
 
-                ARCANESOFT.on('auth::roles.permissions.detach', ({id}) => {
+                ARCANESOFT.on('authorization::roles.permissions.detach', ({id}) => {
                     detachPermissionModal.show()
                     detachPermissionForm.action(detachPermissionAction.replace(':id', id))
                 })

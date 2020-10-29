@@ -2,7 +2,7 @@
 
 <?php
 /**
- * @var  \Arcanesoft\Foundation\Auth\Models\Role[]|\Illuminate\Database\Eloquent\Collection  $roles
+ * @var  \Arcanesoft\Foundation\Authorization\Models\Role[]|\Illuminate\Database\Eloquent\Collection  $roles
  */
 ?>
 
@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <x-arc:form action="{{ route('admin::auth.administrators.store') }}" method="POST">
+    <x-arc:form action="{{ route('admin::authorization.administrators.store') }}" method="POST">
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
                 <x-arc:card>
@@ -51,7 +51,7 @@
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <x-arc:form-cancel-button to="{{ route('admin::auth.administrators.index') }}"/>
+                        <x-arc:form-cancel-button to="{{ route('admin::authorization.administrators.index') }}"/>
                         <x-arc:form-submit-button type="save"/>
                     </x-arc:card-footer>
                 </x-arc:card>

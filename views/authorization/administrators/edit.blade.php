@@ -2,8 +2,8 @@
 
 <?php
 /**
- * @var  \Arcanesoft\Foundation\Auth\Models\Administrator                                    $administrator
- * @var  \Arcanesoft\Foundation\Auth\Models\Role[]|\Illuminate\Database\Eloquent\Collection  $roles
+ * @var  \Arcanesoft\Foundation\Authorization\Models\Administrator                                    $administrator
+ * @var  \Arcanesoft\Foundation\Authorization\Models\Role[]|\Illuminate\Database\Eloquent\Collection  $roles
  */
 ?>
 
@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    {{ form()->open(['route' => ['admin::auth.administrators.update', $administrator], 'method' => 'PUT']) }}
+    {{ form()->open(['route' => ['admin::authorization.administrators.update', $administrator], 'method' => 'PUT']) }}
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
                 <x-arc:card>
@@ -42,7 +42,7 @@
                         </div>
                     </x-arc:card-body>
                     <x-arc:card-footer class="d-flex justify-content-between">
-                        <x-arc:form-cancel-button to="{{ route('admin::auth.administrators.show', [$administrator]) }}"/>
+                        <x-arc:form-cancel-button to="{{ route('admin::authorization.administrators.show', [$administrator]) }}"/>
                         <x-arc:form-submit-button type="save"/>
                     </x-arc:card-footer>
                 </x-arc:card>

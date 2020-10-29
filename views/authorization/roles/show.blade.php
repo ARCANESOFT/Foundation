@@ -2,7 +2,7 @@
 
 <?php
 /**
- * @var  Arcanesoft\Foundation\Auth\Models\Role  $role
+ * @var  Arcanesoft\Foundation\Authorization\Models\Role  $role
  * @var  string                                  $tab
  */
 ?>
@@ -71,25 +71,25 @@
                 </x-arc:card-table>
                 <x-arc:card-footer class="d-flex justify-content-end">
                     {{-- UPDATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('update'), [$role])
-                        <a href="{{ route('admin::auth.roles.edit', [$role]) }}"
+                    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('update'), [$role])
+                        <a href="{{ route('admin::authorization.roles.edit', [$role]) }}"
                            class="btn btn-sm btn-secondary">@lang('Edit')</a>
                     @endcan
 
                     {{-- ACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('activate'), [$role])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'), [$role])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::roles.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('deactivate'), [$role])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('deactivate'), [$role])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::roles.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- DELETE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('delete'), [$role])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('delete'), [$role])
                         <button class="btn btn-sm btn-danger ml-2"
                                 onclick="ARCANESOFT.emit('authorization::roles.delete')">@lang('Delete')</button>
                     @endcan
@@ -100,8 +100,8 @@
             <div class="card card-borderless shadow-sm">
                 <div class="card-header d-flex justify-content-end p-2">
                     <div class="btn-group" role="group" aria-label="Administrators and Permissions">
-                        <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-secondary {{ $tab === 'administrators' ? 'active' : '' }}">@lang('Administrators')</a>
-                        <a href="{{ route('admin::auth.roles.show', [$role, 'tab' => 'permissions']) }}" class="btn btn-sm btn-secondary {{ $tab === 'permissions' ? 'active' : '' }}">@lang('Permissions')</a>
+                        <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-secondary {{ $tab === 'administrators' ? 'active' : '' }}">@lang('Administrators')</a>
+                        <a href="{{ route('admin::authorization.roles.show', [$role, 'tab' => 'permissions']) }}" class="btn btn-sm btn-secondary {{ $tab === 'permissions' ? 'active' : '' }}">@lang('Permissions')</a>
                     </div>
                 </div>
                 @includeWhen($tab === 'administrators', 'foundation::authorization.roles._includes.role-administrators-table', ['role' => $role])
@@ -112,11 +112,11 @@
 @endsection
 
 {{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('activate'), [$role])
+@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'), [$role])
     @push('modals')
         <x-arc:modal-action
             type="activate"
-            action="{{ route('admin::auth.roles.activate', [$role]) }}" method="PUT"
+            action="{{ route('admin::authorization.roles.activate', [$role]) }}" method="PUT"
             title="Activate Role" body="Are you sure you want to activate this role ?"
         />
     @endpush
@@ -139,11 +139,11 @@
 @endcan
 
 {{-- DEACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('deactivate'), [$role])
+@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('deactivate'), [$role])
     @push('modals')
         <x-arc:modal-action
             type="deactivate"
-            action="{{ route('admin::auth.roles.deactivate', [$role]) }}" method="PUT"
+            action="{{ route('admin::authorization.roles.deactivate', [$role]) }}" method="PUT"
             title="Deactivate Role" body="Are you sure you want to deactivate this role ?"
         />
     @endpush
@@ -166,11 +166,11 @@
 @endcan
 
 {{-- DELETE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\RolesPolicy::ability('delete'), [$role])
+@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('delete'), [$role])
     @push('modals')
         <x-arc:modal-action
             type="delete"
-            action="{{ route('admin::auth.roles.delete', [$role]) }}" method="DELETE"
+            action="{{ route('admin::authorization.roles.delete', [$role]) }}" method="DELETE"
             title="Delete Role"
             body="Are you sure you want to delete this role ?"
         />
@@ -187,7 +187,7 @@
 
             deleteForm.onSubmit('DELETE', () => {
                 deleteModal.hide()
-                location.replace("{{ route('admin::auth.roles.index') }}")
+                location.replace("{{ route('admin::authorization.roles.index') }}")
             })
         </script>
     @endpush

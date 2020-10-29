@@ -35,6 +35,24 @@ class ModuleManifest extends PackageManifest
      */
 
     /**
+     * Pluck module's config by the given key.
+     *
+     * @param  string  $key
+     *
+     * @return array
+     */
+    public function pluck(string $key): array
+    {
+        return Collection::make($this->modules())
+            ->filter(function ($module) use ($key) {
+                return isset($module[$key]);
+            })
+            ->mapWithKeys(function ($module, $name) use ($key) {
+                return [$name => $module[$key]];
+            })
+            ->toArray();
+    }
+    /**
      * Build the manifest and write it to disk.
      *
      * @return void

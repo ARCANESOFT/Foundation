@@ -1,7 +1,7 @@
 
 @extends(arcanesoft\foundation()->template())
 
-<?php /** @var  Arcanesoft\Foundation\Auth\Models\Administrator  $administrator */ ?>
+<?php /** @var  Arcanesoft\Foundation\Authorization\Models\Administrator  $administrator */ ?>
 
 @section('page-title')
     <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang("Administrator's details")</small>
@@ -83,31 +83,31 @@
                 </x-arc:card-table>
                 <x-arc:card-footer class="d-flex justify-content-end">
                     {{-- UPDATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('update'), [$administrator])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('update'), [$administrator])
                         <a class="btn btn-sm btn-secondary"
-                           href="{{ route('admin::auth.administrators.edit', [$administrator]) }}">@lang('Edit')</a>
+                           href="{{ route('admin::authorization.administrators.edit', [$administrator]) }}">@lang('Edit')</a>
                     @endcan
 
                     {{-- ACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- RESTORE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
                         <button class="btn btn-sm btn-secondary ml-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.restore')">@lang('Restore')</button>
                     @endcan
 
                     {{-- DELETE --}}
-                    @can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
+                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
                         <button class="btn btn-sm btn-danger ml-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.delete')">@lang('Delete')</button>
                     @endcan
@@ -131,12 +131,12 @@
                             </thead>
                             <tbody>
                                 @forelse($administrator->roles as $role)
-                                    <?php /** @var  Arcanesoft\Foundation\Auth\Models\Role  $role */ ?>
+                                    <?php /** @var  Arcanesoft\Foundation\Authorization\Models\Role  $role */ ?>
                                     <tr>
                                         <td class="small">{{ $role->name }}</td>
                                         <td class="small">{{ $role->description }}</td>
                                         <td class="text-right">
-                                            <a href="{{ route('admin::auth.roles.show', [$role]) }}" class="btn btn-sm btn-light"
+                                            <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-light"
                                                data-toggle="tooltip" title="@lang('Show')">
                                                 <i class="far fa-fw fa-eye"></i>
                                             </a>
@@ -196,11 +196,11 @@
 @endsection
 
 {{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
     @push('modals')
         <x-arc:modal-action
             type="activate"
-            action="{{ route('admin::auth.administrators.activate', [$administrator]) }}" method="PUT"
+            action="{{ route('admin::authorization.administrators.activate', [$administrator]) }}" method="PUT"
             title="Activate Administrator" body="Are you sure you want to activate this administrator ?"
         />
     @endpush
@@ -223,11 +223,11 @@
 @endcan
 
 {{-- DEACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
     @push('modals')
         <x-arc:modal-action
             type="deactivate"
-            action="{{ route('admin::auth.administrators.deactivate', [$administrator]) }}" method="PUT"
+            action="{{ route('admin::authorization.administrators.deactivate', [$administrator]) }}" method="PUT"
             title="Deactivate Administrator" body="Are you sure you want to deactivate this administrator ?"
         />
     @endpush
@@ -250,11 +250,11 @@
 @endcan
 
 {{-- DELETE MODAL --}}
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
     @push('modals')
         <x-arc:modal-action
             type="delete"
-            action="{{ route('admin::auth.administrators.delete', [$administrator]) }}" method="DELETE"
+            action="{{ route('admin::authorization.administrators.delete', [$administrator]) }}" method="DELETE"
             title="Delete Administrator"
             body="Are you sure you want to delete this administrator ?"
         />
@@ -272,7 +272,7 @@
             deleteForm.onSubmit('DELETE', () => {
                 deleteModal.hide()
                 @if ($administrator->trashed())
-                location.replace("{{ route('admin::auth.administrators.index') }}")
+                location.replace("{{ route('admin::authorization.administrators.index') }}")
                 @else
                 location.reload()
                 @endif
@@ -283,11 +283,11 @@
 
 {{-- RESTORE MODAL --}}
 @if($administrator->trashed())
-@can(Arcanesoft\Foundation\Auth\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
     @push('modals')
         <x-arc:modal-action
             type="restore"
-            action="{{ route('admin::auth.administrators.restore', [$administrator]) }}" method="PUT"
+            action="{{ route('admin::authorization.administrators.restore', [$administrator]) }}" method="PUT"
             title="Restore Administrator"
             body="Are you sure you want to restore this administrator ?"
         />

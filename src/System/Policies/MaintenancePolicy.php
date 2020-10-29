@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Policies;
 
-use Arcanesoft\Foundation\Auth\Models\Administrator;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 
 /**
  * Class     MaintenancePolicy
@@ -69,7 +69,7 @@ class MaintenancePolicy extends AbstractPolicy
     /**
      * Allow to access the maintenance details.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $administrator
      *
      * @return \Illuminate\Auth\Access\Response|bool|void
      */
@@ -81,7 +81,7 @@ class MaintenancePolicy extends AbstractPolicy
     /**
      * Allow to toggle the maintenance mode.
      *
-     * @param  \Arcanesoft\Foundation\Auth\Models\Administrator|mixed  $administrator
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed  $administrator
      *
      * @return \Illuminate\Auth\Access\Response|bool|void
      */

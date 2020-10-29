@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Controllers;
 
-use Arcanesoft\Foundation\Authentication\Actions\Login\AttemptToAuthenticate;
-use Arcanesoft\Foundation\Authentication\Actions\Login\EnsureLoginIsNotThrottled;
-use Arcanesoft\Foundation\Authentication\Actions\Login\PrepareAuthenticatedSession;
-use Arcanesoft\Foundation\Authentication\Actions\Login\RedirectIfTwoFactorWasEnabled;
+use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesUsers;
+use Arcanesoft\Foundation\Authentication\Actions\Login\{
+    AttemptToAuthenticate, EnsureLoginIsNotThrottled, PrepareAuthenticatedSession, RedirectIfTwoFactorWasEnabled
+};
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
 use Arcanesoft\Foundation\Authentication\Http\Requests\LoginRequest;
 use Arcanesoft\Foundation\Core\Http\Routes\Web\DashboardRoutes;
-use Arcanesoft\Foundation\Fortify\Http\Controllers\LoginController as Controller;
 use Illuminate\Http\Request;
 
 /**
@@ -19,13 +18,14 @@ use Illuminate\Http\Request;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LoginController extends Controller
+class LoginController
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
 
+    use AuthenticatesUsers;
     use UseAdministratorGuard;
 
     /* -----------------------------------------------------------------
@@ -38,11 +38,11 @@ class LoginController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\View\View
      */
     public function create(Request $request)
     {
-        return view('foundation::auth.login');
+        return view()->make('foundation::authentication.login');
     }
 
     /**
