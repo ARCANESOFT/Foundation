@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Fortify\Auth;
 
 use Arcanesoft\Foundation\Fortify\Concerns\RetrievesUserFromRequest;
-use Illuminate\Auth\Events\Verified;
+use Closure;
 use Illuminate\Http\{RedirectResponse, Request};
 
 /**
- * Trait     VerifiesEmails
+ * Trait     PromptsEmailVerification
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-trait VerifiesEmails
+trait PromptsEmailVerification
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -21,25 +21,22 @@ trait VerifiesEmails
      */
 
     /**
-     * Mark the authenticated user's email address as verified.
+     * Display the email verification prompt.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure                  $callback
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|mixed
      */
-    protected function verifyEmail(Request $request)
+    protected function promptEmailVerification(Request $request, Closure $callback)
     {
         $user = $this->getUserFromRequest($request);
 
         if ($user->hasVerifiedEmail()) {
-            return $this->redirectTo($request, ['verified' => '1']);
+            return $this->redirectTo($request);
         }
 
-        if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
-        }
-
-        return $this->redirectTo($request, ['verified' => '1']);
+        return $callback($request);
     }
 
     /* -----------------------------------------------------------------

@@ -64,24 +64,46 @@ abstract class AttemptToAuthenticate
      * @param  \Closure                  $next
      *
      * @return mixed
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function handle(Request $request, Closure $next)
     {
-        $authenticated = $this->guard()->attempt(
-            $request->only(Auth::username(), 'password'),
-            $request->filled('remember')
-        );
+        $authenticated = $this->authenticate($request);
 
         if ( ! $authenticated) {
-            $this->limiter->increment($request);
-
-            throw ValidationException::withMessages([
-                Auth::username() => [trans('auth.failed')],
-            ]);
+            $this->throwFailedAuthenticationException($request);
         }
 
         return $next($request);
+    }
+
+    /**
+     * Attempt to authenticate.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return bool
+     */
+    protected function authenticate(Request $request): bool
+    {
+        return $this->guard()->attempt(
+            $request->only([Auth::username(), 'password']),
+            $request->filled('remember')
+        );
+    }
+
+    /**
+     * Throw a failed authentication validation exception.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function throwFailedAuthenticationException(Request $request): void
+    {
+        $this->limiter->increment($request);
+
+        throw ValidationException::withMessages([
+            Auth::username() => [trans('auth.failed')],
+        ]);
     }
 }

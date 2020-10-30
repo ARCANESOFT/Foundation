@@ -69,14 +69,9 @@ abstract class RedirectIfTwoFactorWasEnabled
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = $this->validateCredentials(
-            $request, $this->guard()->getProvider()->getModel()
-        );
+        $user = $this->validateCredentials($request);
 
         if ($this->shouldUseTwoFactor($user)) {
-            $request->session()->flash('login.id', $user->getKey());
-            $request->session()->flash('login.remember', $request->filled('remember'));
-
             return $this->twoFactorChallengeResponse($request, $user);
         }
 
@@ -108,23 +103,17 @@ abstract class RedirectIfTwoFactorWasEnabled
      * Attempt to validate the incoming credentials.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string                    $model
      *
      * @return mixed
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
-    protected function validateCredentials(Request $request, string $model)
+    protected function validateCredentials(Request $request)
     {
+        $model    = $this->guard()->getProvider()->getModel();
         $username = Auth::username();
         $user     = $model::where($username, $request->{$username})->first();
 
         if ( ! $user || ! Hash::check($request->input('password'), $user->password)) {
-            $this->limiter->increment($request);
-
-            throw ValidationException::withMessages([
-                $username => [trans('auth.failed')],
-            ]);
+            $this->throwFailedAuthenticationException($request);
         }
 
         return $user;
@@ -140,10 +129,31 @@ abstract class RedirectIfTwoFactorWasEnabled
      */
     protected function twoFactorChallengeResponse(Request $request, $user)
     {
+        $request->session()->put([
+            'login.id'       => $user->getKey(),
+            'login.remember' => $request->filled('remember')
+        ]);
+
         if ($request->wantsJson())
             return new JsonResponse(['two_factor' => true]);
 
         return redirect()->to($this->getTwoFactorUrl($request));
+    }
+
+    /**
+     * Throw a failed authentication validation exception.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function throwFailedAuthenticationException(Request $request): void
+    {
+        $this->limiter->increment($request);
+
+        throw ValidationException::withMessages([
+            Auth::username() => [trans('auth.failed')],
+        ]);
     }
 
     /**

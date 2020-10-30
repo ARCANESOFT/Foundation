@@ -7,7 +7,9 @@ namespace Arcanesoft\Foundation\Fortify\Auth;
 use Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
 use Arcanesoft\Foundation\Fortify\Http\Requests\TwoFactorLoginRequest;
-use Illuminate\Http\{Request, Response};
+use Illuminate\Http\{
+    JsonResponse,
+    Request};
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -91,7 +93,7 @@ trait AuthenticatesWithTwoFactorChallenge
     protected function getTwoFactorLoginResponse(Request $request, $user)
     {
         if ($request->wantsJson())
-            return new Response('', Response::HTTP_NO_CONTENT);
+            return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
 
         return redirect()->to($this->getRedirectUrlAfterLogin($request, $user));
     }

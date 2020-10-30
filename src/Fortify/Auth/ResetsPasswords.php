@@ -46,10 +46,9 @@ trait ResetsPasswords
             event(new PasswordReset($user));
         });
 
-        if ($status === Password::PASSWORD_RESET)
-            return $this->getSuccessResponse($request, $status);
-
-        return $this->getFailedResponse($request, $status);
+        return $status === Password::PASSWORD_RESET
+            ? $this->getSuccessResponse($request, $status)
+            : $this->getFailedResponse($request, $status);
     }
 
     /* -----------------------------------------------------------------

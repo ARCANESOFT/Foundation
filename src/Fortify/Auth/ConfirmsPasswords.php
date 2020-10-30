@@ -37,13 +37,28 @@ trait ConfirmsPasswords
      */
     protected function confirm(Request $request)
     {
-        if ( ! $this->confirmCredentials($request)) {
+        $confirmed = $this->confirmCredentials($request);
+
+        if ( ! $confirmed)
             return $this->getFailedResponse($request);
-        }
 
         $request->session()->put('auth.password_confirmed_at', time());
 
         return $this->getSuccessResponse($request);
+    }
+
+    /**
+     * Get the password confirmation status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function status(Request $request)
+    {
+        $confirmed = (time() - $request->session()->get('auth.password_confirmed_at', 0)) < $request->input('seconds', config('auth.password_timeout', 900));
+
+        return new JsonResponse(compact('confirmed'), JsonResponse::HTTP_OK);
     }
 
     /* -----------------------------------------------------------------
@@ -101,13 +116,6 @@ trait ConfirmsPasswords
     }
 
     /**
-     * Get the redirect URL.
-     *
-     * @return string
-     */
-    abstract protected function getRedirectUrl(): string;
-
-    /**
      * Get the failed response.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -128,4 +136,16 @@ trait ConfirmsPasswords
 
         return redirect()->back()->withErrors(['password' => $message]);
     }
+
+    /* -----------------------------------------------------------------
+     |  Contractual Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the redirect URL.
+     *
+     * @return string
+     */
+    abstract protected function getRedirectUrl(): string;
 }

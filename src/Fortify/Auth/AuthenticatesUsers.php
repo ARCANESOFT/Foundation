@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Fortify\Auth;
 
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
-use Illuminate\Http\{JsonResponse, Request, Response};
+use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Pipeline\Pipeline;
 
 /**
@@ -90,14 +90,14 @@ trait AuthenticatesUsers
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     protected function getLogoutResponse(Request $request)
     {
         $url = $this->redirectUrlAfterLogout($request);
 
         if ($request->wantsJson())
-            return new Response(['redirect' => $url]);
+            return new JsonResponse(['redirect' => $url]);
 
         return redirect()->to($url);
     }

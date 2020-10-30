@@ -4,22 +4,26 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories\Authentication;
 
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\DisabledAuthentication as DisabledAuthenticationForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\DisablingAuthentication as DisablingAuthenticationForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\EnabledAuthentication as EnabledAuthenticationForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\EnablingAuthentication as EnablingAuthenticationForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\GeneratedRecoveryCode as GeneratedRecoveryCodeForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\GeneratingRecoveryCode as GeneratingRecoveryCodeForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\ReplacedRecoveryCode as ReplacedRecoveryCodeForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\ReplacingRecoveryCode as ReplacingRecoveryCodeForAdministrator;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\DisabledAuthentication as DisabledAuthenticationForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\DisablingAuthentication as DisablingAuthenticationForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\EnabledAuthentication as EnabledAuthenticationForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\EnablingAuthentication as EnablingAuthenticationForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\GeneratedRecoveryCode as GeneratedRecoveryCodeForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\GeneratingRecoveryCode as GeneratingRecoveryCodeForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\ReplacedRecoveryCode as ReplacedRecoveryCodeForUser;
-use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\ReplacingRecoveryCode as ReplacingRecoveryCodeForUser;
+use Arcanesoft\Foundation\Authorization\Events\Administrators\Authentication\TwoFactor\{
+    DisabledAuthentication as DisabledAuthenticationForAdministrator,
+    DisablingAuthentication as DisablingAuthenticationForAdministrator,
+    EnabledAuthentication as EnabledAuthenticationForAdministrator,
+    EnablingAuthentication as EnablingAuthenticationForAdministrator,
+    GeneratedRecoveryCode as GeneratedRecoveryCodeForAdministrator,
+    GeneratingRecoveryCode as GeneratingRecoveryCodeForAdministrator,
+    ReplacedRecoveryCode as ReplacedRecoveryCodeForAdministrator,
+    ReplacingRecoveryCode as ReplacingRecoveryCodeForAdministrator
+};
+use Arcanesoft\Foundation\Authorization\Events\Users\Authentication\TwoFactor\{
+    DisabledAuthentication as DisabledAuthenticationForUser,
+    DisablingAuthentication as DisablingAuthenticationForUser,
+    EnabledAuthentication as EnabledAuthenticationForUser,
+    EnablingAuthentication as EnablingAuthenticationForUser,
+    GeneratedRecoveryCode as GeneratedRecoveryCodeForUser,
+    GeneratingRecoveryCode as GeneratingRecoveryCodeForUser,
+    ReplacedRecoveryCode as ReplacedRecoveryCodeForUser,
+    ReplacingRecoveryCode as ReplacingRecoveryCodeForUser
+};
 use Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication\{RecoveryCode, TwoFactorAuthenticationProvider};
 use Illuminate\Support\Arr;
 
@@ -135,10 +139,13 @@ class TwoFactorAuthenticationRepository
         $twoFactor = $user->two_factor;
 
 //        $this->dispatchTwoFactorEvent(static::EVENT_DISABLING, $user);
-        $saved = $twoFactor->delete();
+        $deleted = $twoFactor->delete();
 //        $this->dispatchTwoFactorEvent(static::EVENT_DISABLED, $user);
 
-        return $saved;
+        if ($deleted)
+            $user->refresh();
+
+        return $deleted;
     }
 
     /**
