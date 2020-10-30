@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Models;
 
 use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\Provider as TwoFactorAuthenticationProvider;
 use Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication\QrCode;
 use Illuminate\Support\HtmlString;
 
@@ -125,11 +125,15 @@ class TwoFactor extends Model
      */
     public function getQrCodeSvgAttribute(): HtmlString
     {
-        $url = app(TwoFactorAuthenticationProvider::class)->qrCodeUrl(
-            config('app.name'), $this->two_factorable->email, $this->decrypted_secret
-        );
+        $provider = app(TwoFactorAuthenticationProvider::class);
 
-        $svg = (new QrCode)->svg($url);
+        $svg = (new QrCode)->svg(
+            $provider->qrCodeUrl(
+                config('app.name'),
+                $this->two_factorable->email,
+                $this->decrypted_secret
+            )
+        );
 
         return new HtmlString(
             trim(substr($svg, strpos($svg, "\n") + 1))

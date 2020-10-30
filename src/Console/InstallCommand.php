@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Console;
 
+use Arcanesoft\Foundation\Arcanesoft;
 use Arcanesoft\Foundation\Authorization\Console\InstallCommand as AuthInstallCommand;
 use Arcanesoft\Foundation\Core\Console\InstallCommand as CoreInstallCommand;
 use Arcanesoft\Foundation\ModuleManifest;
@@ -49,13 +50,14 @@ class InstallCommand extends Command
      */
     public function handle(ModuleManifest $manifest): void
     {
-        $this->info("<fg=blue>
+        $this->line("<fg=blue>
     ___    ____  _________    _   _____________ ____  ____________
    /   |  / __ \/ ____/   |  / | / / ____/ ___// __ \/ ____/_  __/
   / /| | / /_/ / /   / /| | /  |/ / __/  \__ \/ / / / /_    / /
  / ___ |/ _  _/ /___/ ___ |/ /|  / /___ ___/ / /_/ / __/   / /
 /_/  |_/_/ |_|\____/_/  |_/_/ |_/_____//____/\____/_/     /_/</>");
-        $this->info('Created by ARCANEDEV');
+        $this->newLine();
+        $this->line('<fg=blue>Version '.Arcanesoft::VERSION.' - Created by ARCANEDEV</>');
         $this->newLine();
 
         $this->installFoundation();
@@ -65,7 +67,7 @@ class InstallCommand extends Command
         $this->installModules($manifest);
 
         $this->newLine();
-        $this->info("ARCANESOFT has been installed successfully ( ^o^)b");
+        $this->line('<fg=blue>ARCANESOFT has been installed successfully ( ^o^)b</>');
     }
 
     /**
@@ -74,6 +76,8 @@ class InstallCommand extends Command
     protected function installFoundation(): void
     {
         $this->comment('Installing ARCANESOFT Foundation...');
+
+        $this->newLine();
 
         $this->callMany([
             CoreInstallCommand::class,
@@ -91,39 +95,13 @@ class InstallCommand extends Command
     {
         $this->comment('Installing ARCANESOFT Modules...');
 
+        $this->newLine();
+
         $modules = $manifest->pluck('install');
 
-        $installed = [];
-
-        $this->progressBar($modules, function ($command, $module) use (&$installed) {
+        foreach ($modules as $module => $command) {
             $this->callSilent($command);
-            $installed[] = $module;
-        });
-
-        if ( ! empty($installed)) {
-            $this->newLine(2);
-
-            $this->info('Installed modules:');
-            foreach ($installed as $module) {
-                $this->comment($module);
-            }
+            $this->line("<fg=green>Installed:</> {$module}");
         }
-    }
-
-    /**
-     * @param  array     $items
-     * @param  \Closure  $callback
-     */
-    protected function progressBar(array $items, Closure $callback): void
-    {
-        $bar = $this->output->createProgressBar(count($items));
-        $bar->start();
-
-        foreach ($items as $key => $value) {
-            $callback($value, $key, $bar);
-            $bar->advance();
-        }
-
-        $bar->finish();
     }
 }

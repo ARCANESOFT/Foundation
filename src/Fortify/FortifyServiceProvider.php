@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify;
 
-use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\Provider as ProviderContract;
 use Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication\TwoFactorAuthenticationProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +26,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(
-            TwoFactorAuthenticationProviderContract::class,
+            ProviderContract::class,
             TwoFactorAuthenticationProvider::class
         );
     }

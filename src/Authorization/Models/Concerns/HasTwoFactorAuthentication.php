@@ -15,7 +15,7 @@ use Arcanesoft\Foundation\Authorization\Models\TwoFactor;
  * @property  string|null  two_factor_secret
  * @property  string|null  two_factor_recovery_codes
  *
- * @property  \Arcanesoft\Foundation\Authorization\Models\TwoFactor  two_factor
+ * @property  \Arcanesoft\Foundation\Authorization\Models\TwoFactor  twoFactor
  */
 trait HasTwoFactorAuthentication
 {
@@ -29,7 +29,7 @@ trait HasTwoFactorAuthentication
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function two_factor()
+    public function twoFactor()
     {
         return $this->morphOne(Auth::model('two-factor', TwoFactor::class), 'two_factorable');
     }
@@ -46,7 +46,7 @@ trait HasTwoFactorAuthentication
      */
     public function recoveryCodes(): array
     {
-        return json_decode(decrypt($this->two_factor->getRecoveryCodes()), true);
+        return json_decode(decrypt($this->twoFactor->getRecoveryCodes()), true);
     }
 
     /* -----------------------------------------------------------------
@@ -61,6 +61,6 @@ trait HasTwoFactorAuthentication
      */
     public function isTwoFactorEnabled(): bool
     {
-        return ! is_null($this->two_factor);
+        return ! is_null($this->twoFactor);
     }
 }

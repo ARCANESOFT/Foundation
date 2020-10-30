@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Services\TwoFactorAuthentication;
 
-use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\Provider;
 use PragmaRX\Google2FA\Google2FA;
 
 /**
@@ -12,7 +12,7 @@ use PragmaRX\Google2FA\Google2FA;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProviderContract
+class TwoFactorAuthenticationProvider implements Provider
 {
     /* -----------------------------------------------------------------
      |  Properties

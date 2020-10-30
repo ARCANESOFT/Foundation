@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Fortify\Contracts;
+namespace Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication;
 
 /**
- * Interface  TwoFactorAuthenticationProvider
+ * Interface  Provider
  *
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface TwoFactorAuthenticationProvider
+interface Provider
 {
     /* -----------------------------------------------------------------
      |  Main Methods

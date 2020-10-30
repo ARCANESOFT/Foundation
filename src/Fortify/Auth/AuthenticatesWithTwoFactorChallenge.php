@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Auth;
 
-use Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
 use Arcanesoft\Foundation\Fortify\Http\Requests\TwoFactorLoginRequest;
-use Illuminate\Http\{
-    JsonResponse,
-    Request};
+use Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository;
+use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -144,7 +142,7 @@ trait AuthenticatesWithTwoFactorChallenge
     /**
      * Get the two factor authentication repository.
      *
-     * @return \Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository
+     * @return \Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository
      */
     protected function getTwoFactorAuthenticationRepository()
     {

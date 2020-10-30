@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories\Concerns\Authentication;
 
-use Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository;
+use Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository;
 
 /**
  * Trait     HasTwoFactorAuthentication
@@ -21,7 +21,7 @@ trait HasTwoFactorAuthentication
     /**
      * Get the two factor authentication's repository.
      *
-     * @return \Arcanesoft\Foundation\Authorization\Repositories\Authentication\TwoFactorAuthenticationRepository
+     * @return \Arcanesoft\Foundation\Fortify\Repositories\TwoFactorAuthenticationRepository
      */
     public function twoFactorAuthentication()
     {

@@ -6,7 +6,8 @@ namespace Arcanesoft\Foundation\Fortify\Http\Requests;
 
 use Arcanesoft\Foundation\Authorization\Models\TwoFactor;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
-use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\Provider;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -105,22 +106,20 @@ abstract class TwoFactorLoginRequest extends FormRequest
     /**
      * Get the user that is attempting the two factor challenge.
      *
-     * @return \Arcanesoft\Foundation\Authorization\Models\Administrator|\Arcanesoft\Foundation\Authorization\Models\User|mixed|null
+     * @return \Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor|mixed|null
      */
-    public function challengedUser()
+    public function challengedUser(): ?HasTwoFactor
     {
-        if ($this->challengedUser) {
+        if ($this->challengedUser)
             return $this->challengedUser;
-        }
 
         $model = $this->guard()->getProvider()->getModel();
 
-        if (
-            ! $this->session()->has('login.id') ||
-            ! $user = $model::find($this->session()->pull('login.id'))
-        ) {
+        if ( ! $this->session()->has('login.id'))
             return null;
-        }
+
+        if ( ! $user = $model::find($this->session()->pull('login.id')))
+            return null;
 
         return $this->challengedUser = $user;
     }
@@ -151,16 +150,16 @@ abstract class TwoFactorLoginRequest extends FormRequest
      */
     protected function twoFactor(): TwoFactor
     {
-        return $this->challengedUser()->two_factor;
+        return $this->challengedUser()->twoFactor;
     }
 
     /**
      * Get the two factor authentication provider.
      *
-     * @return \Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthenticationProvider
+     * @return \Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\Provider
      */
-    protected function getTwoFactorProvider(): TwoFactorAuthenticationProvider
+    protected function getTwoFactorProvider(): Provider
     {
-        return app(TwoFactorAuthenticationProvider::class);
+        return app(Provider::class);
     }
 }

@@ -17,6 +17,7 @@ use Arcanesoft\Foundation\Authorization\Models\Concerns\HasSessions;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\HasTwoFactorAuthentication;
 use Arcanesoft\Foundation\Authorization\Models\Presenters\UserPresenter;
 use Arcanesoft\Foundation\Authentication\Guard;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor;
 use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, SoftDeletes};
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,7 +48,7 @@ use Illuminate\Notifications\Notifiable;
  * @method  static|\Illuminate\Database\Eloquent\Builder  filterByAuthenticatedUser(User $user)
  * @method  static|\Illuminate\Database\Eloquent\Builder  verifiedEmail()
  */
-class User extends Authenticatable implements Impersonatable, CanBeActivated
+class User extends Authenticatable implements Impersonatable, CanBeActivated, HasTwoFactor
 {
     /* -----------------------------------------------------------------
      |  Traits

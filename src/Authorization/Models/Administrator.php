@@ -8,7 +8,7 @@ use Arcanedev\LaravelImpersonator\Contracts\Impersonatable;
 use Arcanedev\LaravelImpersonator\Traits\CanImpersonate;
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Contracts\CanBeActivated;
-use Arcanesoft\Foundation\Authorization\Events\Administrators\{AdministratorEvent};
+use Arcanesoft\Foundation\Authorization\Events\Administrators\AdministratorEvent;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\Activatable;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\CanResetPassword;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\HasPassword;
@@ -17,6 +17,7 @@ use Arcanesoft\Foundation\Authorization\Models\Concerns\HasSessions;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\HasTwoFactorAuthentication;
 use Arcanesoft\Foundation\Authorization\Models\Presenters\UserPresenter;
 use Arcanesoft\Foundation\Authentication\Guard;
+use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor;
 use Arcanesoft\Foundation\Fortify\Notifications\VerifyEmailNotification;
 use Arcanesoft\Foundation\Support\Traits\Deletable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,7 +52,7 @@ use Illuminate\Support\Collection;
  * @property  \Illuminate\Support\Collection|\Arcanesoft\Foundation\Authorization\Models\Role[]        active_roles
  * @property  \Illuminate\Support\Collection|\Arcanesoft\Foundation\Authorization\Models\Permission[]  permissions
  */
-class Administrator extends Authenticatable implements Impersonatable, CanBeActivated
+class Administrator extends Authenticatable implements Impersonatable, CanBeActivated, HasTwoFactor
 {
     /* -----------------------------------------------------------------
      |  Traits
