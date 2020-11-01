@@ -10,21 +10,42 @@
 $attributes = $attributes->merge([
     'name'  => $name,
     'id'    => $id,
-    'class' => 'form-control'.$errors->first($name, ' is-invalid'),
+    'class' => 'form-select'.$errors->first($name, ' is-invalid'),
 ]);
 ?>
-<x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
-<select {{ $attributes}}>
-    @unless(empty($options))
-        @foreach($options as $key => $option)
-            @if($key === $value)
-                <option value="{{ $key }}" selected>{{ $option }}</option>
+@if($grouped)
+    <div class="form-floating">
+        <select {{ $attributes }}>
+            @unless(empty($options))
+                @foreach($options as $key => $option)
+                    @if($key === $value)
+                        <option value="{{ $key }}" selected>{{ $option }}</option>
+                    @else
+                        <option value="{{ $key }}">{{ $option }}</option>
+                    @endif
+                @endforeach
             @else
-                <option value="{{ $key }}">{{ $option }}</option>
-            @endif
-        @endforeach
-    @else
-        {{ $slot }}
-    @endunless
-</select>
-<x-arc:form-error name="{{ $name }}"/>
+                {{ $slot }}
+            @endunless
+        </select>
+        <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
+        <x-arc:form-error name="{{ $name }}"/>
+    </div>
+@else
+    <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
+    <select {{ $attributes }}>
+        @unless(empty($options))
+            @foreach($options as $key => $option)
+                @if($key === $value)
+                    <option value="{{ $key }}" selected>{{ $option }}</option>
+                @else
+                    <option value="{{ $key }}">{{ $option }}</option>
+                @endif
+            @endforeach
+        @else
+            {{ $slot }}
+        @endunless
+    </select>
+    <x-arc:form-error name="{{ $name }}"/>
+@endif
+

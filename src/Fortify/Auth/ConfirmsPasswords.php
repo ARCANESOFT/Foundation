@@ -42,7 +42,7 @@ trait ConfirmsPasswords
         if ( ! $confirmed)
             return $this->getFailedResponse($request);
 
-        $request->session()->put('auth.password_confirmed_at', time());
+        $request->session()->put($this->sessionKey(), time());
 
         return $this->getSuccessResponse($request);
     }
@@ -56,15 +56,49 @@ trait ConfirmsPasswords
      */
     public function status(Request $request)
     {
-        $confirmed = (time() - $request->session()->get('auth.password_confirmed_at', 0)) < $request->input('seconds', config('auth.password_timeout', 900));
-
-        return new JsonResponse(compact('confirmed'), JsonResponse::HTTP_OK);
+        return new JsonResponse([
+            'confirmed' => $this->isConfirmed($request),
+        ], JsonResponse::HTTP_OK);
     }
 
     /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
+    /**
+     * Determine if the password is confirmed by the given request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return bool
+     */
+    protected function isConfirmed(Request $request): bool
+    {
+        return (time() - $request->session()->get($this->sessionKey(), 0)) < $this->getPasswordTimeout($request);
+    }
+
+    /**
+     * Get the `password_confirmed_at` session key.
+     *
+     * @return string
+     */
+    protected function sessionKey(): string
+    {
+        return 'auth.password_confirmed_at';
+    }
+
+    /**
+     * Get the password timeout.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return int
+     */
+    protected function getPasswordTimeout(Request $request): int
+    {
+        return $request->input('seconds') ?: config('auth.password_timeout', 900);
+    }
 
     /**
      * Confirm the user's credentials.

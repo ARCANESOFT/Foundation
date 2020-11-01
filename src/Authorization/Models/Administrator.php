@@ -17,6 +17,7 @@ use Arcanesoft\Foundation\Authorization\Models\Concerns\HasSessions;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\HasTwoFactorAuthentication;
 use Arcanesoft\Foundation\Authorization\Models\Presenters\UserPresenter;
 use Arcanesoft\Foundation\Authentication\Guard;
+use Arcanesoft\Foundation\Fortify\Contracts\BrowserSessions\HasBrowserSessions;
 use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor;
 use Arcanesoft\Foundation\Fortify\Notifications\VerifyEmailNotification;
 use Arcanesoft\Foundation\Support\Traits\Deletable;
@@ -52,7 +53,7 @@ use Illuminate\Support\Collection;
  * @property  \Illuminate\Support\Collection|\Arcanesoft\Foundation\Authorization\Models\Role[]        active_roles
  * @property  \Illuminate\Support\Collection|\Arcanesoft\Foundation\Authorization\Models\Permission[]  permissions
  */
-class Administrator extends Authenticatable implements Impersonatable, CanBeActivated, HasTwoFactor
+class Administrator extends Authenticatable implements Impersonatable, CanBeActivated, HasTwoFactor, HasBrowserSessions
 {
     /* -----------------------------------------------------------------
      |  Traits

@@ -33,6 +33,9 @@ class Select extends Component
     /** @var  string|null */
     public $label;
 
+    /** @var  bool */
+    public $grouped;
+
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
@@ -46,13 +49,15 @@ class Select extends Component
      * @param  string|null  $id
      * @param  mixed|null   $value
      * @param  string|null  $label
+     * @param  bool         $grouped
      */
     public function __construct(
         iterable $options,
         string $name,
         string $id = null,
         $value = null,
-        ?string $label = null
+        ?string $label = null,
+        bool $grouped = false
     ){
 
         $this->options = $options;
@@ -60,6 +65,7 @@ class Select extends Component
         $this->id      = $id;
         $this->value   = $value;
         $this->label   = $label;
+        $this->grouped = $grouped;
     }
 
     /* -----------------------------------------------------------------

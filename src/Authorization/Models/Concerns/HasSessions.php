@@ -29,7 +29,8 @@ trait HasSessions
      */
     public function sessions(): HasMany
     {
-        return $this->hasMany(Auth::model('session', Session::class), 'user_id')
+        return $this
+            ->hasMany(Auth::model('session', Session::class), 'user_id')
             ->where('guard', static::guardName());
     }
 
