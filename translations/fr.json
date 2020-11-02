@@ -44,6 +44,10 @@
 
     "Authorization": "Autorisation",
 
+    "Profile": "Profile",
+    "Account": "Compte",
+    "Edit Password": "Modifier mot de passe",
+
     "Users": "Utilisateurs",
     "User": "Utilisateur",
     "New User": "Nouvel utilisateur",

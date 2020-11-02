@@ -62,6 +62,13 @@ class Password implements Rule
     protected $confirmed = false;
 
     /**
+     * Indicates if the password must be matches with the current one.
+     *
+     * @var string|null
+     */
+    protected $current = null;
+
+    /**
      * The message that should be used when validation fails.
      *
      * @var string
@@ -148,6 +155,20 @@ class Password implements Rule
     }
 
     /**
+     * Indicates if the password must be matches with the current one.
+     *
+     * @param string|null $guard
+     *
+     * @return $this
+     */
+    public function current(?string $guard)
+    {
+        $this->current = implode(':', ['password', $guard]);
+
+        return $this;
+    }
+
+    /**
      * Set the message that should be used when the rule fails.
      *
      * @param  string  $message
@@ -179,9 +200,11 @@ class Password implements Rule
     /**
      * Get the validation rules.
      *
+     * @param  array  $extra
+     *
      * @return array|string[]
      */
-    public function rules(): array
+    public function rules(array $extra = []): array
     {
         $rules = [
             $this->nullable ? 'nullable' : 'required',
@@ -189,11 +212,15 @@ class Password implements Rule
             $this,
         ];
 
+        if ($this->current) {
+            $rules[] = $this->current;
+        }
+
         if ($this->confirmed) {
             $rules[] = 'confirmed';
         }
 
-        return $rules;
+        return array_merge($rules, $extra);
     }
 
     /**

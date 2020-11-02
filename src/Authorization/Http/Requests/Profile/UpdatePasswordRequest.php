@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Requests\Profile;
 
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
+use Arcanesoft\Foundation\Fortify\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -25,10 +27,9 @@ class UpdatePasswordRequest extends FormRequest
      */
     public function rules(): array
     {
-        // TODO: Replace with the new Password Object
         return [
-            'old_password' => ['required', 'string', 'min:8', 'password'],
-            'password'     => ['required', 'string', 'min:8', 'confirmed', 'different:old_password'],
+            'current_password' => Password::make()->current(Administrator::guardName())->rules(),
+            'password'         => Password::make()->confirmed()->rules(['different:current_password']),
         ];
     }
 

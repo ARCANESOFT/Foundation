@@ -14,7 +14,7 @@ $attributes = $attributes->merge([
 ]);
 ?>
 
-<x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
+<x-arc:form-label :for="$id" :label="$label"/>
 <{{$component}} {{ $attributes }}>{{ $slot }}</{{$component}}>
-<x-arc:form-error name="{{ $name }}"/>
+<x-arc:form-error :name="$name"/>
 

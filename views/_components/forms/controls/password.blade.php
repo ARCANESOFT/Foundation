@@ -16,12 +16,12 @@ $attributes = $attributes->merge([
 
 @if($grouped)
     <div class="form-floating">
-        <input type="password" {{ $attributes->merge(['placeholder' => $label]) }}>
-        <label for="{{ $name }}">{{ $label }}</label>
-        <x-arc:form-error name="{{ $name }}"/>
+        <input type="password" {{ $attributes->merge(['placeholder' => __($label)]) }}>
+        <x-arc:form-label :for="$id" :label="$label"/>
+        <x-arc:form-error :name="$name"/>
     </div>
 @else
-    <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
+    <x-arc:form-label :for="$id" :label="$label"/>
     <input type="password" {{ $attributes }}>
-    <x-arc:form-error name="{{ $name }}"/>
+    <x-arc:form-error :name="$name"/>
 @endif

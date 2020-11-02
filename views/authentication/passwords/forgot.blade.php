@@ -11,13 +11,10 @@
         <div class="col-md-8 col-lg-6 col-xxl-4">
             <x-arc:card>
                 <x-arc:card-header class="text-center">@lang('Reset Password')</x-arc:card-header>
-
                 <x-arc:card-body>
                     <p class="small">@lang('No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.')</p>
 
-                    @if (session('status'))
-                        <p class="font-weight-bold small text-success">{{ session('status') }}</p>
-                    @endif
+                    @includeWhen(session()->has('status'), 'foundation::authentication._partials.status', ['status' => session('status')])
 
                     <x-arc:form
                         action="{{ route(Arcanesoft\Foundation\Authentication\Http\Routes\PasswordResetRoutes::EMAIL) }}"
@@ -29,11 +26,11 @@
                                     type="email" name="email" label="E-Mail Address" placeholder="E-Mail Address"
                                     required autofocus autocomplete="username" grouped="true"/>
                             </div>
+
                             {{-- SUBMIT BUTTON --}}
                             <div class="col">
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">
-                                    @lang('Email Password Reset Link')
-                                </button>
+                                <button class="btn btn-lg btn-primary btn-block"
+                                        type="submit">@lang('Email Password Reset Link')</button>
                             </div>
                         </div>
                     </x-arc:form>

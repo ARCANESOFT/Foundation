@@ -28,11 +28,11 @@ $attributes = $attributes->merge([
                 {{ $slot }}
             @endunless
         </select>
-        <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
-        <x-arc:form-error name="{{ $name }}"/>
+        <x-arc:form-label :for="$id" :label="$label"/>
+        <x-arc:form-error :name="$name"/>
     </div>
 @else
-    <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
+    <x-arc:form-label :for="$id" :label="$label"/>
     <select {{ $attributes }}>
         @unless(empty($options))
             @foreach($options as $key => $option)
@@ -46,6 +46,6 @@ $attributes = $attributes->merge([
             {{ $slot }}
         @endunless
     </select>
-    <x-arc:form-error name="{{ $name }}"/>
+    <x-arc:form-error :name="$name"/>
 @endif
 

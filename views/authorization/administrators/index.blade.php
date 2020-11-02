@@ -1,7 +1,7 @@
 @extends(arcanesoft\foundation()->template())
 
 @section('page-title')
-    <i class="fa fa-fw fa-administrator-secret"></i> @lang('Administrators')
+    <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators')
 @endsection
 
 @push('content-nav')
