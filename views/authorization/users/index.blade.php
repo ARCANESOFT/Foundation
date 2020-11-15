@@ -7,34 +7,35 @@
 @endsection
 
 @push('content-nav')
-    <div class="mt-2 mb-3 text-right">
+    <nav class="page-actions">
         @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('metrics'))
-        <a href="{{ route('admin::authorization.users.metrics') }}"
-           class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.metrics']) }}">@lang('Metrics')</a>
+            <a href="{{ route('admin::authorization.users.metrics') }}"
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.metrics']) }}">@lang('Metrics')</a>
         @endcan
 
         @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('index'))
-        <div class="btn-group ml-auto" role="group" aria-label="@lang("Users's List")">
             <a href="{{ route('admin::authorization.users.index') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.index']) }}">@lang('All')</a>
-            <a href="{{ route('admin::authorization.users.trash') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.trash']) }}">@lang('Trash')</a>
-        </div>
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.users.index']) }}">@lang('List')</a>
         @endcan
 
         @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('create'))
-            <a href="{{ route('admin::authorization.users.create') }}" class="btn btn-primary btn-sm ml-1">
-                <i class="fa fa-fw fa-plus"></i> @lang('Add')
-            </a>
+            <a href="{{ route('admin::authorization.users.create') }}"
+               class="btn btn-primary btn-sm"><i class="fa fa-fw fa-plus"></i> @lang('Add')</a>
         @endcan
-    </div>
+    </nav>
 @endpush
 
 @section('content')
     <v-datatable
-        name="{{ Arcanesoft\Foundation\Authorization\Views\Components\UsersDatatable::NAME }}"
-        :data='@json(compact('trash'))'/>
+        name="users-datatable"
+        url="{{ route('admin::authorization.users.datatable') }}"/>
 @endsection
+
+@push('scripts')
+    <script>
+        const usersDatatable = components.datatable('users-datatable')
+    </script>
+@endpush
 
 {{-- ACIVATE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('activate'))
@@ -60,7 +61,7 @@
 
             activateForm.onSubmit('PUT', () => {
                 activateModal.hide()
-                location.reload()
+                usersDatatable.reload()
             })
 
             activateModal.on('hidden', () => {
@@ -94,7 +95,7 @@
 
             deactivateForm.onSubmit('PUT', () => {
                 deactivateModal.hide()
-                location.reload()
+                usersDatatable.reload()
             })
 
             deactivateModal.on('hidden', () => {
@@ -128,7 +129,7 @@
 
             deleteForm.onSubmit('DELETE', () => {
                 deleteModal.hide()
-                location.reload()
+                usersDatatable.reload()
             })
 
             deleteModal.on('hidden', () => {
@@ -139,37 +140,35 @@
 @endcan
 
 {{-- RESTORE MODAL/SCRIPT --}}
-@if ($trash)
-    @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'))
-        @push('modals')
-            <x-arc:modal-action
-                type="restore"
-                action="{{ route('admin::authorization.users.restore', [':id']) }}" method="PUT"
-                title="Restore User"
-                body="Are you sure you want to restore this user ?"
-            />
-        @endpush
+@can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'))
+    @push('modals')
+        <x-arc:modal-action
+            type="restore"
+            action="{{ route('admin::authorization.users.restore', [':id']) }}" method="PUT"
+            title="Restore User"
+            body="Are you sure you want to restore this user ?"
+        />
+    @endpush
 
-        @push('scripts')
-            <script defer>
-                let restoreModal = components.modal('div#restore-user-modal')
-                let restoreForm = components.form('form#restore-user-form')
-                let restoreAction = restoreForm.action()
+    @push('scripts')
+        <script defer>
+            let restoreModal = components.modal('div#restore-modal')
+            let restoreForm = components.form('form#restore-form')
+            let restoreAction = restoreForm.action()
 
-                ARCANESOFT.on('authorization::users.restore', ({id}) => {
-                    restoreForm.action(restoreAction.replace(':id', id))
-                    restoreModal.show()
-                })
+            ARCANESOFT.on('authorization::users.restore', ({id}) => {
+                restoreForm.action(restoreAction.replace(':id', id))
+                restoreModal.show()
+            })
 
-                restoreForm.onSubmit('PUT', () => {
-                    restoreModal.hide()
-                    location.reload()
-                })
+            restoreForm.onSubmit('PUT', () => {
+                restoreModal.hide()
+                usersDatatable.reload()
+            })
 
-                restoreModal.on('hidden', () => {
-                    restoreForm.action(restoreAction.toString())
-                })
-            </script>
-        @endpush
-    @endcan
-@endif
+            restoreModal.on('hidden', () => {
+                restoreForm.action(restoreAction.toString())
+            })
+        </script>
+    @endpush
+@endcan

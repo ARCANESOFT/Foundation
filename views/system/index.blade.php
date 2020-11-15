@@ -4,9 +4,11 @@
     <i class="fas fa-fw fa-info-circle"></i> @lang('System') <small>@lang('Information')</small>
 @endsection
 
-@section('content')
+@push('content-nav')
     @include('foundation::system._includes.system-nav')
+@endpush
 
+@section('content')
     <div class="row g-4">
         <div class="col-lg-4">
             @include(Arcanesoft\Foundation\System\Views\Composers\ApplicationInfoComposer::VIEW)

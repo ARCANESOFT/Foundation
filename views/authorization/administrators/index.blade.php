@@ -5,35 +5,35 @@
 @endsection
 
 @push('content-nav')
-    <div class="mt-2 mb-3 text-right">
+    <nav class="page-actions">
         @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('metrics'))
             <a href="{{ route('admin::authorization.administrators.metrics') }}"
                class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.metrics']) }}">@lang('Metrics')</a>
         @endcan
 
         @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('index'))
-        <div class="btn-group ml-1" role="group" aria-label="Administrators lists">
             <a href="{{ route('admin::authorization.administrators.index') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.index']) }}">@lang('All')</a>
-            <a href="{{ route('admin::authorization.administrators.trash') }}"
-               class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.trash']) }}">@lang('Trash')</a>
-        </div>
+               class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.index']) }}">@lang('List')</a>
         @endcan
 
         @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('create'))
-            <a href="{{ route('admin::authorization.administrators.create') }}" class="btn btn-primary btn-sm ml-1">
-                <i class="fa fa-fw fa-plus"></i> @lang('Add')
-            </a>
+            <a href="{{ route('admin::authorization.administrators.create') }}"
+               class="btn btn-sm btn-primary"><i class="fa fa-fw fa-plus"></i> @lang('Add')</a>
         @endcan
-    </div>
+    </nav>
 @endpush
 
 @section('content')
     <v-datatable
-        name="{{ Arcanesoft\Foundation\Authorization\Views\Components\AdministratorsDatatable::NAME }}"
-        :data='@json(compact('trash'))'></v-datatable>
+        name="administrators-datatable"
+        url="{{ route('admin::authorization.administrators.datatable') }}"/>
 @endsection
 
+@push('scripts')
+    <script>
+        const administratorsDatatable = components.datatable('administrators-datatable')
+    </script>
+@endpush
 
 {{-- ACIVATE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'))
@@ -59,7 +59,7 @@
 
             activateForm.onSubmit('PUT', () => {
                 activateModal.hide()
-                location.reload()
+                administratorsDatatable.reload()
             })
 
             activateModal.on('hidden', () => {
@@ -93,7 +93,7 @@
 
             deactivateForm.onSubmit('PUT', () => {
                 deactivateModal.hide()
-                location.reload()
+                administratorsDatatable.reload()
             })
 
             deactivateModal.on('hidden', () => {
@@ -127,7 +127,7 @@
 
             deleteForm.onSubmit('DELETE', () => {
                 deleteModal.hide()
-                location.reload()
+                administratorsDatatable.reload()
             })
 
             deleteModal.on('hidden', () => {

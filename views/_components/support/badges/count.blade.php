@@ -4,7 +4,7 @@
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  */
 $attributes = $attributes->merge([
-    'class' => 'badge rounded-pill border '.($value > 0 ? 'border-info text-info' : 'text-muted'),
+    'class' => 'badge rounded-pill text-muted border '.($value > 0 ? 'border-info' : 'border-muted'),
 ]);
 ?>
 <span {{ $attributes }}>{{ $value }}</span>

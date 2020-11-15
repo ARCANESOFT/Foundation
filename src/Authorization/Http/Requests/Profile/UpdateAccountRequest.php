@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Arcanesoft\Foundation\Authorization\Rules\Users\EmailRule;
+use Arcanesoft\Foundation\Authorization\Rules\Administrators\EmailRule;
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
 
 /**
@@ -38,9 +38,23 @@ class UpdateAccountRequest extends FormRequest
         $user = $this->user($this->getGuardName());
 
         return [
-            'first_name' => ['required', 'string', 'max:50'],
-            'last_name'  => ['required', 'string', 'max:50'],
-            'email'      => ['required', 'string', 'email', 'max:255', EmailRule::unique()->ignore($user->getKey())],
+            'first_name' => [
+                'required',
+                'string',
+                'max:50',
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:50',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                EmailRule::unique()->ignore($user->getKey()),
+            ],
         ];
     }
 }

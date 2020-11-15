@@ -17,11 +17,11 @@ $attributes = $attributes->merge([
 @if($grouped)
     <div class="form-floating">
         <textarea {{ $attributes }}>{{ $slot->isEmpty() ? $value : $slot }}</textarea>
-        <x-arc:form-label :for="$id" :label="$label"/>
+        <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
         <x-arc:form-error :name="$name"/>
     </div>
 @else
-    <x-arc:form-label :for="$id" :label="$label"/>
+    <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
     <textarea {{ $attributes }}>{{ $slot->isEmpty() ? $value : $slot }}</textarea>
     <x-arc:form-error :name="$name"/>
 @endif

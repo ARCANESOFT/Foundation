@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
+use Arcanesoft\Foundation\Authorization\Http\Datatables\PasswordResetsDatatable;
 use Arcanesoft\Foundation\Authorization\Policies\PasswordResetsPolicy;
 use Arcanesoft\Foundation\Support\Traits\HasNotifications;
 
@@ -46,6 +47,13 @@ class PasswordResetsController extends Controller
         $this->authorize(PasswordResetsPolicy::ability('index'));
 
         return $this->view('authorization.password-resets.index');
+    }
+
+    public function datatable(PasswordResetsDatatable $datatable)
+    {
+        $this->authorize(PasswordResetsPolicy::ability('index'));
+
+        return $datatable;
     }
 
     public function metrics()

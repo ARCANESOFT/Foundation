@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
+use Arcanesoft\Foundation\Authorization\Http\Datatables\PermissionsDatatable;
 use Arcanesoft\Foundation\Authorization\Models\Permission;
 use Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy;
 use Arcanesoft\Foundation\Authorization\Repositories\PermissionsRepository;
@@ -41,6 +42,13 @@ class PermissionsController extends Controller
         $this->authorize(PermissionsPolicy::ability('index'));
 
         return $this->view('authorization.permissions.index');
+    }
+
+    public function datatable(PermissionsDatatable $datatable)
+    {
+        $this->authorize(PermissionsPolicy::ability('index'));
+
+        return $datatable;
     }
 
     public function show(Permission $permission, PermissionsRepository $repo, Request $request)

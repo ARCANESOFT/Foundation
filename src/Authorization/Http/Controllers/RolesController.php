@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
+use Arcanesoft\Foundation\Authorization\Http\Datatables\RolesDatatable;
 use Arcanesoft\Foundation\Authorization\Http\Requests\Roles\{CreateRoleRequest, UpdateRoleRequest};
 use Arcanesoft\Foundation\Authorization\Models\Role;
 use Arcanesoft\Foundation\Authorization\Policies\RolesPolicy;
@@ -58,6 +59,20 @@ class RolesController extends Controller
     }
 
     /**
+     * Datatable api response.
+     *
+     * @param  \Arcanesoft\Foundation\Authorization\Http\Datatables\RolesDatatable  $datatable
+     *
+     * @return \Arcanesoft\Foundation\Authorization\Http\Datatables\RolesDatatable
+     */
+    public function datatable(RolesDatatable $datatable)
+    {
+        $this->authorize(RolesPolicy::ability('index'));
+
+        return $datatable;
+    }
+
+    /**
      * Show all the metrics.
      *
      * @return \Illuminate\Contracts\View\View
@@ -103,8 +118,12 @@ class RolesController extends Controller
     {
         $this->authorize(RolesPolicy::ability('create'));
 
-        $data = $request->getValidatedData();
-        $role = $rolesRepo->createOne($data);
+        $role = $rolesRepo->createOne($request->validated());
+
+        static::notifySuccess(
+            'Role Created',
+            'The role has been successfully created!'
+        );
 
         return redirect()->route('admin::authorization.roles.show', [$role]);
     }
@@ -113,7 +132,7 @@ class RolesController extends Controller
      * Show the role's details.
      *
      * @param  \Arcanesoft\Foundation\Authorization\Models\Role  $role
-     * @param  \Illuminate\Http\Request                 $request
+     * @param  \Illuminate\Http\Request                          $request
      *
      * @return \Illuminate\Contracts\View\View
      */
@@ -142,7 +161,7 @@ class RolesController extends Controller
      */
     public function edit(Role $role, PermissionsRepository $permissionsRepo)
     {
-        $this->authorize(RolesPolicy::ability('update'));
+        $this->authorize(RolesPolicy::ability('update'), [$role]);
 
         $this->addBreadcrumb(__('Edit Role'));
 
@@ -164,16 +183,14 @@ class RolesController extends Controller
      */
     public function update(Role $role, UpdateRoleRequest $request, RolesRepository $rolesRepo)
     {
-        $this->authorize(RolesPolicy::ability('update'));
+        $this->authorize(RolesPolicy::ability('update'), [$role]);
 
-        $data = $request->getValidatedData();
+        $rolesRepo->updateOneWithPermissions($role, $request->validated());
 
-        $rolesRepo->updateOne($role, $data);
-
-        if (empty($permissions = $data['permissions'] ?: []))
-            $rolesRepo->detachAllPermissions($role);
-        else
-            $rolesRepo->syncPermissionsByUuids($role, $permissions);
+        static::notifySuccess(
+            'Role Updated',
+            'The role has been successfully updated!'
+        );
 
         return redirect()->route('admin::authorization.roles.show', [$role]);
     }

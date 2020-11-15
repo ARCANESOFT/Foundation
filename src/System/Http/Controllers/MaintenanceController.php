@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Http\Controllers;
 
-use Arcanesoft\Foundation\Helpers\MaintenanceMode;
+use Arcanesoft\Foundation\System\Helpers\MaintenanceMode;
 use Arcanesoft\Foundation\System\Http\Requests\MaintenanceMode\StartMaintenanceModeRequest;
 use Arcanesoft\Foundation\System\Policies\MaintenancePolicy;
 
@@ -16,22 +16,12 @@ use Arcanesoft\Foundation\System\Policies\MaintenancePolicy;
 class MaintenanceController extends Controller
 {
     /* -----------------------------------------------------------------
-     |  Properties
-     | -----------------------------------------------------------------
-     */
-
-    /** @var  \Arcanesoft\Foundation\Helpers\MaintenanceMode */
-    private $maintenance;
-
-    /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
 
-    public function __construct(MaintenanceMode $maintenance)
+    public function __construct()
     {
-        $this->maintenance = $maintenance;
-
         parent::__construct();
 
         $this->setCurrentSidebarItem('foundation::system.info');
@@ -43,20 +33,20 @@ class MaintenanceController extends Controller
      | -----------------------------------------------------------------
      */
 
-    public function index()
+    public function index(MaintenanceMode $maintenance)
     {
         $this->authorize(MaintenancePolicy::ability('index'));
 
         return $this->view('system.maintenance.index', [
-            'maintenance' => $this->maintenance,
+            'maintenance' => $maintenance,
         ]);
     }
 
-    public function start(StartMaintenanceModeRequest $request)
+    public function start(MaintenanceMode $maintenance, StartMaintenanceModeRequest $request)
     {
         $this->authorize(MaintenancePolicy::ability('toggle'));
 
-        $this->maintenance->down(
+        $maintenance->down(
             $request->get('redirect'),
             $request->get('retry'),
             $request->get('secret')
@@ -67,10 +57,10 @@ class MaintenanceController extends Controller
         return redirect()->back();
     }
 
-    public function stop()
+    public function stop(MaintenanceMode $maintenance)
     {
-        if ($this->maintenance->isEnabled()) {
-            $this->maintenance->up();
+        if ($maintenance->isEnabled()) {
+            $maintenance->up();
 
             // TODO: Add notification
         }

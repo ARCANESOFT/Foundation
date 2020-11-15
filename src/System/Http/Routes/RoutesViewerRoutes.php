@@ -27,6 +27,11 @@ class RoutesViewerRoutes extends AbstractRouteRegistrar
             // admin::system.routes-viewer.index
             $this->get('/', [RoutesViewerController::class, 'index'])
                  ->name('index');
+
+            // admin::system.routes-viewer.index
+            $this->post('datatable', [RoutesViewerController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
         });
     }
 }

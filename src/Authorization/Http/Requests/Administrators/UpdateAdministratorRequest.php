@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Requests\Administrators;
 
-use Arcanesoft\Foundation\Authorization\Http\Routes\AdministratorsRoutes;
+use Arcanesoft\Foundation\Authorization\Http\Routes\Web\AdministratorsRoutes;
+use Arcanesoft\Foundation\Authorization\Models\Administrator;
 use Arcanesoft\Foundation\Authorization\Rules\Administrators\EmailRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,20 +34,22 @@ class UpdateAdministratorRequest extends FormRequest
                 'string',
                 'max:50',
             ],
-            'last_name'  => [
+            'last_name' => [
                 'required',
                 'string',
                 'max:50',
             ],
-            'email'      => [
+            'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
                 EmailRule::unique()->ignore($this->getCurrentAdministrator()->id),
             ],
-            'roles'      => [
+            // TODO: Validate roles array
+            'roles' => [
                 'array',
+                'min:1',
             ],
         ];
     }
@@ -57,11 +60,11 @@ class UpdateAdministratorRequest extends FormRequest
      */
 
     /**
-     * Get the current user.
+     * Get the current administrator.
      *
-     * @return \Arcanesoft\Foundation\Authorization\Models\User|mixed
+     * @return \Arcanesoft\Foundation\Authorization\Models\Administrator|mixed
      */
-    protected function getCurrentAdministrator()
+    protected function getCurrentAdministrator(): Administrator
     {
         return $this->route()->parameter(AdministratorsRoutes::WILDCARD_ADMIN);
     }

@@ -35,7 +35,7 @@ class RolesRoutes extends RouteRegistrar
     {
         $this->prefix('roles')->name('roles.')->group(function () {
             $this->prefix('{'.static::ROLE_WILDCARD.'}')->group(function () {
-                // admin::auth.permissions.roles.detach
+                // admin::authorization.permissions.roles.detach
                 $this->delete('detach', [RolesController::class, 'detach'])
                      ->name('detach');
             });

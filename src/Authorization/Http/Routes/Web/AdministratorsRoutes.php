@@ -32,55 +32,56 @@ class AdministratorsRoutes extends RouteRegistrar
     public function map(): void
     {
         $this->name('administrators.')->prefix('administrators')->group(function () {
-            // admin::auth.administrators.index
+            // admin::authorization.administrators.index
             $this->get('/', [AdministratorsController::class, 'index'])
                  ->name('index');
 
-            // admin::auth.administrators.trash
-            $this->get('trash', [AdministratorsController::class, 'trash'])
-                 ->name('trash');
+            // admin::authorization.administrators.datatable
+            $this->post('datatable', [AdministratorsController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
 
-            // admin::auth.administrators.metrics
+            // admin::authorization.administrators.metrics
             $this->get('metrics', [AdministratorsController::class, 'metrics'])
                  ->name('metrics');
 
-            // admin::auth.administrators.create
+            // admin::authorization.administrators.create
             $this->get('create', [AdministratorsController::class, 'create'])
                  ->name('create');
 
-            // admin::auth.administrators.post
+            // admin::authorization.administrators.post
             $this->post('store', [AdministratorsController::class, 'store'])
                  ->name('store');
 
             $this->prefix('{'.static::WILDCARD_ADMIN.'}')->group(function () {
-                // admin::auth.administrators.show
+                // admin::authorization.administrators.show
                 $this->get('/', [AdministratorsController::class, 'show'])
                      ->name('show');
 
-                // admin::auth.administrators.edit
+                // admin::authorization.administrators.edit
                 $this->get('edit', [AdministratorsController::class, 'edit'])
                      ->name('edit');
 
-                // admin::auth.administrators.update
+                // admin::authorization.administrators.update
                 $this->put('update', [AdministratorsController::class, 'update'])
                      ->name('update');
 
-                // admin::auth.administrators.activate
+                // admin::authorization.administrators.activate
                 $this->put('activate', [AdministratorsController::class, 'activate'])
                      ->middleware(['ajax'])
                      ->name('activate');
 
-                // admin::auth.administrators.deactivate
+                // admin::authorization.administrators.deactivate
                 $this->put('deactivate', [AdministratorsController::class, 'deactivate'])
                      ->middleware(['ajax'])
                      ->name('deactivate');
 
-                // admin::auth.administrators.delete
+                // admin::authorization.administrators.delete
                 $this->delete('delete', [AdministratorsController::class, 'delete'])
                      ->middleware(['ajax'])
                      ->name('delete');
 
-                // admin::auth.administrators.restore
+                // admin::authorization.administrators.restore
                 $this->put('restore', [AdministratorsController::class, 'restore'])
                      ->middleware(['ajax'])
                      ->name('restore');

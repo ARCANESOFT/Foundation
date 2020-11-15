@@ -32,16 +32,4 @@ class UpdatePasswordRequest extends FormRequest
             'password'         => Password::make()->confirmed()->rules(['different:current_password']),
         ];
     }
-
-    /**
-     * Get the validated data.
-     *
-     * @return array
-     */
-    public function getValidatedData(): array
-    {
-        return $this->all([
-            'password',
-        ]);
-    }
 }

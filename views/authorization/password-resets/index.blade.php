@@ -5,7 +5,7 @@
 @endsection
 
 @push('content-nav')
-    <div class="mb-3 text-right">
+    <nav class="page-actions">
         @can(Arcanesoft\Foundation\Authorization\Policies\PasswordResetsPolicy::ability('metrics'))
         <a href="{{ route('admin::authorization.password-resets.metrics') }}"
            class="btn btn-sm btn-secondary {{ active(['admin::authorization.password-resets.metrics']) }}">@lang('Metrics')</a>
@@ -13,11 +13,13 @@
 
         @can(Arcanesoft\Foundation\Authorization\Policies\PasswordResetsPolicy::ability('index'))
         <a href="{{ route('admin::authorization.password-resets.index') }}"
-           class="btn btn-sm btn-secondary {{ active(['admin::authorization.password-resets.index']) }}">@lang('All')</a>
+           class="btn btn-sm btn-secondary {{ active(['admin::authorization.password-resets.index']) }}">@lang('List')</a>
         @endcan
-    </div>
+    </nav>
 @endpush
 
 @section('content')
-    <v-datatable name="{{ Arcanesoft\Foundation\Authorization\Views\Components\PasswordResetsDatatable::NAME }}"></v-datatable>
+    <v-datatable
+        name="password-resets-datatable"
+        url="{{ route('admin::authorization.password-resets.datatable') }}"/>
 @endsection

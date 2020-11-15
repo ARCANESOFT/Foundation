@@ -29,23 +29,21 @@ class CreateRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'string', Rule::unique(Auth::table('roles'), 'name'), new UniqueKey],
-            'description'   => ['required', 'string'],
-            'permissions.*' => ['nullable', 'string', Rule::exists(Auth::table('permissions'), 'uuid')],
+            'name' => [
+                'required',
+                'string',
+                Rule::unique(Auth::table('roles'), 'name'),
+                new UniqueKey,
+            ],
+            'description' => [
+                'required',
+                'string',
+            ],
+            'permissions.*' => [
+                'nullable',
+                'string',
+                Rule::exists(Auth::table('permissions'), 'uuid'),
+            ],
         ];
-    }
-
-    /**
-     * Get the validated data.
-     *
-     * @return array
-     */
-    public function getValidatedData(): array
-    {
-        return $this->all([
-            'name',
-            'description',
-            'permissions',
-        ]);
     }
 }

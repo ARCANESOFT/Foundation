@@ -9,55 +9,19 @@
     height: 92px;
 }
 
-.img-sm {
+.img-md {
     width: 43px;
     height: 43px;
 }
 
-.img-xs {
+.img-sm {
     width: 37px;
     height: 37px;
 }
 
-.img-ss {
+.img-xs {
     width: 26px;
     height: 26px;
-}
-
-.border-right-sm {
-    @media (min-width: 576px) {
-        border-right: $border-width solid $border-color;
-    }
-}
-
-.border-right-md {
-    @media (min-width: 768px) {
-        border-right: $border-width solid $border-color;
-    }
-}
-
-.border-right-lg {
-    @media (min-width: 992px) {
-        border-right: $border-width solid $border-color;
-    }
-}
-
-.border-left-sm {
-    @media (min-width: 576px) {
-        border-left: $border-width solid $border-color;
-    }
-}
-
-.border-left-md {
-    @media (min-width: 768px) {
-        border-left: $border-width solid $border-color;
-    }
-}
-
-.border-left-lg {
-    @media (min-width: 992px) {
-        border-left: $border-width solid $border-color;
-    }
 }
 
 @each $color, $value in $colors {

@@ -73,7 +73,7 @@ class PackageManifest
         $packages = [];
 
         if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {
-            $installed = json_decode($this->files->get($path), true);
+            $installed = json_decode($this->files->get($path), true); // Transform the installed packages into an entity or class
 
             $packages = $installed['packages'] ?? $installed;
         }

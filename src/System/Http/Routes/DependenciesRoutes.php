@@ -26,11 +26,16 @@ class DependenciesRoutes extends AbstractRouteRegistrar
         $this->prefix('dependencies')->name('dependencies.')->group(function () {
             // admin::system.dependencies.index
             $this->get('/', [DependenciesController::class, 'index'])
-                ->name('index');
+                 ->name('index');
+
+            // admin::system.dependencies.datatable
+            $this->post('datatable', [DependenciesController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
 
             // admin::system.dependencies.show
-            $this->get('{admin_package_key}', [DependenciesController::class, 'show'])
-                ->name('show');
+            $this->get('{admin_package_vendor}/{admin_package_name}', [DependenciesController::class, 'show'])
+                 ->name('show');
         });
     }
 }

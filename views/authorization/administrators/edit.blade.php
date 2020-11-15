@@ -23,21 +23,21 @@
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
                                     type="text" name="first_name" :value="old('first_name', $administrator->first_name)"
-                                    label="First Name" required/>
+                                    label="First Name" grouped="true" required/>
                             </div>
 
                             {{-- LAST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
                                     type="text" name="last_name" :value="old('last_name', $administrator->last_name)"
-                                    label="Last Name" required/>
+                                    label="Last Name" grouped="true" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
                                 <x-arc:input-control
                                     type="email" name="email" :value="old('email', $administrator->email)"
-                                    label="Email" required/>
+                                    label="Email" grouped="true" required/>
                             </div>
                         </div>
                     </x-arc:card-body>

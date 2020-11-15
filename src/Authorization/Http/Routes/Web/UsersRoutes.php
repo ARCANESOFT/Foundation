@@ -32,61 +32,62 @@ class UsersRoutes extends RouteRegistrar
     public function map(): void
     {
         $this->name('users.')->prefix('users')->group(function () {
-            // admin::auth.users.index
+            // admin::authorization.users.index
             $this->get('/', [UsersController::class, 'index'])
                  ->name('index');
 
-            // admin::auth.users.trash
-            $this->get('trash', [UsersController::class, 'trash'])
-                 ->name('trash');
+            // admin::authorization.users.datatable
+            $this->post('datatable', [UsersController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
 
-            // admin::auth.users.metrics
+            // admin::authorization.users.metrics
             $this->get('metrics', [UsersController::class, 'metrics'])
                  ->name('metrics');
 
-            // admin::auth.users.create
+            // admin::authorization.users.create
             $this->get('create', [UsersController::class, 'create'])
                  ->name('create');
 
-            // admin::auth.users.post
+            // admin::authorization.users.post
             $this->post('store', [UsersController::class, 'store'])
                  ->name('store');
 
             $this->prefix('{'.static::USER_WILDCARD.'}')->group(function () {
-                // admin::auth.users.show
+                // admin::authorization.users.show
                 $this->get('/', [UsersController::class, 'show'])
                      ->name('show');
 
-                // admin::auth.users.edit
+                // admin::authorization.users.edit
                 $this->get('edit', [UsersController::class, 'edit'])
                      ->name('edit');
 
-                // admin::auth.users.update
+                // admin::authorization.users.update
                 $this->put('update', [UsersController::class, 'update'])
                      ->name('update');
 
-                // admin::auth.users.activate
+                // admin::authorization.users.activate
                 $this->put('activate', [UsersController::class, 'activate'])
                      ->middleware(['ajax'])
                      ->name('activate');
 
-                // admin::auth.users.deactivate
+                // admin::authorization.users.deactivate
                 $this->put('deactivate', [UsersController::class, 'deactivate'])
                      ->middleware(['ajax'])
                      ->name('deactivate');
 
-                // admin::auth.users.delete
+                // admin::authorization.users.delete
                 $this->delete('delete', [UsersController::class, 'delete'])
                      ->middleware(['ajax'])
                      ->name('delete');
 
-                // admin::auth.users.restore
+                // admin::authorization.users.restore
                 $this->put('restore', [UsersController::class, 'restore'])
                      ->middleware(['ajax'])
                      ->name('restore');
 
                 if (impersonator()->isEnabled()) {
-                    // admin::auth.users.impersonate
+                    // admin::authorization.users.impersonate
                     $this->get('impersonate', [UsersController::class, 'impersonate'])
                          ->name('impersonate');
                 }

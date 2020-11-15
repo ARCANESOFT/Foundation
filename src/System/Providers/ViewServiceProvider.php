@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Providers;
 
-use Arcanesoft\Foundation\System\Views\{Composers, Components};
+use Arcanesoft\Foundation\System\Views\Composers;
 use Arcanesoft\Foundation\Support\Providers\ViewServiceProvider as ServiceProvider;
 
 /**
@@ -40,10 +40,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function components(): array
     {
-        return [
-            Components\AbilitiesDatatable::NAME    => Components\AbilitiesDatatable::class,
-            Components\RoutesDatatable::NAME       => Components\RoutesDatatable::class,
-            Components\DependenciesDatatable::NAME => Components\DependenciesDatatable::class,
-        ];
+        return [];
     }
 }

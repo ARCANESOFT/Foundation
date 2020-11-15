@@ -6,5 +6,6 @@
 
 @section('content')
     <v-datatable
-        name="{{ Arcanesoft\Foundation\Authorization\Views\Components\PermissionsDatatable::NAME }}"></v-datatable>
+        name="permissions-datatable"
+        url="{{ route('admin::authorization.permissions.datatable') }}"/>
 @endsection

@@ -6,6 +6,7 @@ namespace Arcanesoft\Foundation\System\Http\Controllers;
 
 use Arcanedev\LaravelPolicies\Ability;
 use Arcanedev\LaravelPolicies\Contracts\PolicyManager;
+use Arcanesoft\Foundation\System\Http\Datatables\AbilitiesDatatable;
 use Arcanesoft\Foundation\System\Policies\AbilitiesPolicy;
 use Illuminate\Support\Facades\Gate;
 
@@ -49,6 +50,13 @@ class AbilitiesController extends Controller
         $this->authorize(AbilitiesPolicy::ability('index'));
 
         return $this->view('system.abilities.index');
+    }
+
+    public function datatable(AbilitiesDatatable $datatable)
+    {
+        $this->authorize(AbilitiesPolicy::ability('index'));
+
+        return $datatable;
     }
 
     public function show(string $key)

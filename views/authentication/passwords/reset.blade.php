@@ -40,9 +40,8 @@
                             </div>
 
                             {{-- SUBMIT BUTTON --}}
-                            <div class="col">
-                                <button class="btn btn-lg btn-primary btn-block"
-                                        type="submit">@lang('Reset Password')</button>
+                            <div class="d-grid col">
+                                <button class="btn btn-lg btn-primary" type="submit">@lang('Reset Password')</button>
                             </div>
                         </div>
                     </x-arc:form>

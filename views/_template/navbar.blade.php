@@ -16,10 +16,6 @@
             </li>
             @endif
 
-            <li class="nav-item d-none d-lg-block">
-                <v-fullscreen-toggler></v-fullscreen-toggler>
-            </li>
-
             <li class="nav-item dropdown">
                 <v-navbar-notifications></v-navbar-notifications>
             </li>

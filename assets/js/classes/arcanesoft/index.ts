@@ -1,6 +1,6 @@
 import { App } from '@vue/runtime-core'
-import emitter, { EmitterInterface, EventType, WildcardHandler } from '@arcanesoft/core/src/helpers/event-emitter'
-import { RequestInstance, RequestConfig } from '@arcanesoft/core/src/helpers/request'
+import emitter, { EventterInterface, EventType, WildcardHandler } from '@arcanescripts/eventter'
+import { RequestInstance, RequestConfig } from '@arcanescripts/request'
 import Csrf from '@arcanesoft/core/src/helpers/csrf'
 import { Arcanesoft as ArcanesoftContract } from '@arcanesoft/core/src/contracts/arcanesoft'
 import { ArcanesoftConfig } from './types'
@@ -13,7 +13,7 @@ class Arcanesoft implements ArcanesoftContract {
     //----------------------------------
 
     public app: App
-    public emitter: EmitterInterface
+    public emitter: EventterInterface
     public ui: UI
     protected _config: ArcanesoftConfig
     protected _started: Boolean = false
@@ -103,7 +103,7 @@ class Arcanesoft implements ArcanesoftContract {
     // Other Methods
     //----------------------------------
 
-    public bootComponents(dom: Document|Element): void {
+    public bootComponents(dom: Document): void {
         this.ui.initToasts(dom)
         this.ui.initTooltips(dom)
         this.ui.initPageScrolled()
