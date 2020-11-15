@@ -88,7 +88,7 @@ class ProfileController extends Controller
             $request->get('password')
         );
 
-        $this->notifySuccess(
+        static::notifySuccess(
             __('Password updated'),
             __('Your password has been successfully updated !')
         );

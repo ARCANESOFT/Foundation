@@ -157,13 +157,34 @@ class RolesRepository extends AbstractRepository
      * Update the given role.
      *
      * @param  \Arcanesoft\Foundation\Authorization\Models\Role  $role
-     * @param  array                                    $attributes
+     * @param  array                                             $attributes
      *
      * @return bool
      */
     public function updateOne(Role $role, array $attributes): bool
     {
         return $role->update($attributes);
+    }
+
+    /**
+     * Update the given role with permissions.
+     *
+     * @param  \Arcanesoft\Foundation\Authorization\Models\Role  $role
+     * @param  array                                             $attributes
+     *
+     * @return bool
+     */
+    public function updateOneWithPermissions(Role $role, array $attributes): bool
+    {
+        $updated = $this->updateOne($role, $attributes);
+
+        tap($attributes['permissions'] ?: [], function (array $permissions) use ($role) {
+            empty($permissions)
+                ? $this->detachAllPermissions($role)
+                : $this->syncPermissionsByUuids($role, $permissions);
+        });
+
+        return $updated;
     }
 
     /**

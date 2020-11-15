@@ -5,22 +5,20 @@
 @endsection
 
 @push('content-nav')
-    <div class="mb-3 text-right">
-        @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('metrics'))
-            <a href="{{ route('admin::authorization.roles.metrics') }}" class="btn btn-sm btn-secondary {{ active(['admin::authorization.roles.metrics']) }}">@lang('Metrics')</a>
-        @endcan
-
-        @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('create'))
-            <a href="{{ route('admin::authorization.roles.create') }}" class="btn btn-primary btn-sm ml-1">
-                <i class="fa fa-fw fa-plus"></i> @lang('Add')
-            </a>
-        @endcan
-    </div>
+    @include('foundation::authorization.roles._partials.nav-actions')
 @endpush
 
 @section('content')
-    <v-datatable name="{{ Arcanesoft\Foundation\Authorization\Views\Components\RolesDatatable::NAME }}"></v-datatable>
+    <v-datatable
+        name="roles-datatable"
+        url="{{ route('admin::authorization.roles.datatable') }}"/>
 @endsection
+
+@push('scripts')
+    <script>
+        const rolesDatatable = components.datatable('roles-datatable')
+    </script>
+@endpush
 
 {{-- ACIVATE MODAL/SCRIPT --}}
 @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'))
@@ -46,7 +44,7 @@
 
             activateForm.onSubmit('PUT', () => {
                 activateModal.hide()
-                location.reload()
+                rolesDatatable.reload()
             })
 
             activateModal.on('hidden', () => {
@@ -80,7 +78,7 @@
 
             deactivateForm.onSubmit('PUT', () => {
                 deactivateModal.hide()
-                location.reload()
+                rolesDatatable.reload()
             })
 
             deactivateModal.on('hidden', () => {
@@ -114,7 +112,7 @@
 
             deleteForm.onSubmit('DELETE', () => {
                 deleteModal.hide()
-                location.reload()
+                rolesDatatable.reload()
             })
 
             deleteModal.on('hidden', () => {

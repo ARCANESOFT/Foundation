@@ -18,8 +18,9 @@
                     <x-arc:form
                         action="{{ route(Arcanesoft\Foundation\Authentication\Http\Routes\EmailVerificationRoutes::RESEND) }}"
                         method="POST">
-                        <button class="btn btn-primary btn-block"
-                                type="submit">@lang('Resend verification email')</button>
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit">@lang('Resend verification email')</button>
+                        </div>
                     </x-arc:form>
                 </x-arc:card-body>
                 <x-arc:card-footer>

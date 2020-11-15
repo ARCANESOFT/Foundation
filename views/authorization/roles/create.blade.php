@@ -18,12 +18,14 @@
                             <div class="col-12">
                                 {{-- NAME --}}
                                 <x-arc:input-control
-                                    type="text" name="name" :value="old('name')" label="Name" required/>
+                                    type="text" name="name" :value="old('name')" label="Name"
+                                    grouped="true" required/>
                             </div>
                             <div class="col-12">
                                 {{-- DESCRIPTION --}}
                                 <x-arc:textarea-control
-                                    name="description" :value="old('description')" label="Description" required/>
+                                    name="description" :value="old('description')" label="Description"
+                                    grouped="true" required/>
                             </div>
                         </div>
                     </x-arc:card-body>

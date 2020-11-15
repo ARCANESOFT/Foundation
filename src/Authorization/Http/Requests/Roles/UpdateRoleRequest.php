@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Http\Requests\Roles;
 
 use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Http\Routes\RolesRoutes;
+use Arcanesoft\Foundation\Authorization\Http\Routes\Web\RolesRoutes;
+use Arcanesoft\Foundation\Authorization\Models\Role;
 use Arcanesoft\Foundation\Authorization\Rules\Users\UniqueKey;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -32,30 +33,22 @@ class UpdateRoleRequest extends FormRequest
         $role = $this->getCurrentRole();
 
         return [
-            'name'          => [
-                'required', 'string', Rule::unique(Auth::table('roles'), 'name')->ignore($role->id), (new UniqueKey)->ignore($role->id),
+            'name' => [
+                'required',
+                'string',
+                Rule::unique(Auth::table('roles'), 'name')->ignore($role->id),
+                (new UniqueKey)->ignore($role->id),
             ],
-            'description'   => [
-                'required', 'string',
+            'description' => [
+                'required',
+                'string',
             ],
             'permissions.*' => [
-                'nullable', 'string', Rule::exists(Auth::table('permissions'), 'uuid'),
+                'nullable',
+                'string',
+                Rule::exists(Auth::table('permissions'), 'uuid'),
             ],
         ];
-    }
-
-    /**
-     * Get the validated data.
-     *
-     * @return array
-     */
-    public function getValidatedData(): array
-    {
-        return $this->all([
-            'name',
-            'description',
-            'permissions',
-        ]);
     }
 
     /**
@@ -63,7 +56,7 @@ class UpdateRoleRequest extends FormRequest
      *
      * @return \Arcanesoft\Foundation\Authorization\Models\Role|mixed
      */
-    private function getCurrentRole()
+    private function getCurrentRole(): Role
     {
         return $this->route()->parameter(RolesRoutes::ROLE_WILDCARD);
     }

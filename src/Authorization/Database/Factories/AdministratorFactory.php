@@ -46,6 +46,7 @@ class AdministratorFactory extends Factory
             'email'          => $this->faker->unique()->safeEmail,
             'password'       => 'password',
             'remember_token' => Str::random(10),
+            'activated_at'   => now(),
         ];
     }
 }

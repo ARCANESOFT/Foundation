@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
 use Arcanesoft\Foundation\Authorization\Auth;
+use Arcanesoft\Foundation\Authorization\Http\Datatables\AdministratorDatatable;
 use Arcanesoft\Foundation\Authorization\Http\Requests\Administrators\{CreateAdministratorRequest, UpdateAdministratorRequest};
 use Arcanesoft\Foundation\Authorization\Models\Administrator;
 use Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy;
@@ -60,13 +61,17 @@ class AdministratorsController extends Controller
     }
 
     /**
-     * List all the deleted administrators.
+     * Datatable api response.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @param  \Arcanesoft\Foundation\Authorization\Http\Datatables\AdministratorDatatable  $datatable
+     *
+     * @return \Arcanesoft\Foundation\Authorization\Http\Datatables\AdministratorDatatable
      */
-    public function trash()
+    public function datatable(AdministratorDatatable $datatable)
     {
-        return $this->index(true);
+        $this->authorize(AdministratorsPolicy::ability('index'));
+
+        return $datatable;
     }
 
     /**

@@ -7,5 +7,7 @@
 @endsection
 
 @section('content')
-    <v-datatable name="{{ Arcanesoft\Foundation\System\Views\Components\RoutesDatatable::NAME }}"></v-datatable>
+    <v-datatable
+        name="routes-datatable"
+        url="{{ route('admin::system.routes-viewer.datatable') }}"/>
 @endsection

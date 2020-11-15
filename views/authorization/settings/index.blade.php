@@ -5,13 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card card-borderless shadow-sm mb-3">
-                <div class="card-header">@lang('Authentication')</div>
-                <table class="table table-borderless table-hover mb-0">
+    <div class="row row-cols-lg-3 g-3">
+        <div class="col">
+            <x-arc:card>
+                <x-arc:card-header>@lang('Authentication')</x-arc:card-header>
+                <x-arc:card-table>
                     <tr>
-                        <td class="font-weight-light text-uppercase text-muted">@lang('Login')</td>
+                        <x-arc:table-th label="Login"/>
                         <td class="text-right">
                             @if ($authentication['login']['enabled'])
                                 <span class="badge border border-success text-success">@lang('Enabled')</span>
@@ -21,7 +21,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="font-weight-light text-uppercase text-muted">@lang('Register')</td>
+                        <x-arc:table-th label="Register"/>
                         <td class="text-right">
                             @if ($authentication['register']['enabled'])
                                 <span class="badge border border-success text-success">@lang('Enabled')</span>
@@ -31,7 +31,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="font-weight-light text-uppercase text-muted">Socialite</td>
+                        <x-arc:table-th label="Socialite"/>
                         <td class="text-right">
                             @if ($authentication['socialite']['enabled'])
                                 <span class="badge border border-success text-success">@lang('Enabled')</span>
@@ -40,29 +40,31 @@
                             @endif
                         </td>
                     </tr>
-                </table>
-            </div>
-
-            @if ($authentication['socialite']['enabled'])
-                <?php $providers = Arcanesoft\Foundation\Authorization\Socialite::getProviders(); ?>
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header">Socialite</div>
-                    <table class="table table-borderless mb-0">
-                        @foreach($providers as $provider)
-                        <tr>
-                            <td class="font-weight-light text-uppercase text-muted">{{ $provider->name }}</td>
-                            <td class="text-right">
-                                @if ($provider->enabled)
-                                    <span class="badge border border-success text-success">@lang('Enabled')</span>
-                                @else
-                                    <span class="badge border border-secondary text-secondary">@lang('Disabled')</span>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            @endif
+                </x-arc:card-table>
+            </x-arc:card>
         </div>
+
+        @if ($authentication['socialite']['enabled'])
+            <div class="col">
+                <?php $providers = Arcanesoft\Foundation\Authorization\Socialite::getProviders(); ?>
+                <x-arc:card>
+                    <x-arc:card-header>@lang('Socialite')</x-arc:card-header>
+                    <x-arc:card-table>
+                        @foreach($providers as $provider)
+                            <tr>
+                                <x-arc:table-th label="{{ $provider->name }}"/>
+                                <td class="text-right">
+                                    @if ($provider->enabled)
+                                        <span class="badge border border-success text-success">@lang('Enabled')</span>
+                                    @else
+                                        <span class="badge border border-secondary text-secondary">@lang('Disabled')</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </x-arc:card-table>
+                </x-arc:card>
+            </div>
+        @endif
     </div>
 @endsection

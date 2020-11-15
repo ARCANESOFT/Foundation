@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Http\Requests\Administrators;
 
 use Arcanesoft\Foundation\Authorization\Rules\Administrators\EmailRule;
+use Arcanesoft\Foundation\Fortify\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -32,25 +33,21 @@ class CreateAdministratorRequest extends FormRequest
                 'string',
                 'max:50',
             ],
-            'last_name'  => [
+            'last_name' => [
                 'required',
                 'string',
                 'max:50',
             ],
-            'email'      => [
+            'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
                 EmailRule::unique(),
             ],
-            'password'   => [
-                'nullable',
-                'string',
-                'min:8',
-                'confirmed',
-            ],
-            'roles'      => [
+            'password' => Password::make()->nullable()->confirmed()->rules(),
+            // TODO: Validate the roles array
+            'roles' => [
                 'array',
                 'min:1',
             ],

@@ -1,3 +1,3 @@
-import request from '@arcanesoft/core/src/helpers/request'
+import request from '@arcanescripts/request'
 
 window['request'] = request

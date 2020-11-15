@@ -6,11 +6,14 @@ namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
 use Arcanedev\LaravelImpersonator\Contracts\Impersonator;
 use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Http\Requests\Users\{CreateUserRequest, UpdateUserRequest};
+use Arcanesoft\Foundation\Authorization\Http\Datatables\UsersDatatable;
+use Arcanesoft\Foundation\Authorization\Http\Requests\Users\{
+    CreateUserRequest,
+    UpdateUserRequest};
 use Arcanesoft\Foundation\Authorization\Models\User;
 use Arcanesoft\Foundation\Authorization\Policies\UsersPolicy;
-use Arcanesoft\Foundation\Support\Traits\HasNotifications;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
+use Arcanesoft\Foundation\Support\Traits\HasNotifications;
 
 /**
  * Class     UsersController
@@ -61,13 +64,17 @@ class UsersController extends Controller
     }
 
     /**
-     * List all the deleted users.
+     * Datatable api response.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @param  \Arcanesoft\Foundation\Authorization\Http\Datatables\UsersDatatable  $datatable
+     *
+     * @return \Arcanesoft\Foundation\Authorization\Http\Datatables\UsersDatatable
      */
-    public function trash()
+    public function datatable(UsersDatatable $datatable)
     {
-        return $this->index(true);
+        $this->authorize(UsersPolicy::ability('index'));
+
+        return $datatable;
     }
 
     /**

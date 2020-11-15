@@ -16,7 +16,7 @@
         'data-sidebar-visible' => Arcanesoft\Foundation\Helpers\Sidebar\Manager::isVisible() ? 'true' : 'false',
     ]);
 ?>
-<body {{ $attributes->merge(['class' => 'h-100']) }}>
+<body {{ $attributes->merge(['class' => 'h-100 p-0']) }}>
     {{-- APP CONTAINER --}}
     <div id="arcanesoft" class="app-container h-100">
         @include('foundation::_template.navbar')

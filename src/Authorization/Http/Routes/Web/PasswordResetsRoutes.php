@@ -28,6 +28,11 @@ class PasswordResetsRoutes extends RouteRegistrar
             $this->get('/', [PasswordResetsController::class, 'index'])
                  ->name('index');
 
+            // admin::authorization.password-resets.datatable
+            $this->post('datatable', [PasswordResetsController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
+
             // admin::authorization.password-resets.metrics
             $this->get('metrics', [PasswordResetsController::class, 'metrics'])
                  ->name('metrics');

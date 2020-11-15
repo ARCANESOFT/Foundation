@@ -36,10 +36,10 @@ class Active extends Component
     /**
      * Count constructor.
      *
-     * @param  int   $value
-     * @param  bool  $icon
+     * @param  bool|int  $value
+     * @param  bool      $icon
      */
-    public function __construct(int $value, bool $icon = false)
+    public function __construct($value, bool $icon = false)
     {
         $this->value = $value;
         $this->icon  = $icon;

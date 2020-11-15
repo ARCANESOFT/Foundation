@@ -32,46 +32,51 @@ class RolesRoutes extends RouteRegistrar
     public function map(): void
     {
         $this->name('roles.')->prefix('roles')->group(function () {
-            // admin::auth.roles.index
+            // admin::authorization.roles.index
             $this->get('/', [RolesController::class, 'index'])
                  ->name('index');
 
-            // admin::auth.roles.metrics
+            // admin::authorization.roles.datatable
+            $this->post('datatable', [RolesController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
+
+            // admin::authorization.roles.metrics
             $this->get('metrics', [RolesController::class, 'metrics'])
                  ->name('metrics');
 
-            // admin::auth.roles.create
+            // admin::authorization.roles.create
             $this->get('create', [RolesController::class, 'create'])
                  ->name('create');
 
-            // admin::auth.roles.store
+            // admin::authorization.roles.store
             $this->post('store', [RolesController::class, 'store'])
                  ->name('store');
 
             $this->prefix('{'.static::ROLE_WILDCARD.'}')->group(function () {
-                // admin::auth.roles.show
+                // admin::authorization.roles.show
                 $this->get('/', [RolesController::class, 'show'])
                      ->name('show');
 
-                // admin::auth.roles.edit
+                // admin::authorization.roles.edit
                 $this->get('edit', [RolesController::class, 'edit'])
                      ->name('edit');
 
-                // admin::auth.roles.update
+                // admin::authorization.roles.update
                 $this->put('update', [RolesController::class, 'update'])
                      ->name('update');
 
-                // admin::auth.roles.activate
+                // admin::authorization.roles.activate
                 $this->put('activate', [RolesController::class, 'activate'])
                      ->middleware(['ajax'])
                      ->name('activate');
 
-                // admin::auth.roles.deactivate
+                // admin::authorization.roles.deactivate
                 $this->put('deactivate', [RolesController::class, 'deactivate'])
                      ->middleware(['ajax'])
                      ->name('deactivate');
 
-                // admin::auth.roles.delete
+                // admin::authorization.roles.delete
                 $this->delete('delete', [RolesController::class, 'delete'])
                      ->middleware(['ajax'])
                      ->name('delete');

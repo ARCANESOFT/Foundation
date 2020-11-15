@@ -82,5 +82,5 @@
         @endpush
     @endcan
 @else
-    @include('foundation::_partials.no-data-found')
+    @include('foundation::_partials.states.no-data-found')
 @endif

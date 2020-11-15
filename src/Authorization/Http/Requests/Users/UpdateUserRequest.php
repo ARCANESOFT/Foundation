@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Requests\Users;
 
+use Arcanesoft\Foundation\Authorization\Http\Routes\Web\UsersRoutes;
+use Arcanesoft\Foundation\Authorization\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Arcanesoft\Foundation\Authorization\Http\Routes\UsersRoutes;
 use Arcanesoft\Foundation\Authorization\Rules\Users\EmailRule;
 
 /**
@@ -30,9 +31,23 @@ class UpdateUserRequest extends FormRequest
         $user = $this->getCurrentUser();
 
         return [
-            'first_name' => ['required', 'string', 'max:50'],
-            'last_name'  => ['required', 'string', 'max:50'],
-            'email'      => ['required', 'string', 'email', 'max:255', EmailRule::unique()->ignore($user->id)],
+            'first_name' => [
+                'required',
+                'string',
+                'max:50',
+            ],
+            'last_name' => [
+                'required',
+                'string',
+                'max:50',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                EmailRule::unique()->ignore($user->id)
+            ],
         ];
     }
 
@@ -46,7 +61,7 @@ class UpdateUserRequest extends FormRequest
      *
      * @return \Arcanesoft\Foundation\Authorization\Models\User|mixed
      */
-    protected function getCurrentUser()
+    protected function getCurrentUser(): User
     {
         return $this->route()->parameter(UsersRoutes::USER_WILDCARD);
     }

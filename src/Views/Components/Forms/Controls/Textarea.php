@@ -55,6 +55,7 @@ class Textarea extends Component
      * @param  string|null  $id
      * @param  string|null  $value
      * @param  string|null  $label
+     * @param  bool         $grouped
      */
     public function __construct(
         string $name,

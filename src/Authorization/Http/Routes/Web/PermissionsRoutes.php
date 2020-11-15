@@ -32,12 +32,17 @@ class PermissionsRoutes extends RouteRegistrar
     public function map(): void
     {
         $this->prefix('permissions')->name('permissions.')->group(function () {
-            // admin::auth.permissions.index
+            // admin::authorization.permissions.index
             $this->get('/', [PermissionsController::class, 'index'])
                  ->name('index');
 
+            // admin::authorization.permissions.datatable
+            $this->post('datatable', [PermissionsController::class, 'datatable'])
+                 ->middleware(['ajax'])
+                 ->name('datatable');
+
             $this->prefix('{'.static::PERMISSION_WILDCARD.'}')->group(function () {
-                // admin::auth.permissions.show
+                // admin::authorization.permissions.show
                 $this->get('/', [PermissionsController::class, 'show'])
                      ->name('show');
 

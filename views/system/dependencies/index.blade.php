@@ -4,8 +4,12 @@
     <i class="fas fa-fw fa-user-shield"></i> @lang('System') <small>@lang('Dependencies')</small>
 @endsection
 
-@section('content')
+@push('content-nav')
     @include('foundation::system._includes.system-nav')
+@endpush
 
-    <v-datatable name="{{ Arcanesoft\Foundation\System\Views\Components\DependenciesDatatable::NAME }}"/>
+@section('content')
+    <v-datatable
+        name="dependencies-datatable"
+        url="{{ route('admin::system.dependencies.datatable') }}"/>
 @endsection

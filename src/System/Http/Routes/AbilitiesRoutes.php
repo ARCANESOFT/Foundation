@@ -26,11 +26,15 @@ class AbilitiesRoutes extends AbstractRouteRegistrar
         $this->prefix('abilities')->name('abilities.')->group(function () {
             // admin::system.abilities.index
             $this->get('/', [AbilitiesController::class, 'index'])
-                ->name('index');
+                 ->name('index');
+
+            // admin::system.abilities.datatable
+            $this->post('datatable', [AbilitiesController::class, 'datatable'])
+                 ->name('datatable');
 
             // admin::system.abilities.show
             $this->get('{admin_ability_key}', [AbilitiesController::class, 'show'])
-                ->name('show');
+                 ->name('show');
         });
     }
 }

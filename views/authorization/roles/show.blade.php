@@ -97,16 +97,16 @@
             </x-arc:card>
         </div>
         <div class="col-lg-8">
-            <div class="card card-borderless shadow-sm">
-                <div class="card-header d-flex justify-content-end p-2">
+            <x-arc:card>
+                <x-arc:card-header class="d-flex justify-content-end">
                     <div class="btn-group" role="group" aria-label="Administrators and Permissions">
                         <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-secondary {{ $tab === 'administrators' ? 'active' : '' }}">@lang('Administrators')</a>
                         <a href="{{ route('admin::authorization.roles.show', [$role, 'tab' => 'permissions']) }}" class="btn btn-sm btn-secondary {{ $tab === 'permissions' ? 'active' : '' }}">@lang('Permissions')</a>
                     </div>
-                </div>
+                </x-arc:card-header>
                 @includeWhen($tab === 'administrators', 'foundation::authorization.roles._includes.role-administrators-table', ['role' => $role])
                 @includeWhen($tab === 'permissions', 'foundation::authorization.roles._includes.role-permissions-table', ['role' => $role])
-            </div>
+            </x-arc:card>
         </div>
     </div>
 @endsection

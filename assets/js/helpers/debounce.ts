@@ -1,11 +1,18 @@
-export default (callback: Function, delay: number) => {
-    let timeoutID = null
+export default (callback: Function, wait: number, immediate: boolean = false) => {
+    let timeout
 
-    return function (...args): void {
-        clearTimeout(timeoutID)
+    return (...args): void => {
+        let callNow = immediate && ! timeout
 
-        timeoutID = setTimeout(() => {
+        clearTimeout(timeout)
+
+        timeout = setTimeout(() => {
+            timeout = null
+            if ( ! immediate)
+                callback.apply(this, args)
+        }, wait)
+
+        if (callNow)
             callback.apply(this, args)
-        }, delay)
     }
 }

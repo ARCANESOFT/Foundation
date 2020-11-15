@@ -1,3 +1,3 @@
-import { RequestConfig, RequestInstance } from '@arcanesoft/core/src/helpers/request'
+import { RequestConfig, RequestInstance } from '@arcanescripts/request'
 
 export default (options?: RequestConfig): RequestInstance => window['request'](options)
