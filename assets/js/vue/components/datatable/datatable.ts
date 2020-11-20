@@ -97,8 +97,8 @@ export default defineComponent({
                         <div class="col-auto">
                             <DatatableReloadButton/>
                         </div>
-                        <div class="col-auto">
-                            <DatatableFilters v-if="hasFilters"/>
+                        <div class="col-auto" v-if="hasFilters">
+                            <DatatableFilters/>
                         </div>
                     </div>
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Views;
 
 use Arcanesoft\Foundation\Support\Providers\ServiceProvider;
-use Arcanesoft\Foundation\Views\Contracts\Manager as ManagerContract;
 use Illuminate\Support\Collection;
 use Illuminate\View\Compilers\BladeCompiler;
 
@@ -38,9 +37,7 @@ class ViewsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        parent::register();
-
-        $this->singleton(ManagerContract::class, Manager::class);
+        //
     }
 
     /**

@@ -32,14 +32,4 @@ class ViewServiceProvider extends ServiceProvider
             Composers\RequiredPhpExtensionsComposer::class,
         ];
     }
-
-    /**
-     * Get the view composers.
-     *
-     * @return array
-     */
-    public function components(): array
-    {
-        return [];
-    }
 }

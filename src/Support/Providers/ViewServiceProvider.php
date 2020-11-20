@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Support\Providers;
 
-use Arcanesoft\Foundation\Views\Contracts\Manager;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -29,16 +28,6 @@ abstract class ViewServiceProvider extends ServiceProvider
         return [];
     }
 
-    /**
-     * Get the view composers.
-     *
-     * @return array
-     */
-    public function components(): array
-    {
-        return [];
-    }
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -50,7 +39,6 @@ abstract class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerViewComposers();
-        $this->registerViewComponents();
     }
 
     /* -----------------------------------------------------------------
@@ -69,24 +57,6 @@ abstract class ViewServiceProvider extends ServiceProvider
         if ( ! empty($composers = $this->getRegisteredViewComposers())) {
             $factory->composers($composers);
         }
-    }
-
-    /**
-     * Get the components manager.
-     *
-     * @return \Arcanesoft\Foundation\Views\Contracts\Manager
-     */
-    protected function getComponentsManager(): Manager
-    {
-        return $this->app->make(Manager::class);
-    }
-
-    /**
-     * Register the view components.
-     */
-    protected function registerViewComponents(): void
-    {
-        $this->getComponentsManager()->register($this->components());
     }
 
     /**
