@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\Users;
 
 use Arcanedev\LaravelMetrics\Metrics\NullablePartition;
-use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Policies\UsersPolicy;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
@@ -25,7 +23,7 @@ class ActivatedUsers extends NullablePartition
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Illuminate\Http\Request                                  $request
+     * @param  \Illuminate\Http\Request                                           $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo
      *
      * @return \Arcanedev\LaravelMetrics\Results\Result|mixed
@@ -42,17 +40,5 @@ class ActivatedUsers extends NullablePartition
                         1 => '#28A745',
                     ])
                     ->sort('desc');
-    }
-
-    /**
-     * Check if the authenticated user is authorized.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return bool
-     */
-    public function authorize(Request $request): bool
-    {
-        return Auth::admin()->can(UsersPolicy::ability('metrics'));
     }
 }

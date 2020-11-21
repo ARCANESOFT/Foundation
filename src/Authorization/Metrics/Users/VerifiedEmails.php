@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\Users;
 
 use Arcanedev\LaravelMetrics\Metrics\NullablePartition;
-use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Policies\UsersPolicy;
+use Arcanesoft\Foundation\Authorization\Metrics\Users\Concerns\CanAuthorize;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
@@ -18,6 +17,13 @@ use Illuminate\Http\Request;
 class VerifiedEmails extends NullablePartition
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAuthorize;
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -25,7 +31,7 @@ class VerifiedEmails extends NullablePartition
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Illuminate\Http\Request                                  $request
+     * @param  \Illuminate\Http\Request                                           $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo
      *
      * @return \Arcanedev\LaravelMetrics\Results\Result|mixed
@@ -42,17 +48,5 @@ class VerifiedEmails extends NullablePartition
                         1 => '#007BFF',
                     ])
                     ->sort('desc');
-    }
-
-    /**
-     * Check if the authenticated user is authorized.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return mixed
-     */
-    public function authorize(Request $request)
-    {
-        return Auth::admin()->can(UsersPolicy::ability('metrics'));
     }
 }

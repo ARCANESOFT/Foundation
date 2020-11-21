@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\Administrators;
 
 use Arcanedev\LaravelMetrics\Metrics\RangedValue;
-use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy;
+use Arcanesoft\Foundation\Authorization\Metrics\Administrators\Concerns\CanAuthorize;
 use Arcanesoft\Foundation\Authorization\Repositories\AdministratorsRepository;
 use Illuminate\Http\Request;
 
@@ -18,6 +17,13 @@ use Illuminate\Http\Request;
 class NewAdministrators extends RangedValue
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAuthorize;
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -25,7 +31,7 @@ class NewAdministrators extends RangedValue
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Illuminate\Http\Request                                           $request
+     * @param  \Illuminate\Http\Request                                                    $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\AdministratorsRepository  $repo
      *
      * @return \Arcanedev\LaravelMetrics\Results\Result|mixed
@@ -49,17 +55,5 @@ class NewAdministrators extends RangedValue
             60  => __(':days Days', ['days' => 60]),
             365 => __(':days Days', ['days' => 365]),
         ];
-    }
-
-    /**
-     * Check if the authenticated user is authorized.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return bool
-     */
-    public function authorize(Request $request): bool
-    {
-        return Auth::admin()->can(AdministratorsPolicy::ability('metrics'));
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\PasswordResets;
 
 use Arcanedev\LaravelMetrics\Metrics\Value;
-use Arcanesoft\Foundation\Authorization\Policies\PasswordResetsPolicy;
+use Arcanesoft\Foundation\Authorization\Metrics\PasswordResets\Concerns\CanAuthorize;
 use Arcanesoft\Foundation\Authorization\Repositories\PasswordResetsRepository;
 use Illuminate\Http\Request;
 
@@ -17,6 +17,13 @@ use Illuminate\Http\Request;
 class TotalPasswordResets extends Value
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAuthorize;
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -24,7 +31,7 @@ class TotalPasswordResets extends Value
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Illuminate\Http\Request                                           $request
+     * @param  \Illuminate\Http\Request                                                    $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\PasswordResetsRepository  $repo
      *
      * @return mixed
@@ -32,17 +39,5 @@ class TotalPasswordResets extends Value
     public function calculate(Request $request, PasswordResetsRepository $repo)
     {
         return $this->result($repo->count());
-    }
-
-    /**
-     * Check if the current user is authorized.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return bool
-     */
-    public function authorize(Request $request): bool
-    {
-        return $request->user()->can(PasswordResetsPolicy::ability('metrics'));
     }
 }

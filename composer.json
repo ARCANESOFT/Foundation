@@ -15,6 +15,7 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
+        "arcanedev/agent": "^9.0",
         "arcanedev/breadcrumbs": "^6.0",
         "arcanedev/laravel-active": "^4.0",
         "arcanedev/laravel-html": "^8.0",

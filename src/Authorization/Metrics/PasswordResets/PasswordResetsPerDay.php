@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\PasswordResets;
 
 use Arcanedev\LaravelMetrics\Metrics\Trend;
+use Arcanesoft\Foundation\Authorization\Metrics\PasswordResets\Concerns\CanAuthorize;
 use Arcanesoft\Foundation\Authorization\Repositories\PasswordResetsRepository;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,13 @@ use Illuminate\Http\Request;
 class PasswordResetsPerDay extends Trend
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAuthorize;
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -23,7 +31,7 @@ class PasswordResetsPerDay extends Trend
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Illuminate\Http\Request                                           $request
+     * @param  \Illuminate\Http\Request                                                    $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\PasswordResetsRepository  $repo
      *
      * @return mixed

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\Users;
 
 use Arcanedev\LaravelMetrics\Metrics\Trend;
-use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Policies\UsersPolicy;
+use Arcanesoft\Foundation\Authorization\Metrics\Users\Concerns\CanAuthorize;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
@@ -18,6 +17,13 @@ use Illuminate\Http\Request;
 class UsersPerMinute extends Trend
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAuthorize;
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -25,7 +31,7 @@ class UsersPerMinute extends Trend
     /**
      * Calculate the value of the metric.
      *
-     * @param  \Illuminate\Http\Request                                  $request
+     * @param  \Illuminate\Http\Request                                           $request
      * @param  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo
      *
      * @return \Arcanedev\LaravelMetrics\Results\Result|mixed
@@ -49,17 +55,5 @@ class UsersPerMinute extends Trend
             180  => __(':minutes Minutes', ['minutes' => 180]),
             240  => __(':minutes Minutes', ['minutes' => 240]),
         ];
-    }
-
-    /**
-     * Check if the authenticated user is authorized.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return bool
-     */
-    public function authorize(Request $request): bool
-    {
-        return Auth::admin()->can(UsersPolicy::ability('metrics'));
     }
 }

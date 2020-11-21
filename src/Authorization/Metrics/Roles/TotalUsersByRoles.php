@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Metrics\Roles;
 
 use Arcanedev\LaravelMetrics\Metrics\Partition;
-use Arcanesoft\Foundation\Authorization\Auth;
-use Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy;
+use Arcanesoft\Foundation\Authorization\Metrics\Roles\Concerns\CanAuthorize;
 use Arcanesoft\Foundation\Authorization\Repositories\RolesRepository;
 use Illuminate\Http\Request;
 
@@ -17,6 +16,13 @@ use Illuminate\Http\Request;
  */
 class TotalUsersByRoles extends Partition
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAuthorize;
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -38,17 +44,5 @@ class TotalUsersByRoles extends Partition
         })->pluck('administrators_count', 'name');
 
         return $this->result($result)->sort('desc');
-    }
-
-    /**
-     * Check if the current user is authorized.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return mixed
-     */
-    public function authorize(Request $request)
-    {
-        return Auth::admin()->can(AdministratorsPolicy::ability('metrics'));
     }
 }
