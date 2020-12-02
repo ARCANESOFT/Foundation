@@ -119,7 +119,7 @@ abstract class Datatable implements Responsable
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return mixed
+     * @return mixed|void
      */
     protected function results(Request $request)
     {
@@ -145,7 +145,7 @@ abstract class Datatable implements Responsable
         $this->applySortByQuery($request, $query);
 
         if ($this->hasTrait(HasFilters::class))
-            $query = $this->callMethod('applyFilters', compact('request', 'query'));
+            $query = $this->callMethod('applyFilters', [$request, $query]);
 
         if ($this->hasTrait(HasPagination::class))
             return $query->paginate(call_user_func_array([$this, 'getPerPage'], [$request]));
@@ -164,14 +164,14 @@ abstract class Datatable implements Responsable
     protected function handleCollection(Collection $collection, Request $request)
     {
         if ($this->hasTrait(HasFilters::class))
-            $collection = $this->callMethod('applyFilters', compact('request', 'collection'));
+            $collection = $this->callMethod('applyFilters', [$request, $collection]);
 
         $collection = $this->applySortByCollection($request, $collection);
 
         return $this->callTraitMethod(
             HasPagination::class,
             'paginateCollection',
-            compact('request', 'collection'),
+            [$request, $collection],
             $collection
         );
     }

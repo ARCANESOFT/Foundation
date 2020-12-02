@@ -89,9 +89,11 @@ class AdministratorDatatable extends Datatable
     /**
      * Define the datatable filters.
      *
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Arcanesoft\Foundation\Datatable\Contracts\Filter[]
      */
-    protected function filters(): array
+    protected function filters(Request $request): array
     {
         return [
             Filter::select('status', 'Status', 'all', [

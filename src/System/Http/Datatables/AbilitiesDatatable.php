@@ -6,11 +6,7 @@ namespace Arcanesoft\Foundation\System\Http\Datatables;
 
 use Arcanedev\LaravelPolicies\Ability;
 use Arcanedev\LaravelPolicies\Contracts\PolicyManager;
-use Arcanesoft\Foundation\Datatable\{
-    Action,
-    Column,
-    Datatable,
-    Filter};
+use Arcanesoft\Foundation\Datatable\{Action, Column, Datatable, Filter};
 use Arcanesoft\Foundation\Datatable\Concerns\{HasActions, HasFilters, HasPagination};
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
 use Arcanesoft\Foundation\System\Http\Transformers\AbilityTransformer;
@@ -137,9 +133,11 @@ class AbilitiesDatatable extends Datatable
     /**
      * Define the datatable filters.
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Arcanesoft\Foundation\Datatable\Contracts\Filter[]
      */
-    protected function filters(): array
+    protected function filters(Request $request): array
     {
         return [
             Filter::select('status', 'Status', 'all', [
