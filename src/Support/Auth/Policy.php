@@ -30,7 +30,7 @@ abstract class Policy extends AbstractPolicy
      */
     public static function can(string $ability, $data = []): bool
     {
-        return static::authorized(static::user(), static::ability($ability), $data);
+        return static::authorized(static::user(), $ability, $data);
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class Policy extends AbstractPolicy
      */
     public static function canFromRequest(Request $request, string $ability, $data = []): bool
     {
-        return static::authorized($request->user(), static::ability($ability), $data);
+        return static::authorized($request->user(), $ability, $data);
     }
 
     /**
