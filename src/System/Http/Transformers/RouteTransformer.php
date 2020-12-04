@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\System\Http\Transformers;
 
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
+use Arcanesoft\Foundation\Datatable\DataTypes\Tag;
 use Illuminate\Http\Request;
 
 /**
@@ -30,12 +31,7 @@ class RouteTransformer implements Transformer
     public function transform($resource, Request $request): array
     {
         return [
-            'methods'    => array_map(function (array $method) {
-                return [
-                    'color' => $method['color'],
-                    'label' => $method['name'],
-                ];
-            }, $resource->methods),
+            'methods'    => $this->transformMethods($resource->methods),
             'domain'     => $resource->domain ?: '-',
             'details'    => [
                 [
@@ -51,12 +47,40 @@ class RouteTransformer implements Transformer
                     'description' => $resource->action,
                 ],
             ],
-            'middleware' => array_map(function (string $middleware) {
-                return [
-                    'color' => 'dark',
-                    'label' => $middleware,
-                ];
-            }, $resource->middleware),
+            'middleware' => $this->transformMiddleware($resource->middleware),
         ];
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Transform the methods.
+     *
+     * @param  array  $methods
+     *
+     * @return array
+     */
+    protected function transformMethods(array $methods): array
+    {
+        return array_map(function (array $method) {
+            return (new Tag)->transform($method['name'], $method['color']);
+        }, $methods);
+    }
+
+    /**
+     * Transform the middlewares.
+     *
+     * @param  array  $middlewares
+     *
+     * @return array
+     */
+    protected function transformMiddleware(array $middlewares): array
+    {
+        return array_map(function (string $middleware) {
+            return (new Tag)->transform($middleware, 'dark');
+        }, $middlewares);
     }
 }

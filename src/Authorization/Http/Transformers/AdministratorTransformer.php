@@ -6,6 +6,7 @@ namespace Arcanesoft\Foundation\Authorization\Http\Transformers;
 
 use Arcanesoft\Foundation\Authorization\Models\Administrator;
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
+use Arcanesoft\Foundation\Datatable\DataTypes\BadgeActive;
 use Illuminate\Http\Request;
 
 /**
@@ -35,13 +36,7 @@ class AdministratorTransformer implements Transformer
             'last_name'  => $resource->last_name,
             'email'      => $resource->email,
             'created_at' => $resource->created_at->format('Y-m-d H:i:s'),
-            'status'     => with($resource->isActive(), function ($isActive) {
-                return [
-                    'active' => $isActive,
-                    'label'  => __($isActive ? 'Activated' : 'Deactivated'),
-                    'icon'   => true,
-                ];
-            }),
+            'status'     => (new BadgeActive)->transform($resource->isActive()),
         ];
     }
 

@@ -6,6 +6,8 @@ namespace Arcanesoft\Foundation\Authorization\Http\Transformers;
 
 use Arcanesoft\Foundation\Authorization\Models\User;
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
+use Arcanesoft\Foundation\Datatable\DataTypes\Avatar;
+use Arcanesoft\Foundation\Datatable\DataTypes\BadgeActive;
 use Illuminate\Http\Request;
 
 /**
@@ -31,21 +33,12 @@ class UserTransformer implements Transformer
     public function transform($resource, Request $request): array
     {
         return [
-            'avatar'     => [
-                'image' => $resource->avatar,
-                'alt'   => $resource->full_name,
-            ],
+            'avatar'     => (new Avatar)->transform($resource->avatar, $resource->full_name),
             'first_name' => $resource->first_name,
             'last_name'  => $resource->last_name,
             'email'      => $resource->email,
             'created_at' => $resource->created_at->format('Y-m-d H:i:s'),
-            'status'     => with($resource->isActive(), function ($isActive) {
-                return [
-                    'active' => $isActive,
-                    'label'  => __($isActive ? 'Activated' : 'Deactivated'),
-                    'icon'   => true,
-                ];
-            }),
+            'status'     => (new BadgeActive)->transform($resource->isActive()),
         ];
     }
 }

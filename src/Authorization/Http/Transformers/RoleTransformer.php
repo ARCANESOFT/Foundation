@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Transformers;
 
-use Arcanesoft\Foundation\Authorization\Models\Role;
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
+use Arcanesoft\Foundation\Datatable\DataTypes\{BadgeActive, BadgeCount, Status};
 use Illuminate\Http\Request;
 
 /**
@@ -33,33 +33,10 @@ class RoleTransformer implements Transformer
         return [
             'name'           => $resource->name,
             'description'    => $resource->description,
-            'administrators' => $resource->administrators_count,
-            'locked'         => $this->lockedBadge($resource),
-            'status'         => with($resource->isActive(), function ($isActive) {
-                return [
-                    'active' => $isActive,
-                    'label'  => __($isActive ? 'Activated' : 'Deactivated'),
-                    'icon'   => true,
-                ];
-            }),
+            'administrators' => (new BadgeCount)->transform($resource->administrators_count, 'Administrators'),
+            'locked'         => (new Status)->transform($resource->isLocked() ? 'danger' : 'success', $resource->isLocked() ? 'Locked' : 'Unlocked'),
+            'status'         => (new BadgeActive)->transform($resource->isActive()),
             'created_at'     => $resource->created_at->format('Y-m-d H:i:s'),
         ];
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the locked badge.
-     *
-     * @param  \Arcanesoft\Foundation\Authorization\Models\Role  $role
-     *
-     * @return string
-     */
-    protected function lockedBadge(Role $role): string
-    {
-        return '<span class="status '.($role->isLocked() ? 'bg-danger' : 'bg-secondary').'" data-toggle="tooltip" title="'.__($role->isLocked() ? 'Locked' : 'Unlocked').'"></span>';
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Http\Transformers;
 
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
+use Arcanesoft\Foundation\Datatable\DataTypes\BadgeCount;
 use Illuminate\Http\Request;
 
 /**
@@ -34,7 +35,7 @@ class PermissionTransformer implements Transformer
             'category'    => $resource->category,
             'name'        => $resource->name,
             'description' => $resource->description,
-            'roles'       => $resource->roles_count,
+            'roles'       => (new BadgeCount)->transform($resource->roles_count, 'Roles'),
         ];
     }
 }
