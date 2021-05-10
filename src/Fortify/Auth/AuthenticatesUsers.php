@@ -76,11 +76,8 @@ trait AuthenticatesUsers
      */
     protected function getLoginResponse(Request $request)
     {
-        if ($request->wantsJson()) {
-            return new JsonResponse(
-                ['two_factor' => false], JsonResponse::HTTP_OK
-            );
-        }
+        if ($request->wantsJson())
+            return new JsonResponse(['two_factor' => false], JsonResponse::HTTP_OK);
 
         return redirect()->intended($this->redirectUrlAfterLogin($request));
     }
@@ -94,12 +91,12 @@ trait AuthenticatesUsers
      */
     protected function getLogoutResponse(Request $request)
     {
-        $url = $this->redirectUrlAfterLogout($request);
-
         if ($request->wantsJson())
-            return new JsonResponse(['redirect' => $url]);
+            return new JsonResponse(['success' => 'Successfully logged out of application'], JsonResponse::HTTP_OK);
 
-        return redirect()->to($url);
+        return redirect()->to(
+            $this->redirectUrlAfterLogout($request)
+        );
     }
 
     /**

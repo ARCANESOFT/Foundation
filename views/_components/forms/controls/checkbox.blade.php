@@ -7,7 +7,7 @@
  */
 
 $attributes = $attributes->merge([
-    'class' => 'form-check-input'.$errors->first($name, ' is-invalid'),
+    'class' => 'form-check-input '.$errors->first($name, ' is-invalid'),
 ]);
 ?>
 

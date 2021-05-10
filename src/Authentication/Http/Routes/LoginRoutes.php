@@ -7,7 +7,7 @@ namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 use Arcanedev\Support\Routing\RouteRegistrar;
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authentication\Http\Controllers\{LoginController, TwoFactorLoginController};
-use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
+use Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter;
 
 /**
  * Class     LoginRoutes

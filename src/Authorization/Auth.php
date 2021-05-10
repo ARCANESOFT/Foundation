@@ -149,7 +149,7 @@ class Auth
      */
     public static function username(): string
     {
-        return 'email';
+        return static::config('username', 'email');
     }
 
     /* -----------------------------------------------------------------

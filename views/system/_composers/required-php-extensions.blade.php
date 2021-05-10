@@ -4,7 +4,7 @@
         @foreach($requiredPhpExtensions as $extension => $loaded)
         <tr>
             <td class="text-monospace text-muted small">{{ $extension }}</td>
-            <td class="text-right">
+            <td class="text-end">
                 @if ($loaded)
                     <span class="badge border border-success text-success">
                         <i class="fas fa-fw fa-check"></i>

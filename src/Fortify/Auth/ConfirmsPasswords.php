@@ -160,14 +160,14 @@ trait ConfirmsPasswords
      */
     protected function getFailedResponse(Request $request)
     {
-        $message = __('The provided password was incorrect.');
+        $message = __('auth.password');
 
-        if ($request->wantsJson()) {
+        if ($request->wantsJson())
             throw ValidationException::withMessages([
                 'password' => [$message],
             ]);
-        }
 
+        // TODO: Remove the redirection and use validation exception instead?
         return redirect()->back()->withErrors(['password' => $message]);
     }
 

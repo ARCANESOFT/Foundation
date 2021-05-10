@@ -27,7 +27,7 @@
             <li class="nav-item dropdown">
                 @php($user = Arcanesoft\Foundation\Authorization\Auth::admin())
                 <a class="navbar-link-item profile-dropdown-menu dropdown-toggle" id="profile-dropdown-menu"
-                   href="#" data-toggle="dropdown" aria-expanded="false">
+                   href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="avatar">
                         <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}" class="rounded-circle bg-light">
                         <span class="status bg-success"></span>
@@ -44,7 +44,7 @@
                     <div class="dropdown-divider"></div>
                     {{-- LOGOUT --}}
                     <button @click.prevent="logout('{{ route('admin::auth.logout') }}')"
-                       class="dropdown-item">@lang('Logout')</button>
+                       class="dropdown-item">@lang('Log out')</button>
                 </div>
             </li>
         </ul>

@@ -24,7 +24,7 @@
                     <x-arc:card-table>
                         <tr>
                             <x-arc:table-th label="Status"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <span class="badge border border-danger text-muted">
                                     <i class="fas fa-fw fa-exclamation-triangle text-danger"></i> @lang('Enabled')
                                 </span>
@@ -32,15 +32,15 @@
                         </tr>
                         <tr>
                             <x-arc:table-th label="Time"/>
-                            <td class="text-right small">{{ $maintenanceData['time'] ?? 'null' }}</td>
+                            <td class="text-end small">{{ $maintenanceData['time'] ?? 'null' }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Message"/>
-                            <td class="text-right small">{{ $maintenanceData['message'] ?? 'null' }}</td>
+                            <td class="text-end small">{{ $maintenanceData['message'] ?? 'null' }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Allowed"/>
-                            <td class="text-right">
+                            <td class="text-end">
 {{--                                @forelse($maintenanceData['allowed'] as $allowed)--}}
 {{--                                    <span class="badge border border-secondary">{{ $allowed }}</span>--}}
 {{--                                @empty--}}
@@ -51,19 +51,19 @@
                         @if ($maintenanceData['retry'])
                         <tr>
                             <x-arc:table-th label="Retry"/>
-                            <td class="text-right">{{ $maintenanceData['retry'] }}</td>
+                            <td class="text-end">{{ $maintenanceData['retry'] }}</td>
                         </tr>
                         @endif
                         @if ($maintenanceData['status'])
                             <tr>
                                 <x-arc:table-th label="Status"/>
-                                <td class="text-right">{{ $maintenanceData['status'] }}</td>
+                                <td class="text-end">{{ $maintenanceData['status'] }}</td>
                             </tr>
                         @endif
                     </x-arc:card-table>
 
                     @can (Arcanesoft\Foundation\System\Policies\MaintenancePolicy::ability('toggle'))
-                    <x-arc:card-footer class="text-right">
+                    <x-arc:card-footer class="text-end">
                         <x-arc:form action="{{ route('admin::system.maintenance.stop') }}" method="POST">
                             <button type="submit"
                                     class="btn btn-sm btn-outline-success">@lang('Stop Maintenance Mode')</button>
@@ -74,7 +74,7 @@
                     <x-arc:card-table>
                         <tr>
                             <td class="font-weight-light text-uppercase text-muted">@lang('Status')</td>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <span class="badge border border-success text-muted">@lang('Disabled')</span>
                             </td>
                         </tr>
@@ -134,7 +134,7 @@
                                 </div>
                             </div>
                         </x-arc:card-body>
-                        <x-arc:card-footer class="text-right">
+                        <x-arc:card-footer class="text-end">
                             <button type="submit"
                                     class="btn btn-sm btn-outline-danger">@lang('Start Maintenance Mode')</button>
                         </x-arc:card-footer>

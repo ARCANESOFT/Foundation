@@ -84,7 +84,7 @@ trait RegistersUsers
         if ($request->wantsJson())
             new Response('', Response::HTTP_CREATED);
 
-        return redirect()->to($this->redirectUrlAfterRegister($request, $user));
+        return redirect()->intended($this->redirectUrlAfterRegister($request, $user));
     }
 
     /**

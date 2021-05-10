@@ -135,7 +135,7 @@ class TwoFactorAuthenticationRepository
         ]);
 
         event(new ReplacingRecoveryCode($user));
-        $saved = $user->save();
+        $saved = $user->twoFactor->push();
         event(new ReplacedRecoveryCode($user));
 
         return $saved;

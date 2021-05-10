@@ -3,19 +3,19 @@
     <x-arc:card-table>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('URL')</td>
-            <td class="text-right small">{{ $applicationInfo['url'] }}</td>
+            <td class="text-end small">{{ $applicationInfo['url'] }}</td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Locale')</td>
-            <td class="text-right small">{{ $applicationInfo['locale'] }}</td>
+            <td class="text-end small">{{ $applicationInfo['locale'] }}</td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Timezone')</td>
-            <td class="text-right small">{{ $applicationInfo['timezone'] }}</td>
+            <td class="text-end small">{{ $applicationInfo['timezone'] }}</td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Debug Mode')</td>
-            <td class="text-right">
+            <td class="text-end">
                 @if ($applicationInfo['debug_mode'])
                     <span class="badge border border-danger text-muted">
                         <i class="fas fa-fw fa-exclamation-triangle text-danger"></i> @lang('Enabled')
@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Maintenance Mode')</td>
-            <td class="text-right">
+            <td class="text-end">
                 @if ($applicationInfo['maintenance_mode'])
                     <span class="badge border border-danger text-muted">
                         <i class="fas fa-fw fa-exclamation-triangle text-danger"></i> @lang('Enabled')
@@ -39,37 +39,37 @@
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('PHP Version')</td>
-            <td class="text-right">
+            <td class="text-end">
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['php_version'] }}</span>
             </td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Laravel Version')</td>
-            <td class="text-right">
+            <td class="text-end">
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['laravel_version'] }}</span>
             </td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('ARCANESOFT Version')</td>
-            <td class="text-right">
+            <td class="text-end">
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['foundation_version'] }}</span>
             </td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Database Driver')</td>
-            <td class="text-right">
+            <td class="text-end">
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['database_connection'] }}</span>
             </td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Cache Driver')</td>
-            <td class="text-right">
+            <td class="text-end">
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['cache_driver'] }}</span>
             </td>
         </tr>
         <tr>
             <td class="font-weight-light text-uppercase text-muted">@lang('Session Driver')</td>
-            <td class="text-right">
+            <td class="text-end">
                 <span class="badge border border-muted text-muted">{{ $applicationInfo['session_driver'] }}</span>
             </td>
         </tr>

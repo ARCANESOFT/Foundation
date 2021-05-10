@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Actions\Authentication\Login;
 
-use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
+use Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -23,7 +23,7 @@ abstract class PrepareAuthenticatedSession
     /**
      * The login rate limiter instance.
      *
-     * @var \Arcanesoft\Foundation\Fortify\LoginRateLimiter
+     * @var \Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
@@ -35,7 +35,7 @@ abstract class PrepareAuthenticatedSession
     /**
      * PrepareAuthenticatedSession constructor.
      *
-     * @param  \Arcanesoft\Foundation\Fortify\LoginRateLimiter  $limiter
+     * @param  \Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter  $limiter
      */
     public function __construct(LoginRateLimiter $limiter)
     {

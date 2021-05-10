@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Database\Factories;
 
 use Arcanesoft\Foundation\Authorization\Models\User;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Carbon, Str};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -71,11 +71,12 @@ class UserFactory extends Factory
      */
     public function verified($date = null): self
     {
-        if (is_null($date))
-            $date = now();
+        $date = $date === false
+            ? null
+            : ($date ?: Carbon::now());
 
         return $this->state([
-            'email_verified_at' => $date === false ? null : $date,
+            'email_verified_at' => $date,
         ]);
     }
 

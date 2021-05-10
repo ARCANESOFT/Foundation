@@ -7,6 +7,8 @@ return [
      | -----------------------------------------------------------------
      */
 
+    'username' => 'email',
+
     'authentication' => [
 
         'login'      => [
@@ -59,6 +61,11 @@ return [
 
         'login' => [
             'enabled'  => true,
+            'throttle' => '5',
+        ],
+
+        'two-factor' => [
+            'enabled'  => false,
             'throttle' => '5',
         ],
 

@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
  * Class     Password
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @todo Update by using Illuminate\Validation\Rules\Password class
  */
 class Password implements Rule
 {

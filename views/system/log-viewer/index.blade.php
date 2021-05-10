@@ -15,7 +15,7 @@
                             label="{{ $header }}" scope="col"
                             class="{{ $key === 'date' ? 'text-left' : 'text-center' }}"/>
                     @endforeach
-                    <x-arc:table-th label="Actions" scope="col" class="text-right"/>
+                    <x-arc:table-th label="Actions" scope="col" class="text-end"/>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                             @endif
                         </td>
                     @endforeach
-                    <td class="text-right">
+                    <td class="text-end">
                         {{-- SHOW --}}
                         <x-arc:datatable-action
                             type="show"

@@ -7,10 +7,11 @@ namespace Arcanesoft\Foundation\Fortify\Actions\Authentication\Login;
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Models\Concerns\HasTwoFactorAuthentication;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
-use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
+use Arcanesoft\Foundation\Fortify\Http\Limiters\TwoFactorRateLimiter;
 use Closure;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\{JsonResponse, Request};
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -35,7 +36,7 @@ abstract class RedirectIfTwoFactorWasEnabled
     /**
      * The login rate limiter instance.
      *
-     * @var \Arcanesoft\Foundation\Fortify\LoginRateLimiter
+     * @var \Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
@@ -47,9 +48,9 @@ abstract class RedirectIfTwoFactorWasEnabled
     /**
      * RedirectIfTwoFactorWasEnabled constructor.
      *
-     * @param  \Arcanesoft\Foundation\Fortify\LoginRateLimiter  $limiter
+     * @param  \Arcanesoft\Foundation\Fortify\Http\Limiters\TwoFactorRateLimiter  $limiter
      */
-    public function __construct(LoginRateLimiter $limiter)
+    public function __construct(TwoFactorRateLimiter $limiter)
     {
         $this->limiter = $limiter;
     }
@@ -111,8 +112,10 @@ abstract class RedirectIfTwoFactorWasEnabled
         $model    = $this->guard()->getProvider()->getModel();
         $username = Auth::username();
         $user     = $model::where($username, $request->{$username})->first();
+        $password = $request->password;
 
-        if ( ! $user || ! Hash::check($request->input('password'), $user->password)) {
+        if ( ! $user || ! $this->guard()->getProvider()->validateCredentials($user, compact('password'))) {
+            $this->fireFailedEvent($request, $user);
             $this->throwFailedAuthenticationException($request);
         }
 
@@ -154,6 +157,22 @@ abstract class RedirectIfTwoFactorWasEnabled
         throw ValidationException::withMessages([
             Auth::username() => [trans('auth.failed')],
         ]);
+    }
+
+    /**
+     * Fire the failed authentication attempt event with the given arguments.
+     *
+     * @param  \Illuminate\Http\Request                         $request
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
+     */
+    protected function fireFailedEvent(Request $request, Authenticatable $user = null): void
+    {
+        $username = Auth::username();
+
+        event(new Failed($this->getGuardName(), $user, [
+            $username  => $request->{$username},
+            'password' => $request->password,
+        ]));
     }
 
     /**

@@ -104,6 +104,19 @@ abstract class TwoFactorLoginRequest extends FormRequest
     }
 
     /**
+     * Determine if there is a challenged user in the current session.
+     *
+     * @return bool
+     */
+    public function hasChallengedUser(): bool
+    {
+        $model = $this->guard()->getProvider()->getModel();
+
+        return $this->session()->has('login.id')
+            && $model::find($this->session()->get('login.id'));
+    }
+
+    /**
      * Get the user that is attempting the two factor challenge.
      *
      * @return \Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor|mixed|null

@@ -69,13 +69,15 @@ trait AuthenticatesWithTwoFactorChallenge
 
         if ($code = $request->validRecoveryCode()) {
             $this->getTwoFactorAuthenticationRepository()
-                ->replaceRecoveryCode($user, $code);
+                 ->replaceRecoveryCode($user, $code);
         }
         elseif ( ! $request->hasValidCode()) {
             return $this->getFailedTwoFactorLoginResponse($request);
         }
 
         $this->guard()->login($user, $request->remember());
+
+        $request->session()->regenerate();
 
         return $this->getTwoFactorLoginResponse($request, $user);
     }

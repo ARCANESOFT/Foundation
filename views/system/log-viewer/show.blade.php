@@ -92,7 +92,7 @@
 
     {{-- Log Entries --}}
     @if ($entries->hasPages())
-        <div class="mb-4 text-right">
+        <div class="mb-4 text-end">
             <x-arc:pagination-pages :paginator="$entries"/>
         </div>
     @endif

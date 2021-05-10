@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Fortify;
+namespace Arcanesoft\Foundation\Fortify\Http\Limiters;
 
 use Arcanesoft\Foundation\Authorization\Auth;
-use Illuminate\Cache\RateLimiter;
+use Illuminate\Cache\RateLimiter as Limiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /**
- * Class     LoginRateLimiter
+ * Class     RateLimiter
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LoginRateLimiter
+abstract class RateLimiter
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -38,15 +38,10 @@ class LoginRateLimiter
      *
      * @param  \Illuminate\Cache\RateLimiter  $limiter
      */
-    public function __construct(RateLimiter $limiter)
+    public function __construct(Limiter $limiter)
     {
         $this->limiter = $limiter;
     }
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
 
     /**
      * Determine if the user has too many failed login attempts.
@@ -92,32 +87,16 @@ class LoginRateLimiter
         $this->limiter->clear($this->throttleKey($request));
     }
 
-    /* -----------------------------------------------------------------
-     |  Check Methods
-     | -----------------------------------------------------------------
-     */
-
     /**
-     * Check if the throttle is enabled.
+     * Get the number of attempts for the given key.
      *
-     * @return bool
-     */
-    public static function isEnabled(): bool
-    {
-        return (bool) Auth::config('limiters.login.enabled');
-    }
-
-    /**
-     * Get the 'throttle' middleware.
+     * @param  \Illuminate\Http\Request  $request
      *
-     * @return string|null
+     * @return mixed
      */
-    public static function middleware(): ?string
+    public function attempts(Request $request)
     {
-        if ( ! static::isEnabled())
-            return null;
-
-        return 'throttle:'.Auth::config('limiters.login.throttle');
+        return $this->limiter->attempts($this->throttleKey($request));
     }
 
     /* -----------------------------------------------------------------

@@ -6,7 +6,7 @@ namespace Arcanesoft\Foundation\Fortify\Actions\Authentication\Login;
 
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Fortify\Concerns\HasGuard;
-use Arcanesoft\Foundation\Fortify\LoginRateLimiter;
+use Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -33,7 +33,7 @@ abstract class AttemptToAuthenticate
     /**
      * The login rate limiter instance.
      *
-     * @var \Arcanesoft\Foundation\Fortify\LoginRateLimiter
+     * @var \Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter
      */
     protected $limiter;
 
@@ -45,7 +45,7 @@ abstract class AttemptToAuthenticate
     /**
      * AttemptToAuthenticate constructor.
      *
-     * @param  \Arcanesoft\Foundation\Fortify\LoginRateLimiter  $limiter
+     * @param  \Arcanesoft\Foundation\Fortify\Http\Limiters\LoginRateLimiter  $limiter
      */
     public function __construct(LoginRateLimiter $limiter)
     {
