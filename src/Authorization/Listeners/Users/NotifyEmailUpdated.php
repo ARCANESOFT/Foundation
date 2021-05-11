@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Listeners\Users;
 
 use Arcanesoft\Foundation\Authorization\Events\Users\Attributes\UpdatedEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 /**
  * Class     NotifyEmailUpdated
@@ -25,6 +26,7 @@ class NotifyEmailUpdated
      */
     public function handle(UpdatedEmail $event)
     {
-        // TODO: Send email updated notification.
+        if ($event->user instanceof MustVerifyEmail)
+            $event->user->sendEmailVerificationNotification();
     }
 }

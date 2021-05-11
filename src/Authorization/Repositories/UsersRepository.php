@@ -124,39 +124,41 @@ class UsersRepository extends AbstractRepository
      * Update the given user (+ synced roles).
      *
      * @param  \Arcanesoft\Foundation\Authorization\Models\User  $user
-     * @param array                                    $attributes
+     * @param  array                                             $attributes
      *
      * @return bool
-     *@todo: Clean this method.
      *
+     * @TODO: Clean this method.
      */
     public function updateOne(User $user, array $attributes): bool
     {
         $user->fill($attributes);
 
-        $this->dispatchAttributeEvent('updating', $user);
-        $updated = (clone $user)->save();
-        $this->dispatchAttributeEvent('updated', $user);
+        $dirtyAttributes = $user->getDirty();
+
+        $this->dispatchAttributeEvent('updating', $user, $dirtyAttributes);
+        $updated = $user->save();
+        $this->dispatchAttributeEvent('updated', $user, $dirtyAttributes);
 
         return $updated;
     }
 
     /**
-     * @todo: Move this into a model or repository.
+     * TODO: Move this into a model or repository.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @param  string                               $type
      *
      * @return array|null
      */
-    protected function dispatchAttributeEvent(string $type, $model)
+    protected function dispatchAttributeEvent(string $type, $model, $dirtyAttributes)
     {
         $attributesEvents = [
             'email.updating' => \Arcanesoft\Foundation\Authorization\Events\Users\Attributes\UpdatingEmail::class,
             'email.updated'  => \Arcanesoft\Foundation\Authorization\Events\Users\Attributes\UpdatedEmail::class,
         ];
 
-        foreach ($model->getDirty() as $name => $value) {
+        foreach ($dirtyAttributes as $name => $value) {
             $event = $name.'.'.$type;
 
             if ( ! array_key_exists($event, $attributesEvents))
@@ -174,7 +176,7 @@ class UsersRepository extends AbstractRepository
      * Update the user's password.
      *
      * @param  \Arcanesoft\Foundation\Authorization\Models\User  $user
-     * @param  string                                   $password
+     * @param  string                                            $password
      *
      * @return bool
      */

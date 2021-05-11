@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanesoft\Foundation\Authorization\Listeners\Users;
 
 use Arcanesoft\Foundation\Authorization\Events\Users\Attributes\UpdatingEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 /**
  * Class     ResetEmailVerification
@@ -25,6 +26,7 @@ class ResetEmailVerification
      */
     public function handle(UpdatingEmail $event)
     {
-        $event->user->forceFill(['email_verified_at' => null]);
+        if ($event->user instanceof MustVerifyEmail)
+            $event->user->forceFill(['email_verified_at' => null]);
     }
 }
