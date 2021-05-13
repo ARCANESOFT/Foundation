@@ -87,7 +87,7 @@ abstract class AttemptToAuthenticate
     {
         return $this->guard()->attempt(
             $request->only([Auth::username(), 'password']),
-            $request->filled('remember')
+            $request->boolean('remember')
         );
     }
 

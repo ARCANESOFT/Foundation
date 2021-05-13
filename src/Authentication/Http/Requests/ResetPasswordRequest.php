@@ -14,6 +14,11 @@ use Arcanesoft\Foundation\Fortify\Rules\Password;
  */
 class ResetPasswordRequest extends FormRequest
 {
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
     /**
      * Validation's rules.
      *

@@ -61,7 +61,7 @@ class LoginTest extends TestCase
     {
         $this->get(static::loginCreateUrl())
              ->assertSuccessful()
-             ->assertViewIs('foundation::auth.login');
+             ->assertViewIs('foundation::authentication.login');
     }
 
     /** @test */
@@ -71,7 +71,7 @@ class LoginTest extends TestCase
 
         $this->actingAs($admin, $this->guard)
              ->get(static::loginCreateUrl())
-             ->assertRedirect(url('/home'));
+             ->assertRedirect(url('home'));
 
         $this->assertAuthenticatedAs($admin);
     }
@@ -171,10 +171,10 @@ class LoginTest extends TestCase
             ->assertAuthenticatedAs($admin);
 
         $this->deleteJson(static::logoutUrl())
-            ->assertSuccessful()
-            ->assertExactJson([
-                'redirect' => static::indexPageUrl(),
-            ]);
+             ->assertSuccessful()
+             ->assertExactJson([
+                 'success' => 'Successfully logged out of application',
+             ]);
 
         $this->assertGuest($this->guard);
     }

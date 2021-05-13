@@ -31,7 +31,7 @@ class CreateUserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:50'],
             'last_name'  => ['required', 'string', 'max:50'],
             'email'      => ['required', 'string', 'email', 'max:255', EmailRule::unique()],
-            'password'   => Password::make()->nullable()->confirmed()->rules(),
+            'password'   => Password::make()->confirmed()->nullable()->rules(),
         ];
     }
 }

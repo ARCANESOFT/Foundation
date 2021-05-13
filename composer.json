@@ -34,6 +34,7 @@
     "require-dev": {
         "composer/composer": "^1.10|^2.0",
         "laravel/framework": "^8.0",
+        "mockery/mockery": "^1.4.2",
         "orchestra/testbench-core": "^6.0",
         "phpunit/phpunit": "^9.3"
     },

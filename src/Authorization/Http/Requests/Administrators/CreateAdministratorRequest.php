@@ -45,7 +45,7 @@ class CreateAdministratorRequest extends FormRequest
                 'max:255',
                 EmailRule::unique(),
             ],
-            'password' => Password::make()->nullable()->confirmed()->rules(),
+            'password' => Password::make()->confirmed()->nullable()->rules(),
             // TODO: Validate the roles array
             'roles' => [
                 'array',
