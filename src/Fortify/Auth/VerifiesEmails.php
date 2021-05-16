@@ -1,10 +1,7 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Auth;
 
-use Arcanesoft\Foundation\Fortify\Concerns\RetrievesUserFromRequest;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\{RedirectResponse, Request};
 

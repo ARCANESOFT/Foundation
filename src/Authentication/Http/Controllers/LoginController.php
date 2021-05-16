@@ -1,13 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Controllers;
 
 use Arcanesoft\Foundation\Fortify\Auth\AuthenticatesUsers;
-use Arcanesoft\Foundation\Authentication\Actions\Login\{
-    AttemptToAuthenticate, EnsureLoginIsNotThrottled, PrepareAuthenticatedSession, RedirectIfTwoFactorWasEnabled
-};
+use Arcanesoft\Foundation\Authentication\Actions\Login\AttemptToAuthenticate;
+use Arcanesoft\Foundation\Authentication\Actions\Login\EnsureLoginIsNotThrottled;
+use Arcanesoft\Foundation\Authentication\Actions\Login\PrepareAuthenticatedSession;
+use Arcanesoft\Foundation\Authentication\Actions\Login\RedirectIfTwoFactorWasEnabled;
 use Arcanesoft\Foundation\Authentication\Concerns\UseAdministratorGuard;
 use Arcanesoft\Foundation\Authentication\Http\Requests\LoginRequest;
 use Arcanesoft\Foundation\Core\Http\Routes\Web\DashboardRoutes;

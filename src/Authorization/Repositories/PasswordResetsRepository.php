@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories;
 
@@ -14,7 +12,7 @@ use Arcanesoft\Foundation\Authorization\Models\PasswordReset;
  *
  * @mixin  \Arcanesoft\Foundation\Authorization\Models\PasswordReset
  */
-class PasswordResetsRepository extends AbstractRepository
+class PasswordResetsRepository extends Repository
 {
     /* -----------------------------------------------------------------
      |  Main Methods

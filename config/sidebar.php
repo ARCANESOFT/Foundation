@@ -22,6 +22,7 @@ return [
 
         // Modules' sidebar items
         'arcanesoft.blog.sidebar.items',
+        'arcanesoft.seo.sidebar.items',
         'arcanesoft.media.sidebar.items',
         'arcanesoft.passport.sidebar.items',
 

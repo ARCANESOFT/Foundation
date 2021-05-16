@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 
@@ -50,7 +48,8 @@ class LoginRoutes extends RouteRegistrar
      */
     protected function mapLoginRoutes(): void
     {
-        $this->prefix('login')->name('login.')->middleware(['guest'])->group(function () {
+        // TODO: Change the `guest` middleware?
+        $this->prefix('login')->name('login.')->middleware(['guest'])->group(function (): void {
             // admin::auth.login.create
             $this->get('/', [LoginController::class, 'create'])
                  ->name('create');
@@ -70,14 +69,14 @@ class LoginRoutes extends RouteRegistrar
         if ( ! Auth::isTwoFactorEnabled())
             return;
 
-        $this->prefix('two-factor-challenge')->name('two-factor.')->group(function () {
+        $this->prefix('two-factor-challenge')->name('two-factor.')->group(function (): void {
             // admin::auth.login.two-factor.create
             $this->get('/', [TwoFactorLoginController::class, 'create'])
-                ->name('create');
+                 ->name('create');
 
             // admin::auth.login.two-factor.store
             $this->post('/', [TwoFactorLoginController::class, 'store'])
-                ->name('store');
+                 ->name('store');
         });
     }
 

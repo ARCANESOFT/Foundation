@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 
@@ -33,7 +31,7 @@ class EmailVerificationRoutes extends RouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('email/verification')->name('email.verification.')->middleware(['auth'])->group(function () {
+        $this->prefix('email/verification')->name('email.verification.')->middleware(['auth'])->group(function (): void {
             // auth::email.verification.notice
             $this->get('/', [EmailVerificationController::class, 'show'])
                  ->name('notice');

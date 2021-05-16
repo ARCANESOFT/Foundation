@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Routes;
 
@@ -43,7 +41,7 @@ class WebRoutes extends AdminRouteRegistrar
      */
     public function map(): void
     {
-        $this->adminGroup(function () {
+        $this->adminGroup(function (): void {
             static::mapRouteClasses($this->getRouteClasses());
         });
     }
@@ -69,7 +67,7 @@ class WebRoutes extends AdminRouteRegistrar
     protected function moduleGroup(Closure $callback)
     {
         $this->prefix('authorization')
-            ->name('authorization.')
-            ->group($callback);
+             ->name('authorization.')
+             ->group($callback);
     }
 }

@@ -21,51 +21,51 @@
                     <tbody>
                         <tr>
                             <x-arc:table-th label="Name"/>
-                            <td class="text-right small">{{ $role->name }}</td>
+                            <td class="text-end small">{{ $role->name }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Description"/>
-                            <td class="text-right small">{{ $role->description }}</td>
+                            <td class="text-end small">{{ $role->description }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Administrator"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <x-arc:badge-count value="{{ $role->administrators->count() }}"/>
                             </td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Permissions"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <x-arc:badge-count value="{{ $role->permissions->count() }}"/>
                             </td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Locked"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 @if ($role->isLocked())
                                     <span class="badge border border-danger text-muted">
-                                        <i class="fa fa-lock text-danger mr-1"></i> @lang('Locked')
+                                        <i class="fa fa-lock text-danger me-1"></i> @lang('Locked')
                                     </span>
                                 @else
                                     <span class="badge border border-secondary text-muted">
-                                        <i class="fa fa-unlock text-secondary mr-1"></i> @lang('Unlocked')
+                                        <i class="fa fa-unlock text-secondary me-1"></i> @lang('Unlocked')
                                     </span>
                                 @endif
                             </td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Status"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <x-arc:badge-active value="{{ $role->isActive() }}"/>
                             </td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Created at"/>
-                            <td class="text-muted text-right small">{{ $role->created_at }}</td>
+                            <td class="text-muted text-end small">{{ $role->created_at }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Updated at"/>
-                            <td class="text-muted text-right small">{{ $role->updated_at }}</td>
+                            <td class="text-muted text-end small">{{ $role->updated_at }}</td>
                         </tr>
                     </tbody>
                 </x-arc:card-table>
@@ -78,19 +78,19 @@
 
                     {{-- ACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'), [$role])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::roles.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('deactivate'), [$role])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::roles.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- DELETE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('delete'), [$role])
-                        <button class="btn btn-sm btn-danger ml-2"
+                        <button class="btn btn-sm btn-danger ms-2"
                                 onclick="ARCANESOFT.emit('authorization::roles.delete')">@lang('Delete')</button>
                     @endcan
                 </x-arc:card-footer>

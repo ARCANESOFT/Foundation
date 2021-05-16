@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Http\Routes;
 
@@ -23,7 +21,7 @@ class DependenciesRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('dependencies')->name('dependencies.')->group(function () {
+        $this->prefix('dependencies')->name('dependencies.')->group(function (): void {
             // admin::system.dependencies.index
             $this->get('/', [DependenciesController::class, 'index'])
                  ->name('index');

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Http\Routes;
 
@@ -23,13 +21,13 @@ class LogViewerRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('log-viewer')->name('log-viewer.')->group(function () {
+        $this->prefix('log-viewer')->name('log-viewer.')->group(function (): void {
             // admin::system.log-viewer.index
             $this->get('/', [LogViewerController::class, 'index'])
                  ->name('index');
 
-            $this->prefix('logs')->name('logs.')->group(function () {
-                $this->prefix('{admin_log_file_date}')->group(function () {
+            $this->prefix('logs')->name('logs.')->group(function (): void {
+                $this->prefix('{admin_log_file_date}')->group(function (): void {
                     // admin::system.log-viewer.logs.show
                     $this->get('/', [LogViewerController::class, 'showLog'])
                          ->name('show');

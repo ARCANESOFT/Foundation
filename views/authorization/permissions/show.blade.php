@@ -18,29 +18,29 @@
                             <tbody>
                             <tr>
                                 <x-arc:table-th label="Group"/>
-                                <td class="text-right small">{{ $permission->group->name }}</td>
+                                <td class="text-end small">{{ $permission->group->name }}</td>
                             </tr>
                             <tr>
                                 <x-arc:table-th label="Category"/>
-                                <td class="text-right small">{{ $permission->category }}</td>
+                                <td class="text-end small">{{ $permission->category }}</td>
                             </tr>
                             <tr>
                                 <x-arc:table-th label="Name"/>
-                                <td class="text-right small">{{ $permission->name }}</td>
+                                <td class="text-end small">{{ $permission->name }}</td>
                             </tr>
                             <tr>
                                 <x-arc:table-th label="Description"/>
-                                <td class="text-right small">{{ $permission->description }}</td>
+                                <td class="text-end small">{{ $permission->description }}</td>
                             </tr>
                             <tr>
                                 <x-arc:table-th label="Roles"/>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <x-arc:badge-count value="{{ $roles->count() }}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <x-arc:table-th label="Created at"/>
-                                <td class="text-right small text-muted">{{ $permission->created_at }}</td>
+                                <td class="text-end small text-muted">{{ $permission->created_at }}</td>
                             </tr>
                             </tbody>
                         </x-arc:card-table>
@@ -55,13 +55,13 @@
                                 <tbody>
                                 <tr>
                                     <x-arc:table-th label="Ability"/>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <div class="badge border border-secondary text-secondary font-monospace">{{ $permission->ability }}</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <x-arc:table-th label="Registered"/>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         @if ($permission->isAbilityRegistered())
                                             <span class="badge border border-success text-success" data-toggle="tooltip" title="@lang('Yes')">
                                                 <i class="fas fa-fw fa-check"></i>
@@ -98,7 +98,7 @@
                                 <x-arc:table-th label="Users" class="text-center"/>
                                 <x-arc:table-th label="Locked" class="text-center"/>
                                 <x-arc:table-th label="Status" class="text-center"/>
-                                <x-arc:table-th label="Actions" class="text-right"/>
+                                <x-arc:table-th label="Actions" class="text-end"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,7 +123,7 @@
                                             <span class="status bg-secondary" data-toggle="tooltip" title="@lang('Deactivated')"></span>
                                         @endif
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{-- SHOW --}}
                                         <x-arc:datatable-action
                                             type="show"

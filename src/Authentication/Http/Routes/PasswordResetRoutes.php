@@ -1,11 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 
 use Arcanedev\Support\Routing\RouteRegistrar;
-use Arcanesoft\Foundation\Authentication\Http\Controllers\{PasswordResetLinkController, ResetPasswordController};
+use Arcanesoft\Foundation\Authentication\Http\Controllers\PasswordResetLinkController;
+use Arcanesoft\Foundation\Authentication\Http\Controllers\ResetPasswordController;
 
 /**
  * Class     PasswordResetRoutes
@@ -34,10 +33,8 @@ class PasswordResetRoutes extends RouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('password')
-             ->name('password.')
-             ->middleware(['guest'])
-             ->group(function () {
+        // TODO: Change the `guest` middleware?
+        $this->prefix('password')->name('password.')->middleware(['guest'])->group(function (): void {
                  // admin::auth.password.request
                  $this->get('forgotten', [PasswordResetLinkController::class, 'create'])
                       ->name('request');

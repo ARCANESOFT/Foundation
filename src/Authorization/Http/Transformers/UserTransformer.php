@@ -1,10 +1,7 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Transformers;
 
-use Arcanesoft\Foundation\Authorization\Models\User;
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
 use Arcanesoft\Foundation\Datatable\DataTypes\Avatar;
 use Arcanesoft\Foundation\Datatable\DataTypes\BadgeActive;

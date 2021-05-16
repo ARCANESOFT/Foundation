@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 
@@ -32,18 +30,14 @@ class ConfirmPasswordRoutes extends RouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('password/confirm')
-             ->name('password.confirm.')
-             ->middleware(['arcanesoft'])
-             ->group(function () {
-                 // admin::auth.password.confirm.create
-                 $this->get('/', [ConfirmPasswordController::class, 'create'])
-                      ->name('create');
+        $this->prefix('password/confirm')->name('password.confirm.')->middleware(['arcanesoft'])->group(function (): void {
+             // admin::auth.password.confirm.create
+             $this->get('/', [ConfirmPasswordController::class, 'create'])
+                  ->name('create');
 
-                 // admin::auth.password.confirm.store
-                 $this->post('/', [ConfirmPasswordController::class, 'store'])
-                      ->name('store');
-             });
+             // admin::auth.password.confirm.store
+             $this->post('/', [ConfirmPasswordController::class, 'store'])
+                  ->name('store');
+         });
     }
-
 }

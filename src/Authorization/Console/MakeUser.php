@@ -1,11 +1,8 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Console;
 
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
-use Closure;
 use Illuminate\Console\Command;
 
 /**
@@ -66,11 +63,11 @@ class MakeUser extends Command
     /**
      * Get the default callback used for creating new Nova users.
      *
-     * @return \Closure
+     * @return callable
      */
-    protected static function defaultCreateUserCallback(): Closure
+    protected static function defaultCreateUserCallback(): callable
     {
-        return function (string $firstName, string $lastName, string $email, string $password) {
+        return function (string $firstName, string $lastName, string $email, string $password): void {
             /** @var  \Arcanesoft\Foundation\Authorization\Repositories\UsersRepository  $repo */
             $repo = app(UsersRepository::class);
             $now  = now();

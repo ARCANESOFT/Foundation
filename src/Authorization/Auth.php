@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization;
 
@@ -64,13 +62,11 @@ class Auth
      *
      * @return string
      */
-    public static function table(string $name, $default = null, $prefixed = true): string
+    public static function table(string $name, string $default = null, bool $prefixed = true): string
     {
         $name = static::config("database.tables.{$name}", $default);
 
-        return $prefixed
-            ? static::prefixTable($name)
-            : $name;
+        return $prefixed ? static::prefixTable($name) : $name;
     }
 
     /**
@@ -81,7 +77,7 @@ class Auth
      *
      * @return string
      */
-    public static function model(string $name, $default = null): string
+    public static function model(string $name, string $default = null): string
     {
         // TODO: Throw exception if not found ?
 

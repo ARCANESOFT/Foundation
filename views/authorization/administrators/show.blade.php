@@ -21,11 +21,11 @@
                     <tbody>
                         <tr>
                             <x-arc:table-th label="Full Name"/>
-                            <td class="text-right">{{ $administrator->full_name }}</td>
+                            <td class="text-end">{{ $administrator->full_name }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Email"/>
-                            <td class="small text-right">
+                            <td class="small text-end">
                                 {{ $administrator->email }}
                                 @if ($administrator->hasVerifiedEmail())
                                     <i class="far fa-check-circle text-primary"
@@ -36,14 +36,14 @@
                         @if ($administrator->hasVerifiedEmail())
                         <tr>
                             <x-arc:table-th label="Email Verified at"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <small class="text-muted">{{ $administrator->email_verified_at }}</small>
                             </td>
                         </tr>
                         @endif
                         <tr>
                             <x-arc:table-th label="Status"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 @if ($administrator->isActive())
                                     <span class="badge border border-success text-muted">
                                         <i class="fas fa-fw fa-check"></i> @lang('Activated')
@@ -63,20 +63,20 @@
                         </tr>
                         <tr>
                             <x-arc:table-th label="Last Activity"/>
-                            <td class="text-right"><small class="text-muted">{{ $administrator->last_activity }}</small></td>
+                            <td class="text-end"><small class="text-muted">{{ $administrator->last_activity }}</small></td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Created at"/>
-                            <td class="text-right"><small class="text-muted">{{ $administrator->created_at }}</small></td>
+                            <td class="text-end"><small class="text-muted">{{ $administrator->created_at }}</small></td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Updated at"/>
-                            <td class="text-right"><small class="text-muted">{{ $administrator->updated_at }}</small></td>
+                            <td class="text-end"><small class="text-muted">{{ $administrator->updated_at }}</small></td>
                         </tr>
                         @if ($administrator->trashed())
                             <tr>
                                 <x-arc:table-th label="Deleted at"/>
-                                <td class="text-right"><small class="text-muted">{{ $administrator->deleted_at }}</small></td>
+                                <td class="text-end"><small class="text-muted">{{ $administrator->deleted_at }}</small></td>
                             </tr>
                         @endif
                     </tbody>
@@ -90,25 +90,25 @@
 
                     {{-- ACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- RESTORE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.restore')">@lang('Restore')</button>
                     @endcan
 
                     {{-- DELETE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-                        <button class="btn btn-sm btn-danger ml-2"
+                        <button class="btn btn-sm btn-danger ms-2"
                                 onclick="ARCANESOFT.emit('authorization::administrators.delete')">@lang('Delete')</button>
                     @endcan
                 </x-arc:card-footer>
@@ -126,7 +126,7 @@
                                 <tr>
                                     <x-arc:table-th label="Name"/>
                                     <x-arc:table-th label="Description"/>
-                                    <x-arc:table-th label="Actions" class="text-right"/>
+                                    <x-arc:table-th label="Actions" class="text-end"/>
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,7 +135,7 @@
                                     <tr>
                                         <td class="small">{{ $role->name }}</td>
                                         <td class="small">{{ $role->description }}</td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-light"
                                                data-toggle="tooltip" title="@lang('Show')">
                                                 <i class="far fa-fw fa-eye"></i>
@@ -163,7 +163,7 @@
                                     <x-arc:table-th label="IP"/>
                                     <x-arc:table-th label="Device"/>
                                     <x-arc:table-th label="Last activity"/>
-                                    <x-arc:table-th label="Actions" class="text-right"/>
+                                    <x-arc:table-th label="Actions" class="text-end"/>
                                 </tr>
                             </thead>
                             <tbody>

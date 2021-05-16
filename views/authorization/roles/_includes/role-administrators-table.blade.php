@@ -9,7 +9,7 @@
                 <x-arc:table-th label="Email"/>
                 <x-arc:table-th label="Created at" class="text-center"/>
                 <x-arc:table-th label="Status" class="text-center"/>
-                <x-arc:table-th label="Actions" class="text-right"/>
+                <x-arc:table-th label="Actions" class="text-end"/>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                     <span class="status {{ $administrator->isActive() ? 'bg-success' : 'bg-secondary' }}"
                           data-toggle="tooltip" title="@lang($administrator->isActive() ? 'Activated' : 'Deactivated')"></span>
                 </td>
-                <td class="text-right">
+                <td class="text-end">
                     {{-- SHOW --}}
                     <x-arc:datatable-action
                         type="show"

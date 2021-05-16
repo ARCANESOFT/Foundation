@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories;
 
@@ -16,7 +14,7 @@ use Illuminate\Http\Response;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SocialiteUsersRepository extends AbstractRepository
+class SocialiteUsersRepository extends Repository
 {
     /* -----------------------------------------------------------------
      |  Main Methods

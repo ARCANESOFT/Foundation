@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Database\Migration;

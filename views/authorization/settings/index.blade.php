@@ -12,7 +12,7 @@
                 <x-arc:card-table>
                     <tr>
                         <x-arc:table-th label="Login"/>
-                        <td class="text-right">
+                        <td class="text-end">
                             @if ($authentication['login']['enabled'])
                                 <span class="badge border border-success text-success">@lang('Enabled')</span>
                             @else
@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <x-arc:table-th label="Register"/>
-                        <td class="text-right">
+                        <td class="text-end">
                             @if ($authentication['register']['enabled'])
                                 <span class="badge border border-success text-success">@lang('Enabled')</span>
                             @else
@@ -32,7 +32,7 @@
                     </tr>
                     <tr>
                         <x-arc:table-th label="Socialite"/>
-                        <td class="text-right">
+                        <td class="text-end">
                             @if ($authentication['socialite']['enabled'])
                                 <span class="badge border border-success text-success">@lang('Enabled')</span>
                             @else
@@ -53,7 +53,7 @@
                         @foreach($providers as $provider)
                             <tr>
                                 <x-arc:table-th label="{{ $provider->name }}"/>
-                                <td class="text-right">
+                                <td class="text-end">
                                     @if ($provider->enabled)
                                         <span class="badge border border-success text-success">@lang('Enabled')</span>
                                     @else

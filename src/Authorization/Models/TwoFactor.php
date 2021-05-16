@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Models;
 
@@ -57,7 +55,6 @@ class TwoFactor extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->setConnection(config('arcanesoft.auth.database.connection'));
         $this->setTable(Auth::table('two_factors'));
 
         parent::__construct($attributes);

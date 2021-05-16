@@ -5,7 +5,7 @@
 @endsection
 
 @push('content-nav')
-    <div class="mb-3 text-right">
+    <nav class="page-actions">
         @can(Arcanesoft\Foundation\Authorization\Policies\PasswordResetsPolicy::ability('metrics'))
         <a href="{{ route('admin::authorization.password-resets.metrics') }}"
            class="btn btn-sm btn-secondary {{ active(['admin::authorization.password-resets.metrics']) }}">@lang('Metrics')</a>
@@ -15,5 +15,5 @@
         <a href="{{ route('admin::authorization.password-resets.index') }}"
            class="btn btn-sm btn-secondary {{ active(['admin::authorization.password-resets.index']) }}">@lang('Password Resets')</a>
         @endcan
-    </div>
+    </nav>
 @endpush

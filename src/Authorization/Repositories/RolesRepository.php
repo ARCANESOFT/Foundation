@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories;
 
@@ -28,7 +26,7 @@ use Arcanesoft\Foundation\Authorization\Events\Roles\Permissions\SyncingPermissi
  *
  * @mixin  \Arcanesoft\Foundation\Authorization\Models\Role
  */
-class RolesRepository extends AbstractRepository
+class RolesRepository extends Repository
 {
     /* -----------------------------------------------------------------
      |  Main Methods

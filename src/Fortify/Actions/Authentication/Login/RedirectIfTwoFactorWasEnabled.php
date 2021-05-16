@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Fortify\Actions\Authentication\Login;
 
@@ -182,5 +180,5 @@ abstract class RedirectIfTwoFactorWasEnabled
      *
      * @return string
      */
-    abstract protected function getTwoFactorUrl(Request $request);
+    abstract protected function getTwoFactorUrl(Request $request): string;
 }

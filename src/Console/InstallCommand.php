@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Console;
 
@@ -10,7 +8,6 @@ use Arcanesoft\Foundation\Core\Console\InstallCommand as CoreInstallCommand;
 use Arcanesoft\Foundation\ModuleManifest;
 use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
 use Arcanesoft\Foundation\System\Console\InstallCommand as SystemInstallCommand;
-use Closure;
 
 /**
  * Class     InstallCommand

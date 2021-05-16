@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Http\Routes;
 
@@ -23,7 +21,7 @@ class MaintenanceRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('maintenance')->name('maintenance.')->group(function () {
+        $this->prefix('maintenance')->name('maintenance.')->group(function (): void {
             // admin::system.maintenance.index
             $this->get('/', [MaintenanceController::class, 'index'])
                  ->name('index');

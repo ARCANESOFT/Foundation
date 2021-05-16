@@ -42,10 +42,6 @@ return [
         // Table
         'table-th'         => Arcanesoft\Foundation\Views\Components\Table\Th::class,
 
-        // Datatable
-        'datatable-action'     => Arcanesoft\Foundation\Views\Components\Datatable\Action::class,
-        'datatable-pagination' => Arcanesoft\Foundation\Views\Components\Datatable\Pagination::class,
-
         // Modal
         'modal'            => Arcanesoft\Foundation\Views\Components\Modals\Modal::class,
         'modal-header'     => Arcanesoft\Foundation\Views\Components\Modals\Header::class,

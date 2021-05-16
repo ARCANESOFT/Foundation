@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories;
 
@@ -12,7 +10,7 @@ use Arcanesoft\Foundation\Authorization\Models\Session;
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SessionsRepository extends AbstractRepository
+class SessionsRepository extends Repository
 {
     /**
      * @inheritDoc

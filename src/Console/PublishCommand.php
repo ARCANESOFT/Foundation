@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Console;
 
@@ -69,7 +67,7 @@ class PublishCommand extends Command
      */
     public function publishFoundation(): void
     {
-
+        //
     }
 
     /**

@@ -11,7 +11,7 @@
             <p class="mb-0">{{ $notification['content'] }}</p>
             @endif
         </div>
-        <x-arc:button-close data-dismiss="alert"/>
+        <x-arc:button-close data-bs-dismiss="alert"/>
     </div>
 @endforeach
 

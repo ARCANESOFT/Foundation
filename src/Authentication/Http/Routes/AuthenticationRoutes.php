@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authentication\Http\Routes;
 
@@ -24,7 +22,7 @@ class AuthenticationRoutes extends RouteRegistrar
     public function map(): void
     {
         $this->adminGroup(function () {
-            $this->prefix('auth')->name('auth.')->group(function () {
+            $this->prefix('auth')->name('auth.')->group(function (): void {
                 static::mapRouteClasses([
                     ConfirmPasswordRoutes::class,
                     LoginRoutes::class,

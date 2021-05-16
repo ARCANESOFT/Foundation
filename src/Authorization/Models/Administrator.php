@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Models;
 
@@ -277,6 +275,7 @@ class Administrator extends Authenticatable implements Impersonatable, CanBeActi
      */
     public function isDeletable(): bool
     {
+        // TODO: Add more deletion checks?
         return ! $this->isSuperAdmin()
             || ! $this->is(Auth::admin());
     }

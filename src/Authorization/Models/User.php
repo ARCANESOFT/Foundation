@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Models;
 
@@ -127,7 +125,7 @@ class User extends Authenticatable implements Impersonatable, CanBeActivated, Ha
      */
     public function __construct(array $attributes = [])
     {
-        $this->setConnection(config('arcanesoft.auth.database.connection'));
+        $this->setConnection(Auth::config('database.connection'));
         $this->setTable(Auth::table('users'));
 
         parent::__construct($attributes);
@@ -187,6 +185,7 @@ class User extends Authenticatable implements Impersonatable, CanBeActivated, Ha
      */
     public function isDeletable(): bool
     {
+        // TODO: Add the deletion check
         return true;
     }
 

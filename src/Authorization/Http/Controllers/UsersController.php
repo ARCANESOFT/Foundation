@@ -1,15 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
 use Arcanedev\LaravelImpersonator\Contracts\Impersonator;
 use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Http\Datatables\UsersDatatable;
-use Arcanesoft\Foundation\Authorization\Http\Requests\Users\{
-    CreateUserRequest,
-    UpdateUserRequest};
+use Arcanesoft\Foundation\Authorization\Http\Requests\Users\{CreateUserRequest, UpdateUserRequest};
 use Arcanesoft\Foundation\Authorization\Models\User;
 use Arcanesoft\Foundation\Authorization\Policies\UsersPolicy;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;

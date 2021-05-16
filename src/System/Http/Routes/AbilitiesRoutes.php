@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Http\Routes;
 
@@ -23,7 +21,7 @@ class AbilitiesRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('abilities')->name('abilities.')->group(function () {
+        $this->prefix('abilities')->name('abilities.')->group(function (): void {
             // admin::system.abilities.index
             $this->get('/', [AbilitiesController::class, 'index'])
                  ->name('index');

@@ -1,14 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Datatable;
 
 use Arcanesoft\Foundation\Datatable\Contracts\Filter as FilterContract;
 use Arcanesoft\Foundation\Datatable\Filters\Select;
 use Closure;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 
 /**
  * Class     Filter

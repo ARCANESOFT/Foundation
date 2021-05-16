@@ -19,11 +19,11 @@
                     <tbody>
                         <tr>
                             <x-arc:table-th label="Full Name"/>
-                            <td class="text-right small">{{ $user->full_name }}</td>
+                            <td class="text-end small">{{ $user->full_name }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Email"/>
-                            <td class="text-right small">
+                            <td class="text-end small">
                                 {{ $user->email }}
                                 @if ($user->hasVerifiedEmail())
                                     <i class="far fa-check-circle text-primary" data-toggle="tooltip" title="@lang('Verified')"></i>
@@ -33,12 +33,12 @@
                         @if ($user->hasVerifiedEmail())
                         <tr>
                             <x-arc:table-th label="Email Verified at"/>
-                            <td class="text-muted text-right small">{{ $user->email_verified_at }}</td>
+                            <td class="text-muted text-end small">{{ $user->email_verified_at }}</td>
                         </tr>
                         @endif
                         <tr>
                             <x-arc:table-th label="Status"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 @if ($user->isActive())
                                     <span class="badge border border-success text-muted">
                                         <i class="fas fa-fw fa-check text-success"></i> @lang('Activated')
@@ -52,21 +52,21 @@
                         </tr>
                         <tr>
                             <x-arc:table-th label="Last Activity"/>
-                            <td class="text-right text-muted small">{{ $user->last_activity }}</td>
+                            <td class="text-end text-muted small">{{ $user->last_activity }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Created at"/>
-                            <td class="text-right text-muted small">{{ $user->created_at }}</td>
+                            <td class="text-end text-muted small">{{ $user->created_at }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Updated at"/>
-                            <td class="text-right text-muted small">{{ $user->updated_at }}</td>
+                            <td class="text-end text-muted small">{{ $user->updated_at }}</td>
                         </tr>
                         @if ($user->trashed())
                             <tr>
                                 <x-arc:table-th label="Deleted at"/>
                                 <td class="font-weight-light text-uppercase text-muted">@lang('Deleted at')</td>
-                                <td class="text-right text-muted small">{{ $user->deleted_at }}</td>
+                                <td class="text-end text-muted small">{{ $user->deleted_at }}</td>
                             </tr>
                         @endif
                     </tbody>
@@ -81,30 +81,30 @@
                     {{-- IMPERSONATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('impersonate'), [$user])
                         <a href="{{ route('admin::authorization.users.impersonate', [$user]) }}"
-                           class="btn btn-sm btn-secondary ml-2">@lang('Impersonate')</a>
+                           class="btn btn-sm btn-secondary ms-2">@lang('Impersonate')</a>
                     @endcan
 
                     {{-- ACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('activate'), [$user])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::users.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('deactivate'), [$user])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::users.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- RESTORE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'), [$user])
-                        <button class="btn btn-sm btn-secondary ml-2"
+                        <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('authorization::users.restore')">@lang('Restore')</button>
                     @endcan
 
                     {{-- DELETE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('delete'), [$user])
-                        <button class="btn btn-sm btn-danger ml-2"
+                        <button class="btn btn-sm btn-danger ms-2"
                                 onclick="ARCANESOFT.emit('authorization::users.delete')">@lang('Delete')</button>
                     @endcan
                 </x-arc:card-footer>
@@ -120,7 +120,7 @@
                                 <x-arc:table-th label="Provider"/>
                                 <x-arc:table-th label="Created at" class="text-center"/>
                                 <x-arc:table-th label="Updated at" class="text-center"/>
-                                <x-arc:table-th label="Actions" class="text-right"/>
+                                <x-arc:table-th label="Actions" class="text-end"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,7 +129,7 @@
                                 <td>{{ $linkedAccount->name }}</td>
                                 <td class="small text-muted text-center">{{ $linkedAccount->created_at }}</td>
                                 <td class="small text-muted text-center">{{ $linkedAccount->updated_at }}</td>
-                                <td class="text-right"></td>
+                                <td class="text-end"></td>
                             </tr>
                             @endforeach
                         </tbody>

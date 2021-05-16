@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\System\Http\Routes;
 
@@ -23,7 +21,7 @@ class RoutesViewerRoutes extends AbstractRouteRegistrar
      */
     public function map(): void
     {
-        $this->prefix('routes-viewer')->name('routes-viewer.')->group(function () {
+        $this->prefix('routes-viewer')->name('routes-viewer.')->group(function (): void {
             // admin::system.routes-viewer.index
             $this->get('/', [RoutesViewerController::class, 'index'])
                  ->name('index');

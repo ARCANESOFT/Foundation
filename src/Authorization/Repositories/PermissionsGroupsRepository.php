@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories;
 
@@ -14,7 +12,7 @@ use Arcanesoft\Foundation\Authorization\Models\PermissionsGroup;
  *
  * @mixin  \Arcanesoft\Foundation\Authorization\Models\PermissionsGroup
  */
-class PermissionsGroupsRepository extends AbstractRepository
+class PermissionsGroupsRepository extends Repository
 {
     /* -----------------------------------------------------------------
      |  Main Methods

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Authorization\Repositories;
 
@@ -25,7 +23,7 @@ use Illuminate\Support\{Collection, Str};
  *
  * @mixin \Arcanesoft\Foundation\Authorization\Models\Administrator
  */
-class AdministratorsRepository extends AbstractRepository
+class AdministratorsRepository extends Repository
 {
     /* -----------------------------------------------------------------
      |  Traits
