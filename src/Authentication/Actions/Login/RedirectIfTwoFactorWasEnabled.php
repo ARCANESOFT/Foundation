@@ -32,7 +32,7 @@ class RedirectIfTwoFactorWasEnabled extends Action
      *
      * @return string
      */
-    protected function getTwoFactorUrl(Request $request)
+    protected function getTwoFactorUrl(Request $request): string
     {
         return route('auth::admin.login.two-factor.create');
     }

@@ -28,6 +28,7 @@
         "arcanedev/route-viewer": "^4.0",
         "arcanedev/support": "^8.0",
         "bacon/bacon-qr-code": "^2.0",
+        "kalnoy/nestedset": "^6.0",
         "laravel/socialite": "^5.0",
         "pragmarx/google2fa": "^7.0|^8.0"
     },

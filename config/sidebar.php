@@ -28,6 +28,37 @@ return [
 
         // Authorization
         [
+            'name'        => 'foundation::cms',
+            'title'       => 'CMS',
+            'icon'        => 'fas fa-fw fa-key',
+            'roles'       => [],
+            'permissions' => [],
+            'children'    => [
+                [
+                    'name'        => 'foundation::cms.dashboard',
+                    'title'       => 'Statistics',
+                    'icon'        => 'fas fa-fw fa-tachometer-alt',
+                    'route'       => 'admin::cms.index',
+                    'roles'       => ['cms-moderator'],
+                    'permissions' => [
+                        'admin::cms.index',
+                    ],
+                ],
+                [
+                    'name'        => 'foundation::cms.categories',
+                    'title'       => 'Categories',
+                    'icon'        => 'fas fa-fw fa-tachometer-alt',
+                    'route'       => 'admin::cms.categories.index',
+                    'roles'       => ['cms-moderator'],
+                    'permissions' => [
+                        'admin::cms.categories.index',
+                    ],
+                ],
+            ],
+        ],
+
+        // Authorization
+        [
             'name'        => 'foundation::authorization',
             'title'       => 'Authorization',
             'icon'        => 'fas fa-fw fa-key',

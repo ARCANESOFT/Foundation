@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
+declare(strict_types=1);
+
+namespace Arcanesoft\Foundation\Cms\Http\Controllers;
 
 use Arcanesoft\Foundation\Support\Http\Controller as BaseController;
 
@@ -33,6 +35,6 @@ abstract class Controller extends BaseController
      */
     protected function addBreadcrumbParent(): void
     {
-        $this->addBreadcrumbRoute(__('Authorization'), 'admin::authorization.index');
+        $this->addBreadcrumbRoute(__('CMS'), 'admin::cms.index');
     }
 }

@@ -45,7 +45,7 @@ class InstallCommand extends Command
      *
      * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    public function handle(ModuleManifest $manifest): void
+    public function handle(ModuleManifest $manifest): int
     {
         $this->line("<fg=blue>
     ___    ____  _________    _   _____________ ____  ____________
@@ -65,6 +65,8 @@ class InstallCommand extends Command
 
         $this->newLine();
         $this->line('<fg=blue>ARCANESOFT has been installed successfully ( ^o^)b</>');
+
+        return static::SUCCESS;
     }
 
     /**
