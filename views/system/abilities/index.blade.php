@@ -1,15 +1,13 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-user-shield"></i> @lang('System') <small>@lang('Abilities')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-user-shield"></i> @lang('System') <small>@lang('Abilities')</small>
-@endsection
+    @push('content-nav')
+        @include('foundation::system._includes.system-nav')
+    @endpush
 
-@push('content-nav')
-    @include('foundation::system._includes.system-nav')
-@endpush
-
-@section('content')
     <v-datatable
         name="abilities-datatable"
         url="{{ route('admin::system.abilities.datatable') }}"/>
-@endsection
+</x-arc:layout>

@@ -1,12 +1,9 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php /** @var  Arcanesoft\Foundation\Authorization\Models\Permission  $permission */ ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-shield-alt"></i> @lang('Permissions') <small>@lang("Permission's details")</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-shield-alt"></i> @lang('Permissions') <small>@lang("Permission's details")</small>
-@endsection
-
-@section('content')
     <div class="row">
         <div class="col-md-5 col-lg-4">
             <div class="row row-cols-1 g-4">
@@ -144,38 +141,38 @@
             @endcan
         </div>
     </div>
-@endsection
 
-{{-- DETACH ROLE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::ability('roles.detach'), $permission)
-    @push('modals')
-        <x-arc:modal-action
-            type="detach" id="detach-role"
-            action="{{ route('admin::authorization.permissions.roles.detach', [$permission, ':id']) }}" method="DELETE"
-            title="Detach Role"
-            body="Are you sure you want to delete this role ?"
-        />
-    @endpush
+    {{-- DETACH ROLE MODAL/SCRIPT --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::ability('roles.detach'), $permission)
+        @push('modals')
+            <x-arc:modal-action
+                type="detach" id="detach-role"
+                action="{{ route('admin::authorization.permissions.roles.detach', [$permission, ':id']) }}" method="DELETE"
+                title="Detach Role"
+                body="Are you sure you want to delete this role ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script>
-            let detachRoleModal  = components.modal('div#detach-role-modal')
-            let detachRoleForm   = components.form('form#detach-role-form')
-            let detachRoleAction = detachRoleForm.action()
+        @push('scripts')
+            <script>
+                let detachRoleModal  = components.modal('div#detach-role-modal')
+                let detachRoleForm   = components.form('form#detach-role-form')
+                let detachRoleAction = detachRoleForm.action()
 
-            ARCANESOFT.on('authorization::permissions.roles.detach', ({id}) => {
-                detachRoleForm.action(detachRoleAction.replace(':id', id))
-                detachRoleModal.show();
-            });
+                ARCANESOFT.on('authorization::permissions.roles.detach', ({id}) => {
+                    detachRoleForm.action(detachRoleAction.replace(':id', id))
+                    detachRoleModal.show();
+                });
 
-            detachRoleForm.onSubmit('DELETE', () => {
-                detachRoleModal.hide()
-                location.reload()
-            })
+                detachRoleForm.onSubmit('DELETE', () => {
+                    detachRoleModal.hide()
+                    location.reload()
+                })
 
-            detachRoleModal.on('hidden', () => {
-                detachRoleForm.action(detachRoleAction.toString());
-            });
-        </script>
-    @endpush
-@endcan
+                detachRoleModal.on('hidden', () => {
+                    detachRoleForm.action(detachRoleAction.toString());
+                });
+            </script>
+        @endpush
+    @endcan
+</x-arc:layout>

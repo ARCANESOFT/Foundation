@@ -1,11 +1,9 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-language"></i> @lang('Languages') <small>@lang('New Language')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-language"></i> @lang('Languages') <small>@lang('New Language')</small>
-@endsection
-
-@section('content')
-    <x-arc:form action="{{ route('admin::cms.languages.store') }}" method="POST">
+    <x-arc:form action="{{ route('admin::cms.languages.store') }}">
         <div class="row row-cols-lg-2">
             <div class="col">
                 <x-arc:card>
@@ -28,4 +26,4 @@
             </div>
         </div>
     </x-arc:form>
-@endsection
+</x-arc:layout>

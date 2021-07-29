@@ -1,12 +1,9 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang('Metrics')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fa fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang('Metrics')</small>
-@endsection
-
-@push('content-nav')
-    @include('foundation::authorization.roles._partials.nav-actions')
-@endpush
-
-@section('content')
-@endsection
+    @push('content-nav')
+        @include('foundation::authorization.roles._partials.nav-actions')
+    @endpush
+</x-arc:layout>

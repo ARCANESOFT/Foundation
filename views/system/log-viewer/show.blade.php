@@ -1,17 +1,14 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php
 /**
  * @var  Arcanedev\LogViewer\Entities\Log                                                    $log
  * @var  Arcanedev\LogViewer\Entities\LogEntry[]|Illuminate\Pagination\LengthAwarePaginator  $entries
  */
 ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-clipboard-list"></i> @lang('LogViewer')
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-clipboard-list"></i> @lang('LogViewer')
-@endsection
-
-@section('content')
     {{-- Log Details --}}
     <x-arc:card class="mb-4">
         <x-arc:card-header>{{ $log->date }}</x-arc:card-header>
@@ -143,32 +140,32 @@
     </section>
 
     {{ $entries->appends(compact('query'))->render('foundation::_components.pagination', ['class' => 'justify-content-center mb-0']) }}
-@endsection
 
-{{-- DELETE MODAL/SCRIPT --}}
-@can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
-    @push('modals')
-        <x-arc:modal-action
-            type="delete"
-            action="{{ route('admin::system.log-viewer.logs.delete', [$log->date]) }}" method="DELETE"
-            title="Delete Log File"
-            body="Are you sure you want to delete this log file ?"
-        />
-    @endpush
+    {{-- DELETE MODAL/SCRIPT --}}
+    @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
+        @push('modals')
+            <x-arc:modal-action
+                type="delete"
+                action="{{ route('admin::system.log-viewer.logs.delete', [$log->date]) }}" method="DELETE"
+                title="Delete Log File"
+                body="Are you sure you want to delete this log file ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deleteModal = components.modal('div#delete-modal')
-            let deleteForm  = components.form('form#delete-form')
+        @push('scripts')
+            <script defer>
+                let deleteModal = components.modal('div#delete-modal')
+                let deleteForm  = components.form('form#delete-form')
 
-            ARCANESOFT.on('foundation::system.log-viewer.delete', () => {
-                deleteModal.show()
-            })
+                ARCANESOFT.on('foundation::system.log-viewer.delete', () => {
+                    deleteModal.show()
+                })
 
-            deleteForm.onSubmit('DELETE', () => {
-                deleteModal.hide()
-                location.replace("{{ route('admin::system.log-viewer.index') }}")
-            })
-        </script>
-    @endpush
-@endcan
+                deleteForm.onSubmit('DELETE', () => {
+                    deleteModal.hide()
+                    location.replace("{{ route('admin::system.log-viewer.index') }}")
+                })
+            </script>
+        @endpush
+    @endcan
+</x-arc:layout>

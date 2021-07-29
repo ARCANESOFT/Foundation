@@ -1,14 +1,11 @@
-@extends(arcanesoft\foundation()->template())
-
-@section('page-title')
-    <i class="fas fa-fw fa-user"></i> @lang('Profile')
-@endsection
-
 <?php /** @var  Arcanesoft\Foundation\Authorization\Models\User  $user */ ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-user"></i> @lang('Profile')
+    @endsection
 
-@section('content')
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row row-cols-md-2">
+        <div class="col">
             {{-- ACCOUNT --}}
             <x-arc:form action="{{ route('admin::authorization.profile.account.update') }}" method="PUT">
                 <x-arc:card>
@@ -43,7 +40,7 @@
                 </x-arc:card>
             </x-arc:form>
         </div>
-        <div class="col-md-6">
+        <div class="col">
             {{-- PASSWORD --}}
             <x-arc:form action="{{ route('admin::authorization.profile.password.update') }}" method="PUT">
                 <x-arc:card>
@@ -76,7 +73,4 @@
             </x-arc:form>
         </div>
     </div>
-@endsection
-
-@push('scripts')
-@endpush
+</x-arc:layout>

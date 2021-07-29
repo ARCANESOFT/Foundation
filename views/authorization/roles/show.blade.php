@@ -1,17 +1,14 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php
 /**
  * @var  Arcanesoft\Foundation\Authorization\Models\Role  $role
- * @var  string                                  $tab
+ * @var  string                                           $tab
  */
 ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang("Role's details")</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang("Role's details")</small>
-@endsection
-
-@section('content')
     <div class="row g-4">
         <div class="col-lg-4">
             {{-- ROLE --}}
@@ -109,86 +106,86 @@
             </x-arc:card>
         </div>
     </div>
-@endsection
 
-{{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'), [$role])
-    @push('modals')
-        <x-arc:modal-action
-            type="activate"
-            action="{{ route('admin::authorization.roles.activate', [$role]) }}" method="PUT"
-            title="Activate Role" body="Are you sure you want to activate this role ?"
-        />
-    @endpush
+    {{-- ACIVATE MODAL --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('activate'), [$role])
+        @push('modals')
+            <x-arc:modal-action
+                type="activate"
+                action="{{ route('admin::authorization.roles.activate', [$role]) }}" method="PUT"
+                title="Activate Role" body="Are you sure you want to activate this role ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let activateModal = components.modal('div#activate-modal')
-            let activateForm  = components.form('form#activate-form')
+        @push('scripts')
+            <script defer>
+                let activateModal = components.modal('div#activate-modal')
+                let activateForm  = components.form('form#activate-form')
 
-            ARCANESOFT.on('authorization::roles.activate', () => {
-                activateModal.show()
-            });
+                ARCANESOFT.on('authorization::roles.activate', () => {
+                    activateModal.show()
+                });
 
-            activateForm.onSubmit('PUT', () => {
-                activateModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
+                activateForm.onSubmit('PUT', () => {
+                    activateModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- DEACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('deactivate'), [$role])
-    @push('modals')
-        <x-arc:modal-action
-            type="deactivate"
-            action="{{ route('admin::authorization.roles.deactivate', [$role]) }}" method="PUT"
-            title="Deactivate Role" body="Are you sure you want to deactivate this role ?"
-        />
-    @endpush
+    {{-- DEACIVATE MODAL --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('deactivate'), [$role])
+        @push('modals')
+            <x-arc:modal-action
+                type="deactivate"
+                action="{{ route('admin::authorization.roles.deactivate', [$role]) }}" method="PUT"
+                title="Deactivate Role" body="Are you sure you want to deactivate this role ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deactivateModal = components.modal('div#deactivate-modal')
-            let deactivateForm  = components.form('form#deactivate-form')
+        @push('scripts')
+            <script defer>
+                let deactivateModal = components.modal('div#deactivate-modal')
+                let deactivateForm  = components.form('form#deactivate-form')
 
-            ARCANESOFT.on('authorization::roles.deactivate', () => {
-                deactivateModal.show()
-            });
+                ARCANESOFT.on('authorization::roles.deactivate', () => {
+                    deactivateModal.show()
+                });
 
-            deactivateForm.onSubmit('PUT', () => {
-                deactivateModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
+                deactivateForm.onSubmit('PUT', () => {
+                    deactivateModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- DELETE MODAL --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('delete'), [$role])
-    @push('modals')
-        <x-arc:modal-action
-            type="delete"
-            action="{{ route('admin::authorization.roles.delete', [$role]) }}" method="DELETE"
-            title="Delete Role"
-            body="Are you sure you want to delete this role ?"
-        />
-    @endpush
+    {{-- DELETE MODAL --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('delete'), [$role])
+        @push('modals')
+            <x-arc:modal-action
+                type="delete"
+                action="{{ route('admin::authorization.roles.delete', [$role]) }}" method="DELETE"
+                title="Delete Role"
+                body="Are you sure you want to delete this role ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deleteModal = components.modal('div#delete-modal')
-            let deleteForm  = components.form('form#delete-form')
+        @push('scripts')
+            <script defer>
+                let deleteModal = components.modal('div#delete-modal')
+                let deleteForm  = components.form('form#delete-form')
 
-            ARCANESOFT.on('authorization::roles.delete', () => {
-                deleteModal.show()
-            })
+                ARCANESOFT.on('authorization::roles.delete', () => {
+                    deleteModal.show()
+                })
 
-            deleteForm.onSubmit('DELETE', () => {
-                deleteModal.hide()
-                location.replace("{{ route('admin::authorization.roles.index') }}")
-            })
-        </script>
-    @endpush
-@endcan
+                deleteForm.onSubmit('DELETE', () => {
+                    deleteModal.hide()
+                    location.replace("{{ route('admin::authorization.roles.index') }}")
+                })
+            </script>
+        @endpush
+    @endcan
+</x-arc:layout>

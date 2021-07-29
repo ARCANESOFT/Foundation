@@ -1,14 +1,12 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-user-shield"></i> @lang('System') <small>@lang('Dependencies')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-user-shield"></i> @lang('System') <small>@lang('Dependencies')</small>
-@endsection
+    @push('content-nav')
+        @include('foundation::system._includes.system-nav')
+    @endpush
 
-@push('content-nav')
-    @include('foundation::system._includes.system-nav')
-@endpush
-
-@section('content')
     <div class="row">
         <div class="col-lg-6">
             <x-arc:card>
@@ -54,4 +52,4 @@
             </x-arc:card>
         </div>
     </div>
-@endsection
+</x-arc:layout>

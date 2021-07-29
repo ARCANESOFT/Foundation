@@ -1,17 +1,14 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php
 /**
  * @var  Arcanesoft\Foundation\Authorization\Models\Role                                                   $role
  * @var  Arcanesoft\Foundation\Authorization\Models\Permission[]|\Illuminate\Database\Eloquent\Collection  $permissions
  */
 ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang('Edit Role')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang('Edit Role')</small>
-@endsection
-
-@section('content')
     <x-arc:form action="{{ route('admin::authorization.roles.update', [$role]) }}" method="PUT">
         <div class="row">
             <div class="col-md-4">
@@ -76,4 +73,4 @@
             </div>
         </div>
     </x-arc:form>
-@endsection
+</x-arc:layout>

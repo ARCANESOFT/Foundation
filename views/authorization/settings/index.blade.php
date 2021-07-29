@@ -1,10 +1,8 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-cog"></i> @lang('Settings')
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-cog"></i> @lang('Settings')
-@endsection
-
-@section('content')
     <div class="row row-cols-lg-3 g-3">
         <div class="col">
             <x-arc:card>
@@ -67,4 +65,4 @@
             </div>
         @endif
     </div>
-@endsection
+</x-arc:layout>

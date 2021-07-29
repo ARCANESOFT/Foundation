@@ -1,13 +1,9 @@
-
-@extends(arcanesoft\foundation()->template())
-
 <?php /** @var  Arcanesoft\Foundation\Authorization\Models\Administrator  $administrator */ ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang("Administrator's details")</small>
+    @endsection
 
-@section('page-title')
-    <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang("Administrator's details")</small>
-@endsection
-
-@section('content')
     <div class="row g-4">
         <div class="col-lg-5">
             {{-- ADMINISTRATOR --}}
@@ -193,120 +189,120 @@
             </div>
         </div>
     </div>
-@endsection
 
-{{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-    @push('modals')
-        <x-arc:modal-action
-            type="activate"
-            action="{{ route('admin::authorization.administrators.activate', [$administrator]) }}" method="PUT"
-            title="Activate Administrator" body="Are you sure you want to activate this administrator ?"
-        />
-    @endpush
+    {{-- ACIVATE MODAL --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
+        @push('modals')
+            <x-arc:modal-action
+                type="activate"
+                action="{{ route('admin::authorization.administrators.activate', [$administrator]) }}" method="PUT"
+                title="Activate Administrator" body="Are you sure you want to activate this administrator ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let activateModal = components.modal('div#activate-modal')
-            let activateForm  = components.form('form#activate-form')
+        @push('scripts')
+            <script defer>
+                let activateModal = components.modal('div#activate-modal')
+                let activateForm  = components.form('form#activate-form')
 
-            ARCANESOFT.on('authorization::administrators.activate', () => {
-                activateModal.show()
-            });
+                ARCANESOFT.on('authorization::administrators.activate', () => {
+                    activateModal.show()
+                });
 
-            activateForm.onSubmit('PUT', () => {
-                activateModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
+                activateForm.onSubmit('PUT', () => {
+                    activateModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- DEACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
-    @push('modals')
-        <x-arc:modal-action
-            type="deactivate"
-            action="{{ route('admin::authorization.administrators.deactivate', [$administrator]) }}" method="PUT"
-            title="Deactivate Administrator" body="Are you sure you want to deactivate this administrator ?"
-        />
-    @endpush
+    {{-- DEACIVATE MODAL --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
+        @push('modals')
+            <x-arc:modal-action
+                type="deactivate"
+                action="{{ route('admin::authorization.administrators.deactivate', [$administrator]) }}" method="PUT"
+                title="Deactivate Administrator" body="Are you sure you want to deactivate this administrator ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deactivateModal = components.modal('div#deactivate-modal')
-            let deactivateForm  = components.form('form#deactivate-form')
+        @push('scripts')
+            <script defer>
+                let deactivateModal = components.modal('div#deactivate-modal')
+                let deactivateForm  = components.form('form#deactivate-form')
 
-            ARCANESOFT.on('authorization::administrators.deactivate', () => {
-                deactivateModal.show()
-            });
+                ARCANESOFT.on('authorization::administrators.deactivate', () => {
+                    deactivateModal.show()
+                });
 
-            deactivateForm.onSubmit('PUT', () => {
-                deactivateModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
+                deactivateForm.onSubmit('PUT', () => {
+                    deactivateModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- DELETE MODAL --}}
-@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-    @push('modals')
-        <x-arc:modal-action
-            type="delete"
-            action="{{ route('admin::authorization.administrators.delete', [$administrator]) }}" method="DELETE"
-            title="Delete Administrator"
-            body="Are you sure you want to delete this administrator ?"
-        />
-    @endpush
+    {{-- DELETE MODAL --}}
+    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
+        @push('modals')
+            <x-arc:modal-action
+                type="delete"
+                action="{{ route('admin::authorization.administrators.delete', [$administrator]) }}" method="DELETE"
+                title="Delete Administrator"
+                body="Are you sure you want to delete this administrator ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deleteModal = components.modal('div#delete-modal')
-            let deleteForm  = components.form('form#delete-form')
+        @push('scripts')
+            <script defer>
+                let deleteModal = components.modal('div#delete-modal')
+                let deleteForm  = components.form('form#delete-form')
 
-            ARCANESOFT.on('authorization::administrators.delete', () => {
-                deleteModal.show()
-            })
+                ARCANESOFT.on('authorization::administrators.delete', () => {
+                    deleteModal.show()
+                })
 
-            deleteForm.onSubmit('DELETE', () => {
-                deleteModal.hide()
-                @if ($administrator->trashed())
-                location.replace("{{ route('admin::authorization.administrators.index') }}")
-                @else
-                location.reload()
-                @endif
-            })
-        </script>
-    @endpush
-@endcan
+                deleteForm.onSubmit('DELETE', () => {
+                    deleteModal.hide()
+                    @if ($administrator->trashed())
+                    location.replace("{{ route('admin::authorization.administrators.index') }}")
+                    @else
+                    location.reload()
+                    @endif
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- RESTORE MODAL --}}
-@if($administrator->trashed())
-@can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-    @push('modals')
-        <x-arc:modal-action
-            type="restore"
-            action="{{ route('admin::authorization.administrators.restore', [$administrator]) }}" method="PUT"
-            title="Restore Administrator"
-            body="Are you sure you want to restore this administrator ?"
-        />
-    @endpush
+    {{-- RESTORE MODAL --}}
+    @if($administrator->trashed())
+    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+        @push('modals')
+            <x-arc:modal-action
+                type="restore"
+                action="{{ route('admin::authorization.administrators.restore', [$administrator]) }}" method="PUT"
+                title="Restore Administrator"
+                body="Are you sure you want to restore this administrator ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let restoreModal = components.modal('div#restore-modal')
-            let restoreForm  = components.form('form#restore-form')
+        @push('scripts')
+            <script defer>
+                let restoreModal = components.modal('div#restore-modal')
+                let restoreForm  = components.form('form#restore-form')
 
-            ARCANESOFT.on('authorization::administrators.restore', () => {
-                restoreModal.show()
-            });
+                ARCANESOFT.on('authorization::administrators.restore', () => {
+                    restoreModal.show()
+                });
 
-            restoreForm.onSubmit('PUT', () => {
-                restoreModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
-@endif
+                restoreForm.onSubmit('PUT', () => {
+                    restoreModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
+    @endif
+</x-arc:layout>

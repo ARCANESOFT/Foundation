@@ -1,12 +1,9 @@
-@extends(arcanesoft\foundation()->template())
-
-@section('page-title')
-    <i class="fas fa-fw fa-language"></i> @lang('Languages') <small>@lang("Language's details")</small>
-@endsection
-
 <?php /** @var  Arcanesoft\Foundation\Cms\Models\Language|mixed  $language */ ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-language"></i> @lang('Languages') <small>@lang("Language's details")</small>
+    @endsection
 
-@section('content')
     <div class="row g-4">
         <div class="col-lg-5">
             <x-arc:card>
@@ -75,87 +72,86 @@
         <div class="col-lg-7">
         </div>
     </div>
-@endsection
 
-{{-- ACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('activate'), [$language])
-    @push('modals')
-        <x-arc:modal-action
-            type="activate"
-            action="{{ route('admin::cms.languages.activate', [$language]) }}" method="PUT"
-            title="Activate Language" body="Are you sure you want to activate this user ?"
-        />
-    @endpush
+    {{-- ACIVATE MODAL --}}
+    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('activate'), [$language])
+        @push('modals')
+            <x-arc:modal-action
+                type="activate"
+                action="{{ route('admin::cms.languages.activate', [$language]) }}" method="PUT"
+                title="Activate Language" body="Are you sure you want to activate this user ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let activateModal = components.modal('div#activate-modal')
-            let activateForm  = components.form('form#activate-form')
+        @push('scripts')
+            <script defer>
+                let activateModal = components.modal('div#activate-modal')
+                let activateForm  = components.form('form#activate-form')
 
-            ARCANESOFT.on('cms::languages.activate', () => {
-                activateModal.show()
-            });
+                ARCANESOFT.on('cms::languages.activate', () => {
+                    activateModal.show()
+                });
 
-            activateForm.onSubmit('PUT', () => {
-                activateModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
+                activateForm.onSubmit('PUT', () => {
+                    activateModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- DEACIVATE MODAL --}}
-@can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('deactivate'), [$language])
-    @push('modals')
-        <x-arc:modal-action
-            type="deactivate"
-            action="{{ route('admin::cms.languages.deactivate', [$language]) }}" method="PUT"
-            title="Deactivate Language" body="Are you sure you want to deactivate this user ?"
-        />
-    @endpush
+    {{-- DEACIVATE MODAL --}}
+    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('deactivate'), [$language])
+        @push('modals')
+            <x-arc:modal-action
+                type="deactivate"
+                action="{{ route('admin::cms.languages.deactivate', [$language]) }}" method="PUT"
+                title="Deactivate Language" body="Are you sure you want to deactivate this user ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deactivateModal = components.modal('div#deactivate-modal')
-            let deactivateForm  = components.form('form#deactivate-form')
+        @push('scripts')
+            <script defer>
+                let deactivateModal = components.modal('div#deactivate-modal')
+                let deactivateForm  = components.form('form#deactivate-form')
 
-            ARCANESOFT.on('cms::languages.deactivate', () => {
-                deactivateModal.show()
-            });
+                ARCANESOFT.on('cms::languages.deactivate', () => {
+                    deactivateModal.show()
+                });
 
-            deactivateForm.onSubmit('PUT', () => {
-                deactivateModal.hide()
-                location.reload()
-            })
-        </script>
-    @endpush
-@endcan
+                deactivateForm.onSubmit('PUT', () => {
+                    deactivateModal.hide()
+                    location.reload()
+                })
+            </script>
+        @endpush
+    @endcan
 
-{{-- DELETE MODAL --}}
-@can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('delete'), [$language])
-    @push('modals')
-        <x-arc:modal-action
-            type="delete"
-            action="{{ route('admin::cms.languages.delete', [$language]) }}" method="DELETE"
-            title="Delete Language"
-            body="Are you sure you want to delete this user ?"
-        />
-    @endpush
+    {{-- DELETE MODAL --}}
+    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('delete'), [$language])
+        @push('modals')
+            <x-arc:modal-action
+                type="delete"
+                action="{{ route('admin::cms.languages.delete', [$language]) }}" method="DELETE"
+                title="Delete Language"
+                body="Are you sure you want to delete this user ?"
+            />
+        @endpush
 
-    @push('scripts')
-        <script defer>
-            let deleteModal = components.modal('div#delete-modal')
-            let deleteForm  = components.form('form#delete-form')
+        @push('scripts')
+            <script defer>
+                let deleteModal = components.modal('div#delete-modal')
+                let deleteForm  = components.form('form#delete-form')
 
-            ARCANESOFT.on('cms::languages.delete', () => {
-                deleteModal.show()
-            })
+                ARCANESOFT.on('cms::languages.delete', () => {
+                    deleteModal.show()
+                })
 
-            deleteForm.onSubmit('DELETE', () => {
-                deleteModal.hide()
-                location.replace("{{ route('admin::cms.languages.index') }}")
-            })
-        </script>
-    @endpush
-@endcan
-
+                deleteForm.onSubmit('DELETE', () => {
+                    deleteModal.hide()
+                    location.replace("{{ route('admin::cms.languages.index') }}")
+                })
+            </script>
+        @endpush
+    @endcan
+</x-arc:layout>

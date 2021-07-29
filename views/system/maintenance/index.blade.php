@@ -1,20 +1,18 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php
 /**
  * @var  Arcanesoft\Foundation\System\Helpers\MaintenanceMode  $maintenance
  * @var  Illuminate\Support\ViewErrorBag                       $errors
  */
 ?>
-@section('page-title')
-    <i class="far fa-fw fa-stop-circle"></i> @lang('System') <small>@lang('Maintenance')</small>
-@endsection
+<x-arc:layout>
+    @section('page-title')
+        <i class="far fa-fw fa-stop-circle"></i> @lang('System') <small>@lang('Maintenance')</small>
+    @endsection
 
-@push('content-nav')
-    @include('foundation::system._includes.system-nav')
-@endpush
+    @push('content-nav')
+        @include('foundation::system._includes.system-nav')
+    @endpush
 
-@section('content')
     <div class="row g-3">
         <div class="col-12 col-lg-4">
             <x-arc:card>
@@ -144,5 +142,4 @@
             @endcan
         @endif
     </div>
-@endsection
-
+</x-arc:layout>

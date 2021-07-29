@@ -1,12 +1,10 @@
-@extends(arcanesoft\foundation()->template())
-
-@section('page-title')
-    <i class="fa fa-fw fa-users"></i> @lang('Users') <small>@lang('Edit User')</small>
-@endsection
-
 <?php /** @var  App\Models\User|mixed  $user */ ?>
 
-@section('content')
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-users"></i> @lang('Users') <small>@lang('Edit User')</small>
+    @endsection
+
     <x-arc:form action="{{ route('admin::authorization.users.update', [$user]) }}" method="PUT">
         <div class="row">
             <div class="col-lg-6">
@@ -44,4 +42,4 @@
             </div>
         </div>
     </x-arc:form>
-@endsection
+</x-arc:layout>

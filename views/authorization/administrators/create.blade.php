@@ -1,17 +1,14 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php
 /**
  * @var  \Arcanesoft\Foundation\Authorization\Models\Role[]|\Illuminate\Database\Eloquent\Collection  $roles
  */
 ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang('New Administrator')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang('New Administrator')</small>
-@endsection
-
-@section('content')
-    <x-arc:form action="{{ route('admin::authorization.administrators.store') }}" method="POST">
+    <x-arc:form action="{{ route('admin::authorization.administrators.store') }}">
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
                 <x-arc:card>
@@ -87,4 +84,4 @@
             </div>
         </div>
     </x-arc:form>
-@endsection
+</x-arc:layout>

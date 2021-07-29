@@ -44,14 +44,4 @@ class Arcanesoft
     {
         return static::VERSION;
     }
-
-    /**
-     * Get the template path.
-     *
-     * @return string
-     */
-    public function template(): string
-    {
-        return 'foundation::_template.master';
-    }
 }

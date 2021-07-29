@@ -1,11 +1,9 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-shield-alt"></i> @lang('Permissions')
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-shield-alt"></i> @lang('Permissions')
-@endsection
-
-@section('content')
     <v-datatable
         name="permissions-datatable"
         url="{{ route('admin::authorization.permissions.datatable') }}"/>
-@endsection
+</x-arc:layout>

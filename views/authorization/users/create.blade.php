@@ -1,11 +1,9 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-users"></i> @lang('Users') <small>@lang('New User')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fa fa-fw fa-users"></i> @lang('Users') <small>@lang('New User')</small>
-@endsection
-
-@section('content')
-    <x-arc:form action="{{ route('admin::authorization.users.store') }}" method="POST">
+    <x-arc:form action="{{ route('admin::authorization.users.store') }}">
         <div class="row">
             <div class="col-lg-6">
                 <x-arc:card>
@@ -54,4 +52,4 @@
             </div>
         </div>
     </x-arc:form>
-@endsection
+</x-arc:layout>

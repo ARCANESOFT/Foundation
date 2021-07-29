@@ -1,14 +1,12 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-info-circle"></i> @lang('System') <small>@lang('Information')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-info-circle"></i> @lang('System') <small>@lang('Information')</small>
-@endsection
+    @push('content-nav')
+        @include('foundation::system._includes.system-nav')
+    @endpush
 
-@push('content-nav')
-    @include('foundation::system._includes.system-nav')
-@endpush
-
-@section('content')
     <div class="row g-4">
         <div class="col-lg-4">
             @include(Arcanesoft\Foundation\System\Views\Composers\ApplicationInfoComposer::VIEW)
@@ -20,7 +18,4 @@
             @include(Arcanesoft\Foundation\System\Views\Composers\RequiredPhpExtensionsComposer::VIEW)
         </div>
     </div>
-@endsection
-
-@section('scripts')
-@endsection
+</x-arc:layout>

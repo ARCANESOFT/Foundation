@@ -1,18 +1,15 @@
-@extends(arcanesoft\foundation()->template())
-
 <?php
 /**
  * @var  \Arcanesoft\Foundation\Authorization\Models\Administrator                                    $administrator
  * @var  \Arcanesoft\Foundation\Authorization\Models\Role[]|\Illuminate\Database\Eloquent\Collection  $roles
  */
 ?>
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang('Edit Administrator')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fa fa-fw fa-user-secret"></i> @lang('Administrators') <small>@lang('Edit Administrator')</small>
-@endsection
-
-@section('content')
-    {{ form()->open(['route' => ['admin::authorization.administrators.update', $administrator], 'method' => 'PUT']) }}
+    <x-arc:form action="{{ route('admin::authorization.administrators.update', [$administrator]) }}" method="PUT">
         <div class="row g-4">
             <div class="col-lg-6 col-xl-5">
                 <x-arc:card>
@@ -73,5 +70,5 @@
                 </x-arc:card>
             </div>
         </div>
-    {{ form()->close() }}
-@endsection
+    </x-arc:form>
+</x-arc:layout>

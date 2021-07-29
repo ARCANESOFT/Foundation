@@ -1,14 +1,12 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fas fa-fw fa-user-shield"></i> @lang('Abilities')
+    @endsection
 
-@section('page-title')
-    <i class="fas fa-fw fa-user-shield"></i> @lang('Abilities')
-@endsection
+    <?php /** @var  Arcanedev\LaravelPolicies\Ability  $ability */ ?>
 
-<?php /** @var  Arcanedev\LaravelPolicies\Ability  $ability */ ?>
-
-@section('content')
-    <div class="row">
-        <div class="col-lg-6">
+    <div class="row row-cols-lg-2">
+        <div class="col">
             <x-arc:card>
                 <x-arc:card-header>@lang('Ability')</x-arc:card-header>
                 <x-arc:card-table>
@@ -67,4 +65,4 @@
             </x-arc:card>
         </div>
     </div>
-@endsection
+</x-arc:layout>
