@@ -20,8 +20,10 @@ class InstallCommand extends Command
     /**
      * Handle the command.
      */
-    public function handle(): void
+    public function handle(): int
     {
         $this->seed(DatabaseSeeder::class);
+
+        return static::SUCCESS;
     }
 }

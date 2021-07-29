@@ -73,9 +73,12 @@
     "Permissions": "Permissions",
     "Permission's details": "Détails de la permission",
     "Group": "Groupe",
-    "Category": "Catégorie",
 
     "Password Resets": "Réinitialisation du mot de passe",
+
+    "CMS": "CMS",
+    "Categories": "Catégories",
+    "Category": "Catégorie",
 
     "Settings": "Réglages"
 }

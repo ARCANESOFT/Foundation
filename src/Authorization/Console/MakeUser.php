@@ -39,12 +39,12 @@ class MakeUser extends Command
     /**
      * Handle the command.
      */
-    public function handle(): void
+    public function handle(): int
     {
         $this->newLine();
         $this->comment('Creating a new User');
 
-        // TODO: Validate the inputs ?
+        // TODO: Validate the inputs + password confirmation ?
         call_user_func(static::defaultCreateUserCallback(), ...[
             $this->ask('First Name'),
             $this->ask('Last Name'),
@@ -53,6 +53,8 @@ class MakeUser extends Command
         ]);
 
         $this->comment('User created successfully.');
+
+        return static::SUCCESS;
     }
 
     /* -----------------------------------------------------------------

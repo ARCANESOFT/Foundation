@@ -46,20 +46,21 @@ class PublishCommand extends Command
         $this->line('');
         $this->info('Publishing the modules...');
 
-        $tags = [
-            'arcanesoft-assets',
-            'arcanesoft-config',
-            'arcanesoft-translations',
-            'arcanesoft-views',
-        ];
-
         $this->publishFoundation();
         $this->publishModules($manifest);
 
+//        $tags = [
+//            'arcanesoft-assets',
+//            'arcanesoft-config',
+//            'arcanesoft-translations',
+//            'arcanesoft-views',
+//        ];
 //        foreach ($tags as $tag) {
 //            $this->comment("Publishing [{$tag}]");
 //            $this->callSilent('vendor:publish', ['--tag' => $tag]);
 //        }
+
+        return static::SUCCESS;
     }
 
     /**

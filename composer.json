@@ -14,6 +14,7 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "ext-intl": "*",
         "ext-json": "*",
         "arcanedev/agent": "^9.0",
         "arcanedev/breadcrumbs": "^6.0",
@@ -30,7 +31,8 @@
         "bacon/bacon-qr-code": "^2.0",
         "kalnoy/nestedset": "^6.0",
         "laravel/socialite": "^5.0",
-        "pragmarx/google2fa": "^7.0|^8.0"
+        "pragmarx/google2fa": "^7.0|^8.0",
+        "symfony/intl": "^5.3"
     },
     "require-dev": {
         "composer/composer": "^1.10|^2.0",

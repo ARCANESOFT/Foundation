@@ -6,11 +6,11 @@ use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
 use Illuminate\Http\Request;
 
 /**
- * Class     CategoryTransformer
+ * Class     LanguageTransformer
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CategoryTransformer implements Transformer
+class LanguageTransformer implements Transformer
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -20,7 +20,7 @@ class CategoryTransformer implements Transformer
     /**
      * Transform the resource.
      *
-     * @param  \Arcanesoft\Foundation\Cms\Models\Category|mixed  $resource
+     * @param  \Arcanesoft\Foundation\Cms\Models\Language|mixed  $resource
      * @param  \Illuminate\Http\Request                          $request
      *
      * @return array
@@ -28,8 +28,10 @@ class CategoryTransformer implements Transformer
     public function transform($resource, Request $request): array
     {
         return [
+            // TODO: Add flag image
+            'code'        => $resource->code,
             'name'        => $resource->name,
-            'description' => $resource->description,
+            // TODO: Add active static badge
             'created_at'  => $resource->created_at->format('Y-m-d H:i:s'),
         ];
     }

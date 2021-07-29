@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Cms\Http\Requests\Categories;
+namespace Arcanesoft\Foundation\Cms\Http\Requests\Languages;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class     CreateCategoryRequest
+ * Class     CreateLocaleRequest
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CreateCategoryRequest extends FormRequest
+class CreateLanguagesRequest extends FormRequest
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -24,10 +24,7 @@ class CreateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'         => ['required', 'string'],
-            'slug'         => ['required', 'string'],
-            'description'  => ['nullable', 'string'],
-            'parent'       => [],
+            'code' => ['required', 'string'],
         ];
     }
 }

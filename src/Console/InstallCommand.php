@@ -4,6 +4,7 @@ namespace Arcanesoft\Foundation\Console;
 
 use Arcanesoft\Foundation\Arcanesoft;
 use Arcanesoft\Foundation\Authorization\Console\InstallCommand as AuthInstallCommand;
+use Arcanesoft\Foundation\Cms\Console\InstallCommand as CmsInstallCommand;
 use Arcanesoft\Foundation\Core\Console\InstallCommand as CoreInstallCommand;
 use Arcanesoft\Foundation\ModuleManifest;
 use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
@@ -81,6 +82,7 @@ class InstallCommand extends Command
         $this->callMany([
             CoreInstallCommand::class,
             AuthInstallCommand::class,
+            CmsInstallCommand::class,
             SystemInstallCommand::class,
         ]);
     }

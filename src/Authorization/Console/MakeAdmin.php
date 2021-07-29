@@ -40,12 +40,12 @@ class MakeAdmin extends Command
     /**
      * Handle the command.
      */
-    public function handle(): void
+    public function handle(): int
     {
         $this->newLine();
         $this->comment('Creating a new Admin');
 
-        // TODO: Validate the inputs ?
+        // TODO: Validate the inputs + password confirmation ?
         call_user_func(static::defaultCreateUserCallback(), ...[
             $this->ask('First Name'),
             $this->ask('Last Name'),
@@ -54,6 +54,8 @@ class MakeAdmin extends Command
         ]);
 
         $this->comment('Admin created successfully.');
+
+        return static::SUCCESS;
     }
 
     /* -----------------------------------------------------------------

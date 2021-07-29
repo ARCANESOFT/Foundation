@@ -41,12 +41,14 @@ class DiscoverCommand extends Command
      *
      * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    public function handle(ModuleManifest $manifest): void
+    public function handle(ModuleManifest $manifest): int
     {
         foreach (array_keys($manifest->modules()) as $module) {
             $this->line("Discovered Module: <info>{$module}</info>");
         }
 
         $this->info("Arcanesoft's Modules manifest generated successfully.");
+
+        return static::SUCCESS;
     }
 }

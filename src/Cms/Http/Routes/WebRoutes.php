@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Cms\Http\Routes;
 
@@ -28,6 +26,7 @@ class WebRoutes extends AdminRouteRegistrar
     {
         return [
             Web\DashboardRoutes::class,
+            Web\LanguagesRoutes::class,
             Web\CategoriesRoutes::class,
         ];
     }

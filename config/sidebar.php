@@ -30,7 +30,7 @@ return [
         [
             'name'        => 'foundation::cms',
             'title'       => 'CMS',
-            'icon'        => 'fas fa-fw fa-key',
+            'icon'        => 'fas fa-fw fa-cubes',
             'roles'       => [],
             'permissions' => [],
             'children'    => [
@@ -47,11 +47,21 @@ return [
                 [
                     'name'        => 'foundation::cms.categories',
                     'title'       => 'Categories',
-                    'icon'        => 'fas fa-fw fa-tachometer-alt',
+                    'icon'        => 'fas fa-fw fa-stream',
                     'route'       => 'admin::cms.categories.index',
                     'roles'       => ['cms-moderator'],
                     'permissions' => [
                         'admin::cms.categories.index',
+                    ],
+                ],
+                [
+                    'name'        => 'foundation::cms.languages',
+                    'title'       => 'Languages',
+                    'icon'        => 'fas fa-fw fa-language',
+                    'route'       => 'admin::cms.languages.index',
+                    'roles'       => ['cms-moderator'],
+                    'permissions' => [
+                        'admin::cms.languages.index',
                     ],
                 ],
             ],

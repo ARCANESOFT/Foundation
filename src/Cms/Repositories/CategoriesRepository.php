@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Cms\Repositories;
 
@@ -58,7 +56,7 @@ class CategoriesRepository extends Repository
      */
     public function createOne(array $attributes): Category
     {
-
+        dd($attributes);
     }
 
     /**

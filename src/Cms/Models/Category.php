@@ -1,13 +1,10 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanesoft\Foundation\Cms\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Arcanesoft\Foundation\Cms\Cms;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Kalnoy\Nestedset\NestedSet;
-use Kalnoy\Nestedset\NodeTrait;
+use Kalnoy\Nestedset\{NestedSet, NodeTrait};
 
 /**
  * Class     Category
@@ -65,5 +62,22 @@ class Category extends Model
         NestedSet::PARENT_ID => 'integer',
         'deleted_at'         => 'datetime',
     ];
+
+    /* -----------------------------------------------------------------
+     |  Constructor
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param  array  $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->setTable(Cms::table('categories', 'categories'));
+
+        parent::__construct($attributes);
+    }
 }
 

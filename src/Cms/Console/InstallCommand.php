@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Core\Console;
+namespace Arcanesoft\Foundation\Cms\Console;
 
-use Arcanesoft\Foundation\Core\Database\DatabaseSeeder;
+use Arcanesoft\Foundation\Cms\Database\DatabaseSeeder;
 use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
 
 /**

@@ -5,14 +5,13 @@ declare(strict_types=1);
 use Arcanesoft\Foundation\Cms\Cms;
 use Arcanesoft\Foundation\Cms\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Kalnoy\Nestedset\NestedSet;
 
 /**
- * Class     CreateCmsCategoriesTable
+ * Class     CreateCmsCategorizablesTable
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CreateCmsCategoriesTable extends Migration
+class CreateCmsCategorizablesTable extends Migration
 {
     /* -----------------------------------------------------------------
      |  Constructor
@@ -20,13 +19,13 @@ class CreateCmsCategoriesTable extends Migration
      */
 
     /**
-     * CreateCmsCategoriesTable constructor.
+     * CreateCmsCategorizablesTable constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
-        $this->setTable(Cms::table('categories', 'categories'));
+        $this->setTable(Cms::table('categorizables', 'categorizables', false));
     }
 
     /* -----------------------------------------------------------------
@@ -40,15 +39,14 @@ class CreateCmsCategoriesTable extends Migration
     public function up(): void
     {
         $this->createSchema(function (Blueprint $table): void {
-            $table->id();
-            $table->string('slug');
-            $table->json('name');
-            $table->json('description')->nullable();
-            NestedSet::columns($table);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignId('category_id');
+            $table->morphs('categorizable');
+            $table->timestamp('created_at')->nullable();
 
-            $table->unique(['slug']);
+            $table->unique(
+                ['category_id', 'categorizable_id', 'categorizable_type'],
+                'categorizables_ids_type_unique'
+            );
         });
     }
 }
