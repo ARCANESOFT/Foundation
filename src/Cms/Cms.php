@@ -86,4 +86,14 @@ class Cms
 
         return config()->get($key, $default);
     }
+
+    /**
+     * Get the current locale.
+     *
+     * @return string
+     */
+    public static function getLocale(): string
+    {
+        return app()->getLocale();
+    }
 }

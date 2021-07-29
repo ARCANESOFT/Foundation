@@ -93,13 +93,15 @@ class LanguagesController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(LanguagesRepository $repo)
     {
         $this->authorize(LanguagesPolicy::ability('create'));
 
         $this->addBreadcrumb(__('New Languages'));
 
-        return $this->view('cms.languages.create');
+        $languages = $repo->getAvailableLanguages();
+
+        return $this->view('cms.languages.create', compact('languages'));
     }
 
     /**

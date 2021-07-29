@@ -112,12 +112,6 @@ class LanguagesDatatable extends Datatable
             return LanguagesPolicy::can('show', [$language]);
         })->asIcon();
 
-        $actions[] = Action::link('edit', 'Edit', function () use ($language) {
-            return route('admin::cms.languages.edit', [$language]);
-        })->can(function () use ($language) {
-            return LanguagesPolicy::can('update', [$language]);
-        })->asIcon();
-
         $actions[] = Action::button('delete', 'Delete', function () use ($language) {
             return "ARCANESOFT.emit('cms::languages.delete', {id: '{$language->getRouteKey()}'})";
         })->can(function () use ($language) {

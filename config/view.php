@@ -16,6 +16,9 @@ return [
 
     'components' => [
 
+        // Layout
+        'layout'           => Arcanesoft\Foundation\Views\Components\Layout::class,
+
         // Buttons
         'button-close'     => Arcanesoft\Foundation\Views\Components\Buttons\Close::class,
 

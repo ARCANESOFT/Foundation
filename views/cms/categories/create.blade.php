@@ -1,10 +1,8 @@
-@extends(arcanesoft\foundation()->template())
+<x-arc:layout>
+    @section('page-title')
+        <i class="fa fa-fw fa-users"></i> @lang('Categories') <small>@lang('New Category')</small>
+    @endsection
 
-@section('page-title')
-    <i class="fa fa-fw fa-users"></i> @lang('Categories') <small>@lang('New Category')</small>
-@endsection
-
-@section('content')
     <x-arc:form action="{{ route('admin::cms.categories.store') }}" method="POST">
         <div class="row row-cols-lg-2">
             <div class="col">
@@ -55,4 +53,5 @@
             </div>
         </div>
     </x-arc:form>
-@endsection
+</x-arc:layout>
+

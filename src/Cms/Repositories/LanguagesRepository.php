@@ -3,7 +3,10 @@
 namespace Arcanesoft\Foundation\Cms\Repositories;
 
 use Arcanesoft\Foundation\Cms\Cms;
+use Arcanesoft\Foundation\Cms\Entities\LanguageCollection;
 use Arcanesoft\Foundation\Cms\Models\Language;
+use Illuminate\Support\{Collection, Str};
+use Symfony\Component\Intl\Locales;
 
 /**
  * Class     LanguagesRepository
@@ -32,11 +35,11 @@ class LanguagesRepository extends Repository
      *
      * @param  array  $attributes
      *
-     * @return \Arcanesoft\Foundation\Cms\Models\Language
+     * @return \Arcanesoft\Foundation\Cms\Models\Language|mixed
      */
     public function createOne(array $attributes): Language
     {
-        dd($attributes);
+        return $this->create($attributes);
     }
 
     /**
@@ -47,5 +50,26 @@ class LanguagesRepository extends Repository
     public function deleteOne(Language $language)
     {
         //
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    public function getAvailableLanguages()
+    {
+        $ignore = $this->pluck('code')->toArray();
+
+        return Collection::make(Locales::getNames(Cms::getLocale()))
+            ->unless(empty($ignore), function (Collection $items) use ($ignore) {
+                return $items->reject(function (string $name, string $locale) use ($ignore) {
+                    return in_array($locale, $ignore);
+                });
+            })
+            ->transform(function (string $language, string $code) {
+                return Str::ucfirst($language);
+            })
+        ;
     }
 }

@@ -14,8 +14,8 @@
                         <div class="row g-3">
                             {{-- NAME --}}
                             <div class="col-12 col-xxl-6">
-                                <x-arc:input-control
-                                    type="text" name="code" :value="old('code')"
+                                <x-arc:select-control
+                                    name="code" :value="old('code')" :options="$languages"
                                     label="Code" required/>
                             </div>
                         </div>
