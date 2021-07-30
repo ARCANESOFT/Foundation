@@ -34,6 +34,11 @@ class SidebarComposer
      | -----------------------------------------------------------------
      */
 
+    /**
+     * SidebarComposer constructor.
+     *
+     * @param  \Arcanesoft\Foundation\Helpers\Sidebar\Manager  $manager
+     */
     public function __construct(Manager $manager)
     {
         $this->manager = $manager;
@@ -55,7 +60,7 @@ class SidebarComposer
 
         $sidebar = $this->manager
             ->loadFromConfig($items)
-            ->setSelectedItem($view->currentSidebarItem ?? '');
+            ->setSelectedItem($view->getData()['currentSidebarItem'] ?? '');
 
         $view->with('sidebar', $sidebar);
     }

@@ -5,11 +5,18 @@
  * @var  string                                 $hasFiles
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  */
+$attributes = $attributes
+    ->except(['action'])
+    ->merge([
+        'action' => $action,
+        'method' => $method !== 'GET' ? 'POST' : 'GET',
+    ])
+;
+if ($hasFiles)
+    $attributes = $attributes->merge(['enctype' => 'multipart/form-data'])
 ?>
-<form method="{{ $method !== 'GET' ? 'POST' : 'GET' }}"
-      action="{{ $action }}" {!! $hasFiles ? 'enctype="multipart/form-data"' : '' !!} {{ $attributes }}>
+<form {{ $attributes }}>
     @csrf
     @method($method)
-
     {{ $slot }}
 </form>

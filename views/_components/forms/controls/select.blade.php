@@ -6,12 +6,13 @@
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  Illuminate\Support\ViewErrorBag        $errors
  */
-
-$attributes = $attributes->merge([
-    'name'  => $name,
-    'id'    => $id,
-    'class' => 'form-select'.$errors->first($name, ' is-invalid'),
-]);
+$attributes = $attributes
+    ->merge([
+        'name' => $name,
+        'id'   => $id,
+    ])
+    ->class(['form-select', 'is-invalid' => $errors->has($name)])
+;
 ?>
 @if($grouped)
     <div class="form-floating">

@@ -73,7 +73,9 @@ abstract class Controller
      */
     protected function setCurrentSidebarItem(string $name)
     {
-        return $this->setData('currentSidebarItem', $name);
+        view()->share('currentSidebarItem', $name);
+
+        return $this;
     }
 
     /**
@@ -156,7 +158,7 @@ abstract class Controller
         $this->preRenderingView();
 
         return tap(
-            view()->make($name, $data, array_merge($this->viewData, $mergeData)),
+            view()->make($name, $data, $mergeData),
             function ($view) {
                 $this->postRenderingView($view);
             }
