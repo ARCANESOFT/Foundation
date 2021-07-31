@@ -14,5 +14,3 @@ if ( ! function_exists('arcanesoft\foundation')) {
         return app(Arcanesoft::class);
     }
 }
-
-require_once __DIR__.'/helpers/ui.php';
