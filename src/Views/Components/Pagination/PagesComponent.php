@@ -1,28 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Forms;
+namespace Arcanesoft\Foundation\Views\Components\Pagination;
 
 use Arcanesoft\Foundation\Views\Components\Component;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\ViewErrorBag;
 
 /**
- * Class     Error
+ * Class     PagesComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Error extends Component
+class PagesComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var string */
-    public $name;
-
-    /** @var string */
-    public $bag;
+    /** @var  \Illuminate\Contracts\Pagination\LengthAwarePaginator */
+    public $paginator;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -30,13 +27,11 @@ class Error extends Component
      */
 
     /**
-     * @param  string  $name
-     * @param  string  $bag
+     * @param  \Illuminate\Contracts\Pagination\LengthAwarePaginator  $paginator
      */
-    public function __construct(string $name, string $bag = 'default')
+    public function __construct(LengthAwarePaginator $paginator)
     {
-        $this->name = $name;
-        $this->bag = $bag;
+        $this->paginator = $paginator;
     }
 
     /* -----------------------------------------------------------------
@@ -49,20 +44,6 @@ class Error extends Component
      */
     public function render(): View
     {
-        return $this->view('forms.error');
-    }
-
-    /**
-     * Get the messages.
-     *
-     * @param  \Illuminate\Support\ViewErrorBag  $errors
-     *
-     * @return array
-     */
-    public function messages(ViewErrorBag $errors): array
-    {
-        $bag = $errors->getBag($this->bag);
-
-        return $bag->has($this->name) ? $bag->get($this->name) : [];
+        return $this->view('pagination.pages');
     }
 }

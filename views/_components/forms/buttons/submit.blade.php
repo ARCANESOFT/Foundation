@@ -1,6 +1,6 @@
 <?php
 /**
- * @see \Arcanesoft\Foundation\Views\Components\Forms\Buttons\Submit
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\Buttons\SubmitComponent
  */
 ?>
 <button {{ $attributes->merge(['class' => $actionClass(), 'type' => 'submit']) }}>

@@ -1,28 +1,33 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Forms;
+namespace Arcanesoft\Foundation\Views\Components\Forms\Controls;
 
 use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\ViewErrorBag;
 
 /**
- * Class     Error
+ * Class     VueComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Error extends Component
+class VueComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var string */
+    /** @var  string */
+    public $use;
+
+    /** @var  string */
     public $name;
 
-    /** @var string */
-    public $bag;
+    /** @var  string|null */
+    public $id;
+
+    /** @var  string|null */
+    public $label;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -30,13 +35,17 @@ class Error extends Component
      */
 
     /**
-     * @param  string  $name
-     * @param  string  $bag
+     * @param  string       $use
+     * @param  string       $name
+     * @param  string|null  $id
+     * @param  string|null  $label
      */
-    public function __construct(string $name, string $bag = 'default')
+    public function __construct(string $use, string $name, ?string $id = null, ?string $label= null)
     {
-        $this->name = $name;
-        $this->bag = $bag;
+        $this->use   = $use;
+        $this->name  = $name;
+        $this->id    = $id ?: $name;
+        $this->label = $label;
     }
 
     /* -----------------------------------------------------------------
@@ -49,20 +58,6 @@ class Error extends Component
      */
     public function render(): View
     {
-        return $this->view('forms.error');
-    }
-
-    /**
-     * Get the messages.
-     *
-     * @param  \Illuminate\Support\ViewErrorBag  $errors
-     *
-     * @return array
-     */
-    public function messages(ViewErrorBag $errors): array
-    {
-        $bag = $errors->getBag($this->bag);
-
-        return $bag->has($this->name) ? $bag->get($this->name) : [];
+        return $this->view('forms.controls.vue');
     }
 }

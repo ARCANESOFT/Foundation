@@ -4,25 +4,24 @@ namespace Arcanesoft\Foundation\Views\Components\Forms;
 
 use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\ViewErrorBag;
 
 /**
- * Class     Error
+ * Class     LabelComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Error extends Component
+class LabelComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var string */
-    public $name;
+    /** @var  string */
+    public $for;
 
-    /** @var string */
-    public $bag;
+    /** @var  string */
+    public $label;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -30,13 +29,13 @@ class Error extends Component
      */
 
     /**
-     * @param  string  $name
-     * @param  string  $bag
+     * @param  string       $for
+     * @param  string|null  $label
      */
-    public function __construct(string $name, string $bag = 'default')
+    public function __construct(string $for, ?string $label = null)
     {
-        $this->name = $name;
-        $this->bag = $bag;
+        $this->for   = $for;
+        $this->label = __($label ?: $for);
     }
 
     /* -----------------------------------------------------------------
@@ -49,20 +48,6 @@ class Error extends Component
      */
     public function render(): View
     {
-        return $this->view('forms.error');
-    }
-
-    /**
-     * Get the messages.
-     *
-     * @param  \Illuminate\Support\ViewErrorBag  $errors
-     *
-     * @return array
-     */
-    public function messages(ViewErrorBag $errors): array
-    {
-        $bag = $errors->getBag($this->bag);
-
-        return $bag->has($this->name) ? $bag->get($this->name) : [];
+        return $this->view('forms.label');
     }
 }

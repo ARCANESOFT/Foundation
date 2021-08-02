@@ -1,28 +1,31 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Forms;
+namespace Arcanesoft\Foundation\Views\Components\Buttons;
 
 use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\ViewErrorBag;
+use Illuminate\Support\Str;
 
 /**
- * Class     Error
+ * Class     ActionComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Error extends Component
+class ActionComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var string */
-    public $name;
+    /** @var  string */
+    public $type;
 
-    /** @var string */
-    public $bag;
+    /** @var  string */
+    public $action;
+
+    /** @var  string */
+    public $label;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -30,13 +33,14 @@ class Error extends Component
      */
 
     /**
-     * @param  string  $name
-     * @param  string  $bag
+     * @param  string  $type
+     * @param  string  $action
      */
-    public function __construct(string $name, string $bag = 'default')
+    public function __construct(string $type, string $action, ?string $label = null)
     {
-        $this->name = $name;
-        $this->bag = $bag;
+        $this->type = Str::slug($type);
+        $this->action = $action;
+        $this->label = $label ?: Str::ucfirst($type);
     }
 
     /* -----------------------------------------------------------------
@@ -49,20 +53,6 @@ class Error extends Component
      */
     public function render(): View
     {
-        return $this->view('forms.error');
-    }
-
-    /**
-     * Get the messages.
-     *
-     * @param  \Illuminate\Support\ViewErrorBag  $errors
-     *
-     * @return array
-     */
-    public function messages(ViewErrorBag $errors): array
-    {
-        $bag = $errors->getBag($this->bag);
-
-        return $bag->has($this->name) ? $bag->get($this->name) : [];
+        return $this->view('buttons.action');
     }
 }

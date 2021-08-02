@@ -15,97 +15,97 @@
                 </x-arc:card-body>
                 <x-arc:card-table>
                     <tbody>
-                        <tr>
-                            <x-arc:table-th label="Full Name"/>
-                            <td class="text-end">{{ $administrator->full_name }}</td>
-                        </tr>
-                        <tr>
-                            <x-arc:table-th label="Email"/>
-                            <td class="small text-end">
-                                {{ $administrator->email }}
-                                @if ($administrator->hasVerifiedEmail())
-                                    <i class="far fa-check-circle text-primary"
-                                       data-toggle="tooltip" title="@lang('Verified')"></i>
-                                @endif
-                            </td>
-                        </tr>
-                        @if ($administrator->hasVerifiedEmail())
+                    <tr>
+                        <x-arc:table-th label="Full Name"/>
+                        <td class="text-end">{{ $administrator->full_name }}</td>
+                    </tr>
+                    <tr>
+                        <x-arc:table-th label="Email"/>
+                        <td class="small text-end">
+                            {{ $administrator->email }}
+                            @if ($administrator->hasVerifiedEmail())
+                                <i class="far fa-check-circle text-primary"
+                                   data-toggle="tooltip" title="@lang('Verified')"></i>
+                            @endif
+                        </td>
+                    </tr>
+                    @if ($administrator->hasVerifiedEmail())
                         <tr>
                             <x-arc:table-th label="Email Verified at"/>
                             <td class="text-end">
                                 <small class="text-muted">{{ $administrator->email_verified_at }}</small>
                             </td>
                         </tr>
-                        @endif
-                        <tr>
-                            <x-arc:table-th label="Status"/>
-                            <td class="text-end">
-                                @if ($administrator->isActive())
-                                    <span class="badge border border-success text-muted">
+                    @endif
+                    <tr>
+                        <x-arc:table-th label="Status"/>
+                        <td class="text-end">
+                            @if ($administrator->isActive())
+                                <span class="badge border border-success text-muted">
                                         <i class="fas fa-fw fa-check"></i> @lang('Activated')
                                     </span>
-                                @else
-                                    <span class="badge border border-secondary text-muted">
+                            @else
+                                <span class="badge border border-secondary text-muted">
                                         <i class="fas fa-fw fa-ban"></i> @lang('Deactivated')
                                     </span>
-                                @endif
-                                @if ($administrator->isSuperAdmin())
-                                    <span class="badge border border-warning text-muted"
-                                          data-toggle="tooltip" data-placement="top" title="@lang('Super Administrator')">
+                            @endif
+                            @if ($administrator->isSuperAdmin())
+                                <span class="badge border border-warning text-muted"
+                                      data-toggle="tooltip" data-placement="top" title="@lang('Super Administrator')">
                                         <i class="fas fa-crown"></i>
                                     </span>
-                                @endif
-                            </td>
-                        </tr>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <x-arc:table-th label="Last Activity"/>
+                        <td class="text-end"><small class="text-muted">{{ $administrator->last_activity }}</small></td>
+                    </tr>
+                    <tr>
+                        <x-arc:table-th label="Created at"/>
+                        <td class="text-end"><small class="text-muted">{{ $administrator->created_at }}</small></td>
+                    </tr>
+                    <tr>
+                        <x-arc:table-th label="Updated at"/>
+                        <td class="text-end"><small class="text-muted">{{ $administrator->updated_at }}</small></td>
+                    </tr>
+                    @if ($administrator->trashed())
                         <tr>
-                            <x-arc:table-th label="Last Activity"/>
-                            <td class="text-end"><small class="text-muted">{{ $administrator->last_activity }}</small></td>
+                            <x-arc:table-th label="Deleted at"/>
+                            <td class="text-end"><small class="text-muted">{{ $administrator->deleted_at }}</small></td>
                         </tr>
-                        <tr>
-                            <x-arc:table-th label="Created at"/>
-                            <td class="text-end"><small class="text-muted">{{ $administrator->created_at }}</small></td>
-                        </tr>
-                        <tr>
-                            <x-arc:table-th label="Updated at"/>
-                            <td class="text-end"><small class="text-muted">{{ $administrator->updated_at }}</small></td>
-                        </tr>
-                        @if ($administrator->trashed())
-                            <tr>
-                                <x-arc:table-th label="Deleted at"/>
-                                <td class="text-end"><small class="text-muted">{{ $administrator->deleted_at }}</small></td>
-                            </tr>
-                        @endif
+                    @endif
                     </tbody>
                 </x-arc:card-table>
-                <x-arc:card-footer class="d-flex justify-content-end">
+                <x-arc:card-footer class="d-flex justify-content-end btn-seperated">
                     {{-- UPDATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('update'), [$administrator])
-                        <a class="btn btn-sm btn-secondary"
-                           href="{{ route('admin::authorization.administrators.edit', [$administrator]) }}">@lang('Edit')</a>
+                        <x-arc:button-action
+                            type="show" action="{{ route('admin::authorization.administrators.edit', [$administrator]) }}"/>
                     @endcan
 
                     {{-- ACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ms-2"
-                                onclick="ARCANESOFT.emit('authorization::administrators.activate')">@lang('Activate')</button>
+                        <x-arc:button-action
+                            type="activate" action="authorization::administrators.activate"/>
                     @endcan
 
                     {{-- DEACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ms-2"
-                                onclick="ARCANESOFT.emit('authorization::administrators.deactivate')">@lang('Deactivate')</button>
+                        <x-arc:button-action
+                            type="deactivate" action="authorization::administrators.deactivate"/>
                     @endcan
 
                     {{-- RESTORE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-                        <button class="btn btn-sm btn-secondary ms-2"
-                                onclick="ARCANESOFT.emit('authorization::administrators.restore')">@lang('Restore')</button>
+                        <x-arc:button-action
+                            type="restore" action="authorization::administrators.restore"/>
                     @endcan
 
                     {{-- DELETE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-                        <button class="btn btn-sm btn-danger ms-2"
-                                onclick="ARCANESOFT.emit('authorization::administrators.delete')">@lang('Delete')</button>
+                        <x-arc:button-action
+                            type="delete" action="authorization::administrators.delete"/>
                     @endcan
                 </x-arc:card-footer>
             </x-arc:card>
@@ -119,30 +119,32 @@
                         <x-arc:card-header>@lang('Roles')</x-arc:card-header>
                         <x-arc:card-table class="table-hover">
                             <thead>
-                                <tr>
-                                    <x-arc:table-th label="Name"/>
-                                    <x-arc:table-th label="Description"/>
-                                    <x-arc:table-th label="Actions" class="text-end"/>
-                                </tr>
+                            <tr>
+                                <x-arc:table-th label="Name"/>
+                                <x-arc:table-th label="Description"/>
+                                <x-arc:table-th label="Actions" class="text-end"/>
+                            </tr>
                             </thead>
                             <tbody>
-                                @forelse($administrator->roles as $role)
-                                    <?php /** @var  Arcanesoft\Foundation\Authorization\Models\Role  $role */ ?>
-                                    <tr>
-                                        <td class="small">{{ $role->name }}</td>
-                                        <td class="small">{{ $role->description }}</td>
-                                        <td class="text-end">
-                                            <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-light"
-                                               data-toggle="tooltip" title="@lang('Show')">
-                                                <i class="far fa-fw fa-eye"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="3" class="text-muted text-center">@lang('The list is empty !')</td>
-                                    </tr>
-                                @endforelse
+                            @forelse($administrator->roles as $role)
+                                <?php /** @var  Arcanesoft\Foundation\Authorization\Models\Role  $role */ ?>
+                                <tr>
+                                    <td class="small">{{ $role->name }}</td>
+                                    <td class="small">{{ $role->description }}</td>
+                                    <td class="text-end">
+                                        <x-arc:table-action
+                                            type="Show" action="{{ route('admin::authorization.roles.show', [$role]) }}"/>
+                                        {{--                                            <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-light"--}}
+                                        {{--                                               data-toggle="tooltip" title="@lang('Show')">--}}
+                                        {{--                                                <i class="far fa-fw fa-eye"></i>--}}
+                                        {{--                                            </a>--}}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-muted text-center">@lang('The list is empty !')</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </x-arc:card-table>
                     </x-arc:card>
@@ -154,13 +156,13 @@
                         <x-arc:card-header>@lang('Sessions')</x-arc:card-header>
                         <x-arc:card-table class="table-hover">
                             <thead>
-                                <tr>
-                                    <x-arc:table-th />
-                                    <x-arc:table-th label="IP"/>
-                                    <x-arc:table-th label="Device"/>
-                                    <x-arc:table-th label="Last activity"/>
-                                    <x-arc:table-th label="Actions" class="text-end"/>
-                                </tr>
+                            <tr>
+                                <x-arc:table-th />
+                                <x-arc:table-th label="IP"/>
+                                <x-arc:table-th label="Device"/>
+                                <x-arc:table-th label="Last activity"/>
+                                <x-arc:table-th label="Actions" class="text-end"/>
+                            </tr>
                             </thead>
                             <tbody>
                             @forelse($administrator->sessions as $session)
@@ -278,31 +280,31 @@
 
     {{-- RESTORE MODAL --}}
     @if($administrator->trashed())
-    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-        @push('modals')
-            <x-arc:modal-action
-                type="restore"
-                action="{{ route('admin::authorization.administrators.restore', [$administrator]) }}" method="PUT"
-                title="Restore Administrator"
-                body="Are you sure you want to restore this administrator ?"
-            />
-        @endpush
+        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+            @push('modals')
+                <x-arc:modal-action
+                    type="restore"
+                    action="{{ route('admin::authorization.administrators.restore', [$administrator]) }}" method="PUT"
+                    title="Restore Administrator"
+                    body="Are you sure you want to restore this administrator ?"
+                />
+            @endpush
 
-        @push('scripts')
-            <script defer>
-                let restoreModal = components.modal('div#restore-modal')
-                let restoreForm  = components.form('form#restore-form')
+            @push('scripts')
+                <script defer>
+                    let restoreModal = components.modal('div#restore-modal')
+                    let restoreForm  = components.form('form#restore-form')
 
-                ARCANESOFT.on('authorization::administrators.restore', () => {
-                    restoreModal.show()
-                });
+                    ARCANESOFT.on('authorization::administrators.restore', () => {
+                        restoreModal.show()
+                    });
 
-                restoreForm.onSubmit('PUT', () => {
-                    restoreModal.hide()
-                    location.reload()
-                })
-            </script>
-        @endpush
-    @endcan
+                    restoreForm.onSubmit('PUT', () => {
+                        restoreModal.hide()
+                        location.reload()
+                    })
+                </script>
+            @endpush
+        @endcan
     @endif
 </x-arc:layout>

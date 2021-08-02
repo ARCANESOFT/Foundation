@@ -7,11 +7,15 @@
  * @var  Illuminate\Support\ViewErrorBag        $errors
  */
 $attributes = $attributes
-    ->merge(['name' => $name, 'id' => $id])
-    ->class(['is-invalid' => $errors->has($name)])
+    ->merge([
+        'name' => $name,
+        'id'   => $id,
+    ])
+    ->class([
+        'is-invalid' => $errors->has($name),
+    ])
 ;
 ?>
 <x-arc:form-label :for="$id" :label="$label"/>
-<{{$component}} {{ $attributes }}>{{ $slot }}</{{$component}}>
+<{{$use}} {{ $attributes }}>{{ $slot }}</{{$use}}>
 <x-arc:form-error :name="$name"/>
-

@@ -1,28 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Forms;
+namespace Arcanesoft\Foundation\Views\Components\Forms\Buttons;
 
 use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\ViewErrorBag;
 
 /**
- * Class     Error
+ * Class     CancelComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Error extends Component
+class CancelComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var string */
-    public $name;
-
-    /** @var string */
-    public $bag;
+    /**
+     * @var string
+     */
+    public $to;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -30,13 +28,13 @@ class Error extends Component
      */
 
     /**
-     * @param  string  $name
-     * @param  string  $bag
+     * Cancel constructor.
+     *
+     * @param  string  $to
      */
-    public function __construct(string $name, string $bag = 'default')
+    public function __construct(string $to)
     {
-        $this->name = $name;
-        $this->bag = $bag;
+        $this->to = $to;
     }
 
     /* -----------------------------------------------------------------
@@ -49,20 +47,6 @@ class Error extends Component
      */
     public function render(): View
     {
-        return $this->view('forms.error');
-    }
-
-    /**
-     * Get the messages.
-     *
-     * @param  \Illuminate\Support\ViewErrorBag  $errors
-     *
-     * @return array
-     */
-    public function messages(ViewErrorBag $errors): array
-    {
-        $bag = $errors->getBag($this->bag);
-
-        return $bag->has($this->name) ? $bag->get($this->name) : [];
+        return $this->view('forms.buttons.cancel');
     }
 }
