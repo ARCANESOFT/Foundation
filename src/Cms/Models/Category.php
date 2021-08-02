@@ -3,6 +3,7 @@
 namespace Arcanesoft\Foundation\Cms\Models;
 
 use Arcanesoft\Foundation\Cms\Cms;
+use Arcanesoft\Foundation\Cms\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\{NestedSet, NodeTrait};
 
@@ -32,6 +33,7 @@ class Category extends Model
      | -----------------------------------------------------------------
      */
 
+    use HasTranslations;
     use NodeTrait;
     use SoftDeletes;
 
@@ -50,6 +52,12 @@ class Category extends Model
         NestedSet::LFT,
         NestedSet::RGT,
         NestedSet::PARENT_ID,
+    ];
+
+    /** {@inheritdoc} */
+    protected $translatable = [
+        'name',
+        'description',
     ];
 
     /**

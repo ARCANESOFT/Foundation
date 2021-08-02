@@ -13,8 +13,7 @@
                             {{-- NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:select-control
-                                    name="code" :value="old('code')" :options="$languages"
-                                    label="Code" required/>
+                                    name="code" :options="$languages" label="Code" required/>
                             </div>
                         </div>
                     </x-arc:card-body>

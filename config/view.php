@@ -74,7 +74,8 @@ return [
         'badge-count'       => Arcanesoft\Foundation\Views\Components\Support\Badges\CountComponent::class,
 
         // CMS
-        'localized-content' => Arcanesoft\Foundation\Views\Components\Cms\LocalizedContentComponent::class,
+        'localized-content'      => Arcanesoft\Foundation\Views\Components\Cms\LocalizedContentComponent::class,
+        'localized-content-pane' => Arcanesoft\Foundation\Views\Components\Cms\LocalizedContentPaneComponent::class,
 
     ],
 

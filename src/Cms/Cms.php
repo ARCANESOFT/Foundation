@@ -96,4 +96,14 @@ class Cms
     {
         return app()->getLocale();
     }
+
+    /**
+     * Get the fallback locale.
+     *
+     * @return string
+     */
+    public static function getFallbackLocale(): string
+    {
+        return config('app.fallback_locale', static::getLocale());
+    }
 }

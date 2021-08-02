@@ -2,6 +2,7 @@
 
 namespace Arcanesoft\Foundation\Views\Components\Cms;
 
+use Arcanesoft\Foundation\Cms\Repositories\LanguagesRepository;
 use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
 
@@ -12,6 +13,42 @@ use Illuminate\Contracts\View\View;
  */
 class LocalizedContentComponent extends Component
 {
+    /* -----------------------------------------------------------------
+     |  Properties
+     | -----------------------------------------------------------------
+     */
+
+    /** @var  \Illuminate\Database\Eloquent\Collection */
+    public $languages;
+
+    /* -----------------------------------------------------------------
+     |  Constructor
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * @param  \Arcanesoft\Foundation\Cms\Repositories\LanguagesRepository  $repo
+     */
+    public function __construct(LanguagesRepository $repo)
+    {
+        $this->languages = $repo->all();
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the locales.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getLocales()
+    {
+        return $this->languages->pluck('code');
+    }
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------

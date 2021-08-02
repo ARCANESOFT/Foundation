@@ -2,6 +2,7 @@
 
 namespace Arcanesoft\Foundation\Cms\Http\Requests\Categories;
 
+use Arcanesoft\Foundation\Cms\Repositories\LanguagesRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -23,11 +24,25 @@ class CreateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $locales = $this->getAvailableLocales();
+
         return [
-            'name'         => ['required', 'string'],
             'slug'         => ['required', 'string'],
-            'description'  => ['nullable', 'string'],
+            'name'         => ['array:'.$locales->implode(',')],
+            'name.*'       => ['required', 'string'],
+            'description'  => ['array:'.$locales->implode(',')],
+            'description.' => ['nullable', 'string'],
             'parent'       => [],
         ];
+    }
+
+    /**
+     * Get the available locales.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function getAvailableLocales()
+    {
+        return $this->container->make(LanguagesRepository::class)->pluck('code');
     }
 }
