@@ -3,6 +3,7 @@
 namespace Arcanesoft\Foundation\Fortify\Events\TwoFactorAuthentication;
 
 use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor;
+use Illuminate\Queue\SerializesModels;
 
 /**
  * Class     TwoFactorEvent
@@ -12,11 +13,22 @@ use Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor
 abstract class TwoFactorEvent
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use SerializesModels;
+
+    /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor */
+    /**
+     * The authenticated user.
+     *
+     * @var  \Arcanesoft\Foundation\Fortify\Contracts\TwoFactorAuthentication\HasTwoFactor
+     */
     public $user;
 
     /* -----------------------------------------------------------------

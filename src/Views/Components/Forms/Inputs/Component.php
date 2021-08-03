@@ -16,11 +16,17 @@ abstract class Component extends BaseComponent
      | -----------------------------------------------------------------
      */
 
-    /** @var  string|null */
-    public $id;
+    /** @var  string */
+    public $type;
 
     /** @var  string */
     public $name;
+
+    /** @var  string|null */
+    public $id;
+
+    /** @var  mixed|null */
+    public $value;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -28,12 +34,15 @@ abstract class Component extends BaseComponent
      */
 
     /**
+     * @param  string       $type
      * @param  string       $name
      * @param  string|null  $id
      */
-    public function __construct(string $name = 'password', string $id = null)
+    public function __construct(string $type, string $name, string $id = null, $value = null)
     {
+        $this->type = $type;
         $this->name = $name;
         $this->id = $id ?: $name;
+        $this->value = $value;
     }
 }

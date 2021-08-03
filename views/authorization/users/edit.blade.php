@@ -15,22 +15,19 @@
                             {{-- FIRST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
-                                    type="text" name="first_name" :value="old('first_name', $user->first_name)"
-                                    label="First Name" grouped="true" required/>
+                                    type="text" name="first_name" :value="$user->first_name" label="First Name" required/>
                             </div>
 
                             {{-- LAST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
-                                    type="text" name="last_name" :value="old('last_name', $user->last_name)"
-                                    label="Last Name" grouped="true" required/>
+                                    type="text" name="last_name" :value="$user->last_name" label="Last Name" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
                                 <x-arc:input-control
-                                    type="email" name="email" :value="old('email', $user->email)"
-                                    label="Email" grouped="true" required/>
+                                    type="email" name="email" :value="$user->email" label="Email" required/>
                             </div>
                         </div>
                     </x-arc:card-body>

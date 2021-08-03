@@ -68,41 +68,41 @@
                         @endif
                     </tbody>
                 </x-arc:card-table>
-                <x-arc:card-footer class="d-flex justify-content-end">
+                <x-arc:card-footer class="d-flex justify-content-end btn-seperated">
                     {{-- UPDATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('update'), [$user])
-                        <a href="{{ route('admin::authorization.users.edit', [$user]) }}"
-                           class="btn btn-sm btn-secondary">@lang('Edit')</a>
+                        <x-arc:button-action
+                            type="edit" action="{{ route('admin::authorization.users.edit', [$user]) }}"/>
                     @endcan
 
                     {{-- IMPERSONATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('impersonate'), [$user])
-                        <a href="{{ route('admin::authorization.users.impersonate', [$user]) }}"
-                           class="btn btn-sm btn-secondary ms-2">@lang('Impersonate')</a>
+                        <x-arc:button-action
+                            type="impersonate" action="{{ route('admin::authorization.users.impersonate', [$user]) }}"/>
                     @endcan
 
                     {{-- ACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('activate'), [$user])
-                        <button class="btn btn-sm btn-secondary ms-2"
-                                onclick="ARCANESOFT.emit('authorization::users.activate')">@lang('Activate')</button>
+                        <x-arc:button-action
+                            type="activate" action="authorization::users.activate"/>
                     @endcan
 
                     {{-- DEACTIVATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('deactivate'), [$user])
-                        <button class="btn btn-sm btn-secondary ms-2"
-                                onclick="ARCANESOFT.emit('authorization::users.deactivate')">@lang('Deactivate')</button>
+                        <x-arc:button-action
+                            type="deactivate" action="authorization::users.deactivate"/>
                     @endcan
 
                     {{-- RESTORE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('restore'), [$user])
-                        <button class="btn btn-sm btn-secondary ms-2"
-                                onclick="ARCANESOFT.emit('authorization::users.restore')">@lang('Restore')</button>
+                        <x-arc:button-action
+                            type="restore" action="authorization::users.restore"/>
                     @endcan
 
                     {{-- DELETE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('delete'), [$user])
-                        <button class="btn btn-sm btn-danger ms-2"
-                                onclick="ARCANESOFT.emit('authorization::users.delete')">@lang('Delete')</button>
+                        <x-arc:button-action
+                            type="delete" action="authorization::users.delete"/>
                     @endcan
                 </x-arc:card-footer>
             </x-arc:card>

@@ -29,6 +29,7 @@ return [
         'form-label'        => Arcanesoft\Foundation\Views\Components\Forms\LabelComponent::class,
 
         // Form Inputs
+        'input'             => Arcanesoft\Foundation\Views\Components\Forms\Inputs\InputComponent::class,
         'password'          => Arcanesoft\Foundation\Views\Components\Forms\Inputs\PasswordComponent::class,
 
         // Form Controls

@@ -13,34 +13,29 @@
                             {{-- FIRST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
-                                    type="text" name="first_name" :value="old('first_name')" label="First Name"
-                                    grouped="true" required/>
+                                    type="text" name="first_name" label="First Name" required/>
                             </div>
 
                             {{-- LAST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
-                                    type="text" name="last_name" :value="old('last_name')" label="Last Name"
-                                    required grouped="true"/>
+                                    type="text" name="last_name" label="Last Name" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
                                 <x-arc:input-control
-                                    type="email" name="email" :value="old('email')" label="Email"
-                                    required grouped="true"/>
+                                    type="email" name="email" label="Email" required/>
                             </div>
 
                             {{-- PASSWORD --}}
                             <div class="col-12 col-xxl-6">
-                                <x-arc:password-control name="password" label="Password"
-                                                        grouped="true"/>
+                                <x-arc:password-control name="password" label="Password"/>
                             </div>
 
                             {{-- PASSWORD CONFIRMATION --}}
                             <div class="col-12 col-xxl-6">
-                                <x-arc:password-control name="password_confirmation" label="Confirm Password"
-                                                        grouped="true"/>
+                                <x-arc:password-control name="password_confirmation" label="Confirm Password"/>
                             </div>
                         </div>
                     </x-arc:card-body>

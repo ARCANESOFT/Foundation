@@ -2,7 +2,9 @@
 /** @var  Illuminate\View\ComponentAttributeBag  $attributes */
 $attributes = $attributes
     ->except(['name', 'id', 'rows'])
-    ->class(['form-control'])
+    ->class([
+        'form-control',
+    ])
 ;
 ?>
 <textarea

@@ -25,23 +25,23 @@ class CheckboxComponent extends Component
      */
 
     /**
+     * @param  string       $type
      * @param  string       $name
      * @param  string|null  $id
-     * @param  string       $type
      * @param  string       $value
      * @param  string|null  $label
      * @param  bool         $checked
      */
     public function __construct(
+        string $type = 'text',
         string $name,
         string $id = null,
-        string $type = 'text',
         string $value = '',
         string $label = null,
         bool $checked = false
     )
     {
-        parent::__construct($name, $id, $type, $value, $label);
+        parent::__construct($type, $name, $id, $value, $label);
 
         $this->checked = $checked;
     }

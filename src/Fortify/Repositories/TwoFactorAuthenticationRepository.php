@@ -134,7 +134,7 @@ class TwoFactorAuthenticationRepository
 
         event(new ReplacingRecoveryCode($user));
         $saved = $user->twoFactor->push();
-        event(new ReplacedRecoveryCode($user));
+        event(new ReplacedRecoveryCode($user, $code));
 
         return $saved;
     }

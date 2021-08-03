@@ -12,6 +12,28 @@ use Illuminate\Contracts\View\View;
 class PasswordComponent extends Component
 {
     /* -----------------------------------------------------------------
+     |  Constructor
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * @param  string       $type
+     * @param  string       $name
+     * @param  string|null  $id
+     * @param  mixed|null   $value
+     */
+    public function __construct(
+        string $type = 'password',
+        string $name = 'password',
+        string $id = null,
+        $value = null
+    ) {
+        $value = null;
+
+        parent::__construct($type, $name, $id, $value);
+    }
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */

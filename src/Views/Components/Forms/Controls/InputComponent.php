@@ -33,14 +33,14 @@ class InputComponent extends Component
      * @param  bool         $grouped
      */
     public function __construct(
+        string $type = 'text',
         string $name,
         string $id = null,
-        string $type = 'text',
         ?string $value = '',
         ?string $label = null,
         bool $grouped = false
     ) {
-        parent::__construct($name, $id, $type, $value, $label);
+        parent::__construct($type, $name, $id, $value, $label);
 
         $this->grouped = $grouped;
     }

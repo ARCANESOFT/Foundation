@@ -7,7 +7,10 @@
  */
 $attributes = $attributes
     ->except(['type', 'id', 'name', 'value'])
-    ->class(['form-check-input', 'is-invalid' => $errors->has($name)])
+    ->class([
+        'form-check-input',
+        'is-invalid' => $errors->has($name),
+    ])
 ;
 ?>
 <div class="form-check">

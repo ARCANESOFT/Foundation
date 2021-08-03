@@ -11,7 +11,10 @@ $attributes = $attributes
         'name' => $name,
         'id'   => $id,
     ])
-    ->class(['form-select', 'is-invalid' => $errors->has($name)])
+    ->class([
+        'form-select',
+        'is-invalid' => $errors->has($name),
+    ])
 ;
 ?>
 @if($grouped)

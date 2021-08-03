@@ -1,9 +1,23 @@
 <?php
-/** @var  Illuminate\View\ComponentAttributeBag  $attributes */
+/**
+ * @var  string                                 $type
+ * @var  string                                 $name
+ * @var  string                                 $id
+ * @var  mixed                                  $value
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  Illuminate\Support\ViewErrorBag        $errors
+ */
 $attributes = $attributes
-    ->except(['type', 'name', 'id', 'value'])
+    ->merge([
+        'type'  => $type,
+        'name'  => $name,
+        'id'    => $id,
+        'value' => old($name, $value),
+    ])
+    ->class([
+        'form-control',
+        'is-invalid' => $errors->has($name),
+    ])
 ;
 ?>
-<input
-    type="{{ $type }}" name="{{ $name }}" id="{{ $id }}" value="{{ old($name, $value) }}" {{ $attributes }}
-/>
+<input {{ $attributes }}/>
