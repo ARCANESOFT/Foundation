@@ -51,7 +51,7 @@ class AdministratorsController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index($trash = false)
+    public function index(bool $trash = false)
     {
         $this->authorize(AdministratorsPolicy::ability('index'));
 
@@ -100,10 +100,14 @@ class AdministratorsController extends Controller
         $this->authorize(AdministratorsPolicy::ability('create'));
 
         $roles = $rolesRepo->getFilteredByAuthenticatedAdministrator(Auth::admin());
+        $selectedRoles = [];
 
         $this->addBreadcrumb(__('New Administrator'));
 
-        return $this->view('authorization.administrators.create', compact('roles'));
+        return $this->view(
+            'authorization.administrators.create',
+            compact('roles', 'selectedRoles')
+        );
     }
 
     /**
@@ -166,13 +170,19 @@ class AdministratorsController extends Controller
         $administrator->load(['roles']);
 
         $roles = $rolesRepo->getFilteredByAuthenticatedAdministrator(Auth::admin());
+        $selectedRoles = $administrator->roles
+            ->pluck(Auth::makeModel('role')->getRouteKeyName())
+            ->toArray();
 
         $this->addBreadcrumbRoute(
             __('Edit Administrator'),
             'admin::authorization.administrators.edit', [$administrator]
         );
 
-        return $this->view('authorization.administrators.edit', compact('administrator', 'roles'));
+        return $this->view(
+            'authorization.administrators.edit',
+            compact('administrator', 'roles', 'selectedRoles')
+        );
     }
 
     /**

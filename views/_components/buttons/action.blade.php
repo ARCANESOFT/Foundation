@@ -6,7 +6,7 @@
 
 $isPrimary      = in_array($type, ['add', 'save']);
 $isDestructive  = in_array($type, ['delete', 'detach']);
-$isScriptAction = in_array($type, ['activate', 'activate', 'delete', 'detach', 'restore']);
+$isScriptAction = in_array($type, ['activate', 'deactivate', 'delete', 'detach', 'restore']);
 
 $attributes    = $attributes->class([
     'btn',
@@ -17,7 +17,7 @@ $attributes    = $attributes->class([
 ])
 ?>
 @if ($isScriptAction)
-    <button onclick="ARCANESOFT.emit({{ $action }})" {{ $attributes }}>@lang(ucfirst($type))</button>
+    <button onclick="ARCANESOFT.emit('{{ $action }}')" {{ $attributes }}>@lang(ucfirst($type))</button>
 @else
     <a href="{{ $action }}" {{ $attributes }}>
         @if($type === 'add')<i class="fas fa-fw fa-plus me-1"></i>@endif @lang(ucfirst($type))

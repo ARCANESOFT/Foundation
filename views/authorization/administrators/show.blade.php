@@ -42,18 +42,18 @@
                         <td class="text-end">
                             @if ($administrator->isActive())
                                 <span class="badge border border-success text-muted">
-                                        <i class="fas fa-fw fa-check"></i> @lang('Activated')
-                                    </span>
+                                    <i class="fas fa-fw fa-check"></i> @lang('Activated')
+                                </span>
                             @else
                                 <span class="badge border border-secondary text-muted">
-                                        <i class="fas fa-fw fa-ban"></i> @lang('Deactivated')
-                                    </span>
+                                    <i class="fas fa-fw fa-ban"></i> @lang('Deactivated')
+                                </span>
                             @endif
                             @if ($administrator->isSuperAdmin())
                                 <span class="badge border border-warning text-muted"
                                       data-toggle="tooltip" data-placement="top" title="@lang('Super Administrator')">
-                                        <i class="fas fa-crown"></i>
-                                    </span>
+                                    <i class="fas fa-crown"></i>
+                                </span>
                             @endif
                         </td>
                     </tr>
@@ -134,10 +134,6 @@
                                     <td class="text-end">
                                         <x-arc:table-action
                                             type="Show" action="{{ route('admin::authorization.roles.show', [$role]) }}"/>
-                                        {{--                                            <a href="{{ route('admin::authorization.roles.show', [$role]) }}" class="btn btn-sm btn-light"--}}
-                                        {{--                                               data-toggle="tooltip" title="@lang('Show')">--}}
-                                        {{--                                                <i class="far fa-fw fa-eye"></i>--}}
-                                        {{--                                            </a>--}}
                                     </td>
                                 </tr>
                             @empty
@@ -209,7 +205,7 @@
 
                 ARCANESOFT.on('authorization::administrators.activate', () => {
                     activateModal.show()
-                });
+                })
 
                 activateForm.onSubmit('PUT', () => {
                     activateModal.hide()
@@ -236,7 +232,7 @@
 
                 ARCANESOFT.on('authorization::administrators.deactivate', () => {
                     deactivateModal.show()
-                });
+                })
 
                 deactivateForm.onSubmit('PUT', () => {
                     deactivateModal.hide()
@@ -297,7 +293,7 @@
 
                     ARCANESOFT.on('authorization::administrators.restore', () => {
                         restoreModal.show()
-                    });
+                    })
 
                     restoreForm.onSubmit('PUT', () => {
                         restoreModal.hide()

@@ -30,6 +30,7 @@ return [
 
         // Form Inputs
         'input'             => Arcanesoft\Foundation\Views\Components\Forms\Inputs\InputComponent::class,
+        'checkbox'          => Arcanesoft\Foundation\Views\Components\Forms\Inputs\CheckboxComponent::class,
         'password'          => Arcanesoft\Foundation\Views\Components\Forms\Inputs\PasswordComponent::class,
 
         // Form Controls

@@ -18,36 +18,31 @@
                             {{-- FIRST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
-                                    type="text" name="first_name" :value="old('first_name')" label="First Name"
-                                    grouped="true" required/>
+                                    type="text" name="first_name" label="First Name" required/>
                             </div>
 
                             {{-- LAST NAME --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:input-control
-                                    type="text" name="last_name" :value="old('last_name')" label="Last Name"
-                                    grouped="true" required/>
+                                    type="text" name="last_name" label="Last Name" required/>
                             </div>
 
                             {{-- EMAIL --}}
                             <div class="col-12">
                                 <x-arc:input-control
-                                    type="email" name="email" :value="old('email')" label="Email"
-                                    grouped="true" required/>
+                                    type="email" name="email" label="Email" required/>
                             </div>
 
                             {{-- PASSWORD --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:password-control
-                                    name="password" label="Password"
-                                    grouped="true"/>
+                                    name="password" label="Password"/>
                             </div>
 
                             {{-- PASSWORD CONFIRMATION --}}
                             <div class="col-12 col-xxl-6">
                                 <x-arc:password-control
-                                    name="password_confirmation" label="Confirm Password"
-                                    grouped="true"/>
+                                    name="password_confirmation" label="Confirm Password"/>
                             </div>
                         </div>
                     </x-arc:card-body>
@@ -72,7 +67,9 @@
                             @foreach($roles as $role)
                                 <tr>
                                     <td>
-                                        {{ form()->checkbox('roles[]', $role->uuid, in_array($role->uuid, old('roles', []))) }}
+                                        <x-arc:checkbox
+                                            name="roles[]" :value="$role->getRouteKey()"
+                                            :checked="in_array($role->getRouteKey(), old('roles', $selectedRoles))"/>
                                     </td>
                                     <td class="small">{{ $role->name }}</td>
                                     <td class="small">{{ $role->description }}</td>
