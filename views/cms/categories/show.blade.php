@@ -1,106 +1,63 @@
-<?php /** @var  Arcanesoft\Foundation\Cms\Models\Language|mixed  $language */ ?>
+<?php /** @var  Arcanesoft\Foundation\Cms\Models\Category|mixed  $category */ ?>
 <x-arc:layout>
     @section('page-title')
-        <i class="fas fa-fw fa-language"></i> @lang('Languages') <small>@lang("Language's details")</small>
+        <i class="far fa-fw fa-categories"></i> @lang('Categories') <small>@lang("Category's details")</small>
     @endsection
 
     <div class="row g-4">
         <div class="col-lg-5">
             <x-arc:card>
-                <x-arc:card-body class="d-flex justify-content-center">
-                    <div class="avatar avatar-xxl rounded-circle bg-light">
-                        <img src="{{ $language->avatar }}" alt="{{ $language->full_name }}">
-                    </div>
-                </x-arc:card-body>
+                <x-arc:card-header>@lang('Category')</x-arc:card-header>
                 <x-arc:card-table>
                     <tbody>
                         <tr>
-                            <x-arc:table-th label="Full Name"/>
-                            <td class="text-end small">{{ $language->full_name }}</td>
-                        </tr>
-                        <tr>
-                            <x-arc:table-th label="Email"/>
-                            <td class="text-end small">
-                                {{ $language->email }}
-                                @if ($language->hasVerifiedEmail())
-                                    <i class="far fa-check-circle text-primary" data-toggle="tooltip" title="@lang('Verified')"></i>
-                                @endif
-                            </td>
-                        </tr>
-                        @if ($language->hasVerifiedEmail())
-                        <tr>
-                            <x-arc:table-th label="Email Verified at"/>
-                            <td class="text-muted text-end small">{{ $language->email_verified_at }}</td>
-                        </tr>
-                        @endif
-                        <tr>
-                            <x-arc:table-th label="Status"/>
-                            <td class="text-end">
-                                @if ($language->isActive())
-                                    <span class="badge border border-success text-muted">
-                                        <i class="fas fa-fw fa-check text-success"></i> @lang('Activated')
-                                    </span>
-                                @else
-                                    <span class="badge border border-secondary text-muted">
-                                        <i class="fas fa-fw fa-ban text-secondary"></i> @lang('Deactivated')
-                                    </span>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <x-arc:table-th label="Last Activity"/>
-                            <td class="text-end text-muted small">{{ $language->last_activity }}</td>
+                            <x-arc:table-th label="Slug"/>
+                            <td class="text-end small">{{ $category->slug }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Created at"/>
-                            <td class="text-end text-muted small">{{ $language->created_at }}</td>
+                            <td class="text-end text-muted small">{{ $category->created_at }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Updated at"/>
-                            <td class="text-end text-muted small">{{ $language->updated_at }}</td>
+                            <td class="text-end text-muted small">{{ $category->updated_at }}</td>
                         </tr>
-                        @if ($language->trashed())
+                        @if ($category->trashed())
                             <tr>
                                 <x-arc:table-th label="Deleted at"/>
                                 <td class="font-weight-light text-uppercase text-muted">@lang('Deleted at')</td>
-                                <td class="text-end text-muted small">{{ $language->deleted_at }}</td>
+                                <td class="text-end text-muted small">{{ $category->deleted_at }}</td>
                             </tr>
                         @endif
                     </tbody>
                 </x-arc:card-table>
                 <x-arc:card-footer class="d-flex justify-content-end">
                     {{-- UPDATE --}}
-                    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('update'), [$language])
-                        <a href="{{ route('admin::cms.languages.edit', [$language]) }}"
+                    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('update'), [$category])
+                        <a href="{{ route('admin::cms.categories.edit', [$category]) }}"
                            class="btn btn-sm btn-secondary">@lang('Edit')</a>
                     @endcan
 
-                    {{-- IMPERSONATE --}}
-                    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('impersonate'), [$language])
-                        <a href="{{ route('admin::cms.languages.impersonate', [$language]) }}"
-                           class="btn btn-sm btn-secondary ms-2">@lang('Impersonate')</a>
-                    @endcan
-
                     {{-- ACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('activate'), [$language])
+                    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('activate'), [$category])
                         <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('cms::languages.activate')">@lang('Activate')</button>
                     @endcan
 
                     {{-- DEACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('deactivate'), [$language])
+                    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('deactivate'), [$category])
                         <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('cms::languages.deactivate')">@lang('Deactivate')</button>
                     @endcan
 
                     {{-- RESTORE --}}
-                    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('restore'), [$language])
+                    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('restore'), [$category])
                         <button class="btn btn-sm btn-secondary ms-2"
                                 onclick="ARCANESOFT.emit('cms::languages.restore')">@lang('Restore')</button>
                     @endcan
 
                     {{-- DELETE --}}
-                    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('delete'), [$language])
+                    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('delete'), [$category])
                         <button class="btn btn-sm btn-danger ms-2"
                                 onclick="ARCANESOFT.emit('cms::languages.delete')">@lang('Delete')</button>
                     @endcan
@@ -108,40 +65,18 @@
             </x-arc:card>
         </div>
         <div class="col-lg-7">
-            @if ($language->linkedAccounts->isNotEmpty())
-                <x-arc:card>
-                    <x-arc:card-header>@lang('Linked Accounts')</x-arc:card-header>
-                    <x-arc:card-table>
-                        <thead>
-                            <tr>
-                                <x-arc:table-th label="Provider"/>
-                                <x-arc:table-th label="Created at" class="text-center"/>
-                                <x-arc:table-th label="Updated at" class="text-center"/>
-                                <x-arc:table-th label="Actions" class="text-end"/>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($language->linkedAccounts as $linkedAccount)
-                            <tr>
-                                <td>{{ $linkedAccount->name }}</td>
-                                <td class="small text-muted text-center">{{ $linkedAccount->created_at }}</td>
-                                <td class="small text-muted text-center">{{ $linkedAccount->updated_at }}</td>
-                                <td class="text-end"></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </x-arc:card-table>
-                </x-arc:card>
-            @endif
+            <x-arc:card>
+                <x-arc:card-header>@lang('Sub-categories')</x-arc:card-header>
+            </x-arc:card>
         </div>
     </div>
 
     {{-- ACIVATE MODAL --}}
-    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('activate'), [$language])
+    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('activate'), [$category])
         @push('modals')
             <x-arc:modal-action
                 type="activate"
-                action="{{ route('admin::cms.languages.activate', [$language]) }}" method="PUT"
+                action="{{ route('admin::cms.categories.activate', [$category]) }}" method="PUT"
                 title="Activate Language" body="Are you sure you want to activate this user ?"
             />
         @endpush
@@ -164,11 +99,11 @@
     @endcan
 
     {{-- DEACIVATE MODAL --}}
-    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('deactivate'), [$language])
+    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('deactivate'), [$category])
         @push('modals')
             <x-arc:modal-action
                 type="deactivate"
-                action="{{ route('admin::cms.languages.deactivate', [$language]) }}" method="PUT"
+                action="{{ route('admin::cms.categories.deactivate', [$category]) }}" method="PUT"
                 title="Deactivate Language" body="Are you sure you want to deactivate this user ?"
             />
         @endpush
@@ -191,11 +126,11 @@
     @endcan
 
     {{-- DELETE MODAL --}}
-    @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('delete'), [$language])
+    @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('delete'), [$category])
         @push('modals')
             <x-arc:modal-action
                 type="delete"
-                action="{{ route('admin::cms.languages.delete', [$language]) }}" method="DELETE"
+                action="{{ route('admin::cms.categories.delete', [$category]) }}" method="DELETE"
                 title="Delete Language"
                 body="Are you sure you want to delete this user ?"
             />
@@ -212,8 +147,8 @@
 
                 deleteForm.onSubmit('DELETE', () => {
                     deleteModal.hide()
-                    @if ($language->trashed())
-                    location.replace("{{ route('admin::cms.languages.index') }}")
+                    @if ($category->trashed())
+                    location.replace("{{ route('admin::cms.categories.index') }}")
                     @else
                     location.reload()
                     @endif

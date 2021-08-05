@@ -1,7 +1,7 @@
 <?php /** @var  bool  $trash */ ?>
 <x-arc:layout>
     @section('page-title')
-        <i class="fa fa-fw fa-categories"></i> @lang('Categories')
+        <i class="far fa-fw fa-categories"></i> @lang('Categories')
     @endsection
 
     @push('content-nav')

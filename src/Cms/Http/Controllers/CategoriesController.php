@@ -3,8 +3,7 @@
 namespace Arcanesoft\Foundation\Cms\Http\Controllers;
 
 use Arcanesoft\Foundation\Cms\Http\Datatables\CategoriesDatatable;
-use Arcanesoft\Foundation\Cms\Http\Requests\Categories\CreateCategoryRequest;
-use Arcanesoft\Foundation\Cms\Http\Requests\Categories\UpdateCategoryRequest;
+use Arcanesoft\Foundation\Cms\Http\Requests\Categories\{CreateCategoryRequest, UpdateCategoryRequest};
 use Arcanesoft\Foundation\Cms\Models\Category;
 use Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy;
 use Arcanesoft\Foundation\Cms\Repositories\CategoriesRepository;
@@ -91,13 +90,17 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(CategoriesRepository $repo)
     {
         $this->authorize(CategoriesPolicy::ability('create'));
 
         $this->addBreadcrumb(__('New Category'));
 
-        return $this->view('cms.categories.create');
+        // TODO: Mode this to the repo
+        $categories = $repo->pluck('name', 'id')
+            ->prepend(__('-- Select a parent --'), 0);
+
+        return $this->view('cms.categories.create', compact('categories'));
     }
 
     /**

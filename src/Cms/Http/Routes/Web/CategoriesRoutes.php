@@ -95,7 +95,7 @@ class CategoriesRoutes extends RouteRegistrar
     public function bindings(CategoriesRepository $repo): void
     {
         $this->bind(static::CATEGORY_WILDCARD, function (string $uuid) use ($repo) {
-            return $repo->firstWhereUuidOrFail($uuid);
+            return $repo->findOrFail($uuid);
         });
     }
 }

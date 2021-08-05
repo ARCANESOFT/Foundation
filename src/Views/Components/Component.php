@@ -4,7 +4,6 @@ namespace Arcanesoft\Foundation\Views\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component as IlluminateComponent;
-use function view;
 
 /**
  * Class     Component

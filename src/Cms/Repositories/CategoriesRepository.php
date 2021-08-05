@@ -56,14 +56,13 @@ class CategoriesRepository extends Repository
      */
     public function createOne(array $attributes): Category
     {
-        /** @var  Category  $category */
-        $category = $this->newModelInstance();
-        $category
-            ->setAttribute('slug', $attributes['slug'])
-            ->setTranslations('name', $attributes['name'])
-            ->setTranslations('description', $attributes['name']);
-
-        dd($category, $attributes);
+        return tap(
+            $this->newModelInstance()->fill($attributes),
+            function (Category $category) use ($attributes) {
+                $category->setParentId($attributes['parent']);
+                $category->save();
+            }
+        );
     }
 
     /**

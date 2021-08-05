@@ -1,3 +1,16 @@
+<?php
+
+use Arcanesoft\Foundation\Helpers\Sidebar\Manager;
+
+/**  @var Illuminate\View\ComponentAttributeBag  $attributes */
+$attributes = $attributes
+    ->merge([
+        'data-skin-mode'       => session()->get('foundation.skin.mode', 'light'),
+        'data-sidebar-visible' => Manager::isVisible() ? 'true' : 'false',
+    ])
+    ->class(['h-100', 'p-0'])
+;
+?>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', Arcanesoft\Foundation\Cms\Cms::getLocale()) }}" class="h-100">
 <head>
@@ -10,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset(mix('css/arcanesoft.css', 'assets')) }}">
     @stack('head')
 </head>
-<body {{ $attributes->merge(['class' => 'h-100 p-0']) }}>
+<body {{ $attributes }}>
     {{-- APP CONTAINER --}}
     <div id="arcanesoft" class="app-container h-100">
         @include('foundation::_components.layout.navbar')

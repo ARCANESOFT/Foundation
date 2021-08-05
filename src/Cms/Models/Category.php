@@ -54,7 +54,9 @@ class Category extends Model
         NestedSet::PARENT_ID,
     ];
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $translatable = [
         'name',
         'description',
@@ -77,9 +79,7 @@ class Category extends Model
      */
 
     /**
-     * Create a new Eloquent model instance.
-     *
-     * @param  array  $attributes
+     * {@inheritDoc}
      */
     public function __construct(array $attributes = [])
     {
@@ -88,4 +88,3 @@ class Category extends Model
         parent::__construct($attributes);
     }
 }
-

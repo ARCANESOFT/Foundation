@@ -2,7 +2,6 @@
 
 namespace Arcanesoft\Foundation\Views\Components;
 
-use Arcanesoft\Foundation\Helpers\Sidebar\Manager;
 use Illuminate\Contracts\View\View;
 
 /**
@@ -22,11 +21,6 @@ class LayoutComponent extends Component
      */
     public function render(): View
     {
-        $this->withAttributes([
-            'data-skin-mode'       => session()->get('foundation.skin.mode', 'light'),
-            'data-sidebar-visible' => Manager::isVisible() ? 'true' : 'false',
-        ]);
-
         return $this->view('layout');
     }
 }

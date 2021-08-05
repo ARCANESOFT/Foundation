@@ -32,7 +32,7 @@
                         <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}" class="rounded-circle bg-light">
                         <span class="status bg-success"></span>
                     </div>
-                    <div class="d-none d-sm-inline-block ml-sm-2">
+                    <div class="d-none d-sm-inline-block ms-sm-2">
                         <span class="user-name">{{ $user->full_name }}</span>
                     </div>
                 </a>
