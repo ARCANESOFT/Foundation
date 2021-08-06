@@ -2,6 +2,8 @@
 
 namespace Arcanesoft\Foundation\Cms;
 
+use Arcanesoft\Foundation\Cms\Repositories\LanguagesRepository;
+
 /**
  * Class     Cms
  *
@@ -105,5 +107,16 @@ class Cms
     public static function getFallbackLocale(): string
     {
         return config('app.fallback_locale', static::getLocale());
+    }
+
+    /**
+     * Get the current locale.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getLocales()
+    {
+        // TODO: Cache the results?
+        return app()->make(LanguagesRepository::class)->pluck('code');
     }
 }

@@ -4,6 +4,7 @@ namespace Arcanesoft\Foundation\Cms\Repositories;
 
 use Arcanesoft\Foundation\Cms\Cms;
 use Arcanesoft\Foundation\Cms\Models\Category;
+use Illuminate\Support\Collection;
 
 /**
  * Class     CategoriesRepository
@@ -56,13 +57,33 @@ class CategoriesRepository extends Repository
      */
     public function createOne(array $attributes): Category
     {
+        if ( ! is_null($attributes['parent']))
+            return $this->createOneWithParent($attributes['parent'], $attributes);
+
         return tap(
-            $this->newModelInstance()->fill($attributes),
+            $this->model()->fill($attributes),
             function (Category $category) use ($attributes) {
-                $category->setParentId($attributes['parent']);
                 $category->save();
             }
         );
+    }
+
+    /**
+     * Create a category with a parent.
+     *
+     * @param  int|string  $parent
+     * @param  array       $attributes
+     *
+     * @return \Arcanesoft\Foundation\Cms\Models\Category
+     */
+    public function createOneWithParent($parent, array $attributes): Category
+    {
+        /** @var  \Arcanesoft\Foundation\Cms\Models\Category  $parent */
+        $parent = $this->find($parent);
+
+        return tap($parent->children()->make($attributes), function (Category $category) {
+            $category->save();
+        });
     }
 
     /**
@@ -73,7 +94,10 @@ class CategoriesRepository extends Repository
      */
     public function updateOne(Category $category, array $attributes)
     {
-        //
+        return $category
+            ->fill($attributes)
+            ->setParentId($attributes['parent'])
+            ->save();
     }
 
     /**
@@ -94,5 +118,22 @@ class CategoriesRepository extends Repository
     public function restoreOne(Category $category)
     {
         //
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getSelectOptions(): Collection
+    {
+        $model = $this->model();
+
+        return $this
+            ->pluck('name', $model->getKeyName())
+            ->prepend(__('-- Select a parent --'), 0);
     }
 }

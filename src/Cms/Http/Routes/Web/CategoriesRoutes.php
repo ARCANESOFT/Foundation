@@ -43,6 +43,10 @@ class CategoriesRoutes extends RouteRegistrar
             $this->get('metrics', [CategoriesController::class, 'metrics'])
                  ->name('metrics');
 
+            // admin::cms.categories.tree
+            $this->get('tree', [CategoriesController::class, 'tree'])
+                 ->name('tree');
+
             // admin::cms.categories.create
             $this->get('create', [CategoriesController::class, 'create'])
                  ->name('create');

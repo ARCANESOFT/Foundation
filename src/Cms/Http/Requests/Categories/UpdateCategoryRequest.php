@@ -2,6 +2,7 @@
 
 namespace Arcanesoft\Foundation\Cms\Http\Requests\Categories;
 
+use Arcanesoft\Foundation\Cms\Cms;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -23,8 +24,15 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $locales = Cms::getLocales();
+
         return [
-            //
+            'slug'         => ['required', 'string'],
+            'name'         => ['array:'.$locales->implode(',')],
+            'name.*'       => ['required', 'string'],
+            'description'  => ['array:'.$locales->implode(',')],
+            'description.' => ['nullable', 'string'],
+            'parent'       => [],
         ];
     }
 }

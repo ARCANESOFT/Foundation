@@ -1,6 +1,7 @@
+<?php /** @var  bool  $trash */ ?>
 <x-arc:layout>
     @section('page-title')
-        <i class="fas fa-fw fa-stream"></i> @lang('Users') <small>@lang('Metrics')</small>
+        <i class="fas fa-fw fa-stream"></i> @lang('Categories') <small>Tree</small>
     @endsection
 
     @push('content-nav')
@@ -24,4 +25,5 @@
             @endcan
         </nav>
     @endpush
+
 </x-arc:layout>

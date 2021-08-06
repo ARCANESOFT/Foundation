@@ -86,6 +86,16 @@ class CategoriesController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function tree()
+    {
+        $this->authorize(CategoriesPolicy::ability('index'));
+
+        return $this->view('cms.categories.tree');
+    }
+
+    /**
      * Create a new category.
      *
      * @return \Illuminate\Contracts\View\View
@@ -96,9 +106,7 @@ class CategoriesController extends Controller
 
         $this->addBreadcrumb(__('New Category'));
 
-        // TODO: Mode this to the repo
-        $categories = $repo->pluck('name', 'id')
-            ->prepend(__('-- Select a parent --'), 0);
+        $categories = $repo->getSelectOptions();
 
         return $this->view('cms.categories.create', compact('categories'));
     }
@@ -138,7 +146,13 @@ class CategoriesController extends Controller
 
         $this->addBreadcrumbRoute(__("Category's details"), 'admin::cms.categories.show', [$category]);
 
-        return $this->view('cms.categories.show', compact('category'));
+        $parentCategory = $category->parent;
+        $subCategories  = $category->children->loadCount(['children']);
+
+        return $this->view(
+            'cms.categories.show',
+            compact('category', 'parentCategory', 'subCategories')
+        );
     }
 
     /**
@@ -148,13 +162,15 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(Category $category)
+    public function edit(Category $category, CategoriesRepository $repo)
     {
         $this->authorize(CategoriesPolicy::ability('update'), [$category]);
 
         $this->addBreadcrumbRoute(__('Edit Category'), 'admin::cms.categories.edit', [$category]);
 
-        return $this->view('cms.categories.edit', compact('category'));
+        $categories = $repo->getSelectOptions();
+
+        return $this->view('cms.categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -162,15 +178,15 @@ class CategoriesController extends Controller
      *
      * @param  \Arcanesoft\Foundation\Cms\Models\Category                                 $category
      * @param  \Arcanesoft\Foundation\Cms\Http\Requests\Categories\UpdateCategoryRequest  $request
-     * @param  \Arcanesoft\Foundation\Cms\Repositories\CategoriesRepository               $categoriesRepo
+     * @param  \Arcanesoft\Foundation\Cms\Repositories\CategoriesRepository               $repo
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Category $category, UpdateCategoryRequest $request, CategoriesRepository $categoriesRepo)
+    public function update(Category $category, UpdateCategoryRequest $request, CategoriesRepository $repo)
     {
         $this->authorize(CategoriesPolicy::ability('update'), [$category]);
 
-        $categoriesRepo->updateOne($category, $request->validated());
+        $repo->updateOne($category, $request->validated());
 
         static::notifySuccess(
             'Category Updated',

@@ -3,6 +3,7 @@
 namespace Arcanesoft\Foundation\Cms\Http\Transformers;
 
 use Arcanesoft\Foundation\Datatable\Contracts\Transformer;
+use Arcanesoft\Foundation\Datatable\DataTypes\BadgeCount;
 use Illuminate\Http\Request;
 
 /**
@@ -30,6 +31,7 @@ class CategoryTransformer implements Transformer
         return [
             'name'        => $resource->name,
             'description' => $resource->description,
+            'children'    => (new BadgeCount)->transform($resource->getAttribute('children_count')),
             'created_at'  => $resource->created_at->format('Y-m-d H:i:s'),
         ];
     }

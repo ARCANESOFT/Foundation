@@ -1,6 +1,6 @@
 <x-arc:layout>
     @section('page-title')
-        <i class="fa fa-fw fa-users"></i> @lang('Categories') <small>@lang('New Category')</small>
+        <i class="fas fa-fw fa-stream"></i> @lang('Categories') <small>@lang('New Category')</small>
     @endsection
 
     <x-arc:form action="{{ route('admin::cms.categories.store') }}">

@@ -42,7 +42,9 @@ class CategoriesDatatable extends Datatable
      */
     public function handle(CategoriesRepository $repo, Request $request)
     {
-        $query = $repo->query();
+        /** @var \Kalnoy\Nestedset\QueryBuilder $query */
+        $query = $repo->query()->withCount(['children']);
+        $query->whereIsRoot();
 
         $this->handleSearchQuery($request, $query);
 
@@ -74,8 +76,9 @@ class CategoriesDatatable extends Datatable
     protected function columns(): array
     {
         return [
-            Column::make('name', 'First Name')->sortable(),
-            Column::make('description', 'Last Name')->sortable(),
+            Column::make('name', 'Name')->sortable(),
+            Column::make('description', 'Description')->sortable(),
+            Column::make('children', 'Sub-categories', Column::DATATYPE_BADGE_COUNT)->align('center'),
             Column::make('created_at', 'Created at')->sortable()->align('center'),
         ];
     }

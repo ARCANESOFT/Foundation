@@ -4,6 +4,7 @@ namespace Arcanesoft\Foundation\Cms\Models;
 
 use Arcanesoft\Foundation\Cms\Cms;
 use Arcanesoft\Foundation\Cms\Traits\HasTranslations;
+use Arcanesoft\Foundation\Support\Traits\Deletable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\{NestedSet, NodeTrait};
 
@@ -33,6 +34,7 @@ class Category extends Model
      | -----------------------------------------------------------------
      */
 
+    use Deletable;
     use HasTranslations;
     use NodeTrait;
     use SoftDeletes;
@@ -86,5 +88,18 @@ class Category extends Model
         $this->setTable(Cms::table('categories', 'categories'));
 
         parent::__construct($attributes);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Check Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isDeletable(): bool
+    {
+        return ! $this->children()->exists();
     }
 }

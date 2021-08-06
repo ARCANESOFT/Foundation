@@ -5,20 +5,23 @@
     @endsection
 
     @push('content-nav')
-        <nav class="page-actions">
+        <nav class="btn-seperated page-actions">
             @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('metrics'))
-                <a href="{{ route('admin::cms.categories.metrics') }}"
-                   class="btn btn-sm btn-secondary {{ active(['admin::cms.categories.metrics']) }}">@lang('Metrics')</a>
+                <x-arc:button-action
+                    type="metrics" action="{{ route('admin::cms.categories.metrics') }}"/>
             @endcan
 
             @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('index'))
-                <a href="{{ route('admin::cms.categories.index') }}"
-                   class="btn btn-sm btn-secondary {{ active(['admin::cms.categories.index']) }}">@lang('List')</a>
+                <x-arc:button-action
+                    type="list" action="{{ route('admin::cms.categories.index') }}"/>
+
+                <x-arc:button-action
+                    type="tree" action="{{ route('admin::cms.categories.tree') }}"/>
             @endcan
 
             @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('create'))
-                <a href="{{ route('admin::cms.categories.create') }}"
-                   class="btn btn-primary btn-sm"><i class="fa fa-fw fa-plus"></i> @lang('Add')</a>
+                <x-arc:button-action
+                    type="add" action="{{ route('admin::cms.categories.create') }}"/>
             @endcan
         </nav>
     @endpush
