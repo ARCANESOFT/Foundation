@@ -5,22 +5,7 @@
     @endsection
 
     @push('content-nav')
-        <nav class="page-actions">
-            @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('metrics'))
-                <a href="{{ route('admin::cms.languages.metrics') }}"
-                   class="btn btn-sm btn-secondary {{ active(['admin::cms.languages.metrics']) }}">@lang('Metrics')</a>
-            @endcan
-
-            @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('index'))
-                <a href="{{ route('admin::cms.languages.index') }}"
-                   class="btn btn-sm btn-secondary {{ active(['admin::cms.languages.index']) }}">@lang('List')</a>
-            @endcan
-
-            @can(Arcanesoft\Foundation\Cms\Policies\LanguagesPolicy::ability('create'))
-                <a href="{{ route('admin::cms.languages.create') }}"
-                   class="btn btn-primary btn-sm"><i class="fa fa-fw fa-plus"></i> @lang('Add')</a>
-            @endcan
-        </nav>
+        @include('foundation::cms.languages._partials.nav-actions')
     @endpush
 
     <v-datatable

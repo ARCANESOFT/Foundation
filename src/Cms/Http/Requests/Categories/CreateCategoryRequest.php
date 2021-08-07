@@ -2,7 +2,7 @@
 
 namespace Arcanesoft\Foundation\Cms\Http\Requests\Categories;
 
-use Arcanesoft\Foundation\Cms\Cms;
+use Arcanesoft\Foundation\Validation\Rules\Translated;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -24,15 +24,14 @@ class CreateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $locales = Cms::getLocales();
+        $rules = Translated::rules([
+            'name'        => ['required', 'string'],
+            'description' => ['nullable', 'string'],
+        ]);
 
-        return [
-            'slug'         => ['required', 'string'],
-            'name'         => ['array:'.$locales->implode(',')],
-            'name.*'       => ['required', 'string'],
-            'description'  => ['array:'.$locales->implode(',')],
-            'description.' => ['nullable', 'string'],
-            'parent'       => [],
-        ];
+        return array_merge($rules, [
+            'slug'   => ['required', 'string'],
+            'parent' => ['nullable'],
+        ]);
     }
 }

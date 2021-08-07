@@ -57,7 +57,7 @@ class CategoriesRepository extends Repository
      */
     public function createOne(array $attributes): Category
     {
-        if ( ! is_null($attributes['parent']))
+        if ($attributes['parent'] && $attributes['parent'] != 0)
             return $this->createOneWithParent($attributes['parent'], $attributes);
 
         return tap(
