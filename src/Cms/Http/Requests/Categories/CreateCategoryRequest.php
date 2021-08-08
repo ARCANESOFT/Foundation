@@ -2,7 +2,7 @@
 
 namespace Arcanesoft\Foundation\Cms\Http\Requests\Categories;
 
-use Arcanesoft\Foundation\Validation\Rules\Translated;
+use Arcanesoft\Foundation\Cms\Rules\Translated;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

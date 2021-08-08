@@ -3,8 +3,8 @@
 namespace Arcanesoft\Foundation\Cms\Models;
 
 use Arcanesoft\Foundation\Cms\Cms;
-use Illuminate\Support\Str;
-use Symfony\Component\Intl\Locales;
+use Arcanesoft\Foundation\Cms\Models\Presenters\LanguagePresenter;
+use Arcanesoft\Foundation\Support\Traits\Deletable;
 
 /**
  * Class     Locale
@@ -16,11 +16,17 @@ use Symfony\Component\Intl\Locales;
  * @property  \Illuminate\Support\Carbon  created_at
  * @property  \Illuminate\Support\Carbon  updated_at
  * @property  \Illuminate\Support\Carbon  activated_at
- *
- * @property-read  string  name
  */
 class Language extends Model
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use LanguagePresenter;
+    use Deletable;
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
@@ -37,9 +43,7 @@ class Language extends Model
      */
 
     /**
-     * Create a new Eloquent model instance.
-     *
-     * @param  array  $attributes
+     * {@inheritDoc}
      */
     public function __construct(array $attributes = [])
     {
@@ -49,19 +53,15 @@ class Language extends Model
     }
 
     /* -----------------------------------------------------------------
-     |  Accessors & Mutators
+     |  Check Methods
      | -----------------------------------------------------------------
      */
 
     /**
-     * Get the `name` attribute.
-     *
-     * @return string
+     * {@inheritDoc}
      */
-    public function getNameAttribute(): string
+    public function isDeletable(): bool
     {
-        $name = Locales::getName($this->code, Cms::getLocale());
-
-        return Str::ucfirst($name);
+        return true;
     }
 }

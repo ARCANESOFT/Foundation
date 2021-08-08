@@ -99,10 +99,10 @@ class AdministratorsController extends Controller
     {
         $this->authorize(AdministratorsPolicy::ability('create'));
 
+        $this->addBreadcrumb(__('New Administrator'));
+
         $roles = $rolesRepo->getFilteredByAuthenticatedAdministrator(Auth::admin());
         $selectedRoles = [];
-
-        $this->addBreadcrumb(__('New Administrator'));
 
         return $this->view(
             'authorization.administrators.create',

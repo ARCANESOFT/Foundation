@@ -7,6 +7,7 @@
     <div class="row g-4">
         <div class="col-lg-5">
             <x-arc:card>
+                <x-arc:card-header>@lang('Language')</x-arc:card-header>
                 <x-arc:card-table>
                     <tbody>
                     <tr>
@@ -15,8 +16,14 @@
                     </tr>
                     <tr>
                         <x-arc:table-th label="Name"/>
-                        <td class="text-end small">{{ $language->name }}</td>
+                        <td class="text-end small">{{ $language->language_name }}</td>
                     </tr>
+                    @if($language->hasCountry())
+                    <tr>
+                        <x-arc:table-th label="Country"/>
+                        <td class="text-end small">{{ $language->country_name }}</td>
+                    </tr>
+                    @endif
 {{--                    <tr>--}}
 {{--                        <x-arc:table-th label="Status"/>--}}
 {{--                        <td class="text-end">--}}

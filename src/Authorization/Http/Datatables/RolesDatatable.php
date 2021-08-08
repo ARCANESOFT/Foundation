@@ -42,7 +42,7 @@ class RolesDatatable extends Datatable
      */
     public function handle(RolesRepository $repo, Request $request)
     {
-        $query = $repo->query()->withCount(['administrators']);
+        $query = $repo->query()->withCount(['administrators', 'permissions']);
 
         $this->handleSearchQuery($request, $query);
 
@@ -75,6 +75,7 @@ class RolesDatatable extends Datatable
             Column::make('name', 'Name')->sortable(),
             Column::make('description', 'Description')->sortable(),
             Column::make('administrators', 'Administrators', Column::DATATYPE_BADGE_COUNT)->align('center'),
+            Column::make('permissions', 'Permissions', Column::DATATYPE_BADGE_COUNT)->align('center'),
             Column::make('locked', 'Locked', Column::DATATYPE_STATUS)->sortable()->align('center')->escaped(false),
             Column::make('status', 'Status', Column::DATATYPE_BADGE_ACTIVE)->sortable()->align('center')->escaped(false),
             Column::make('created_at', 'Created at')->sortable()->align('center'),

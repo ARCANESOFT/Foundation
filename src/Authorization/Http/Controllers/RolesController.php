@@ -2,6 +2,7 @@
 
 namespace Arcanesoft\Foundation\Authorization\Http\Controllers;
 
+use Arcanesoft\Foundation\Authorization\Auth;
 use Arcanesoft\Foundation\Authorization\Http\Datatables\RolesDatatable;
 use Arcanesoft\Foundation\Authorization\Http\Requests\Roles\{CreateRoleRequest, UpdateRoleRequest};
 use Arcanesoft\Foundation\Authorization\Models\Role;
@@ -100,8 +101,12 @@ class RolesController extends Controller
         $this->addBreadcrumb(__('Create Role'));
 
         $permissions = $permissionsRepo->with(['group'])->get();
+        $selectedPermissions = [];
 
-        return $this->view('authorization.roles.create', compact('permissions'));
+        return $this->view(
+            'authorization.roles.create',
+            compact('permissions', 'selectedPermissions')
+        );
     }
 
     /**
@@ -115,7 +120,7 @@ class RolesController extends Controller
     public function store(CreateRoleRequest $request, RolesRepository $rolesRepo)
     {
         $this->authorize(RolesPolicy::ability('create'));
-
+        
         $role = $rolesRepo->createOne($request->validated());
 
         static::notifySuccess(
@@ -166,8 +171,14 @@ class RolesController extends Controller
         $role->load(['permissions']);
 
         $permissions = $permissionsRepo->with(['group'])->get();
+        $selectedPermissions = $role->permissions
+            ->pluck(Auth::makeModel('permission')->getRouteKeyName())
+            ->toArray();
 
-        return $this->view('authorization.roles.edit', compact('role', 'permissions'));
+        return $this->view(
+            'authorization.roles.edit',
+            compact('role', 'permissions', 'selectedPermissions')
+        );
     }
 
     /**

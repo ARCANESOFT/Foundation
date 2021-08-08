@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Validation\Rules;
+namespace Arcanesoft\Foundation\Cms\Rules;
 
 use Arcanesoft\Foundation\Cms\Cms;
 use Illuminate\Contracts\Validation\Rule;

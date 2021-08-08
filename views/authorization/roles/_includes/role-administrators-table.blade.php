@@ -29,18 +29,19 @@
                 </td>
                 <td class="text-end">
                     {{-- SHOW --}}
-                    <x-arc:datatable-action
-                        type="show"
-                        action="{{ route('admin::authorization.administrators.show', [$administrator]) }}"
-                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"
-                    />
+                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('show'), [$administrator])
+                        <x-arc:table-action
+                            type="show"
+                            action="{{ route('admin::authorization.administrators.show', [$administrator]) }}"/>
+                    @endcan
 
                     {{-- DETACH --}}
-                    <x-arc:datatable-action
-                        type="detach"
-                        action="ARCANESOFT.emit('authorization::roles.administrators.detach', {id: '{{ $administrator->getRouteKey() }}'})"
-                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::can('show', [$administrator]) }}"
-                    />
+                    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('administrators.detach'), [$role, $administrator])
+                        <x-arc:table-action
+                            type="detach"
+                            action="authorization::roles.administrators.detach"
+                            :params="['id' => $administrator->getRouteKey()]"/>
+                    @endcan
                 </td>
             </tr>
             @endforeach

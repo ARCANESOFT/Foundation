@@ -24,19 +24,20 @@ $attributes    = $attributes
 //        'btn-secondary' => ! ($isPrimary || $isDestructive),
     ])
 ;
-
 $icon = [
     'add'        => 'fas fa-fw fa-plus',
     'show'       => 'fas fa-fw fa-eye',
     'edit'       => 'far fa-fw fa-edit',
     'activate'   => 'fas fa-fw fa-check',
     'deactivate' => 'fas fa-fw fa-ban',
+    'detach'     => 'fas fa-fw fa-unlink',
     'restore'    => 'fas fa-fw fa-trash-restore-alt',
     'delete'     => 'fas fa-fw fa-trash-alt',
 ][$type];
 ?>
 @if ($isScriptAction)
-    <button onclick="ARCANESOFT.emit({{ $action }})" {{ $attributes }}>
+    <?php $params = $attributes->get('params', []) ?>
+    <button onclick='ARCANESOFT.emit("{{ $action }}", @json($params))' {{ $attributes->except(['params']) }}>
         <i class="{{ $icon }}"></i>
     </button>
 @else

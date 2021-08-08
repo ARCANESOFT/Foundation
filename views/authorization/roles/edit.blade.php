@@ -20,14 +20,12 @@
                             <div class="col-12">
                                 {{-- NAME --}}
                                 <x-arc:input-control
-                                    type="text" name="name" :value="old('name', $role->name)" label="Name"
-                                    grouped="true" required/>
+                                    type="text" name="name" :value="$role->name" label="Name" required/>
                             </div>
                             <div class="col-12">
                                 {{-- DESCRIPTION --}}
                                 <x-arc:textarea-control
-                                    name="description" :value="old('description', $role->description)" label="Description"
-                                    grouped="true" required/>
+                                    name="description" :value="$role->description" label="Description" required/>
                             </div>
                         </div>
                     </x-arc:card-body>
@@ -55,7 +53,9 @@
                         @forelse($permissions as $permission)
                             <tr>
                                 <td>
-                                    {{ form()->checkbox('permissions[]', $permission->getRouteKey(), in_array($permission->getRouteKey(), old('permissions', $role->permissions->pluck($permission->getRouteKeyName())->toArray()))) }}
+                                    <x-arc:checkbox
+                                        name="permissions[]" :value="$permission->getRouteKey()"
+                                        :checked="in_array($permission->getRouteKey(), old('permissions', $selectedPermissions))"/>
                                 </td>
                                 <td class="small">{{ $permission->group->name }}</td>
                                 <td class="small">{{ $permission->category }}</td>

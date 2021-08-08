@@ -28,10 +28,13 @@ class RoleTransformer implements Transformer
      */
     public function transform($resource, Request $request): array
     {
+        $badgeCount = new BadgeCount;
+
         return [
             'name'           => $resource->name,
             'description'    => $resource->description,
-            'administrators' => (new BadgeCount)->transform($resource->administrators_count, 'Administrators'),
+            'administrators' => $badgeCount->transform($resource->administrators_count, 'Administrators'),
+            'permissions'    => $badgeCount->transform($resource->permissions_count, 'Administrators'),
             'locked'         => (new Status)->transform($resource->isLocked() ? 'danger' : 'success', $resource->isLocked() ? 'Locked' : 'Unlocked'),
             'status'         => (new BadgeActive)->transform($resource->isActive()),
             'created_at'     => $resource->created_at->format('Y-m-d H:i:s'),

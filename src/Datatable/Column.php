@@ -4,6 +4,7 @@ namespace Arcanesoft\Foundation\Datatable;
 
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
 
 /**
  * Class     Column
@@ -146,7 +147,7 @@ class Column implements Arrayable
     public static function make(string $key, ?string $label = null, ?string $datatype = null): self
     {
         return (new static($key))
-            ->label($label ?: $key)
+            ->label($label ?: $key) // TODO: Transform key as name?
             ->datatype($datatype ?: static::DATATYPE_PLAIN);
     }
 

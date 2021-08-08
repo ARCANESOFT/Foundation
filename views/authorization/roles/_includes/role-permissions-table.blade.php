@@ -8,7 +8,7 @@
                 <x-arc:table-th label="Category"/>
                 <x-arc:table-th label="Name"/>
                 <x-arc:table-th label="Description"/>
-                <x-arc:table-th label="Actions" class="text-right"/>
+                <x-arc:table-th label="Actions" class="text-end"/>
             </tr>
         </thead>
         <tbody>
@@ -18,18 +18,21 @@
                 <td class="small">{{ $permission->category }}</td>
                 <td class="small">{{ $permission->name }}</td>
                 <td class="small">{{ $permission->description }}</td>
-                <td class="text-right">
+                <td class="text-end">
                     {{-- SHOW --}}
-                    <x-arc:datatable-action
-                        type="show"
-                        action="{{ route('admin::authorization.permissions.show', [$permission]) }}"
-                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::can('show', [$permission]) }}"/>
+                    @can(Arcanesoft\Foundation\Authorization\Policies\PermissionsPolicy::ability('show'), [$permission])
+                        <x-arc:table-action
+                            type="show"
+                            action="{{ route('admin::authorization.permissions.show', [$permission]) }}"/>
+                    @endcan
 
                     {{-- DETACH --}}
-                    <x-arc:datatable-action
-                        type="detach"
-                        action="ARCANESOFT.emit('authorization::roles.permissions.detach', {id: '{{ $permission->getRouteKey() }}'})"
-                        allowed="{{ Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::can('permissions.detach', [$role, $permission]) }}"/>
+                    @can(Arcanesoft\Foundation\Authorization\Policies\RolesPolicy::ability('permissions.detach'), [$role, $permission])
+                        <x-arc:table-action
+                            type="detach"
+                            action="authorization::roles.permissions.detach"
+                            :params="['id' => $permission->getRouteKey()]"/>
+                    @endcan
                 </td>
             </tr>
             @endforeach

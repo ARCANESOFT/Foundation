@@ -147,7 +147,7 @@ class RolesRepository extends Repository
     public function createOne(array $attributes): Role
     {
         return tap($this->create($attributes), function (Role $role) use ($attributes) {
-            $this->syncPermissionsByUuids($role, $attributes['permissions'] ?: []);
+            $this->syncPermissionsByUuids($role, $attributes['permissions'] ?? []);
         });
     }
 
