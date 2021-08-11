@@ -1,12 +1,18 @@
 <?php
 /**
  * @var  string                                 $name
+ * @var  string                                 $id
  * @var  string                                 $label
+ * @var  string|null                            $help
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  Illuminate\Support\ViewErrorBag        $errors
  */
+$hasHelpText = ! is_null($help);
 $attributes = $attributes
-    ->except(['type', 'id', 'name', 'value'])
+    ->except(['type', 'id', 'name', 'value', 'help'])
+    ->merge([
+        'aria-describedby' => $hasHelpText ? $id.'-help' : null,
+    ])
     ->class([
         'form-check-input',
         'is-invalid' => $errors->has($name),
@@ -19,3 +25,4 @@ $attributes = $attributes
     <label class="form-check-label" for="{{ $id }}">@lang($label)</label>
 </div>
 <x-arc:form-error :name="$name"/>
+<x-arc:form-help-text :id="$id" :text="$help"/>

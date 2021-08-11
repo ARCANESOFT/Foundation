@@ -32,7 +32,7 @@
                 </tr>
             </tbody>
         </x-arc:card-table>
-        <x-arc:card-footer class="d-flex justify-content-between">
+        <x-arc:card-footer actions>
             @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
                 <a href="{{ route('admin::system.log-viewer.logs.download', [$log->date]) }}"
                    class="btn btn-sm btn-secondary"><i class="fas fa-fw fa-download"></i> @lang('Download')</a>
@@ -100,22 +100,22 @@
                 <div class="timeline-dot d-flex justify-content-center shadow-sm text-white bg-log-level-{{ $entry->level }}">
                     {{ $entry->icon() }}
                 </div>
-                <x-arc:card-header class="d-flex align-items-center">
+                <x-arc:card-header class="d-flex align-items-center py-2">
                     <div>
-                        <span class="d-inline-block badge border border-dark text-dark mr-1">{{ $entry->datetime->format('H:i:s') }}</span>
-                        <span class="d-inline-block badge border border-log-level-env text-dark mr-1">{{ $entry->env }}</span>
+                        <span class="d-inline-block badge border border-dark text-dark me-1">{{ $entry->datetime->format('H:i:s') }}</span>
+                        <span class="d-inline-block badge border border-log-level-env text-dark me-1">{{ $entry->env }}</span>
                         <span class="d-inline-block badge border border-log-level-{{ $entry->level }} text-dark">{{ $entry->name() }}</span>
                     </div>
 
                     @if ($entry->hasStack())
-                        <a class="btn btn-sm btn-light ml-auto" role="button" data-toggle="collapse"
+                        <a class="btn btn-sm btn-light ms-auto" role="button" data-bs-toggle="collapse"
                            href="#log-entry-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
                             <i class="fas fa-fw fa-toggle-on"></i> @lang('Stack')
                         </a>
                     @endif
 
                     @if ($entry->hasContext())
-                        <a class="btn btn-sm btn-light ml-auto" role="button" data-toggle="collapse"
+                        <a class="btn btn-sm btn-light ms-auto" role="button" data-bs-toggle="collapse"
                            href="#log-entry-context-{{ $key }}" aria-expanded="false" aria-controls="log-context-{{ $key }}">
                             <i class="fas fa-fw fa-toggle-on"></i> @lang('Context')
                         </a>

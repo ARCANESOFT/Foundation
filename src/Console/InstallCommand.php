@@ -3,12 +3,8 @@
 namespace Arcanesoft\Foundation\Console;
 
 use Arcanesoft\Foundation\Arcanesoft;
-use Arcanesoft\Foundation\Authorization\Console\InstallCommand as AuthInstallCommand;
-use Arcanesoft\Foundation\Cms\Console\InstallCommand as CmsInstallCommand;
-use Arcanesoft\Foundation\Core\Console\InstallCommand as CoreInstallCommand;
 use Arcanesoft\Foundation\ModuleManifest;
 use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
-use Arcanesoft\Foundation\System\Console\InstallCommand as SystemInstallCommand;
 
 /**
  * Class     InstallCommand
@@ -79,12 +75,9 @@ class InstallCommand extends Command
 
         $this->newLine();
 
-        $this->callMany([
-            CoreInstallCommand::class,
-            AuthInstallCommand::class,
-            CmsInstallCommand::class,
-            SystemInstallCommand::class,
-        ]);
+        $commands = $this->laravel['config']->get('arcanesoft.foundation.modules.commands.install', []);
+
+        $this->callMany($commands);
     }
 
     /**

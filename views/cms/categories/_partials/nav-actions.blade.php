@@ -6,10 +6,10 @@
 
     @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('index'))
         <x-arc:button-action
-            type="list" action="{{ route('admin::cms.categories.index') }}"/>
+            type="tree" action="{{ route('admin::cms.categories.tree') }}"/>
 
         <x-arc:button-action
-            type="tree" action="{{ route('admin::cms.categories.tree') }}"/>
+            type="list" action="{{ route('admin::cms.categories.index') }}"/>
     @endcan
 
     @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('create'))

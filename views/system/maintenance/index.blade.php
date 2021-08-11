@@ -91,15 +91,13 @@
                                 {{-- REDIRECT --}}
                                 <div class="col">
                                     <x-arc:input-control
-                                        type="text" name="redirect" :value="old('redirect')" label="Redirect URL"
-                                        grouped="true" required/>
+                                        type="text" name="redirect" label="Redirect URL" required/>
                                 </div>
 
                                 {{-- SECRET --}}
                                 <div class="col">
                                     <x-arc:input-control
-                                        type="text" name="secret" :value="old('secret')" label="Secret"
-                                        grouped="true" required/>
+                                        type="text" name="secret" label="Secret" required/>
                                 </div>
 
                                 {{-- STAY CONNECTED --}}
@@ -111,24 +109,22 @@
                                 {{-- STATUS CODE --}}
                                 <div class="col">
                                     <x-arc:input-control
-                                        type="text" name="status" :value="old('status', 503)" label="Status code"
-                                        grouped="true" required/>
+                                        type="text" name="status" :value="503" label="Status code" required/>
                                 </div>
 
                                 {{-- TEMPLATE --}}
                                 <div class="col">
                                     <x-arc:select-control
                                         name="template" label="Template"
-                                        :value="old('template', $maintenance->getDefaultTemplate())"
+                                        :value="$maintenance->getDefaultTemplate()"
                                         :options="$maintenance->getTemplates()"
-                                        grouped="true"/>
+                                    />
                                 </div>
 
                                 {{-- RETRY --}}
                                 <div class="col">
                                     <x-arc:input-control
-                                        type="number" name="retry" label="Retry"
-                                        :value="old('retry')" min="0"/>
+                                        type="number" name="retry" label="Retry" min="0"/>
                                 </div>
                             </div>
                         </x-arc:card-body>

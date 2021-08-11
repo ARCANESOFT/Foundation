@@ -1,33 +1,41 @@
 <?php declare(strict_types=1);
 
-namespace Arcanesoft\Foundation\Views\Components\Support\Badges;
+namespace Arcanesoft\Foundation\Views\Components\Forms;
 
 use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
 
 /**
- * Class     ActiveComponent
+ * Class     HelpTextComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ActiveComponent extends Component
+class HelpTextComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var  bool */
-    public $active;
+    /** @var  string */
+    public $id;
+
+    /** @var  string|null */
+    public $text;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
 
-    public function __construct(bool $active)
+    /**
+     * @param  string       $id
+     * @param  string|null  $text
+     */
+    public function __construct(string $id, ?string $text = null)
     {
-        $this->active = $active;
+        $this->id   = $id;
+        $this->text = $text;
     }
 
     /* -----------------------------------------------------------------
@@ -40,6 +48,6 @@ class ActiveComponent extends Component
      */
     public function render(): View
     {
-        return $this->view('support.badges.active');
+        return $this->view('forms.help-text');
     }
 }

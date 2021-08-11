@@ -4,7 +4,6 @@ namespace Arcanesoft\Foundation\Authorization\Metrics\Users;
 
 use Arcanedev\LaravelMetrics\Metrics\Trend;
 use Arcanesoft\Foundation\Authorization\Metrics\Users\Concerns\CanAuthorize;
-use Arcanesoft\Foundation\Authorization\Policies\UsersPolicy;
 use Arcanesoft\Foundation\Authorization\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 

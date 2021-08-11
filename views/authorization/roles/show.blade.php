@@ -9,12 +9,12 @@
         <i class="fas fa-fw fa-user-tag"></i> @lang('Roles') <small>@lang("Role's details")</small>
     @endsection
 
-    <div class="row g-4">
-        <div class="col-lg-4">
+    <div class="row row-cols-1 g-4">
+        <div class="col">
             {{-- ROLE --}}
             <x-arc:card>
                 <x-arc:card-header>@lang('Role')</x-arc:card-header>
-                <x-arc:card-table>
+                <x-arc:card-table hover>
                     <tbody>
                         <tr>
                             <x-arc:table-th label="Name"/>
@@ -39,6 +39,7 @@
                         <tr>
                             <x-arc:table-th label="Locked"/>
                             <td class="text-end">
+                                <x-arc:badge-locked :value="$role->isLocked()"/>
                                 @if ($role->isLocked())
                                     <span class="badge border border-danger text-muted">
                                         <i class="fa fa-lock text-danger me-1"></i> @lang('Locked')
@@ -53,7 +54,7 @@
                         <tr>
                             <x-arc:table-th label="Status"/>
                             <td class="text-end">
-                                <x-arc:badge-active value="{{ $role->isActive() }}"/>
+                                <x-arc:badge-active :value="$role->isActive()"/>
                             </td>
                         </tr>
                         <tr>
@@ -93,7 +94,7 @@
                 </x-arc:card-footer>
             </x-arc:card>
         </div>
-        <div class="col-lg-8">
+        <div class="col">
             <x-arc:card>
                 <x-arc:card-header class="d-flex justify-content-end">
                     <div class="btn-group" role="group" aria-label="Administrators and Permissions">

@@ -27,6 +27,7 @@ return [
         'form'              => Arcanesoft\Foundation\Views\Components\Forms\FormComponent::class,
         'form-error'        => Arcanesoft\Foundation\Views\Components\Forms\Error::class,
         'form-label'        => Arcanesoft\Foundation\Views\Components\Forms\LabelComponent::class,
+        'form-help-text'    => Arcanesoft\Foundation\Views\Components\Forms\HelpTextComponent::class,
 
         // Form Inputs
         'input'             => Arcanesoft\Foundation\Views\Components\Forms\Inputs\InputComponent::class,
@@ -72,8 +73,10 @@ return [
         'pagination-pages'  => Arcanesoft\Foundation\Views\Components\Pagination\PagesComponent::class,
 
         // Support
+        'badge'             => Arcanesoft\Foundation\Views\Components\Support\Badges\BadgeComponent::class,
         'badge-active'      => Arcanesoft\Foundation\Views\Components\Support\Badges\ActiveComponent::class,
         'badge-count'       => Arcanesoft\Foundation\Views\Components\Support\Badges\CountComponent::class,
+        'badge-locked'      => Arcanesoft\Foundation\Views\Components\Support\Badges\LockedComponent::class,
 
         // CMS
         'localized-content'      => Arcanesoft\Foundation\Views\Components\Cms\LocalizedContentComponent::class,

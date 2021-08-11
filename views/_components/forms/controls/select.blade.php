@@ -3,13 +3,17 @@
  * @var  string                                 $name
  * @var  string                                 $id
  * @var  string                                 $label
+ * @var  string                                 $help
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  Illuminate\Support\ViewErrorBag        $errors
  */
+$hasHelpText = ! is_null($help);
 $attributes = $attributes
+    ->except(['help'])
     ->merge([
-        'name' => $name,
-        'id'   => $id,
+        'name'             => $name,
+        'id'               => $id,
+        'aria-describedby' => $hasHelpText ? $id.'-help' : null,
     ])
     ->class([
         'form-select',
@@ -34,6 +38,7 @@ $attributes = $attributes
         </select>
         <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
         <x-arc:form-error name="{{ $name }}"/>
+        <x-arc:form-help-text :id="$id" :text="$help"/>
     </div>
 @else
     <x-arc:form-label for="{{ $id }}" label="{{ $label }}"/>
@@ -51,5 +56,6 @@ $attributes = $attributes
         @endunless
     </select>
     <x-arc:form-error name="{{ $name }}"/>
+    <x-arc:form-help-text :id="$id" :text="$help"/>
 @endif
 

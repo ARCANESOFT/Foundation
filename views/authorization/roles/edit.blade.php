@@ -10,8 +10,8 @@
     @endsection
 
     <x-arc:form action="{{ route('admin::authorization.roles.update', [$role]) }}" method="PUT">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row row-cols-1 g-4">
+            <div class="col">
                 {{-- ROLE --}}
                 <x-arc:card>
                     <x-arc:card-header>@lang('Role')</x-arc:card-header>
@@ -29,13 +29,9 @@
                             </div>
                         </div>
                     </x-arc:card-body>
-                    <x-arc:card-footer class="d-flex justify-content-between">
-                        <x-arc:form-cancel-button to="{{ route('admin::authorization.roles.show', [$role]) }}"/>
-                        <x-arc:form-submit-button type="save"/>
-                    </x-arc:card-footer>
                 </x-arc:card>
             </div>
-            <div class="col-md-8">
+            <div class="col">
                 {{-- PERMISSIONS --}}
                 <x-arc:card>
                     <x-arc:card-header>@lang('Permissions')</x-arc:card-header>
@@ -70,6 +66,12 @@
                         </tbody>
                     </x-arc:card-table>
                 </x-arc:card>
+            </div>
+            <div class="col">
+                <x-arc:card-footer class="d-flex justify-content-between">
+                    <x-arc:form-cancel-button to="{{ route('admin::authorization.roles.show', [$role]) }}"/>
+                    <x-arc:form-submit-button type="save"/>
+                </x-arc:card-footer>
             </div>
         </div>
     </x-arc:form>

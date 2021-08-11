@@ -30,7 +30,8 @@
 
                             {{-- PASSWORD --}}
                             <div class="col-12 col-xxl-6">
-                                <x-arc:password-control name="password" label="Password"/>
+                                <x-arc:password-control name="password" label="Password"
+                                    help="Leaving the password fields blank would be generated randomly for the user and then they can change it."/>
                             </div>
 
                             {{-- PASSWORD CONFIRMATION --}}

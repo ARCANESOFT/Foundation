@@ -4,15 +4,15 @@
         <i class="fa fa-fw fa-users"></i> @lang('Users') <small>@lang("User's details")</small>
     @endsection
 
-    <div class="row g-4">
-        <div class="col-lg-5">
+    <div class="row row-cols-1 g-4">
+        <div class="col">
             <x-arc:card>
                 <x-arc:card-body class="d-flex justify-content-center">
                     <div class="avatar avatar-xxl rounded-circle bg-light">
                         <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}">
                     </div>
                 </x-arc:card-body>
-                <x-arc:card-table>
+                <x-arc:card-table hover>
                     <tbody>
                         <tr>
                             <x-arc:table-th label="Full Name"/>
@@ -36,15 +36,7 @@
                         <tr>
                             <x-arc:table-th label="Status"/>
                             <td class="text-end">
-                                @if ($user->isActive())
-                                    <span class="badge border border-success text-muted">
-                                        <i class="fas fa-fw fa-check text-success"></i> @lang('Activated')
-                                    </span>
-                                @else
-                                    <span class="badge border border-secondary text-muted">
-                                        <i class="fas fa-fw fa-ban text-secondary"></i> @lang('Deactivated')
-                                    </span>
-                                @endif
+                                <x-arc:badge-active :value="$user->isActive()"/>
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +60,7 @@
                         @endif
                     </tbody>
                 </x-arc:card-table>
-                <x-arc:card-footer class="d-flex justify-content-end btn-seperated">
+                <x-arc:card-footer actions>
                     {{-- UPDATE --}}
                     @can(Arcanesoft\Foundation\Authorization\Policies\UsersPolicy::ability('update'), [$user])
                         <x-arc:button-action
@@ -107,11 +99,11 @@
                 </x-arc:card-footer>
             </x-arc:card>
         </div>
-        <div class="col-lg-7">
+        <div class="col">
             @if ($user->linkedAccounts->isNotEmpty())
                 <x-arc:card>
                     <x-arc:card-header>@lang('Linked Accounts')</x-arc:card-header>
-                    <x-arc:card-table>
+                    <x-arc:card-table hover>
                         <thead>
                             <tr>
                                 <x-arc:table-th label="Provider"/>

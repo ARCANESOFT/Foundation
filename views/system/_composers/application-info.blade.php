@@ -2,75 +2,75 @@
     <x-arc:card-header>@lang('Application')</x-arc:card-header>
     <x-arc:card-table>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('URL')</td>
+            <x-arc:table-th label="URL"/>
             <td class="text-end small">{{ $applicationInfo['url'] }}</td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Locale')</td>
+            <x-arc:table-th label="Locale"/>
             <td class="text-end small">{{ $applicationInfo['locale'] }}</td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Timezone')</td>
+            <x-arc:table-th label="Timezone"/>
             <td class="text-end small">{{ $applicationInfo['timezone'] }}</td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Debug Mode')</td>
+            <x-arc:table-th label="Debug Mode"/>
             <td class="text-end">
                 @if ($applicationInfo['debug_mode'])
-                    <span class="badge border border-danger text-muted">
-                        <i class="fas fa-fw fa-exclamation-triangle text-danger"></i> @lang('Enabled')
-                    </span>
+                    <x-arc:badge type="danger">
+                        <i class="fas fa-fw fa-exclamation-triangle text-danger me-1"></i> @lang('Enabled')
+                    </x-arc:badge>
                 @else
-                    <span class="badge border border-success text-muted">@lang('Disabled')</span>
+                    <x-arc:badge type="success">@lang('Disabled')</x-arc:badge>
                 @endif
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Maintenance Mode')</td>
+            <x-arc:table-th label="Maintenance Mode"/>
             <td class="text-end">
                 @if ($applicationInfo['maintenance_mode'])
-                    <span class="badge border border-danger text-muted">
-                        <i class="fas fa-fw fa-exclamation-triangle text-danger"></i> @lang('Enabled')
-                    </span>
+                    <x-arc:badge type="danger">
+                        <i class="fas fa-fw fa-exclamation-triangle text-danger me-1"></i> @lang('Enabled')
+                    </x-arc:badge>
                 @else
-                    <span class="badge border border-success text-muted">@lang('Disabled')</span>
+                    <x-arc:badge type="success">@lang('Disabled')</x-arc:badge>
                 @endif
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('PHP Version')</td>
+            <x-arc:table-th label="PHP Version"/>
             <td class="text-end">
-                <span class="badge border border-muted text-muted">{{ $applicationInfo['php_version'] }}</span>
+                <x-arc:badge type="muted">{{ $applicationInfo['php_version'] }}</x-arc:badge>
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Laravel Version')</td>
+            <x-arc:table-th label="Laravel Version"/>
             <td class="text-end">
-                <span class="badge border border-muted text-muted">{{ $applicationInfo['laravel_version'] }}</span>
+                <x-arc:badge type="muted">{{ $applicationInfo['laravel_version'] }}</x-arc:badge>
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('ARCANESOFT Version')</td>
+            <x-arc:table-th label="ARCANESOFT Version"/>
             <td class="text-end">
-                <span class="badge border border-muted text-muted">{{ $applicationInfo['foundation_version'] }}</span>
+                <x-arc:badge type="muted">{{ $applicationInfo['foundation_version'] }}</x-arc:badge>
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Database Driver')</td>
+            <x-arc:table-th label="Database Driver"/>
             <td class="text-end">
-                <span class="badge border border-muted text-muted">{{ $applicationInfo['database_connection'] }}</span>
+                <x-arc:badge type="muted">{{ $applicationInfo['database_connection'] }}</x-arc:badge>
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Cache Driver')</td>
+            <x-arc:table-th label="Cache Driver"/>
             <td class="text-end">
-                <span class="badge border border-muted text-muted">{{ $applicationInfo['cache_driver'] }}</span>
+                <x-arc:badge type="muted">{{ $applicationInfo['cache_driver'] }}</x-arc:badge>
             </td>
         </tr>
         <tr>
-            <td class="font-weight-light text-uppercase text-muted">@lang('Session Driver')</td>
+            <x-arc:table-th label="Session Driver"/>
             <td class="text-end">
-                <span class="badge border border-muted text-muted">{{ $applicationInfo['session_driver'] }}</span>
+                <x-arc:badge type="muted">{{ $applicationInfo['session_driver'] }}</x-arc:badge>
             </td>
         </tr>
     </x-arc:card-table>

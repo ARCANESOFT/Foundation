@@ -29,6 +29,9 @@ class TextareaComponent extends Component
     /** @var  string|null */
     public $label;
 
+    /** @var  string|null */
+    public $help;
+
     /** @var  bool */
     public $grouped;
 
@@ -42,6 +45,7 @@ class TextareaComponent extends Component
      * @param  string|null  $id
      * @param  string|null  $value
      * @param  string|null  $label
+     * @param  string|null  $help
      * @param  bool         $grouped
      */
     public function __construct(
@@ -49,12 +53,14 @@ class TextareaComponent extends Component
         ?string $id = null,
         ?string $value = '',
         ?string $label = null,
+        ?string $help = null,
         bool $grouped = false
     ) {
         $this->name    = $name;
-        $this->id      = $id;
+        $this->id      = $id ?: $name;
         $this->value   = $value;
         $this->label   = $label;
+        $this->help    = $help;
         $this->grouped = $grouped;
     }
 

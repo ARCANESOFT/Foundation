@@ -171,7 +171,8 @@ class AdministratorsPolicy extends AbstractPolicy
      */
     public function update(Administrator $administrator, Administrator $model = null)
     {
-        //
+        if ($administrator->isSuperAdmin())
+            return false;
     }
 
     /**

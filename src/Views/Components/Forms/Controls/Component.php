@@ -22,6 +22,9 @@ abstract class Component extends BaseComponent
     /** @var  string */
     public $label;
 
+    /** @var  string|null */
+    public $help;
+
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
@@ -33,16 +36,19 @@ abstract class Component extends BaseComponent
      * @param  string       $type
      * @param  mixed|null   $value
      * @param  string|null  $label
+     * @param  string|null  $help
      */
     public function __construct(
         string $type = 'text',
         string $name,
         string $id = null,
         $value = null,
-        ?string $label = null
+        ?string $label = null,
+        ?string $help = null
     ) {
         parent::__construct($type, $name, $id, $value);
 
         $this->label = $label ?: $name;
+        $this->help = $help;
     }
 }

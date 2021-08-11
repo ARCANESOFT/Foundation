@@ -29,6 +29,7 @@
     "Download": "Télécharger",
     "Detach": "Détacher",
     "Save": "Enregistrer",
+    "List": "Liste",
 
     "Locked": "Verrouillé",
     "Unlocked": "Déverrouillé",
@@ -59,8 +60,11 @@
     "Last activity": "Dernière activité",
     "Email Verified at": "Email vérifié le",
 
+    "Leaving the password fields blank would be generated randomly for the user and then they can change it.": "En laissant les champs de mot de passe vides, le mot de passe serait généré de manière aléatoire pour l'utilisateur et il pourrait ensuite le changer.",
+
     "Total Users": "Total des utilisateurs",
     "New Users": "Nouveaux utilisateurs",
+    "Users Per Day": "Utilisateurs par jour",
 
     "Administrators": "Administrateurs",
 

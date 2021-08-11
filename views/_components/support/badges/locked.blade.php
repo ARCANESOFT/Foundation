@@ -1,6 +1,6 @@
 <?php
 /**
- * @var  bool                                   $active
+ * @var  bool                                   $locked
  * @var  bool                                   $icon
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  */
@@ -11,12 +11,12 @@ $attributes = $attributes
         'badge',
         'border',
         'text-muted',
-        'border-success' => $active,
-        'border-secondary' => ! $active,
+        'border-danger'    => $locked,
+        'border-secondary' => ! $locked,
     ])
 ;
-$iconClass = $active ? 'fa-check text-success' : 'fa-ban text-secondary';
-$title = $active ? 'Activated' : 'Deactivated';
+$iconClass = $locked ? 'fa-lock text-danger' : 'fa-unlock text-secondary';
+$title = $locked ? 'Locked' : 'Unlocked';
 ?>
 @if($hasIcon)
     <span {{ $attributes }} title="@lang($title)" data-toggle="tooltip">
@@ -24,7 +24,6 @@ $title = $active ? 'Activated' : 'Deactivated';
     </span>
 @else
     <span {{ $attributes }}>
-        <i class="fa fa-fw {{ $iconClass }} mr-1"></i> @lang($title)
+        <i class="fa fa-fw {{ $iconClass }} me-1"></i> @lang($title)
     </span>
 @endif
-

@@ -4,22 +4,7 @@
     @endsection
 
     @push('content-nav')
-        <nav class="page-actions">
-            @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('metrics'))
-                <a href="{{ route('admin::authorization.administrators.metrics') }}"
-                   class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.metrics']) }}">@lang('Metrics')</a>
-            @endcan
-
-            @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('index'))
-                <a href="{{ route('admin::authorization.administrators.index') }}"
-                   class="btn btn-sm btn-secondary {{ active(['admin::authorization.administrators.index']) }}">@lang('List')</a>
-            @endcan
-
-            @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('create'))
-                <a href="{{ route('admin::authorization.administrators.create') }}"
-                   class="btn btn-sm btn-primary"><i class="fa fa-fw fa-plus"></i> @lang('Add')</a>
-            @endcan
-        </nav>
+        @include('foundation::authorization.administrators._partials.nav-actions')
     @endpush
 
     <v-datatable

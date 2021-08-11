@@ -32,6 +32,9 @@ class SelectComponent extends Component
     /** @var  string|null */
     public $label;
 
+    /** @var  string|null */
+    public $help;
+
     /** @var  bool */
     public $grouped;
 
@@ -54,13 +57,15 @@ class SelectComponent extends Component
         string $id = null,
         $value = null,
         ?string $label = null,
+        ?string $help = null,
         bool $grouped = false
     ){
         $this->options = $options;
         $this->name    = $name;
-        $this->id      = $id;
+        $this->id      = $id ?: $name;
         $this->value   = $value;
         $this->label   = $label;
+        $this->help    = $help;
         $this->grouped = $grouped;
     }
 

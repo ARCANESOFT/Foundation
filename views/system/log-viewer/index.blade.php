@@ -32,11 +32,10 @@
                     @endforeach
                     <td class="text-end">
                         {{-- SHOW --}}
-                        <x-arc:datatable-action
-                            type="show"
-                            action="{{ route('admin::system.log-viewer.logs.show', [$date]) }}"
-                            allowed="{{ Arcanesoft\Foundation\System\Policies\LogViewerPolicy::can('show') }}"
-                        />
+                        @can (Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('show'))
+                            <x-arc:table-action type="show"
+                                action="{{ route('admin::system.log-viewer.logs.show', [$date]) }}"/>
+                        @endcan
 
                         {{-- DOWNLOAD --}}
                         @can(Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('download'))
@@ -47,11 +46,10 @@
                         @endcan
 
                         {{-- DELETE --}}
-                        <x-arc:datatable-action
-                            type="delete"
-                            action="ARCANESOFT.emit('foundation::system.log-viewer.delete', {date: '{{ $date }}'})"
-                            allowed="{{ Arcanesoft\Foundation\System\Policies\LogViewerPolicy::can('delete') }}"
-                        />
+                        @can (Arcanesoft\Foundation\System\Policies\LogViewerPolicy::ability('delete'))
+                        <x-arc:table-action type="delete"
+                            action="foundation::system.log-viewer.delete" :params="['date' => $date]"/>
+                        @endcan
                     </td>
                 </tr>
             @empty

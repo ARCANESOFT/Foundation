@@ -15,38 +15,40 @@
                     <tbody>
                         <tr>
                             <x-arc:table-th label="Name"/>
-                            <td class="text-right small">{{ $package['name'] }}</td>
+                            <td class="text-end small">{{ $package['name'] }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Version"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <span class="badge border border-primary text-muted">{{ $package['version'] }}</span>
                             </td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Description" class="align-baseline"/>
-                            <td class="text-right small">{{ $package['description'] }}</td>
+                            <td class="text-end small">{{ $package['description'] }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Type"/>
-                            <td class="text-right small">{{ $package['type'] }}</td>
+                            <td class="text-end small">{{ $package['type'] }}</td>
                         </tr>
                         <tr>
                             <x-arc:table-th label="Keywords" class="align-baseline"/>
-                            <td class="text-right">
+                            <td class="text-end">
                                 @foreach($package['keywords'] as $keyword)
-                                    <span class="badge border border-secondary text-secondary ml-1">{{ $keyword }}</span>
+                                    <span class="badge border border-secondary text-secondary ms-1">{{ $keyword }}</span>
                                 @endforeach
                             </td>
                         </tr>
+                        @if(isset($package['homepage']))
                         <tr>
                             <x-arc:table-th label="Homepage"/>
-                            <td class="text-right small">
+                            <td class="text-end small">
                                 <a href="{{ $package['homepage'] }}" target="_blank" rel="noopener">
                                     {{ $package['homepage'] }}
                                 </a>
                             </td>
                         </tr>
+                        @endif
                     </tbody>
                 </x-arc:card-table>
             </x-arc:card>

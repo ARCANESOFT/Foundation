@@ -6,11 +6,11 @@ use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
 
 /**
- * Class     ActiveComponent
+ * Class     LockedComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ActiveComponent extends Component
+class LockedComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -18,16 +18,16 @@ class ActiveComponent extends Component
      */
 
     /** @var  bool */
-    public $active;
+    public $locked;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
 
-    public function __construct(bool $active)
+    public function __construct(bool $locked)
     {
-        $this->active = $active;
+        $this->locked = $locked;
     }
 
     /* -----------------------------------------------------------------
@@ -40,6 +40,6 @@ class ActiveComponent extends Component
      */
     public function render(): View
     {
-        return $this->view('support.badges.active');
+        return $this->view('support.badges.locked');
     }
 }

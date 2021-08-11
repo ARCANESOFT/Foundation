@@ -13,7 +13,7 @@
                         <img src="{{ $administrator->avatar }}" alt="{{ $administrator->full_name }}">
                     </div>
                 </x-arc:card-body>
-                <x-arc:card-table>
+                <x-arc:card-table hover>
                     <tbody>
                     <tr>
                         <x-arc:table-th label="Full Name"/>
@@ -40,17 +40,9 @@
                     <tr>
                         <x-arc:table-th label="Status"/>
                         <td class="text-end">
-                            @if ($administrator->isActive())
-                                <span class="badge border border-success text-muted">
-                                    <i class="fas fa-fw fa-check"></i> @lang('Activated')
-                                </span>
-                            @else
-                                <span class="badge border border-secondary text-muted">
-                                    <i class="fas fa-fw fa-ban"></i> @lang('Deactivated')
-                                </span>
-                            @endif
+                            <x-arc:badge-active :value="$administrator->isActive()"/>
                             @if ($administrator->isSuperAdmin())
-                                <span class="badge border border-warning text-muted"
+                                <span class="badge border border-warning text-muted ms-1"
                                       data-toggle="tooltip" data-placement="top" title="@lang('Super Administrator')">
                                     <i class="fas fa-crown"></i>
                                 </span>
@@ -77,37 +69,39 @@
                     @endif
                     </tbody>
                 </x-arc:card-table>
-                <x-arc:card-footer class="d-flex justify-content-end btn-seperated">
-                    {{-- UPDATE --}}
-                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('update'), [$administrator])
-                        <x-arc:button-action
-                            type="show" action="{{ route('admin::authorization.administrators.edit', [$administrator]) }}"/>
-                    @endcan
+                @if(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::canAny(['update', 'activate', 'deactivate', 'restore', 'delete'], [$administrator]))
+                    <x-arc:card-footer actions>
+                        {{-- UPDATE --}}
+                        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('update'), [$administrator])
+                            <x-arc:button-action
+                                type="edit" action="{{ route('admin::authorization.administrators.edit', [$administrator]) }}"/>
+                        @endcan
 
-                    {{-- ACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
-                        <x-arc:button-action
-                            type="activate" action="authorization::administrators.activate"/>
-                    @endcan
+                        {{-- ACTIVATE --}}
+                        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('activate'), [$administrator])
+                            <x-arc:button-action
+                                type="activate" action="authorization::administrators.activate"/>
+                        @endcan
 
-                    {{-- DEACTIVATE --}}
-                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
-                        <x-arc:button-action
-                            type="deactivate" action="authorization::administrators.deactivate"/>
-                    @endcan
+                        {{-- DEACTIVATE --}}
+                        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('deactivate'), [$administrator])
+                            <x-arc:button-action
+                                type="deactivate" action="authorization::administrators.deactivate"/>
+                        @endcan
 
-                    {{-- RESTORE --}}
-                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
-                        <x-arc:button-action
-                            type="restore" action="authorization::administrators.restore"/>
-                    @endcan
+                        {{-- RESTORE --}}
+                        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('restore'), [$administrator])
+                            <x-arc:button-action
+                                type="restore" action="authorization::administrators.restore"/>
+                        @endcan
 
-                    {{-- DELETE --}}
-                    @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
-                        <x-arc:button-action
-                            type="delete" action="authorization::administrators.delete"/>
-                    @endcan
-                </x-arc:card-footer>
+                        {{-- DELETE --}}
+                        @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('delete'), [$administrator])
+                            <x-arc:button-action
+                                type="delete" action="authorization::administrators.delete"/>
+                        @endcan
+                    </x-arc:card-footer>
+                @endif
             </x-arc:card>
         </div>
 
@@ -117,7 +111,7 @@
                 <div class="col">
                     <x-arc:card>
                         <x-arc:card-header>@lang('Roles')</x-arc:card-header>
-                        <x-arc:card-table class="table-hover">
+                        <x-arc:card-table hover>
                             <thead>
                             <tr>
                                 <x-arc:table-th label="Name"/>
@@ -150,7 +144,7 @@
                 <div class="col">
                     <x-arc:card>
                         <x-arc:card-header>@lang('Sessions')</x-arc:card-header>
-                        <x-arc:card-table class="table-hover">
+                        <x-arc:card-table hover>
                             <thead>
                             <tr>
                                 <x-arc:table-th />
@@ -166,7 +160,7 @@
                                     <td>
                                         {{ $session->device_icon }}
                                         @if ($session->isCurrent())
-                                            <span class="status bg-success status-animated"
+                                            <span class="status bg-success status-animated ms-1"
                                                   title="@lang('Your current session')" data-toggle="tooltip"></span>
                                         @endif
                                     </td>

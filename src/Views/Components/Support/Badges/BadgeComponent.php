@@ -6,28 +6,28 @@ use Arcanesoft\Foundation\Views\Components\Component;
 use Illuminate\Contracts\View\View;
 
 /**
- * Class     ActiveComponent
+ * Class     BadgeComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ActiveComponent extends Component
+class BadgeComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var  bool */
-    public $active;
+    /** @var  string */
+    public $type;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
 
-    public function __construct(bool $active)
+    public function __construct(string $type)
     {
-        $this->active = $active;
+        $this->type = $type;
     }
 
     /* -----------------------------------------------------------------
@@ -40,6 +40,6 @@ class ActiveComponent extends Component
      */
     public function render(): View
     {
-        return $this->view('support.badges.active');
+        return $this->view('support.badges.badge');
     }
 }

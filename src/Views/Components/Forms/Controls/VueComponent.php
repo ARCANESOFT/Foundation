@@ -29,6 +29,9 @@ class VueComponent extends Component
     /** @var  string|null */
     public $label;
 
+    /** @var  string|null */
+    public $help;
+
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
@@ -39,13 +42,20 @@ class VueComponent extends Component
      * @param  string       $name
      * @param  string|null  $id
      * @param  string|null  $label
+     * @param  string|null  $help
      */
-    public function __construct(string $use, string $name, ?string $id = null, ?string $label= null)
-    {
+    public function __construct(
+        string $use,
+        string $name,
+        ?string $id = null,
+        ?string $label= null,
+        ?string $help = null
+    ) {
         $this->use   = $use;
         $this->name  = $name;
         $this->id    = $id ?: $name;
         $this->label = $label;
+        $this->help  = $help;
     }
 
     /* -----------------------------------------------------------------
