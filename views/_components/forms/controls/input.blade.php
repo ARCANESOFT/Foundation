@@ -1,13 +1,15 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\Controls\InputComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  Illuminate\Support\ViewErrorBag        $errors
  * @var  string                                 $type
  * @var  string                                 $name
  * @var  string                                 $id
  * @var  string                                 $label
  * @var  string|null                            $help
  * @var  mixed                                  $value
- * @var  Illuminate\View\ComponentAttributeBag  $attributes
- * @var  Illuminate\Support\ViewErrorBag        $errors
  */
 $hasHelpText = ! is_null($help);
 $attributes = $attributes

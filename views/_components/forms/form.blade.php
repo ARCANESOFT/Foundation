@@ -1,9 +1,11 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\FormComponent
+ * 
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  string                                 $method
  * @var  string                                 $action
  * @var  string                                 $hasFiles
- * @var  Illuminate\View\ComponentAttributeBag  $attributes
  */
 $attributes = $attributes
     ->except(['action'])

@@ -1,5 +1,7 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\HelpTextComponent
+ *
  * @var  string       $id
  * @var  string|null  $text
  */

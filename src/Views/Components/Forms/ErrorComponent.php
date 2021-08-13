@@ -7,11 +7,11 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\ViewErrorBag;
 
 /**
- * Class     Error
+ * Class     ErrorComponent
  *
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Error extends Component
+class ErrorComponent extends Component
 {
     /* -----------------------------------------------------------------
      |  Properties

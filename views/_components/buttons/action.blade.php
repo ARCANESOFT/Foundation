@@ -1,5 +1,7 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Buttons\ActionComponent
+ *
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  string                                 $type
  * @var  string                                 $action

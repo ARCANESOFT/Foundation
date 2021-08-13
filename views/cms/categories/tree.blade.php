@@ -7,4 +7,7 @@
     @push('content-nav')
         @include('foundation::cms.categories._partials.nav-actions')
     @endpush
+
+    <v-treeselect
+        name="categories[]" :multiple="true" :options='@json($categories)'/>
 </x-arc:layout>

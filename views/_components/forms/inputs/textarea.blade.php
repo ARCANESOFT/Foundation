@@ -1,12 +1,21 @@
 <?php
-/** @var  Illuminate\View\ComponentAttributeBag  $attributes */
+/**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\Inputs\TextareaComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  string                                 $name
+ * @var  string                                 $id
+ * @var  string                                 $rows
+ */
 $attributes = $attributes
-    ->except(['name', 'id', 'rows'])
+    ->merge([
+        'name' => $name,
+        'id'   => $id,
+        'rows' => $rows,
+    ])
     ->class([
         'form-control',
     ])
 ;
 ?>
-<textarea
-    name="{{ $name }}" id="{{ $id }}" rows="{{ $rows }}" {{ $attributes }}
->{{ old($name, $slot) }}</textarea>
+<textarea {{ $attributes }}>{{ old($name, $slot) }}</textarea>

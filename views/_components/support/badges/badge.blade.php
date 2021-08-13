@@ -1,10 +1,14 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Support\Badges\BadgeComponent
+ *
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  Illuminate\Support\HtmlString          $slot
  * @var  string                                 $type
+ * @var  string|null                            $label
  */
 $attributes = $attributes
-    ->except(['type'])
+    ->except(['type', 'label'])
     ->class([
         'badge',
         'border',
@@ -13,4 +17,4 @@ $attributes = $attributes
     ])
 ;
 ?>
-<span {{ $attributes }}>{{ $slot }}</span>
+<span {{ $attributes }}>{{ $slot->isNotEmpty() ? $slot : __($label ?: '') }}</span>

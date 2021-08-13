@@ -92,7 +92,39 @@ class CategoriesController extends Controller
     {
         $this->authorize(CategoriesPolicy::ability('index'));
 
-        return $this->view('cms.categories.tree');
+        $categories = [
+            [
+                'id' => 1,
+                'label' => 'Category 1',
+                'children' => [
+                    [
+                        'id' => 2,
+                        'label' => 'Sub-Category 1-1',
+                    ],[
+                        'id' => 3,
+                        'label' => 'Sub-Category 1-2',
+                    ],
+                ],
+            ],
+            [
+                'id' => 4,
+                'label' => 'Category 2',
+                'children' => [
+                    [
+                        'id' => 5,
+                        'label' => 'Sub-Category 2-1',
+                    ],[
+                        'id' => 6,
+                        'label' => 'Sub-Category 2-2',
+                    ],[
+                        'id' => 7,
+                        'label' => 'Sub-Category 2-3',
+                    ],
+                ],
+            ],
+        ];
+
+        return $this->view('cms.categories.tree', compact('categories'));
     }
 
     /**

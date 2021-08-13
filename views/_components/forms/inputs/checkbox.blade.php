@@ -1,10 +1,12 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\Inputs\CheckboxComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  string                                 $name
  * @var  string                                 $id
  * @var  mixed|null                             $value
  * @var  bool                                   $checked
- * @var  Illuminate\View\ComponentAttributeBag  $attributes
  */
 $attributes = $attributes
     ->merge([

@@ -1,4 +1,4 @@
-<nav class="btn-seperated page-actions">
+<nav class="page-actions btn-separated">
     @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('metrics'))
         <x-arc:button-action
             type="metrics" action="{{ route('admin::cms.categories.metrics') }}"/>

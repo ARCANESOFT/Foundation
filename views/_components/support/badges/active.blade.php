@@ -1,8 +1,10 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Support\Badges\ActiveComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  bool                                   $active
  * @var  bool                                   $icon
- * @var  Illuminate\View\ComponentAttributeBag  $attributes
  */
 $hasIcon = $attributes->has('icon');
 $attributes = $attributes

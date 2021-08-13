@@ -1,5 +1,8 @@
-<?php /** @var  \Illuminate\Pagination\Paginator  $paginator */ ?>
-
+<?php
+/**
+ * @var  \Illuminate\Pagination\Paginator  $paginator
+ */
+?>
 @if ($paginator->hasPages())
     <ul class="pagination {{ $class ?? '' }}" role="navigation">
         {{-- Previous Page Link --}}

@@ -20,14 +20,18 @@ class BadgeComponent extends Component
     /** @var  string */
     public $type;
 
+    /** @var  string|null */
+    public $label;
+
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
 
-    public function __construct(string $type)
+    public function __construct(string $type, ?string $label = null)
     {
         $this->type = $type;
+        $this->label = $label;
     }
 
     /* -----------------------------------------------------------------

@@ -1,11 +1,12 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Table\ActionComponent
+ *
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  string                                 $action
  * @var  string                                 $type
  * @var  string                                 $label
  */
-
 $isPrimary      = in_array($type, ['add', 'save']);
 $isDestructive  = in_array($type, ['delete', 'detach']);
 $isScriptAction = in_array($type, ['activate', 'activate', 'delete', 'detach', 'restore']);

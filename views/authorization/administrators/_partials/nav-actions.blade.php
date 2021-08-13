@@ -1,4 +1,4 @@
-<nav class="page-actions btn-seperated">
+<nav class="page-actions btn-separated">
     @can(Arcanesoft\Foundation\Authorization\Policies\AdministratorsPolicy::ability('metrics'))
         <x-arc:button-action
             type="metrics" action="{{ route('admin::authorization.administrators.metrics') }}"/>

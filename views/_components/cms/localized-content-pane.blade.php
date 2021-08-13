@@ -1,5 +1,7 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Cms\LocalizedContentPaneComponent
+ *
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
  * @var  string                                 $locale
  * @var  bool                                   $active

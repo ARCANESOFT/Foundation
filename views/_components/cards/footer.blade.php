@@ -1,12 +1,14 @@
 <?php
-/** @var Illuminate\View\ComponentAttributeBag $attributes */
+/**
+ * @see \Arcanesoft\Foundation\Views\Components\Cards\FooterComponent
+ *
+ * @var Illuminate\View\ComponentAttributeBag  $attributes
+ */
 $attributes = $attributes
     ->class([
         'card-footer',
         'p-3',
-        'd-flex'              => $attributes->has('actions'),
-        'justify-content-end' => $attributes->has('actions'),
-        'btn-seperated'       => $attributes->has('actions'),
+        'd-flex justify-content-end btn-separated' => $attributes->has('actions'),
     ])
     ->except(['actions'])
 ;

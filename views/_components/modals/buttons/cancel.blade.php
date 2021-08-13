@@ -1,5 +1,9 @@
 <?php
-/** @var  Illuminate\View\ComponentAttributeBag  $attributes */
+/**
+ * @see Arcanesoft\Foundation\Views\Components\Modals\Buttons\CancelComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ */
 $attributes = $attributes
     ->merge([
         'type' => 'button',

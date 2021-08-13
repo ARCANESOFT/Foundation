@@ -1,6 +1,15 @@
+<?php
+/**
+ * @see \Arcanesoft\Foundation\Views\Components\Cms\LocalizedContentComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag        $attributes
+ * @var  Illuminate\Support\HtmlString                $slot
+ * @var  Arcanesoft\Foundation\Cms\Models\Language[]  $languages
+ * @var  string                                       $locale
+ */
+?>
 <ul class="nav nav-tabs" id="localized" role="tablist">
     @foreach($languages as $language)
-        <?php /** @var  Arcanesoft\Foundation\Cms\Models\Language  $language */ ?>
         @if($loop->first)
             <li class="nav-item" role="presentation">
                 <button class="nav-link small active" id="{{ $language->code }}-tab"

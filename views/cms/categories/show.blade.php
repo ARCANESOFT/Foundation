@@ -40,7 +40,7 @@
                             @endif
                             </tbody>
                         </x-arc:card-table>
-                        <x-arc:card-footer class="d-flex justify-content-end btn-seperated">
+                        <x-arc:card-footer class="d-flex justify-content-end btn-separated">
                             {{-- UPDATE --}}
                             @can(Arcanesoft\Foundation\Cms\Policies\CategoriesPolicy::ability('update'), [$category])
                                 <x-arc:button-action

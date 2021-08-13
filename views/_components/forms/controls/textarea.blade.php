@@ -1,11 +1,13 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\Controls\TextareaComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  Illuminate\Support\ViewErrorBag        $errors
  * @var  string                                 $id
  * @var  string                                 $name
  * @var  string                                 $label
  * @var  string|null                            $help
- * @var  Illuminate\View\ComponentAttributeBag  $attributes
- * @var  Illuminate\Support\ViewErrorBag        $errors
  */
 $attributes = $attributes
     ->except(['type', 'value', 'help'])

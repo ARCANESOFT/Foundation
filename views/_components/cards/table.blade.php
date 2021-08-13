@@ -1,5 +1,9 @@
 <?php
-/** @var  Illuminate\View\ComponentAttributeBag  $attributes */
+/**
+ * @see \Arcanesoft\Foundation\Views\Components\Cards\TableComponent
+ *
+ * @var Illuminate\View\ComponentAttributeBag  $attributes
+ */
 $attributes = $attributes
     ->class([
         'table',

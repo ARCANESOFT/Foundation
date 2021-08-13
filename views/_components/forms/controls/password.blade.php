@@ -1,11 +1,13 @@
 <?php
 /**
+ * @see \Arcanesoft\Foundation\Views\Components\Forms\Controls\PasswordComponent
+ *
+ * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  Illuminate\Support\ViewErrorBag        $errors
  * @var  string                                 $name
  * @var  string                                 $id
  * @var  string                                 $label
- * @var  string|null                             $help
- * @var  Illuminate\View\ComponentAttributeBag  $attributes
- * @var  Illuminate\Support\ViewErrorBag        $errors
+ * @var  string|null                            $help
  */
 $hasHelpText = ! is_null($help);
 $attributes = $attributes

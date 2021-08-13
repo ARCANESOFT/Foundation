@@ -25,7 +25,7 @@ return [
 
         // Form
         'form'              => Arcanesoft\Foundation\Views\Components\Forms\FormComponent::class,
-        'form-error'        => Arcanesoft\Foundation\Views\Components\Forms\Error::class,
+        'form-error'        => Arcanesoft\Foundation\Views\Components\Forms\ErrorComponent::class,
         'form-label'        => Arcanesoft\Foundation\Views\Components\Forms\LabelComponent::class,
         'form-help-text'    => Arcanesoft\Foundation\Views\Components\Forms\HelpTextComponent::class,
 

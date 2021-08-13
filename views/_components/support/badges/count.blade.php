@@ -1,7 +1,9 @@
 <?php
 /**
- * @var  int                                    $value
+ * @see \Arcanesoft\Foundation\Views\Components\Support\Badges\CountComponent
+ *
  * @var  Illuminate\View\ComponentAttributeBag  $attributes
+ * @var  int                                    $value
  */
 $hasPositiveValue = $value > 0;
 $attributes = $attributes
