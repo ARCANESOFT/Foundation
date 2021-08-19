@@ -30,13 +30,13 @@
         "arcanedev/support": "^8.0",
         "bacon/bacon-qr-code": "^2.0",
         "kalnoy/nestedset": "^6.0",
+        "laravel/framework": "^8.55",
         "laravel/socialite": "^5.0",
         "pragmarx/google2fa": "^7.0|^8.0",
         "symfony/intl": "^5.3"
     },
     "require-dev": {
         "composer/composer": "^1.10|^2.0",
-        "laravel/framework": "^8.0",
         "mockery/mockery": "^1.4.2",
         "orchestra/testbench-core": "^6.0",
         "phpunit/phpunit": "^9.3"

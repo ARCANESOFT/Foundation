@@ -52,7 +52,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index($trash = false)
+    public function index(bool $trash = false)
     {
         $this->authorize(UsersPolicy::ability('index'));
 
