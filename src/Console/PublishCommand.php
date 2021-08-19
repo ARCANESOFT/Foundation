@@ -1,11 +1,13 @@
-<?php namespace Arcanesoft\Foundation\Console;
+<?php declare(strict_types=1);
 
-use Arcanesoft\Foundation\FoundationServiceProvider;
+namespace Arcanesoft\Foundation\Console;
+
+use Arcanesoft\Foundation\ModuleManifest;
+use Arcanesoft\Foundation\Support\Console\PublishCommand as Command;
 
 /**
  * Class     PublishCommand
  *
- * @package  Arcanesoft\Foundation\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PublishCommand extends Command
@@ -20,14 +22,14 @@ class PublishCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'foundation:publish';
+    protected $signature = 'arcanesoft:publish';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Publish foundation config, assets and other stuff.';
+    protected $description = 'Publish all the ARCANESOFT modules';
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -35,13 +37,48 @@ class PublishCommand extends Command
      */
 
     /**
-     * Execute the console command.
+     * Handle the command.
+     *
+     * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    public function handle()
+    public function handle(ModuleManifest $manifest)
     {
-        $this->call('vendor:publish', ['--provider' => FoundationServiceProvider::class]);
+        $this->line('');
+        $this->info('Publishing the modules...');
 
-        foreach ($this->config()->get('arcanesoft.foundation.modules.commands.publish', []) as $command) {
+        $this->publishFoundation();
+        $this->publishModules($manifest);
+
+//        $tags = [
+//            'arcanesoft-assets',
+//            'arcanesoft-config',
+//            'arcanesoft-translations',
+//            'arcanesoft-views',
+//        ];
+//        foreach ($tags as $tag) {
+//            $this->comment("Publishing [{$tag}]");
+//            $this->callSilent('vendor:publish', ['--tag' => $tag]);
+//        }
+
+        return static::SUCCESS;
+    }
+
+    /**
+     * Publish Foundation.
+     */
+    public function publishFoundation(): void
+    {
+        //
+    }
+
+    /**
+     * Publish modules.
+     *
+     * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
+     */
+    public function publishModules(ModuleManifest $manifest): void
+    {
+        foreach ($manifest->config('publish') as $command) {
             $this->call($command);
         }
     }

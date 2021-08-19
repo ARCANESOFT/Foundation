@@ -1,27 +1,45 @@
 {
-    "name":        "arcanesoft/foundation",
-    "description": "ARCANESOFT Foundation package.",
-    "homepage":    "https://github.com/ARCANESOFT/Foundation",
-    "keywords":    ["arcanedev", "arcanesoft", "laravel"],
-    "authors":  [
+    "name": "arcanesoft/foundation",
+    "description": "ARCANESOFT - CMS built with Laravel Framework.",
+    "keywords": ["arcanedev", "arcanesoft", "cms", "framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "authors": [
         {
             "name":     "ARCANEDEV",
             "email":    "arcanedev.maroc@gmail.com",
-            "homepage": "https://github.com/ARCANESOFT",
+            "homepage": "https://github.com/arcanedev-maroc",
             "role":     "Developer"
         }
     ],
-    "license": "MIT",
     "require": {
-        "php":                    ">=7.0",
-        "arcanedev/log-viewer":   "~4.4",
-        "arcanedev/route-viewer": "~1.1",
-        "arcanesoft/auth":        "~3.1",
-        "arcanesoft/core":        "~2.7"
+        "php": "^7.3|^8.0",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "arcanedev/agent": "^9.0",
+        "arcanedev/breadcrumbs": "^6.0",
+        "arcanedev/laravel-active": "^4.0",
+        "arcanedev/laravel-html": "^8.0",
+        "arcanedev/gravatar": "^5.0",
+        "arcanedev/laravel-impersonator": "^4.0",
+        "arcanedev/laravel-metrics": "^3.1",
+        "arcanedev/laravel-policies": "^3.0",
+        "arcanedev/log-viewer": "^8.0",
+        "arcanedev/notify": "^7.0",
+        "arcanedev/route-viewer": "^4.0",
+        "arcanedev/support": "^8.0",
+        "bacon/bacon-qr-code": "^2.0",
+        "kalnoy/nestedset": "^6.0",
+        "laravel/framework": "^8.55",
+        "laravel/socialite": "^5.0",
+        "pragmarx/google2fa": "^7.0|^8.0",
+        "symfony/intl": "^5.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.0",
-        "phpunit/phpcov":  "~4.0"
+        "composer/composer": "^1.10|^2.0",
+        "mockery/mockery": "^1.4.2",
+        "orchestra/testbench-core": "^6.0",
+        "phpunit/phpunit": "^9.3"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +53,23 @@
         }
     },
     "scripts": {
-        "testbench": "composer require --dev \"orchestra/testbench=~3.5\""
-    }
+        "test": "phpunit --colors=always",
+        "test:dox": "phpunit --testdox --colors=always",
+        "test:cov": "phpunit --coverage-html coverage"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "4.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Arcanesoft\\Foundation\\FoundationServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

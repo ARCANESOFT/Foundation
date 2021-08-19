@@ -1,11 +1,14 @@
-<?php namespace Arcanesoft\Foundation\Console;
+<?php declare(strict_types=1);
 
-use Arcanesoft\Foundation\Seeds\DatabaseSeeder;
+namespace Arcanesoft\Foundation\Console;
+
+use Arcanesoft\Foundation\Arcanesoft;
+use Arcanesoft\Foundation\ModuleManifest;
+use Arcanesoft\Foundation\Support\Console\InstallCommand as Command;
 
 /**
  * Class     InstallCommand
  *
- * @package  Arcanesoft\Foundation\Console
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class InstallCommand extends Command
@@ -20,14 +23,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'foundation:install';
+    protected $signature = 'arcanesoft:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Foundation install command.';
+    protected $description = 'Install ARCANESOFT';
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -35,70 +38,64 @@ class InstallCommand extends Command
      */
 
     /**
-     * Execute the console command.
+     * Handle the command.
+     *
+     * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    public function handle()
+    public function handle(ModuleManifest $manifest): int
     {
-        $this->arcanesoftHeader();
+        $this->line("<fg=blue>
+    ___    ____  _________    _   _____________ ____  ____________
+   /   |  / __ \/ ____/   |  / | / / ____/ ___// __ \/ ____/_  __/
+  / /| | / /_/ / /   / /| | /  |/ / __/  \__ \/ / / / /_    / /
+ / ___ |/ _  _/ /___/ ___ |/ /|  / /___ ___/ / /_/ / __/   / /
+/_/  |_/_/ |_|\____/_/  |_/_/ |_/_____//____/\____/_/     /_/</>");
+        $this->newLine();
+        $this->line('<fg=blue>Version '.Arcanesoft::VERSION.' - Created by ARCANEDEV</>');
+        $this->newLine();
 
-        if ($this->confirm('Do you wish to publish the modules ?')) {
-            $this->publishAllModules();
-        }
+        $this->installFoundation();
 
-        if ($this->confirm('Do you wish to reset the migrations ?')) {
-            $this->refreshMigrations();
-            $this->installModules();
-        }
-    }
+        $this->newLine();
 
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
+        $this->installModules($manifest);
 
-    /**
-     * Publish all modules: configs, migrations, assets ...
-     */
-    private function publishAllModules()
-    {
-        $this->frame('Publishing all the modules files');
-        $this->line('');
+        $this->newLine();
+        $this->line('<fg=blue>ARCANESOFT has been installed successfully ( ^o^)b</>');
 
-        $this->call('foundation:publish');
-        $this->call('optimize');
-
-        $this->comment('All files are published !');
-        $this->line('');
+        return static::SUCCESS;
     }
 
     /**
-     * Refresh migrations.
+     * Install ARCANESOFT's Foundation.
      */
-    private function refreshMigrations()
+    protected function installFoundation(): void
     {
-        $this->frame('Reseting all the migrations');
-        $this->line('');
+        $this->comment('Installing ARCANESOFT Foundation...');
 
-        $this->call('migrate:fresh');
+        $this->newLine();
 
-        $this->line('');
+        $commands = $this->laravel['config']->get('arcanesoft.foundation.modules.commands.install', []);
+
+        $this->callMany($commands);
     }
 
     /**
-     * Seed all modules.
+     * Install ARCANESOFT's modules.
+     *
+     * @param  \Arcanesoft\Foundation\ModuleManifest  $manifest
      */
-    private function installModules()
+    protected function installModules(ModuleManifest $manifest): void
     {
-        $this->frame('Installing the modules');
-        $this->line('');
+        $this->comment('Installing ARCANESOFT Modules...');
 
-        foreach ($this->config()->get('arcanesoft.foundation.modules.commands.install', []) as $command) {
-            $this->call($command);
+        $this->newLine();
+
+        $modules = $manifest->pluck('install');
+
+        foreach ($modules as $module => $command) {
+            $this->callSilent($command);
+            $this->line("<fg=green>Installed:</> {$module}");
         }
-        $this->call('db:seed', ['--class' => DatabaseSeeder::class]);
-
-        $this->line('');
-        $this->comment('Modules installed !');
-        $this->line('');
     }
 }

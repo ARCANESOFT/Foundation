@@ -1,12 +1,16 @@
 <?php
 
-if ( ! function_exists('foundation')) {
+namespace arcanesoft;
+
+use Arcanesoft\Foundation\Arcanesoft;
+
+if ( ! function_exists('arcanesoft\foundation')) {
     /**
-     * Get the Foundation instance.
+     * Get the foundation's class instance.
      *
-     * @return \Arcanesoft\Foundation\Contracts\Foundation
+     * @return \Arcanesoft\Foundation\Arcanesoft
      */
     function foundation() {
-        return app(Arcanesoft\Foundation\Contracts\Foundation::class);
+        return app(Arcanesoft::class);
     }
 }
